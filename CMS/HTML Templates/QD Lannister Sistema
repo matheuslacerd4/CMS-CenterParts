@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.sistema.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+    />
+  </head>
+
+  <body>
+    <vtex:template id="qd-lannister-header-sistema" />
+
+    <vtex:contentPlaceHolder id="Conteudo Sistema" />
+
+    <div class="video-wrapper-qd-v1">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="video-wrapper-qd-v1-container">
+              <h2><vtex:contentPlaceHolder id="Título do Video" /></h2>
+              <p><vtex:contentPlaceHolder id="Subtítulo do Video" /></p>
+              <div class="video-wrapper-qd-v1-carousel">
+                <vtex:contentPlaceHolder id="Carrossel de Vídeos" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

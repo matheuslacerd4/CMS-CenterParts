@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <script
+      type="text/javascript"
+      src="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//centerparts.vtexcommercestable.com.br/files/qd-bootstrap.2.3.2.css"
+    />
+    <vtex:template id="qd-lannister-partners-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.orders.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="orders">
+    <vtex:template id="qd-lannister-partners-header" />
+    <div class="container">
+      <div class="row">
+        <div class="column-left col-xs-3">
+          <div class="nav-left-dept qdSideMenu">
+            <div class="institucionalSideMenuWrapper institucionalSideMenu">
+              <vtex.cmc:institucionalSideMenu />
+              <!-- para esconder esse conteudo usar body class 'imoff' -->
+            </div>
+            <div class="helpCenterSideMenuWrapper institucionalSideMenu">
+              <vtex.cmc:helpCenterSideMenu />
+              <!-- para esconder esse conteudo usar body class 'hmoff' -->
+            </div>
+          </div>
+        </div>
+        <div class="main-column col-xs-9">
+          <div class="bootstrap2-3-2 clearfix-children">
+            <vtex.cmc:orderList />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <vtex:template id="qd-lannister-partners-footer" />
+  </body>
+</html>

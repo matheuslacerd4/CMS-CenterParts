@@ -1,0 +1,68 @@
+#set($id = $product.Id) #set($uri = $product.Uri) #set($escapedName =
+$product.HtmlEscapedName) #set($evaluationRate = $product.EvaluationRate)
+
+<table>
+  <tr>
+    <td class="id-table">1000.11</td>
+    <td class="image-table found-item-table">
+      <div class="shelf-image">
+        <a class="shelf-image-link" title="$escapedName" href="$uri">
+          $product.GetImageTag(206,206)
+        </a>
+      </div>
+      <div class="shelf-stamps">
+        <a title="$escapedName" class="highlightWrapper" href="$uri"
+          >$product.HightLight</a
+        >
+        <a title="$escapedName" class="highlightWrapper" href="$uri"
+          >$product.DiscountHightLight</a
+        >
+      </div>
+    </td>
+    <td class="product-name-table found-item-table">
+      <h3 class="shelf-product-name">
+        <a title="$escapedName" href="$uri">$product.Name</a>
+      </h3>
+    </td>
+
+    #if ($product.IsInStock)
+    <td class="price-table found-item-table">
+      <div class="shelf-price">
+        <div class="shelf-price-best-price">
+          <span class="best-price"> $product.BestPrice </span>
+        </div>
+      </div>
+    </td>
+    <td class="buy-table found-item-table">
+      <div class="shelf-common-buy-button">
+        <!--<span class="qd_cpProductUnavailable #if($product.IsInStock) qd_cpHide #else qd_cpShow #end">vtexcp 
+					<p class="outOfStock">Produto Esgotado</p>
+				</span> -->
+        <div class="#if($product.IsInStock) qd_cpShow #else qd_cpHide #end">
+          <input type="text" class="quant" value="1" />
+          <a
+            class="buy-button qd-buy-button"
+            title="$escapedName"
+            href="/qd-buy-button?idproduto=$id"
+            >Comprar</a
+          >
+        </div>
+      </div>
+      $product.ProductField(12)
+    </td>
+
+    #else
+    <td class="no-stock-table found-item-table">
+      <div class="shelf-no-stock">
+        <p>indisponível</p>
+      </div>
+    </td>
+    #end
+
+    <td class="not-found-item-table hide">
+      <div class="shelf-not-found-item">
+        <p>Item não encontrado</p>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,366 @@
+<footer>
+  <div class="mz-footer container">
+    <div class="row justify-content-md-left">
+      <div class="col-12 col-xl-3 mb-4">
+        <!-- logo
+        <a class="mz-footer__brand" href="/"></a> -->
+        <!-- social -->
+        <div class="mz-footer__social">
+          <p>Nos acompanhe nas redes sociais</p>
+          <ul>
+            <li>
+              <a href="https://www.facebook.com/Centerparts" target="_blank">
+                <i class="icon-facebook-square" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/centerpartsdistribuidora/" target="_blank">
+                <i class="icon-instagram"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <!-- listas -->
+        <ul class="row mz-footer-institucional-menu">
+          <li class="col-12 col-lg-3  mb-4">
+            <div class="row">
+              <div class="col-12">
+                Institucional
+                <ul>
+                  <li><a href="/institucional/quem-somos">Quem Somos</a></li>
+                  <li>
+                    <a href="/institucional/duvidas-frequentes/">Dúvidas
+                      Frequentes</a>
+                  </li>
+                  <li>
+                    <a href="/institucional/social">Social</a>
+                  </li>
+                  <li>
+                    <a href="/institucional/eventos">Eventos</a>
+                  </li>
+                  <li>
+                    <a href="/institucional/seja-fornecedor">Seja um Fornecedor</a>
+                  </li>
+                  <li>
+                    <a href="/institucional/seja-colaborador">Seja um Colaborador</a>
+                  </li>
+                  <li>
+                      <a href="/institucional/filiais">Filiais</a>
+                </li>
+                </ul>
+              </div>
+              <div class="col-12">
+                Políticas
+                <ul>
+                  <li><a href="/institucional/politicas-de-entregas">Políticas de Entregas</a></li>
+                  <li>
+                    <a href="/institucional/politicas-de-troca-e-devolucao/">Políticas de Troca e Devolução</a>
+                  </li>
+                  <li>
+                    <a href="/institucional/politicas-de-privacidade/">Políticas de Privacidade</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="col-12 col-lg-3  mb-4">
+            Ajuda
+            <ul>
+              <li><a href="/account">Minha Conta</a></li>
+              <li><a href="/account#/orders">Meus Pedidos</a></li>
+              <li><a href="/institucional/central-de-atendimento/">Fale Conosco</a>
+              </li>
+            </ul>
+          </li>
+            <li class="col-12 col-lg-3  mb-4">
+            Downloads
+            <ul>
+              <li><a href="/downloads">Acesso Remoto</a></li></ul> </li>
+              
+            <li class="col-12 col-lg-6  mb-4">
+            Contatos
+            <ul>
+              <li><a href="mailto:vendas@centerparts.com.br" target="_blank">vendas@centerparts.com.br</a></li>
+              <!-- <li><a href="tel:+551140201744">Central de Atendimento: 4020-1744</a></li> -->
+              <li><a href="tel:08000201744" target="_blank">Canal de Vendas: 0800 020 1744</a></li>
+              <li>CNPJ: 61.834.834/0001-97</li>
+            </ul>
+          </li>
+            
+         
+
+        </ul>
+      </div>
+      <div class="col-12 col-xl-3  mb-4">
+        <!-- newsletter -->
+        <div class="mz-newsletter qd_news_auto">
+          <p class="mz-newsletter__title">Seja o primeiro a receber ofertas e descontos exclusivos!</p>
+          <div class="mz-newsletter__form">
+            <input class="qd_news_email input-type-text" placeholder="E-mail" type="text" name="email" />
+            <input class="qd_news_animate_field_success" value="Obrigado!" type="hidden" />
+            <a class="qd_news_button" type="button">Enviar</a>
+          </div>
+        </div>
+        <!-- segurança -->
+        <div class="mz-footer__security">
+          <p class="mz-footer__security--title">SEGURANÇA</p>
+          <ul>
+            <li>
+              <a href="https://secure.vtex.com/?an=centerparts" target="_blank">
+                <img src="/arquivos/selo-pci-vtex.png" alt="Selo Vtex center parts" /></a>
+            </li>
+            <li>
+              <a href="https://www.lojaconfiavel.com/centerparts" class="ts-footerstamp" data-lcname="centerparts"
+                target="_blank">
+                <img src="/arquivos/loja-confiavel.png" title="Loja Confiável" alt="Loja Confiável" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Etapa Formulario -->
+<div class="mz-sign-in-form f-step">
+  <div class="first-step" type="text/template">
+    <a href="//www.centerb2b.com.br/login" class="link-close">Fechar <i class="icon-times-circle"></i></a>
+    <div class="first-step-content">
+
+      <div class="text-header">
+        <div class="row">
+          <div class="col-12">
+            <h3>NOVO USUÁRIO</h3>
+            <span>Cadastre-se e aproveite as vantagens de ser cliente da Center Parts.</span>
+          </div>
+        </div>
+
+        <div class="mz-sign-in-form__bluebox">
+          <div class="col-12">
+            <h4>Algumas Informações:</h4>
+            <p>- O cadastro só será liberado para pessoa Jurídica habilitada no cadastro do SINTEGRA.</p>
+            <p>- No cadastro do CNPJ no Ministério da Fazenda, o ramo de atividade principal ou secundária da
+              empresa deve ser o comércio de autopeças.</p>
+            <p>- O limite da compra estará sujeito a análise após o fechamento de cada compra.</p>
+          </div>
+        </div>
+
+        <div class="col-12 text-right p-0">
+          <a class="btn btn-next-step p-0 mt-2" href="/login">já é cadastrado? <span>Clique aqui</span> </a>
+        </div>
+
+      </div>
+
+      <form class="form-horizontal form-first-step">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>E-mail:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="e-mail" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>CNPJ:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="cnpj" />
+                </div>
+              </div>
+            </div>
+
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>Razão social:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="razao_social" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>Nome Fantasia:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="nome_fantasia" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Insc. Estadual:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md" name="insc_estadual" />
+                </div>
+              </div>
+            </div>
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>Nome:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="nome" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>Sobrenome:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="sobrenome" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">CPF:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md" name="cpf" />
+                </div>
+              </div>
+            </div>
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>Tel. Comercial:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="tel_comercial" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Tel. Celular:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md" name="tel_celular" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label"><span>*</span>CEP:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="cep" />
+                </div>
+              </div>
+            </div>
+            <div class="content-block-form">
+              <div class="form-group">
+                <label class=" control-label">Rua:</label>
+                <div class="">
+                  <textarea class="form-control required" name="rua"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Número:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="numero" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Complemento:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md" name="complemento" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Bairro:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="bairro" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">Cidade:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="cidade" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class=" control-label">Estado:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="estado" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class=" control-label">País:</label>
+                <div class="">
+                  <input type="text" class="form-control input-md required" name="pais" />
+                </div>
+              </div>
+            </div>
+            <div class="content-block-form indicated">
+              <div class="form-group">
+                <label class=" control-label rep">Indicado por um representante:</label>
+                <div class="radioHolder">
+                  <input type="radio" name="was_indicated" value="true" /> Sim
+                </div>
+                <div class="radioHolder">
+                  <input type="radio" name="was_indicated" value="false" /> Não
+                </div>
+              </div>
+              <div class="form-group" style="display:none;">
+                <label class=" control-label rep">Nome do representante:</label>
+                <div>
+                  <input type="text" class="form-control input-md" name="indicated_by" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <a class="btn btn-continue">CONTINUAR</a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-12 mz-sign-in-form__footer">
+        <p>Em caso de dúvidas ligue para<strong> 0800 020 1744 (opção 1)</strong> de <strong>a 5a feira das 8:00h às
+            18:00h. 6a f das
+            8:00h às 17:00h.</strong></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Etapa Sucesso do Formulario -->
+
+<div class="mz-sign-in-form  s-step">
+  <div class="second-step" type="text/template">
+    <div class="second-step-content">
+      <a href="//www.centerb2b.com.br/login" class="link-close">Fechar <i class="icon-times-circle"></i></a>
+      <div class="col-12">
+
+        <div class="text">
+          <h2><i class=" icon-check-circle"></i> Cadastro Aprovado</h2>
+          <h3>Seja bem-vindo(a) a loja da Centerparts!</h3>
+        </div>
+
+        <div class="text">
+          <p><strong>Antes de prosseguir com a compra gostariamos de lembrar que:</strong></p>
+          <ul>
+            <li>• O limite da compra estará sujeito a análise após o fechamento de cada compra.</li>
+            <li>• É necessário que a primeira compra seja feita em até 30 dias para que o seu acesso não seja revogado.
+            </li>
+          </ul>
+        </div>
+
+        <div class="box-info">
+          <p>Clique no botão "fazer login" e no campo e-mail e coloque o <strong>seu e-mail que utilizou no
+              cadastro</strong> e clique em <strong> "Esqueci minha senha"</strong> para criar uma nova senha de
+            acesso.
+          </p>
+          <p>
+            <a href="/login" class="btn btn-block btn-large call-page-login">Fazer login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

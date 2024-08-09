@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.institucional.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/arquivos/CSS.ctp.lan.giftlist.css"
+    />
+  </head>
+  <body class="giftlist-home">
+    <vtex:template id="qd-lannister-header" />
+
+    <div class="container">
+      <!-- <div class="mainTpl"> -->
+      <div class="collectionsWrapper halfBannersWrapper">
+        <vtex:contentPlaceHolder
+          id="Conteúdo Sup 980xLivre coleções 3colunas"
+        />
+        <vtex:giftlSupContentprz />
+      </div>
+      <!-- <div class="giftlistWrapper"> -->
+      <h2 class="titulo"><span>Lista de compras ou orçamento</span></h2>
+      <vtex:contentPlaceHolder id="Banner Título 980xLivre" />
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="productWrapper">
+                <vtex.cmc:GiftListInfoV2 />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <vtex.cmc:giftListNavigation />
+            </div>
+            <div class="col-xs-9">
+              <div class="giftListShelfPagedWrapper">
+                <vtex.cmc:giftListShelfPaged
+                  layout="eb837085-bdee-45cb-b35e-aed82e333506"
+                  itemCount="16"
+                  columnCount="3"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collectionsWrapper halfBannersWrapper">
+        <vtex:contentPlaceHolder
+          id="Conteúdo Inf 980xLivre coleções 4colunas"
+        />
+        <vtex:giftlInfContentprz />
+      </div>
+    </div>
+    <!-- </div> -->
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

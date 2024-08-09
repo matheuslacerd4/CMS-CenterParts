@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+<head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+	<link rel="stylesheet" type="text/css" href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.institucional.css" />
+</head>
+<body class="institucional">
+	<vtex:template id="qd-lannister-header" />
+		<div class="container">
+			<div class="row">
+				<div class="main-column col-xs-12">
+					<h2 class="basic-title">
+						<vtex:contentPlaceHolder id="Título da página" />
+					</h2>
+
+					<div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+						<vtex:contentPlaceHolder id="Conteúdo da Página" />
+					</div>
+				</div>
+			</div>
+		</div>
+	<vtex:template id="qd-lannister-footer" />
+</body>
+</html>

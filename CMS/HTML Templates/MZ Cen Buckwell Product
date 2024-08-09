@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+  <vtex:metaTags />
+  <vtex:contentPlaceHolder id="mz_head" />
+  <meta charset="UTF-8" />
+  <title>
+    <vtex.cmc:productPageTitle />
+  </title>
+  <vtex:template id="mz-cen-buckwell-head-tags" />
+  <vtex:template id="2b - head" />
+
+  <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.product.css" type="text/css" />
+</head>
+
+<body class="produto">
+  <!-- Header -->
+  <vtex:template id="mz-cen-buckwell-header" />
+  <!-- Header -->
+
+  <main>
+    <div class="container mz-product">
+    
+      <!-- left -->
+
+      <div class="row">
+      <p>p</p>
+      
+      <div id="app">
+        <!--<Flag></Flag>-->
+        </div>
+
+        <div class="col-12 col-xl-6 mb-4">
+          <div class="mz-flags">
+            <!-- product discount -->
+            <div class="mz-flags__discount">
+              <vtex.cmc:discountgHightLight />
+            </div>
+            <!-- product discount -->
+            <!-- product higlight -->
+            <div class="mz-flags__highLights">
+              <vtex.cmc:hightLight />
+            </div>
+            <!-- product higlight -->
+          </div>
+          <!-- product image -->
+          <vtex.cmc:ProductImage zoom="on" />
+          <!-- product image -->
+          <!-- <div class="mz-product__badges">
+            <vtex.cmc:mzBucTipBar />
+          </div> -->
+          <!-- <div class="mz-product__badges row">
+            <span class="col-12 col-md-6"><i class="icon-truck"></i>Entregas rápidas e seguras</span>
+            <span class="col-12 col-md-6"><i class="icon-users"></i>Atendimento eficiente</span>
+            <span class="col-12 col-md-6"><i class="icon-boxes"></i>Variedade de Produtos</span>
+            <span class="col-12 col-md-6"><i class="icon-medal"></i>Garantia de Qualidade</span>
+          </div> -->
+        </div>
+
+        <!-- left -->
+
+        <!-- right -->
+
+        <div class="col-12 col-xl-6 mz-product__sku-wrapper">
+          <div class="col-12 mz-product__name">
+            <!-- productName -->
+            <h1>
+              <vtex.cmc:productName />
+            </h1>
+            <!-- productName -->
+            
+            <!-- productReference -->
+            <h2>
+              <vtex.cmc:productReference />
+            </h2>
+            <!-- productReference -->
+            
+            <h3 class="product-brand" style="display: none;">
+              <vtex.cmc:brandName/>
+            </h3>
+          </div>
+          <div class="mz-product__sku-box product-sku-info-wrapper">
+
+            <!-- <div class="row">
+              <div class="col-lg-4 col-6"> Variações</div>
+              <div class="col-lg-4 col-6 d-none d-md-block text-center"> Quantidade </div>
+              <div class="col-lg-2 col-6"> Valor </div>
+            </div> -->
+            <div class="product-sku-rich-selection product-notifyme">
+              <vtex.cmc:skuRichSelection changeImage="1" />
+            </div>
+            <!--  TOTAL/add -->
+            <div class="mz-product__sku-total text-right mz-buy-button">
+              <p class="qd-selected-sku-total">R$ 0,00</p>
+              <a class="qd-ssg-buy-button buy-button"> Adicionar ao Pedido</a>
+              <!-- add to cart button -->
+            </div>
+            
+            <div class="buy-teste" style="display: none">
+                <vtex.cmc:BuyButton/>
+            </div>
+            
+            
+            <!--  TOTAL/add -->
+
+
+
+
+
+          </div>
+          <!-- cep -->
+          <div class="mz-product__sku--ship">
+            <p>Informe seu CEP para calcular o frete</p>
+            <vtex.cmc:shippingValue />
+          </div>
+
+          <!-- cep -->
+        </div>
+        <!-- //adicionar à lista que é acionado dinamicamente pela estrelinha -->
+        <div class="add-lista d-none">
+          <div class="GiftListInsertSkuV2Wrapper">
+            <vtex.cmc:GiftListInsertSkuV2 />
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+      <!-- Right -->
+
+
+
+      <div class="row mz-product__description">
+        <div class="mz-product__description-top col-12">
+          <p>Descrição</p>
+        </div>
+        <div class="col-lg-6 col-12 ">
+          <!-- <h4>
+            <vtex.cmc:productName />
+          </h4> -->
+          <p>
+            <vtex.cmc:ProductDescription />
+          </p>
+        </div>
+        <div class="col-lg-6 col-12 mz-product__description-video">
+        </div>
+      </div>
+
+
+      <div class="row mz-product__specification">
+        <div class="mz-product__description-top col-12">
+          <p>Aplicação</p>
+        </div>
+        <div class="col-12 ">
+          <vtex.cmc:ProductSpecification />
+        </div>
+      </div>
+
+
+
+
+      <!-- outros viram também -->
+      <div class="row">
+        <div class="col-12">
+          <div class="mz-product__related">
+            <div class="mz-shelf">
+              <vtex:contentPlaceHolder id="Quem comprou, comprou tambem" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- outros viram também -->
+
+
+
+
+      <!-- <div class="row mz-product__email">
+        <h2 class="col-12">Fale conosco</h2>
+        <div class="col-12">
+          <div class="form-contact-wrapper">
+            <form class="form-horizontal form-contact" role="form">
+              <div class="form-group">
+                <label for="qd_form_name">Nome completo*</label>
+                <div class="col-xs-12">
+                  <input type="text" class="form-control required" id="qd_form_name" name="Nome" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="qd_form_email">E-mail*</label>
+                <div class="col-xs-12">
+                  <input type="email" class="form-control required" id="qd_form_email" name="E-mail" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="qd_form_phone">Telefone*</label>
+                <div class="col-xs-12">
+                  <input type="tel" class="form-control required" id="qd_form_phone" name="Telefone" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="qd_form_msg">Mensagem*</label>
+                <div class="col-xs-12">
+                  <textarea class="form-control required" rows="3" id="qd_form_msg" name="Mensagem"></textarea>
+                </div>
+              </div>
+              <div class="form-group text-right">
+                <div class="col-xs-12">
+                  <button type="submit" class="btn btn-default">Enviar</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-succes green-alert d-none ">
+                  <i class="icon-check-circle"></i>Email enviado com sucesso
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+      </div> -->
+
+
+
+
+
+
+
+      <!-- <vtex.cmc:BuyButton />
+    <vtex.cmc:BuyTogether /> -->
+      <!-- <vtex.cmc:skuRichSelection changeImage="1" /> -->
+      <!-- buybutton -->
+      <!-- <vtex.cmc:BuyButton /> -->
+
+      <!-- buybutton -->
+
+      <!-- <vtex.cmc:BuyTogether /> -->
+      <!-- productDescription -->
+      <!-- <vtex:contentPlaceHolder id="Titulo da Descrição" /> -->
+
+      <!-- <vtex.cmc:ProductDescription /> -->
+
+      <!-- productDescription -->
+
+    </div>
+  </main>
+  <!-- Footer -->
+  <vtex:template id="2b - scripts" />
+  <vtex:template id="mz-cen-buckwell-footer" />
+  <!-- Footer -->
+</body>
+</html>

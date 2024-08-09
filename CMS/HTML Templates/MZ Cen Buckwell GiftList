@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+    xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+        <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link rel="stylesheet" href="/arquivos/CSS.cen.buc.giftlist.css"
+        type="text/css" />
+</head>
+
+<body class="giftlist-home">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    <main>
+        <div class=" mz-gift-container">
+
+            <div class="row">
+                <div class="col-xs-12 col-lg-6">
+                    <div class="giftlistWrapper">
+                        <div class="giftlist-banner-home ">
+                            <div class="col-xs-6 col-xs-offset-6">
+                                <div class="col-xs-12">
+                                    <div class="textWrapper">
+                                        <h2>
+                                            <vtex:contentPlaceHolder id="Título" />
+                                            <!--remover-->Lista de compras ou orçamento
+                                            <!--remover-->
+                                        </h2>
+                                        <p>
+                                            <vtex:contentPlaceHolder id="Texto de Introdução" />
+                                            <!--remover-->
+                                            Crie uma lista e facilite a navegação e resposição de estoque.
+                                            <!--remover-->
+                                        </p>
+                                        <div class="buttonsWrapper">
+                                            <a href="/giftlist/create" id="criar-lista">Criar uma lista</a>
+                                            <a href="/giftlist/manage" id="gerenciar-listas">Gerenciar minhas listas</a>
+                                        </div>
+
+                                        <div class="searchWrapper">
+                                            <vtex.cmc:GiftListSearchV2 />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                    <img src="/arquivos/giflist-background.jpg" alt="Centerparts - imagem ilustrativa" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="qd-list-search-result"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+</body>
+
+</html>

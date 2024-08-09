@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+  lang="en-us"
+>
+  <head>
+    <title>Loja Online</title>
+    <vtex:metaTags />
+    <link
+      href="http://fonts.googleapis.com/css?family=Oswald:400,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="/arquivos/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link
+      href="/arquivos/bootstrap-responsive.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="/arquivos/bootstrap.min.js" type="text/javascript"></script>
+    <vtex:template id="commonScripts" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <!--  SubTemplate: Header -->
+          <vtex:template id="Header" />
+          <!-- /SubTemplate: Header -->
+
+          <div id="content" class="row-fluid">
+            <div class="span2 sidebar">
+              <div id="departmentNavigator">
+                <!--  Controle: navegador de departamento -->
+                <vtex.cmc:singleDepartmentNavigator />
+                <!-- /Controle: navegador de departamento -->
+              </div>
+            </div>
+
+            <div id="mainContent" class="span10">
+              <vtex.cmc:breadCrumb />
+              <div class="title-category">
+                <!--  Controle: Titulo -->
+                <vtex.cmc:searchTitle />
+                <!-- /Controle: Titulo -->
+              </div>
+
+              <div id="topBanners">
+                <!--  placeholder -->
+                <vtex:contentPlaceHolder id="Banner-Principal" />
+                <!-- /placeholder -->
+              </div>
+
+              <div id="collections">
+                <div class="giftlist-insert">
+                  <vtex.cmc:GiftListInsertSkuV2 />
+                </div>
+                <div class="collectionWrap">
+                  <vtex:contentPlaceHolder id="Destaques" />
+                </div>
+
+                <div class="collectionWrap">
+                  <vtex:contentPlaceHolder id="Lançamentos" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--  SubTemplate: footer -->
+          <div class="footer clearfix">
+            <vtex:template id="Footer" />
+          </div>
+          <!-- /SubTemplate: footer -->
+        </div>
+      </div>
+    </div>
+    <script src="/arquivos/lojavazia-general.js"></script>
+  </body>
+</html>

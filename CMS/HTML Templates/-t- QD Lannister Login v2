@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//qd-cdn.github.io/centerparts-arquivos/CSS.ctp.lan.login.css"
+    />
+  </head>
+
+  <body class="login">
+    <vtex:template id="qd-lannister-header" />
+
+    <div id="content" class="row-fluid">
+      <div class="without-password">
+        <div class="modal-header">
+          <h2>Bem vindo à Center Parts</h2>
+        </div>
+
+        <div class="modal-body">
+          <a href="#" class="btn btn-block btn-large call-page-register"
+            >Fazer Cadastro</a
+          >
+        </div>
+
+        <div class="modal-footer">
+          <p>
+            Ainda não é cadastrado? Clique no botão acima e cadastre-se para
+            poder acessar nossa loja.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+
+    <script>
+      $(function () {
+        vtexid.start({ flow: "classicLogin", returnUrl: "/", canClose: false });
+      });
+    </script>
+  </body>
+</html>

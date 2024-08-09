@@ -1,0 +1,25 @@
+<div class="system-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <h1 class="nav-logo" id="logo">
+          <a href="/" title="CENTERPARTS">CENTERPARTS</a>
+        </h1>
+      </div>
+
+      <div class="col-xs-9 text-right">
+        <ul class="system-nav-pills">
+          <li>
+            <span class="fa fa-phone fa-2"></span>
+            <span
+              class="nav-link store-phone-number"
+              title="Entre em contato com a NOME-PROJETO"
+            >
+              TELEVENDAS: <strong><vtex.cmc:phoneNumber /></strong
+            ></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

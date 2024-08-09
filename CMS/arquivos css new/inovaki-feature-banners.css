@@ -1,0 +1,293 @@
+/**************** CSS FEATURE BANNERS ****************/
+
+/*      BANNER PRINCIPAL      */
+#banimg {
+  width: 100%;
+}
+#banimg img {
+  height: auto;
+  padding-top: 65px;
+}
+
+/****** LOGOS HOME ******/
+@media (max-width: 480px) {
+  .inovaki-new-home .mz-slider-marcas .slick-arrow {
+    padding: 0 20px 0 20px;
+  }
+}
+
+/*      BANNER LATERAL        */
+
+.carrocelLateral {
+  width: 300px;
+  height: auto;
+}
+
+.carrocelLateral .icon-chevron-right,
+.carrocelLateral.icon-chevron-left {
+  display: block !important;
+}
+
+.mz-sidebar #openClose {
+  z-index: 10 !important;
+}
+
+/*     CATÃLOGO DE LOGOMARCAS     */
+
+.catalogo {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  background-color: #ebebf0;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.cardslogo {
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 20px;
+  max-width: 200px;
+  text-align: center;
+  background-color: white;
+  width: 100%; /* Isso garante que preencha a largura disponÃ­vel dentro de seu contÃªiner */
+  flex: 1 1 150px; /* Cresce e encolhe, mas nÃ£o menor que 200px */
+}
+
+/* Media Queries para ajustar em telas menores */
+@media (max-width: 768px) {
+  .cardslogo {
+    flex: 1 1 100%; /* Cada cartÃ£o ocupa a largura total da linha em telas pequenas */
+  }
+}
+
+#imgLogoM {
+  padding: 0px;
+  width: 100px;
+  height: 120px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/*     PAGINA INTERNA DO FORNECEDOR      */
+
+#containerG {
+  margin: 0 0 5px 0;
+  width: 100%;
+}
+
+#contBanner {
+  width: 100%;
+}
+
+#imgBannerInterna {
+  height: auto;
+  width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.destaqueDoDia {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#containerDestaque {
+  margin: 10px 0;
+}
+
+#txtDestaque {
+  background-color: red;
+  color: #fff;
+  /* padding: 0 10px; */
+  width: 280px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+#txtDestaqueDia {
+  font-family: system-ui;
+  height: 40px;
+  padding: 8px 0;
+  font-size: 25px;
+  letter-spacing: 0.8px;
+}
+
+.containerCard {
+  font-size: 14px;
+  border-radius: 5px;
+  filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.1));
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#cardProduto {
+  border: 5px solid #d8d8d8;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 100%;
+  max-width: calc(100% / 5);
+}
+
+#imgProduto {
+  display: flex;
+  object-position: center;
+  padding: 0 5px;
+  width: 100%;
+  height: 150px;
+}
+
+#imgProduto img {
+  max-width: 100%;
+  height: auto !important;
+  object-fit: contain;
+}
+
+.titleProdut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+#txttitulo {
+  margin: 0 0 10px 0;
+  font-family: system-ui;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: #616161;
+}
+#CodValor {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+#txtCodigo {
+  font-weight: bold;
+  align-items: center;
+}
+
+#txtValor {
+  font-family: system-ui;
+  color: red;
+  font-weight: 700;
+  font-size: 40px;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+#spanReais {
+  color: #000;
+  font-size: 15px;
+  position: absolute;
+  top: 20%;
+  right: 99%;
+}
+
+/*      padding icone telefone     */
+
+.d-flex.iconTel {
+  padding-left: 20px;
+}
+
+/*     header contatos      */
+
+.mz-header.headerUnset {
+  position: unset;
+}
+
+.none-input {
+  display: none !important;
+}
+
+/*       padding nas ul do menu de categorias        */
+.padding-sub {
+  padding-bottom: 15px;
+}
+
+/*     altura minima do carrossel das logomarcas      */
+.mz-system .mz-marcas__white-bg {
+  min-height: 90px;
+}
+
+.inovaki-centerparts-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+#txtSobre {
+  font-size: 35px;
+  font-weight: 600;
+  color: #015ac2;
+}
+
+#btnVendedorHome {
+  background-color: #015ac2;
+  border-radius: 25px;
+  border: 0;
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  padding: 0 15px;
+  margin-right: 5px;
+  color: #fff !important;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease-out;
+}
+
+/* espaÃ§amento das subcategorias */
+
+.menu-acabamento {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-acabamento:first-child {
+  padding-right: 60px;
+}
+
+.menu-acabamento-titulo {
+  margin-top: 10px !important;
+}
+
+.mz-header .mz-header__top .d-flex.justify-content-center {
+  width: auto;
+}
+
+.mz-header .mz-header__top {
+  padding: 0 30px !important;
+}
+
+.padding-subcategoria {
+  display: flex;
+  flex-direction: column;
+}
+.padding-subcategoria-titulo {
+  padding-right: 100px !important;
+}
+
+@media (min-width: 992px) {
+  .mz-amazing-menu > ul > li > ul {
+    min-width: 40% !important;
+    height: 860px !important;
+  }
+}
+
+.mz-product-summary__image {
+  z-index: 0 !important;
+}

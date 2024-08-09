@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:metaTags />
+    <meta charset="UTF-8" />
+    <vtex:template id="mz-cen-buckwell-head-tags-dev" />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <vtex:template id="2b - head" />
+
+    <style>
+      body {
+        background-color: #fff !important;
+      }
+
+      #vtex-callcenter__toolbar {
+        display: none !important;
+      }
+
+      .tapume-wrapper {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tapume-wrapper__content-logo {
+        width: 285px;
+        margin: 0 auto;
+      }
+
+      .tapume-wrapper__content-title {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: 0;
+        color: #3f3a60;
+        text-transform: uppercase;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+
+  <body class="2b-digital-tapume">
+    <div class="tapume-wrapper">
+      <div class="tapume-wrapper__content">
+        <div class="tapume-wrapper__content-logo">
+          <img src="https://centerparts.vteximg.com.br/arquivos/logo-top.png" />
+        </div>
+
+        <div class="tapume-wrapper__content-title">ESTAMOS EM MANUTENÇÃO</div>
+      </div>
+    </div>
+  </body>
+</html>

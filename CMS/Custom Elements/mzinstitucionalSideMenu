@@ -1,0 +1,45 @@
+<ul itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+  <li>
+    <p>INSTITUCIONAL</p>
+
+    <ul>
+      <li>
+        <a href="/institucional/quem-somos" itemprop="url" title="Quem Somos"
+          >Quem Somos</a
+        >
+      </li>
+      <li>
+        <a
+          href="/institucional/duvidas-frequentes/"
+          itemprop="url"
+          title="Dúvidas Frequentes"
+          >Dúvidas Frequentes</a
+        >
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>CENTRAL DE ATENDIMENTO</p>
+
+    <ul>
+      <li>
+        <a
+          href="/institucional/central-de-atendimento/"
+          itemprop="url"
+          title="Atendimento"
+          >Fale Conosco</a
+        >
+      </li>
+      <li>
+        <a href="/account/#profile" itemprop="url" title="Minha Conta"
+          >Minha Conta</a
+        >
+      </li>
+      <li>
+        <a href="/account/#orders" itemprop="url" title="Meus Pedidos"
+          >Meus Pedidos</a
+        >
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+  <vtex:metaTags />
+  <vtex:contentPlaceHolder id="mz_head" />
+  <meta charset="UTF-8" />
+  <title>
+    <vtex.cmc:productPageTitle />
+  </title>
+  <vtex:template id="2b - head" />
+  <vtex:template id="mz-cen-buckwell-head-tags" />
+  <link rel="stylesheet" href="/arquivos/CSS.cen.buc.home.css" type="text/css" />
+</head>
+
+<body class="home">
+  <!-- Header -->
+  <!--<vtex:template id="mz-cen-buckwell-header" />-->
+  <vtex:template id="inovaki-novo-header" />
+  <!-- Header -->
+  <main>
+    <div class=" container">
+      <!-- <p class="mz-light-label">CATEGORIAS</p> -->
+      <!-- cards -->
+      <div class="mz-banner mx-auto">
+        <div class="mz-banner__list d-inline-block">
+          <vtex.cmc:mzBucAmazingMenuCategorias />
+          <!-- <ul itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Acabamento</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Guarnição</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Colisão</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Iluminação</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Lataria</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Miudeza</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Acessórios</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Ferragens</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Elétrica</strong></li>
+            <li><p class="qd_am_code qd-am-banner" data-qdam-key="banner" data-qdam-value="Exemplo de banner"></p> <strong>Químicos e Ferramentas</strong></li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- CARROSSEL DE MARCAS -->
+    <div class="container">
+      <!-- <p class="mz-light-label d-none d-lg-block">MARCAS</p> -->
+      <div class="mz-slider-marcas mx-auto mt-5 mb-5 d-none d-lg-block">
+        <vtex:contentPlaceHolder id="mz-marcas" />
+
+        <!--  <ul>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/3mhover.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/alpenfix.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/wd-40.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/3mhover.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/alpenfix.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/wd-40.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/3mhover.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/alpenfix.png" alt="" /></a></li>
+          <li><a href="..." class="mx-auto"><img src="https://qdstonetree.vteximg.com.br/arquivos/wd-40.png" alt="" /></a></li>
+        </ul>  -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <vtex:template id="mz-cen-buckwell-footer" />
+  <vtex:template id="2b - scripts" />
+  <!-- Footer -->
+</body>
+
+</html>

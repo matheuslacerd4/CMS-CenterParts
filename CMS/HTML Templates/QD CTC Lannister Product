@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.product.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="produto" id="produto">
+    <vtex:template id="qd-lannister-header" />
+    <!-- tipbar -->
+    <div class="vtx-tip-bar-full">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="vtx-tip-bar">
+              <vtex:tipBar />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- tipbar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo abaixo do header" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- breadcrumb -->
+        <div class="main-breadcrumb pull-left smal-font dark-grey">
+          <vtex.cmc:breadCrumb />
+        </div>
+        <!-- breadcrumb -->
+        <!-- productReference -->
+        <div class="product-reference pull-right smal-font dark-grey">
+          <span>Cód. Ref.</span>
+          <vtex.cmc:productReference />
+        </div>
+        <!-- productReference -->
+      </div>
+      <!-- productName -->
+      <div class="row">
+        <div class="product-name main-color monster-text strong">
+          <vtex.cmc:productName />
+        </div>
+      </div>
+      <!-- productName -->
+      <div class="row">
+        <div class="col-xs-1">
+          <ul class="thumbs product-image-thumbs QD-thumbs img-responsive"></ul>
+        </div>
+        <div class="col-xs-5">
+          <div class="product-image">
+            <vtex.cmc:ProductImage zoom="on" />
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="product-btn-see-price">
+                <a href="" class="btn btn-visualize">Ver Preço</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- remover -->
+          <div class="vtx-buy-together">
+            <vtex.cmc:BuyTogether />
+          </div>
+          <!-- remover -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo Da Página" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- productDescription -->
+        <div class="product-description">
+          <h3 class="main-title">
+            <vtex:contentPlaceHolder id="Titulo da Descrição" />
+          </h3>
+          <div class="ul p h1 h2 h3 h4 h5 h6">
+            <vtex.cmc:ProductDescription />
+          </div>
+        </div>
+        <!-- productDescription -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- productSpecification -->
+        <div class="product-specification">
+          <vtex.cmc:productSpecification />
+        </div>
+        <!-- productSpecification -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo Abaixo da Descrição" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div
+          id="fb-comments-box"
+          class="third-party-component facebook-comments"
+        >
+          <div data-num-posts="3" data-width="996" class="fb-comments"></div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

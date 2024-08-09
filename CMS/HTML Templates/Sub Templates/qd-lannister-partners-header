@@ -1,0 +1,193 @@
+<div class="store-header" id="header" role="Navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3">
+				<h1 class="nav-logo" id="logo">
+					<a href="/" title="CENTERPARTS">CENTERPARTS</a>
+				</h1>
+			</div>
+			<div class="col-xs-9">
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="row nav nav-pills">
+							<li class="col-xs-4">
+								<span class="fa fa-phone fa-2"></span>
+								<span class="nav-link store-phone-number" title="Entre em contato com a NOME-PROJETO"> TELEVENDAS:
+									<strong>
+										<vtex.cmc:phoneNumber />
+									</strong>
+								</span>
+							</li>
+							<li class="col-xs-2">
+								<ul>
+									<li>
+										<a href="http://www.centerb2b.com.br/account/" class="nav-link account-link" title="Acesse a página de sua conta"> Minha Conta </a>
+									</li>
+									<li>
+										<a href="http://www.centerb2b.com.br/account#/orders" class="nav-link orders-link" title="Acompanhe seus pedidos já realizados">
+										Meus Pedidos </a> 
+									</li>
+								</ul>
+							</li>
+							<li class="col-xs-2">
+								<ul>
+									<li>
+										<a href="/institucional/central-de-atendimento" class="contact-link nav-link" title="Conheça a nossa seção de atendimento">
+										Atendimento </a>
+									</li>
+									<li>
+										<a href="/giftlist/manage" class="contact-link nav-link" title="Saiba quem somos nós"> Minhas Listas </a>
+									</li>
+								</ul>
+							</li>
+							<li class="col-xs-4 last">
+								<div class="row">
+									<div class="link-login-catalog-qd-v1 col-xs-12 col-md-6">
+										<a href="https://www.centerb2b.com.br/login">
+											Entrar
+										</a>
+									</div>
+									<div class="link-login-catalog-qd-v1 col-xs-12 col-md-6">
+										<a href="https://www.centerb2b.com.br/login?register=true">
+											Cadastre-se
+										</a>
+									</div>
+								</div>
+								<div class="row nav-cart qd_cart_auto header-smart-cart">
+									<a class="cart-link" href="/checkout#/cart">
+										<div class="col-xs-3">
+											<div class="nav-cart-icon">
+												<span class="fa fa-shopping-cart fa-2"></span>
+											</div>
+										</div>
+
+										<div class="col-xs-9">
+											<div class="nav-cart-count-data">
+												<div class="nav-cart-count qd_cart_qtt"></div>
+												<div class="items-wrapper">
+													<span class="qd_items_text singular" style="display:none;"> item</span>
+													<span class="qd_items_text plural"> itens</span>
+												</div>
+											</div>
+											<span class="nav-cart-total qd_cart_total"></span>
+										</div>
+									</a>
+
+									<div class="qd-sc-wrapper"></div>
+									<div class="qd-overlayBuyProduct qd_ddc_lightBoxOverlay"></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="nav-text user-messenger">
+							<vtex.cmc:welcomeMessage/>
+						</div>
+					</div>
+					<div class="col-xs-1">
+						<div id="google_translate_element" style="display: none!important;"></div>
+
+						<div class="qd-google-translate" style="display: none;">
+							<ul>
+								<li>
+									<a href="#" data-qd-translate="Inglês" title="Translate to English">
+										<img src="/arquivos/en.png" />
+									</a>
+								</li>
+								<li>
+									<a href="#" data-qd-translate="Espanhol" title="Traducir al español">
+										<img src="/arquivos/es.png" />
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xs-4 col-xs-offset-1">
+						<p class="securitystamp" title="Compra 100% segura">
+							<vtex.cmc:buySafely />
+							<!-- remover -->
+							COMPRA 100% SEGURA
+							<!-- remover -->
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="input-group nav-searchbar">
+							<vtex.cmc:fullTextSearchBox/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="navbar navbar-default qd_amazing_menu_auto">
+		<div class="main-amazing-menu">
+			<vtex.cmc:qdAmazingMenu />
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div>
+			<div class="vtx-placeholder vtx-banners-wrap vtx-tipbar vtx-collections-wrap">
+				<vtex:tipBarHeader />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="floatingTopBar">
+	<div class="container">
+		<div class="row floatingTopBarWrap">
+			<div class="col-xs-2">
+				<h1 class="nav-logo" id="logo">
+					<a href="/" title="Center Parts">Center Parts</a>
+				</h1>
+			</div>
+			<div class="col-xs-7">
+				<div class="input-group nav-searchbar">
+					<vtex.cmc:fullTextSearchBox/>
+				</div>
+			</div>
+			<div class="col-xs-3 nav-login qd_cart_auto header-smart-cart">
+				<div class="row">
+					<div class="link-login-catalog-qd-v1 col-xs-12 col-md-6">
+						<a href="https://www.centerb2b.com.br/login">
+							Entrar
+						</a>
+					</div>
+					<div class="link-login-catalog-qd-v1 col-xs-12 col-md-6">
+						<a href="https://www.centerb2b.com.br/login?register=true">
+							Cadastre-se
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3 nav-cart qd_cart_auto header-smart-cart">
+				<a class="cart-link row" href="/checkout#/cart">
+					<div class="col-xs-3">
+						<div class="nav-cart-icon">
+							<span class="fa fa-shopping-cart fa-2"></span>
+						</div>
+					</div>
+					<div class="col-xs-9">
+						<div class="nav-cart-count-data">
+							<div class="nav-cart-count qd_cart_qtt"></div>
+							<div class="items-wrapper">
+								<span class="qd_items_text singular" style="display:none;"> item</span>
+								<span class="qd_items_text plural"> itens</span>
+							</div>
+						</div>
+						<span class="nav-cart-total qd_cart_total"></span>
+					</div>
+				</a>
+
+				<div class="qd-sc-wrapper"></div>
+			</div>
+		</div>
+	</div>
+</div>

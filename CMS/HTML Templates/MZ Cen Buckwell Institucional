@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link
+      rel="stylesheet"
+      href="/arquivos/CSS.cen.buc.institucional.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="institucional">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    <main>
+      <div class="container">
+        <div class="mz-institucional">
+          <div class="basic-title">
+            <vtex:contentPlaceHolder id="Título da página" />
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+                <vtex:contentPlaceHolder id="Conteúdo da Página" />
+              </div>
+            </div>
+            <div class="col-xl-3 d-none d-xl-block">
+              <div class="nav-left-dept qdSideMenu">
+                <div class="institucionalSideMenuWrapper institucionalSideMenu">
+                  <!-- <vtex.cmc:mzinstitucionalSideMenu /> -->
+                  <!-- para esconder esse conteudo usar body class 'imoff' -->
+                </div>
+                <div class="helpCenterSideMenuWrapper institucionalSideMenu">
+                  <vtex.cmc:helpCenterSideMenu />
+                  <!-- para esconder esse conteudo usar body class 'hmoff' -->
+                </div>
+                <vtex:contentPlaceHolder
+                  id="Conteúdo abaixo do menu Lateral 1"
+                />
+                <vtex:contentPlaceHolder
+                  id="Conteúdo abaixo do menu Lateral 2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+                <vtex:contentPlaceHolder id="Conteúdo da Página - FullScreen" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+  </body>
+</html>

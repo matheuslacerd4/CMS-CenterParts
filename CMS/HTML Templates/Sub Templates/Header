@@ -1,0 +1,36 @@
+<header>
+  <div class="row-fluid">
+    <div class="span3">
+      <a href="/" title="Loja Online" class="logo">
+        <i class="icon-gift"></i> Loja Online
+      </a>
+    </div>
+
+    <div class="span9">
+      <a
+        title="Carrinho de Compras"
+        href="/checkout/"
+        class="btn btn-info pull-right"
+      >
+        <i class="icon-shopping-cart"></i>
+        Meu Carrinho
+      </a>
+      <a title="Minha Lista" href="/giftlist/" class="btn btn-link pull-right">
+        Minha Lista
+      </a>
+      <div class="welcome pull-right">
+        <vtex.cmc:welcomeMessage />
+      </div>
+      <div class="search pull-right">
+        <vtex.cmc:fullTextSearchBox />
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <vtex.cmc:departmentLinks />
+    </div>
+  </div>
+</header>
+<br />

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-partners-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//qd-cdn.github.io/centerparts-arquivos/CSS.ctp.lan.sistema.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//qd-cdn.github.io/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+    />
+  </head>
+
+  <body>
+    <vtex:template id="qd-lannister-partners-header" />
+    <main>
+      <div class="common-qd-v1-structure">
+        <div class="full-banner-qd-v1">
+          <div
+            class="banner-qd-v1-responsive carousel-qd-v1-shelf mosaic-qd-v1-wrapper img-responsive qd-shelf-xs-12 qd-shelf-sm-6 qd-shelf-sm-4"
+          >
+            <vtex:contentPlaceHolder id="Banner full no topo da página" />
+          </div>
+        </div>
+
+        <div class="institucional-qd-v1-content register-content-qd-v1">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div
+                  class="register-content-qd-v1-wrap register-first-content-qd-v1"
+                >
+                  <vtex:contentPlaceHolder id="Conteúdo da página" />
+
+                  <div class="register-content-qd-v1-button">
+                    <a href="/cadastro">Criar conta</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div
+                  class="register-content-qd-v1-wrap register-second-content-qd-v1"
+                >
+                  <h2>Já sou cadastrado</h2>
+                  <a href="/login?ReturnUrl=/?sc=2">Acessar área de atacado</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <vtex:template id="qd-lannister-partners-footer" />
+    <!-- Footer -->
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+    xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+        <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags-dev" />
+    <link rel="stylesheet" href="/arquivos/CSS.cen.buc.search.dev.css" type="text/css" />
+</head>
+
+<body class="quickview">
+<header class="d-none d-xl-block">
+  <div class="mz-header">
+    <div class=" d-none d-md-block h-100 mz-header__top">
+      <div class="d-flex justify-content-between">
+          <!-- Cart -->
+          <div class="mz-header__cart d-none d-lg-block ">
+            <a class="mz-menu__link mz-menu__item--cart mz-menu__item--cart qd_cart_auto"
+              title="Clique para ver os itens no carrinho" href="/checkout" data-qtt="">
+              <i class="icon-truck-loading"></i>
+              <p>Meu Pedido</p>
+              <span class="qd_cart_total light">R$ 0,00</span>
+              <span class="qd_cart_qtt counter">--</span>
+            </a>
+          </div>
+
+          <!-- Cart -->
+        </div>
+
+
+    </div>
+  </div>
+</header>
+    <div class="mz-product-quick-view acabamentos last">
+        <div class="row mz-shelf-regular mz-shelf mz-search-table__item  qd-product-is-in-stock-true">
+
+            <!-- Product image -->
+            <div class="mz-product-summary__image qd-sil-wrapper">
+                <vtex.cmc:ProductImage />
+            </div>
+
+            <!--Brand Name-->
+            <div class="col-12 col-lg-3 mz-product-summary__name">
+                <vtex.cmc:productName />
+            </div>
+            <!--Brand Name-->
+
+            <!-- preço -->
+            <div class="col-12 col-lg-2">
+                <div class="mz-real-qtd mz-qtt-added"></div>
+            </div>
+            <!-- preço -->
+
+            <!-- view Wishlist -->
+            <div class="mz-product-data-code">
+                <div class="mz-product-data-code-img">
+                    <div class="variacao-img-name" style=""></div>
+                </div>
+                <div class="mz-search-table__price">
+                    <div class="mz-smart-quantity row">
+                        <!-- Botao Quantidade -->
+                        <div class="col-12 mz-smart-quantity__action">
+                            <a class="qd-sq-minus qd-sq-inactive"><i class="icon-minus"></i></a>
+
+                            <div class="shelf-qd-v1-qty">
+                                <!-- Input Quantidade -->
+                                <input type="tel" class="qd-sq-quantity form-control qd-sq-on" data-sku-id="2049792" />
+                                <!-- // Input Quantidade -->
+                            </div>
+
+                            <a class="qd-sq-more"><i class="icon-plus"></i></a>
+                        </div>
+                        <!-- // Botao Quantidade -->
+                    </div>
+                    <p class="mz-qtd">Estoque: <span class="mz-qtd-value">1000054</span></p>
+                </div>
+                <div class="mz-shelf__price col-12 col-lg-2">
+                    <vtex.cmc:skuPrice />
+                </div>
+
+                <div class="mz-search-table__buy mz-buy-buttom col-12 col-lg">
+                    <!-- Botao Comprar -->
+                    <vtex.cmc:BuyInPage />
+                    <!-- // Botao Comprar -->
+                </div>
+                <div class="col-12 col-lg mz-search-table__view-fav d-flex">
+                    <div class="mz-quickview-open" id="2032735">
+                        <i class="icon-eye" title="Saiba mais"></i>
+                    </div>
+                    
+                    <!-- giftlist -->
+                    <div class="mz-giftlist-button">
+                        <div class="qd-sss-wishlist-button qd-sss-on">
+                            <a href="#" title="Adicionar a lista de compras" class=""><i class="icon-Ativo-122"></i></a>
+                        </div>
+                    </div>
+                    <!-- giftlist -->
+                </div>
+            </div>
+        </div>
+        <div class="variacoes-container">
+
+        </div>
+    </div>
+    <vtex:template id="2b - scripts" />
+</body>
+
+</html>

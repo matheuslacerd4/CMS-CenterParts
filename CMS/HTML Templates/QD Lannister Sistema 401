@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.sistema.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+    />
+  </head>
+
+  <body>
+    <vtex:template id="qd-lannister-header-sistema-v2" />
+
+    <div class="container">
+      <div class="view-selection margin-b-md">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row padding-t-md padding-b-md">
+              <div class="col-xs-12">
+                <div class="title-wrapper">
+                  <h2>Escolha a visualização desejada</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5 col-xs-offset-1">
+                <a href="http://catalogo.centerb2b.com.br">
+                  <div class="catalogo-wrapper">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="image-wrapper">
+                          <img
+                            src="/arquivos/icone-catalogo.jpg"
+                            title="Catálogo"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="title-wrapper">
+                          <h3>Catálogo</h3>
+                          <p>Liberado a todos os usuários</p>
+                          <p>Acesso a:</p>
+                        </div>
+                        <ul>
+                          <li>
+                            Linha de produtos <i class="fa fa-check-circle"></i>
+                          </li>
+                          <li>Ver preços<i class="fa fa-times-circle"></i></li>
+                          <li>
+                            Consultar Estoque<i class="fa fa-times-circle"></i>
+                          </li>
+                          <li>Comprar<i class="fa fa-times-circle"></i></li>
+                        </ul>
+                        <span>Acessar Catálogo</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-xs-5">
+                <a href="/login?ReturnUrl=/">
+                  <div class="loja-wrapper">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="image-wrapper">
+                          <img src="/arquivos/icone-loja.jpg" title="Loja" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="title-wrapper">
+                          <h3>Loja Online</h3>
+                          <p>Exclusivo para lojistas de autopeças</p>
+                          <p>Acesso a:</p>
+                        </div>
+                        <ul>
+                          <li>
+                            Linha de produtos <i class="fa fa-check-circle"></i>
+                          </li>
+                          <li>Ver preços<i class="fa fa-check-circle"></i></li>
+                          <li>
+                            Consultar Estoque<i class="fa fa-check-circle"></i>
+                          </li>
+                          <li>Comprar<i class="fa fa-check-circle"></i></li>
+                        </ul>
+                        <span>Acessar Loja Online</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-wrapper-qd-v1">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="video-wrapper-qd-v1-container">
+              <h2><vtex:contentPlaceHolder id="Título do Video" /></h2>
+              <p><vtex:contentPlaceHolder id="Subtítulo do Video" /></p>
+              <div class="video-wrapper-qd-v1-carousel">
+                <vtex:contentPlaceHolder id="Carrossel de Vídeos" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

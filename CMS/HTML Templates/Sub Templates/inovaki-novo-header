@@ -1,0 +1,357 @@
+<style type="text/css">
+  #iframe-botuf-chat-widget {
+    display: none;
+  }
+
+  .new-icon-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    z-index: 100;
+    right: 35px;
+  }
+</style>
+
+<div class="new-icon-whatsapp">
+  <a href="https://api.whatsapp.com/send?phone=551133052000" target="_blank">
+    <img
+      src="https://devcenterparts.vteximg.com.br/arquivos/icon-whatsapp.png"
+      width="70"
+      height="70"
+    />
+  </a>
+</div>
+
+<div id="cart">
+  <div style="display: none"><vtex.cmc:welcomeMessage /></div>
+  <header class="d-none d-xl-block">
+    <div class="mz-header">
+      <div class="d-none d-md-block h-100 mz-header__top">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <!-- TELEVENDAS -->
+            <div class="mz-header__item" id="phone">
+              <!-- <a class="mz-menu__link" href="/wishlist" data-wishlist-qtt="">
+                <i class="icon-heart-1"></i>Favoritos
+              </a> -->
+
+              <i class="icon-phone-alt"></i>
+              <p>Canal de Vendas:</p>
+              <a
+                class="mz-menu__link bluetext"
+                href="tel:+5508000201744"
+                data-wishlist-qtt=""
+                style="padding: 0"
+              >
+                0800 020 1744</a
+              >
+              /
+              <a
+                class="mz-menu__link bluetext"
+                href="tel:+5508000201744"
+                data-wishlist-qtt=""
+                >(11) 3305-2000</a
+              >
+            </div>
+
+            <!-- AJUDA -->
+            <div class="mz-header__item">
+              <a href="/institucional/duvidas-frequentes/"
+                >Precisa de ajuda?
+              </a>
+            </div>
+            <!-- AMBIENTE SEGURO -->
+            <div class="mz-header__item" id="seguro">
+              <i class="icon-shield-alt"></i>
+              <p>Ambiente 100% Seguro</p>
+            </div>
+            <div class="mz-header__item mz-translate">
+              <div
+                id="google_translate_element"
+                style="display: none !important"
+              ></div>
+
+              <div class="mz-google-translate">
+                <ul>
+                  <li>
+                    <img src="/arquivos/pt.png" alt="Translate" />
+                    <ul>
+                      <li>
+                        <a href="#" id="en" title="Translate to English">
+                          <img src="/arquivos/en-buc.png" />
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" id="es" title="Traducir al español">
+                          <img src="/arquivos/es-buc.png" />
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ****************************
+              Right side 
+            *******************************-->
+
+          <div class="d-flex justify-content-center">
+            <div class="mz-header__credit" id="customer-credit">
+              <Credit />
+            </div>
+
+            <!-- Username -->
+            <div class="mz-header__username" id="usernameInfo">
+              <div class="elipsis">
+                <p class="bluetext mz-fill-username"></p>
+              </div>
+              <div class="mz-header__baloon row" style="display: none">
+                <div class="col-6 mb-4">
+                  <h2>Endereço:</h2>
+                  <div id="add"></div>
+                </div>
+                <div class="col-6 mb-4">
+                  <h2>Representantes:</h2>
+                  <div id="rep"></div>
+                </div>
+                <div class="col-6 mb-2">
+                  <h2>Responsável:</h2>
+                  <div id="res"></div>
+                </div>
+                <div class="col-6 mb-2">
+                  <h2>Apoio:</h2>
+                  <div id="apo"></div>
+                </div>
+                <button class="col-12 px-auto mb-1 btn-clear-session">
+                  <span style="color: #585757; font-size: 12px"> Sair </span>
+                </button>
+                <p class="mz-header__baloon-box col-12">
+                  Para atualizar as informações, ligue para 0800 - 020 - 1744
+                </p>
+              </div>
+            </div>
+
+            <!-- Cart -->
+            <div class="mz-header__cart d-none d-lg-block">
+              <a
+                class="mz-menu__link mz-menu__item--cart mz-menu__item--cart qd_cart_auto"
+                title="Clique para ver os itens no carrinho"
+                href="/checkout"
+                data-qtt=""
+              >
+                <i class="icon-truck-loading"></i>
+                <p>Meu Pedido</p>
+                <span class="qd_cart_total light">R$ 0,00</span>
+                <span class="qd_cart_qtt counter">--</span>
+              </a>
+
+              <div>
+                <Cart />
+              </div>
+            </div>
+            <!-- Cart -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside class="mz-sidebar-container">
+    <div class="mz-sidebar">
+      <a class="mz-sidebar__brand" href="/"></a>
+
+      <div id="header">
+        <freeshipping-bar></freeshipping-bar>
+        <a href="https://devcenterparts.myvtex.com/campanha-copa">
+          <worldcup-bar></worldcup-bar>
+        </a>
+      </div>
+      <ul>
+        <li>
+          <a href="/account#/orders">
+            <i class="icon-list-alt"></i>
+            <p>Histórico de Pedidos</p>
+          </a>
+        </li>
+        <li id="categorias">
+          <i class="icon-th"></i>
+          <p>Categorias</p>
+          <div class="d-none">
+            <div class="mz-amazing-menu">
+              <vtex.cmc:NovoMenuCategoria />
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="/giftlist">
+            <i class="icon-Ativo-122"></i>
+            <p>Minhas Listas de Pedidos</p>
+          </a>
+        </li>
+        <li>
+          <a href="/account">
+            <i class="icon-user-circle"></i>
+            <p>Minha Conta</p>
+          </a>
+        </li>
+        <li>
+          <a href="/compra-express">
+            <i class="icon-clipboard-list"></i>
+            <p>Compra Fácil</p>
+          </a>
+        </li>
+
+        <li class="mobile-cart" style="display: none">
+          <div>
+            <Cart />
+          </div>
+        </li>
+      </ul>
+      <div class="mz-sidebar__secure">
+        <i class="icon-Group"></i>
+        <!--icone badge-->
+        <p>Ambiente 100% Seguro</p>
+      </div>
+      <button id="openClose">
+        <i class="icon-chevron-right"></i><i class="icon-chevron-left"></i>
+      </button>
+    </div>
+  </aside>
+</div>
+
+<div class="container">
+  <div class="mz-breadcrumb">
+    <vtex.cmc:breadCrumb />
+  </div>
+  <!-- username representante fora do topbar -->
+  <div class="mz-username d-flex">
+    <p id="userName" class="mz-fill-username">
+      <!-- Olá, -->
+    </p>
+    <div class="mz-search-new-item"><a href="/busca">Buscar novo item</a></div>
+  </div>
+  <!-- Busca -->
+  <div class="mz-search align-self-center px-3">
+    <div class="mz-search__customsearch">
+      <h4>
+        Digite abaixo o nome ou marca do produto que você procura.
+        <span style="display: none">Clique Aqui</span>
+      </h4>
+
+      <div class="input-group w-100 regular-search">
+        <vtex.cmc:fullTextSearchBox />
+      </div>
+
+      <div class="mz-search__customsearch--text">
+        <h4 class="open">
+          Digite abaixo o código Centerparts ou da marca do produto que você
+          procura. <span>Clique Aqui</span>
+        </h4>
+        <!-- <a id="mz-show-search-code">Clique Aqui</a> -->
+      </div>
+      <div class="mz-search__customsearch--input" style="display: none">
+        <input class="form-control" type="text" placeholder="Ex: 12345.00" />
+        <button id="mz-custom-search--button">Buscar</button>
+      </div>
+    </div>
+    <!-- Dropdown onde é rendarizado os itens buscados -->
+    <div class="mz-search__dropresults"></div>
+    <!-- // Dropdown onde é rendarizado os itens buscados -->
+  </div>
+</div>
+<!-- breadcrumb -->
+
+<!-- Cart Second button -->
+<div class="mz-header__cart mz-header__cart-sm d-xl-none">
+  <a
+    class="mz-menu__link mz-menu__item--cart mz-menu__item--cart qd_cart_auto"
+    title="Clique para ver os itens no carrinho"
+    href="/checkout"
+    data-qtt=""
+  >
+    <i class="icon-truck-loading"></i>
+    <p>Meu Pedido</p>
+    <span class="qd_cart_total light">Total: R$ 0,00</span>
+    <span class="qd_cart_qtt counter">--</span>
+  </a>
+</div>
+
+<!-- Modal Especial -->
+<div class="mz-specialmodal" style="display: none">
+  <div class="mz-specialmodal__close">
+    <button class="mz-specialmodal__close--button">Fechar</button>
+  </div>
+  <div class="mz-specialmodal__content">
+    <div class="mz-specialmodal__content--bg">
+      <!-- Principal -->
+      <div class="mz-specialmodal__content--main">
+        <div class="mz-main__image">
+          <a href="">
+            <img src="" />
+          </a>
+        </div>
+        <div class="mz-main__infos">
+          <div class="mz-main__infos--name">
+            <span class="name"></span>
+          </div>
+          <div class="mz-main__infos--complements">
+            <div class="info-one">
+              <span></span>
+            </div>
+            <div class="info-two">
+              <div class="quantity"></div>
+              <div class="buttons"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- // Principal -->
+
+      <!-- Outras Marcas -->
+      <div class="mz-specialmodal__content--othersbrands">
+        <span>Outras Marcas</span>
+        <div class="mz-otherbrands__block">
+          <div class="mz-otherbrands__block--image">
+            <a href="">
+              <img src="" />
+            </a>
+          </div>
+          <div class="mz-otherbrands__block--name">
+            <span></span>
+            <span></span>
+          </div>
+          <div class="mz-otherbrands__block--price"></div>
+          <div class="mz-otherbrands__block--quantity"></div>
+          <div class="mz-otherbrands__block--request"></div>
+          <div class="mz-otherbrands__block--favorite"></div>
+        </div>
+      </div>
+      <!-- // Outras Marcas -->
+    </div>
+
+    <!-- Sugeridos -->
+    <div class="mz-specialmodal__content--sugestions">
+      <span>Produtos Sugeridos</span>
+      <div class="mz-sugestions__block">
+        <div class="mz-sugestions__block--image">
+          <a href="">
+            <img src="" />
+          </a>
+        </div>
+        <div class="mz-sugestions__block--name">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="mz-sugestions__block--price"></div>
+        <div class="mz-sugestions__block--quantity"></div>
+        <div class="mz-sugestions__block--request"></div>
+        <div class="mz-sugestions__block--favorite"></div>
+      </div>
+    </div>
+    <!-- // Sugeridos -->
+  </div>
+</div>
+<!-- // Modal Especial -->
+
+<div class="mz-backdrop"></div>

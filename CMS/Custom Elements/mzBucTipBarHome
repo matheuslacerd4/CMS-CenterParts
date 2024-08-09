@@ -1,0 +1,26 @@
+<ul>
+  <li>
+    <img
+      alt="icone truck"
+      src="https://centerparts.vteximg.com.br/arquivos/mz-icon-truck-light.png"
+    />Entregas rápidas e seguras
+  </li>
+  <li>
+    <img
+      alt="icone users"
+      src="https://centerparts.vteximg.com.br/arquivos/mz-icon-star-light.png"
+    />Atendimento eficiente
+  </li>
+  <li>
+    <img
+      alt="icone boxes"
+      src="https://centerparts.vteximg.com.br/arquivos/mz-icon-boxes-light.png"
+    />Variedade de Produtos
+  </li>
+  <li>
+    <img
+      alt="icone medal"
+      src="https://centerparts.vteximg.com.br/arquivos/mz-icon-medal-light.png"
+    />Garantia de Qualidade
+  </li>
+</ul>

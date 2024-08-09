@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+  <vtex:metaTags />
+  <vtex:contentPlaceHolder id="mz_head" />
+  <meta charset="UTF-8" />
+  <title>
+    <vtex.cmc:productPageTitle />
+  </title>
+  <vtex:template id="2b - head" />
+  <vtex:template id="mz-cen-buckwell-head-tags-dev" />
+  <link rel="stylesheet" href="/arquivos/CSS.cen.buc.search.dev.css" type="text/css" />
+</head>
+
+<body class="resultado-busca">
+  <!-- Header -->
+  <vtex:template id="mz-cen-buckwell-header" />
+  <!-- Header -->
+  <main>
+    <!-- Result Filter Order-by -->
+    <div class="container mz-result">
+
+      <!-- Search Title -->
+      <div class="mz-search-title mz-result__label">
+        <vtex.cmc:searchTitle />
+      </div>
+      <p class="mz-result__label ">Encontramos <span></span> <span class="label"> itens para sua
+          busca</span><span></span></p>
+      <!-- <button id="filter">Filtrar<i class="icon-chevron-down"></i></button> -->
+      <!-- searchNavigator menu de filtros -->
+
+      <div class="mz-search-navigation">
+        <h2>Filtrar Resultado <i class="icon-filter ml-auto"></i></h2>
+        <vtex.cmc:searchNavigator />
+      </div>
+
+
+
+      <!-- Search Item  -->
+      <div class="container d-flex">
+        <div class="dropdown">
+          <button class=" dropdown-toggle-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Ordenar
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+            <a class="dropdown-item" data-order-parameter="OrderByPriceASC">Menor Preço</a>
+            <a class="dropdown-item" data-order-parameter="OrderByPriceDESC">Maior Preço</a>
+            <a class="dropdown-item" data-order-parameter="OrderByTopSaleDESC">Mais vendidos</a>
+            <a class="dropdown-item" data-order-parameter="OrderByReviewRateDESC">Melhores avaliações</a>
+            <a class="dropdown-item" data-order-parameter="OrderByNameASC">A - Z</a>
+            <a class="dropdown-item" data-order-parameter="OrderByNameDESC">Z - A</a>
+            <a class="dropdown-item" data-order-parameter="OrderByReleaseDateDESC">Data de lançamento</a>
+            <a class="dropdown-item" data-order-parameter="OrderByBestDiscountDESC">Melhor Desconto</a>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="GiftListInsertSkuV2Wrapper d-none">
+        <vtex.cmc:GiftListInsertSkuV2 />
+      </div>
+      <div class="mz-search-result  mz-search-table">
+        <!-- Search Topbar -->
+        <div class="d-none">
+          <div class="row mz-search-table__top">
+            <!-- Regular search -->
+            <p class="col-md d-none-Qv">Imagem</p>
+            <p class="col-md d-none-Qv">Produto</p>
+            <p class="col-md-3 text-center d-none-Qv">Variação</p>
+            <p class="col-md-3 text-center d-none-Qv">Preço/Qtd</p>
+            <p class="col-md d-none-Qv">Espiar/Favoritar</p>
+
+            <!--opened quickview-->
+            <p class="col-12 col-md-3 d-none-search">Imagem</p>
+            <p class="col-12 col-md-4  d-none-search">Produto</p>
+            <p class=" col-12 col-xl-5  d-none-search">Variação</p>
+
+          </div>
+        </div>
+        
+        <div id="search">
+            <vtex.cmc:searchResult layout="ad4ba4fb-d7e7-4c0c-9c60-8765a3e1da63" itemCount="24" columnCount="1" />
+        </div>
+
+      </div>
+    </div>
+    <!-- carregado pelo infinityScroll -->
+    <!-- <div class="container mz-search-loader ">
+      <i class="icon-spinner mx-auto"></i>
+      <p class="mx-auto">Carregando mais itens. Por favor, aguarde.</p>
+    </div> -->
+  </main>
+  <!-- quickview -->
+  <div class="mz-search__quickview">
+  </div>
+  <!-- quickview -->
+  <div class="mz-modal-quickview">
+    <div class="modal-body"></div>
+    <div class="mz-search-loader"><i class="icon-spinner mx-auto"></i></div>
+  </div>
+  <!-- Footer -->
+  <vtex:template id="2b - scripts" />
+  <vtex:template id="mz-cen-buckwell-footer-dev" />
+  <!-- Footer -->
+</body>
+
+</html>

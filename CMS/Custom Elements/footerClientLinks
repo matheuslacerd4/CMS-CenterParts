@@ -1,0 +1,31 @@
+<ul itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope">
+  <li>
+    <p class="qd_am_text">Ajuda</p>
+    <ul>
+      <li>
+        <a
+          title="Minha conta"
+          itemprop="url"
+          href="http://www.centerb2b.com.br/account"
+          >Minha conta</a
+        >
+      </li>
+      <li>
+        <a
+          title="Meus pedidos"
+          itemprop="url"
+          href="http://www.centerb2b.com.br/account#/orders"
+          >Meus pedidos</a
+        >
+      </li>
+      <li>
+        <a
+          title="Atendimento"
+          itemprop="url"
+          href="/institucional/central-de-atendimento/"
+          >Atendimento</a
+        >
+      </li>
+    </ul>
+  </li>
+</ul>

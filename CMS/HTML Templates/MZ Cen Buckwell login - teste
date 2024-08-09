@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:contentPlaceHolder id="mz_head_tag" />
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <vtex:metaTags />
+  </head>
+
+  <body class="login">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    <main></main>
+
+    <vtex.cmc:userLogin />
+
+    <!-- Footer -->
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+    <script>
+      $(function () {
+        vtexid.start({ flow: "classicLogin", returnUrl: "/", canClose: false });
+      });
+    </script>
+  </body>
+</html>

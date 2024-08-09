@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.institucional.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/arquivos/CSS.ctp.lan.giftlist.css"
+    />
+  </head>
+  <body class="giftlist-home">
+    <vtex:template id="qd-lannister-header" />
+
+    <div class="container">
+      <div class="collectionsWrapper halfBannersWrapper">
+        <vtex:contentPlaceHolder
+          id="Conteúdo Sup 980xLivre coleções 4colunas"
+        />
+        <vtex:giftlSupContent />
+      </div>
+
+      <h2 class="titulo"><span>Editar Produtos</span></h2>
+      <vtex:contentPlaceHolder id="Banner Título 980xLivre" />
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="shelfWrapper">
+                <vtex.cmc:GiftListInfoV2 />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <vtex.cmc:GiftListProductsV2 />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collectionsWrapper halfBannersWrapper">
+        <vtex:contentPlaceHolder
+          id="Conteúdo Inf 980xLivre coleções 4colunas"
+        />
+        <vtex:giftlInfContent />
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

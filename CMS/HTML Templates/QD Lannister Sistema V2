@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.sistema.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+    />
+    <script type="text/javascript" language="javascript">
+      <![CDATA[
+           //    $(document).ready(function () {
+      // 		function popupAlert() {
+      // 			$('body').append('<div class="alert-wrapper" style="position: fixed;background: rgba(255,255,255,0.5);width: 100vw;height: 100vh;top: 0;left: 0;display: flex;justify-content: center;align-items: center;"><div class="alert-inner" style="max-width:90vw;background:white;"><img src="/arquivos/aviso.png" style="width:100%;"></div></div>');
+      // 			$('.alert-wrapper').click(function() {$('.alert-wrapper').remove()});
+      // 		};
+      // 		popupAlert();
+      // 	})
+         ]]>
+    </script>
+  </head>
+
+  <body>
+    <vtex:template id="qd-lannister-header-sistema" />
+
+    <div class="qd-v2-403">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-5">
+            <div class="qd-v2-403-content">
+              <vtex:contentPlaceHolder id="Conteudo" />
+            </div>
+          </div>
+          <div class="col-xs-5 col-xs-offset-2">
+            <div class="video-wrapper-qd-v1">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="video-wrapper-qd-v1-container">
+                    <div class="video-wrapper-qd-v1-carousel">
+                      <vtex:contentPlaceHolder id="Carrossel de Vídeos" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

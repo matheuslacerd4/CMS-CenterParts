@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:contentPlaceHolder id="qd_head" />
+    <vtex:metaTags />
+    <meta charset="UTF-8" />
+    <title>
+      <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    
+    <link rel="stylesheet" href="/arquivos/CSS.cen.buc.wishlist.css" type="text/css" />
+  </head>
+
+  <body class="wishlist">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+
+    <main>
+      <div class="mz-wishlist">
+        <div class="container">
+          <!-- Breadcrumb -->
+          <div class="mz-breadcrumb">
+            <vtex.cmc:breadCrumb />
+          </div>
+          <!-- Breadcrumb -->
+
+          <div class="mz-mosaic-banner">
+            <!-- Conteúdo abaixo do Header -->
+            <vtex:contentPlaceHolder id="Conteúdo abaixo do Header" />
+            <!-- Conteúdo abaixo do Header -->
+          </div>
+
+          <div class="mz-wishlist__title">
+            <h2>Meus Favoritos</h2>
+          </div>
+
+          <!-- WishList shelf -->
+          <div class="mz-shelf"></div>
+          <!-- WishList shelf -->
+
+          <div class="mz-mosaic-banner">
+            <!-- Conteúdo acima do Footer -->
+            <vtex:contentPlaceHolder id="Conteúdo acima do Footer" />
+            <!-- Conteúdo acima do Footer -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+  </body>
+</html>

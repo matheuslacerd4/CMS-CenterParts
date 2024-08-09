@@ -1,0 +1,29 @@
+<div class="footer clearfix">
+    <div class="box clearfix">
+        <div id="footerCredits">
+            <div class="pull-left">
+                <h4>Formas de pagamento</h4>
+                <img src="/arquivos/lojavazia-formasdepagamento.png" alt="Formas de pagamento" />
+            </div>
+
+            <div class="pull-right">
+                <h4>Site seguro</h4>
+                <img src="/arquivos/lojavazia-siteseguro.png" alt="Site seguro" />
+            </div>
+            
+            <hr class="clearfix" />
+
+            <p class="pull-left">
+                Copyright © 2013. Todos os direitos reservados.
+                Todas as marcas e suas imagens são de propriedade de seus respectivos donos. <br />
+                É vedada a reprodução, total ou parcial, de qualquer conteúdo sem expressa autorização.
+            </p>
+
+            <div class="pull-right">
+                <a target="_blank" href="http://www.vtex.com.br/commercesuite/">
+                    <img src="/arquivos/lojavazia-logo-vtex.png" alt="Vtex" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

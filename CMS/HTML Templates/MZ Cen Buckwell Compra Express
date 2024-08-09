@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+    xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+        <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link rel="stylesheet" href="/arquivos/CSS.cen.buc.compra-express.css?v=01" type="text/css" />
+</head>
+
+<body class="compra-express">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    
+    <main>
+        <div class="container mz-compra-express">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Compra Fácil</h2>
+                    <p>Uma forma fácil e rápida para fazer suas compras.</p>
+                    <div class="mz-compra-express__blue-bg">
+                        <h3>Como usar a Compra Fácil:</h3>
+                        <p>Copie e cole na área abaixo sua lista de produtos no seguinte formato: [Codigo] ,
+                            [Quantidade] , separados por virgula ou espaço.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="express-purchase-content">
+                        <div class="express-purchase-title-qd-v1">
+                            <textarea name="textarea" id="" cols="12" rows="10"></textarea>
+                            <button class="btn-search-product">Buscar produtos</button>
+                        </div>
+
+                        <div class="express-purchase-shelf-qd-v1" id="fast-buy">
+                            <div class="d-flex justify-content-end">
+                                <fast-buy />
+                            </div>
+
+                            <table class="table-header qd-products-table">
+                                <thead>
+                                    <tr>
+                                        <th class="id-table">ID</th>
+                                        <th class="product-name-table" colspan="2">PRODUTO</th>
+                                        <th class="price-table">PREÇO</th>
+                                        <th class="buy-table">ADICIONAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            
+                            <div class="d-flex justify-content-end">
+                                <fast-buy />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 p-0">
+                    <div class="mini-cart-wrapper-qd-v1">
+                        <h3>Compra Fácil - Resumo</h3>
+                        <div class="row">
+                            <div class="col">
+                                <div class="order-button-wrapper">
+                                    <a href="/checkout/#/orderform" class="cartCheckout"></a>
+                                </div>
+                                <vtex.cmc:miniCart />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.product.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="produto" id="produto">
+    <vtex:template id="qd-lannister-header" />
+    <!-- tipbar -->
+    <div class="vtx-tip-bar-full">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="vtx-tip-bar">
+              <vtex:tipBar />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- tipbar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo abaixo do header" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- breadcrumb -->
+        <div class="main-breadcrumb pull-left smal-font dark-grey">
+          <vtex.cmc:breadCrumb />
+        </div>
+        <!-- breadcrumb -->
+        <!-- productReference -->
+        <div class="product-reference pull-right smal-font dark-grey">
+          <span>Cód. Ref.</span>
+          <vtex.cmc:productReference />
+        </div>
+        <!-- productReference -->
+      </div>
+      <!-- productName -->
+      <div class="row">
+        <div class="product-name main-color monster-text strong">
+          <vtex.cmc:productName />
+        </div>
+      </div>
+      <!-- productName -->
+      <div class="row">
+        <div class="col-xs-1">
+          <ul class="thumbs product-image-thumbs QD-thumbs img-responsive"></ul>
+        </div>
+        <div class="col-xs-5">
+          <div class="product-image">
+            <vtex.cmc:ProductImage zoom="on" />
+          </div>
+        </div>
+        <div class="col-xs-6 product-sku-content">
+          <div class="product-sku-selection-wrapper">
+            <!-- Botão Comprar -->
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="product-buy-button">
+                  <a class="buy-button qd-ssg-buy-button">
+                    ADICIONAR AO CARRINHO
+                  </a>
+                </div>
+                <p class="sku-grid-alert">
+                  <i class="fa fa-exclamation-triangle font-size-sm"></i> Insira
+                  as quantidades nos campos abaixo
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Seleção de SKU em grade -->
+              <div class="col-xs-12 show-grid-layout">
+                <div
+                  class="qd-smart-sku-grid hide"
+                  data-qd-smart-sku-grid="Lados"
+                  data-qd-smart-sku-grid-z="Tipo"
+                >
+                  <!-- Título para agrupar o eixo Z -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="qd-sku-title-z"></div>
+                    </div>
+                  </div>
+                  <!-- Exemplo de HTML para a seleção de SKU -->
+                  <div class="row">
+                    <div class="sku-rich-selection col-xs-12">
+                      <div class="qd-sku-rich-selection-grid">
+                        <div class="qd-sku-row-head qd-sku-row">
+                          <div class="qd-sku-col qd-empty-col"></div>
+                          <div class="qd-sku-col qd-empty-col"></div>
+                          <div class="qd-sku-col qd-sku-col-title"></div>
+                        </div>
+                        <div class="qd-sku-row qd-sku-row-body">
+                          <div class="qd-sku-col qd-sku-img"></div>
+                          <div class="qd-sku-col qd-sku-name"></div>
+                          <div class="qd-sku-col qd-sku-qtt-wrap">
+                            <div class="qd-sku-qtt-price"></div>
+                            <div class="qd-sku-qtt-input">
+                              <input type="tel" class="input-type-text" />
+                            </div>
+                            <div class="qd-sku-qtt-controls">
+                              <a
+                                class="qd-sku-qtt-btn qd-sku-qtt-remove"
+                                href="#"
+                                ><i class="fa fa-minus-circle"></i
+                              ></a>
+                              <a class="qd-sku-qtt-btn qd-sku-qtt-add" href="#"
+                                ><i class="fa fa-plus-circle"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Totalizador -->
+            <div class="row sku-selected-summary">
+              <div class="col-xs-5">
+                <strong>
+                  <span> TOTAL DE PRODUTOS: </span>
+                  <span class="qd-selected-qtt-sku">0</span>
+                </strong>
+              </div>
+              <div class="col-xs-7">
+                <strong>
+                  <span> TOTAL DE PRODUTOS: </span>
+                  <span class="qd-selected-sku-total">R$ 0,00</span>
+                </strong>
+              </div>
+            </div>
+
+            <!-- Botão Comprar -->
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="product-buy-button">
+                  <a class="buy-button qd-ssg-buy-button">
+                    ADICIONAR AO CARRINHO
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row product-sku-single-wrapper">
+            <div class="col-xs-4">
+              <div class="row qd-smart-quantity">
+                <a href="#" class="qd-add-btn qd-sq-minus qd-sq-inactive">
+                  <i class="fa fa-minus-circle"></i>
+                </a>
+
+                <input
+                  type="tel"
+                  class="form-control input-type-text qd-sq-quantity"
+                />
+
+                <a href="#" class="qd-add-btn qd-sq-more">
+                  <i class="fa fa-plus-circle"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-xs-8">
+              <!-- BuyButton -->
+              <div class="product-buy-button">
+                <vtex.cmc:BuyButton />
+              </div>
+              <!-- BuyButton -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- remover -->
+          <div class="vtx-buy-together">
+            <vtex.cmc:BuyTogether />
+          </div>
+          <!-- remover -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo Da Página" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- productDescription -->
+        <div class="product-description">
+          <h3 class="main-title">
+            <vtex:contentPlaceHolder id="Titulo da Descrição" />
+          </h3>
+          <div class="ul p h1 h2 h3 h4 h5 h6">
+            <vtex.cmc:ProductDescription />
+          </div>
+        </div>
+        <!-- productDescription -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- productSpecification -->
+        <div class="product-specification">
+          <vtex.cmc:productSpecification />
+        </div>
+        <!-- productSpecification -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+            <vtex:contentPlaceHolder id="Conteúdo Abaixo da Descrição" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div
+          id="fb-comments-box"
+          class="third-party-component facebook-comments"
+        >
+          <div data-num-posts="3" data-width="996" class="fb-comments"></div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

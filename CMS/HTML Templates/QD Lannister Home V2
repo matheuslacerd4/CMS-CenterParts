@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+<head>
+	<title><vtex.cmc:productPageTitle /></title>
+	<vtex:template id="qd-lannister-head-tags" />
+	<link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.home.css" type="text/css" />
+	<script type="text/javascript" src="//centerparts.vtexcommercestable.com.br/files/JS.jquery.cycle2.min.js"></script>
+	<script type="text/javascript" src="//centerparts.vtexcommercestable.com.br/files/JS.jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="//cdn.quatrodigital.com/centerparts-arquivos/JS.jquery.owl.carousel.min.js"></script>
+</head>
+
+<body class="home">
+	<vtex:template id="qd-lannister-header" />
+
+	<!-- Conteúdo abaixo do Header -->
+	<div class="container">
+		<div class="row">
+			<div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap col-xs-12 qd-banner-responsive img-responsive qd-shelf-xs-3" data-qd-help="1" data-qd-help-id="Conteúdo abaixo do Header">
+				<!-- Conteúdo abaixo do Header -->
+				<vtex:contentPlaceHolder id="Conteúdo abaixo do Header" />
+				<!-- Conteúdo abaixo do Header -->
+			</div>
+		</div>
+	</div>
+	<!-- Conteúdo abaixo do Header -->
+
+	<!-- Slider Principal de Full Banners -->
+	<div class="slider main-slider full-slider cycle-slideshow clearfix" data-qd-help="2" data-qd-help-id="Slider Principal de Full Banners" data-cycle-slides=">.box-banner" data-cycle-prev=".cycle-prev" data-cycle-next=".cycle-next">
+		<div class="cycle-prev cycle-control cycle-component"></div>
+		<div class="cycle-next cycle-control cycle-component"></div>
+		<span class="cycle-pager cycle-control cycle-component"></span>
+
+		<!-- Slider Principal de Full Banners -->
+		<vtex:contentPlaceHolder id="Slider Principal de Full Banners" />
+		<!-- Slider Principal de Full Banners -->
+
+	</div>
+	<!-- Conteúdo abaixo do Slider Principal -->
+
+	<!-- banners de categoria -->
+	<div class="qd-v2-401-banner-categoria-wrapper">
+		<div class="container">
+			<h2><vtex:contentPlaceHolder id="Título banners de categoria" /></h2>
+
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Coifa de Cambio" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Calha de chuva" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Maçanetas externas" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Retrovisor externo" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Para-choque" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Lanterna Lateral" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Palheta dianteira" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Fechadura de porta" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Lanterna de placa" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Suporte de vedação" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Subconjunto de lentes" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Lampadas" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Amortecedor de tampa" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Pestana" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Letreiro" />
+				</div>
+			</div>
+	
+			<div class="col-xs-4  col-md-3">
+				<div class="qd-v2-401-banner-categoria">
+					<vtex:contentPlaceHolder id="Banner Lanterna traseira" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- banners de categoria -->
+	
+	<div class="video-wrapper-qd-v1">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="video-wrapper-qd-v1-container">
+						<h2><vtex:contentPlaceHolder id="Título do Video" /></h2>
+						<p><vtex:contentPlaceHolder id="Subtítulo do Video" /></p>
+						<div class="video-wrapper-qd-v1-carousel">
+							<vtex:contentPlaceHolder id="Carrossel de Vídeos" />
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 vtx-banner-carousel">
+				<div class="carousel clearfix" data-carousel="speed:400; itensPage:6; auto:800;">
+					<vtex:contentPlaceHolder id="Carrossel de Itens" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Carrossel de Produtos -->
+	<div class="shelf-qd-v1-carousel">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<div class="qd-shelf-xs-12 qd-shelf-sm-6 qd-shelf-md-3 qd-banner-responsive img-responsive clearfix">
+						<vtex:contentPlaceHolder id="Carrossel de Produtos abaixo do Cabeçalho" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Carrossel de Produtos -->
+
+	<!-- Carrossel de Produtos -->
+	<div class="shelf-qd-v1-carousel">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<div class="qd-shelf-xs-12 qd-shelf-sm-6 qd-shelf-md-3 qd-banner-responsive img-responsive clearfix">
+						<vtex:contentPlaceHolder id="Conteúdo Principal" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Carrossel de Produtos -->
+
+	<!-- Carrossel de Produtos -->
+	<div class="shelf-qd-v1-carousel">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<div class="qd-shelf-xs-12 qd-shelf-sm-6 qd-shelf-md-3 qd-banner-responsive img-responsive clearfix">
+						<vtex:contentPlaceHolder id="Carrossel de Produtos acima do Rodapé" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Carrossel de Produtos -->
+
+	<div style="display: none;">
+		<vtex:contentPlaceHolder id="Carrossel de Banners" />
+	</div>
+
+	<div class="container hide">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap">
+					<vtex:contentPlaceHolder id="Conteúdo abaixo do Slider Principal" />
+				</div>
+			</div>
+		</div>
+	</div>	
+
+	<!-- qd-footer -->
+	<vtex:template id="qd-lannister-footer" />
+</body>
+</html>

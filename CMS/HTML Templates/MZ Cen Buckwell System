@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:contentPlaceHolder id="mz_head_tag" />
+    <title><vtex.cmc:productPageTitle /></title>
+
+    <!--<vtex:template id="2b - head" />-->
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <vtex:metaTags />
+
+    <!-- <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.system.css" type="text/css" /> -->
+
+    <link
+      rel="stylesheet"
+      href="/arquivos/CSS.cen.buc.system.css"
+      type="text/css"
+    />
+
+    <style>
+      .mz-system .mz-system__banner {
+        margin-top: 64px;
+      }
+    </style>
+
+    <vtex:template id="2b - head" />
+  </head>
+
+  <body class="system">
+    <!-- Header -->
+    <div style="display: none">
+      <!--<vtex.cmc:welcomeMessage/>-->
+    </div>
+    <header class="">
+      <div class="mz-header mz-system__header">
+        <div class="h-100 mz-header__top">
+          <div class="d-flex justify-content-between">
+            <a class="mz-sidebar__brand mx-auto mx-md-0 ml-md-2" href="/"></a>
+            <div class="d-none d-md-flex justify-content-end">
+              <div class="d-flex">
+                <div>
+                  <div
+                    id="google_translate_element"
+                    style="display: none !important"
+                  ></div>
+
+                  <div class="mz-google-translate">
+                    <ul>
+                      <li>
+                        <img src="/arquivos/pt.png" alt="Translate" />
+                        <ul>
+                          <li>
+                            <a href="#" id="en" title="Translate to English">
+                              <img src="/arquivos/en-buc.png" />
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" id="es" title="Traducir al español">
+                              <img src="/arquivos/es-buc.png" />
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mz-header__item" id="phone">
+                  <i class="icon-phone-alt"></i>
+                  <p>Canal de vendas:</p>
+                  <a
+                    class="mz-menu__link border-right"
+                    href="tel:+5508000201744"
+                    data-wishlist-qtt=""
+                  >
+                    0800 020 1744</a
+                  >
+                </div>
+                <!-- AJUDA -->
+                <div class="mz-header__item">
+                  <p>Precisa de ajuda?</p>
+                </div>
+                <!-- AMBIENTE SEGURO -->
+                <div class="mz-header__item d-none d-xl-block" id="seguro">
+                  <i class="icon-shield-alt"></i>
+                  <p>Ambiente 100% Seguro | Exclusivo para lojistas</p>
+                </div>
+                <div class="mz-header__item" id="menu-assistant">
+                  <a id="login" href="/login?ReturnUrl=/"> Área do Cliente </a>
+
+                  <a id="signIn" href="#"> Primeiro Acesso </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header -->
+
+    <!--<div id="app">-->
+    <!--    <Register />-->
+    <!--</div>-->
+
+    <div id="registerFormCNPJ"></div>
+
+    <main>
+      <style type="text/css">
+        #iframe-botuf-chat-widget {
+          display: none;
+        }
+
+        .new-icon-whatsapp {
+          position: fixed;
+          bottom: 20px;
+          z-index: 100;
+          right: 35px !important;
+          width: 70px;
+          height: 70px;
+        }
+      </style>
+
+      <div class="new-icon-whatsapp">
+        <a
+          href="https://api.whatsapp.com/send?phone=5511945520177"
+          target="_blank"
+        >
+          <img
+            src="https://devcenterparts.vteximg.com.br/arquivos/icon-whatsapp.png"
+            width="70"
+            height="70"
+          />
+        </a>
+      </div>
+
+      <div class="mz-system">
+        <div class="container-fluid mz-system__banner">
+          <!-- colocar apenas 1 banner e depois o conteudo do produto -->
+          <div class="col-10 col-md-6">
+            <h1>
+              Auto Peças para carros, utilitários e caminhões de diversas marcas
+            </h1>
+            <h3>Mais de 20.000 itens exclusivos</h3>
+            <p>
+              Acabamento, Colisão, Guarnições de Borracha, Ferragens e
+              Acessórios e muito mais produtos automotivos na Centerparts.
+            </p>
+            <div>
+              <a
+                class="button-tertiary"
+                href="https://devcenterparts.myvtex.com"
+                >Área do Vendedor</a
+              >
+              <a
+                class="button-secondary white"
+                href="https://devcenterparts.vteximg.com.br/arquivos/cpcatalogo.pdf"
+                target="_blank"
+                ><i class="icon-search"></i> Ver Revista Online</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="mz-marcas__white-bg">
+          <div class="container-fluid mz-slider-marcas">
+            <vtex:contentPlaceHolder id="mz-marcas" />
+          </div>
+        </div>
+
+        <div class="mz-system__badges">
+          <vtex.cmc:mzBucTipBarHome />
+        </div>
+        <div class="container">
+          <!-- catalogo pedido -->
+          <div class="row mz-system__catalogo text-center px-5">
+            <div class="col-12 col-md-6">
+              <img src="/arquivos/icone-catalogo.jpg" alt="Catálogo" />
+              <h2>Acesse nossa Revista de Ofertas</h2>
+              <p>Liberado a todos os usuários</p>
+              <a
+                class="button-secondary"
+                target="_blank"
+                href="https://devcenterparts.vteximg.com.br/arquivos/cpcatalogo.pdf"
+                >Clique aqui</a
+              >
+            </div>
+            <div class="col-12 col-md-6">
+              <img src="/arquivos/icone-loja.jpg" alt="Loja" />
+              <h2>Acesse nossa loja</h2>
+              <p>Exclusivo para lojistas de autopeças</p>
+              <a class="button-tertiary" href="/login?ReturnUrl=/"
+                >Fazer Pedido Online</a
+              >
+            </div>
+          </div>
+          <!-- catalogo pedido -->
+          <!-- Historia -->
+          <div class="row px-5">
+            <h2 class="col-12">Nossa História</h2>
+            <div class="col-12 col-md-6">
+              <p>
+                A CENTERPARTS é uma distribuidora de autopeças fundada em 1989,
+                desde então, segue atuando no segmento de acabamento, carroceria
+                e acessórios em geral para automóveis nacionais e importados.
+                São 12.000 m² situados na Vila Anastácio, Zona Oeste de São
+                Paulo, de onde saem os produtos distribuídos a todo o território
+                nacional e internacional.
+              </p>
+              <p class="mt-4">
+                Com sua experiência de mercado, apresenta um serviço que preza
+                pela qualidade, rapidez e segurança em suas entregas, com índice
+                de atendimento próximo aos 100%. Como a CENTERPARTS valoriza a
+                satisfação do consumidor e preza por um bom relacionamento com
+                seus clientes.
+              </p>
+            </div>
+            <div class="col-12 col-md-6">
+              <img
+                src="https://centerparts.vteximg.com.br/arquivos/ids/197974/banner-quem-somos-401.jpg"
+                alt="Foto galpão Central Parts"
+              />
+            </div>
+          </div>
+          <!-- Historia -->
+        </div>
+
+        <!-- Buttons -->
+        <div class="mz-system__centerbuttons container">
+          <a class="button-tertiary" href="/login?ReturnUrl=/">
+            Fazer Pedido Online</a
+          >
+          <a
+            class="button-secondary orange"
+            target="_blank"
+            href="https://devcenterparts.vteximg.com.br/arquivos/cpcatalogo.pdf"
+            ><i class="icon-search"></i> Ver Revista Online</a
+          >
+        </div>
+        <!-- Buttons -->
+
+        <div class="container-fluid">
+          <!-- Aviso -->
+          <div class="row text-center mz-system__historia">
+            <div class="col-12">
+              <h5>
+                As vendas deste site são exclusivas para lojistas de autopeças
+              </h5>
+              <p>
+                Para realizar a compra, é necessário solicitar a abertura de
+                cadastro junto à Centerparts.
+              </p>
+              <p>O cadastro é aprovado em até 2 dias úteis.</p>
+              <a class="button-tertiary" id="signIn" href="/cadastro"
+                >Cadastre-se</a
+              >
+            </div>
+          </div>
+          <!-- Aviso -->
+        </div>
+        <div class="container">
+          <!-- catalogo pedido -->
+          <h2 class="px-5">
+            <a href="/institucional/duvidas-frequentes/">Precisa de ajuda? </a>
+          </h2>
+          <div class="row mz-system__ajuda px-5">
+            <div class="col-12 col-md-6">
+              <p>Como fazer meu cadastro na Centerparts?</p>
+              <img
+                id="videoCadastro"
+                src="https://centerparts.vteximg.com.br/arquivos/ids/196223/video-como-cadastrar.png"
+                alt="Como fazer meu cadastro"
+              /><!-- modal-open no body -->
+            </div>
+            <div class="col-12 col-md-6">
+              <p>Como fazer login após cadastro aprovado?</p>
+              <img
+                id="videoLogin"
+                src="https://centerparts.vteximg.com.br/arquivos/video-como-fazer-login.png"
+                alt="Como fazer login"
+              />
+              <!-- modal-open no body -->
+            </div>
+          </div>
+          <div class="mz-backdrop">
+            <div class="mz-system__video">
+              <div class="mz-system__video-cadastro">
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/aS0ogDjY8Cg"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              </div>
+              <div class="mz-system__video-login">
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/1mtzlhrfN9g"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- catalogo pedido -->
+          <div class="row mz-system__catalogo text-center px-5">
+            <div class="col-12 col-md-6">
+              <img src="/arquivos/icone-catalogo.jpg" alt="Revista" />
+              <h2>Acesse nossa Revista de Ofertas</h2>
+              <p>Liberado a todos os usuários</p>
+              <a
+                class="button-secondary"
+                href="https://devcenterparts.vteximg.com.br/arquivos/cpcatalogo.pdf"
+                target="_blank"
+                >Clique Aqui</a
+              >
+            </div>
+            <div class="col-12 col-md-6">
+              <img src="/arquivos/icone-loja.jpg" alt="Loja" />
+              <h2>Acesse nossa loja</h2>
+              <p>Exclusivo para lojistas de autopeças</p>
+              <a class="button-tertiary" href="/login?ReturnUrl=/"
+                >Fazer Pedido Online</a
+              >
+            </div>
+          </div>
+          <!-- catalogo pedido -->
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+    <!--<vtex:template id="2b - scripts" />-->
+    <script src="/arquivos/signup-form.js?v=1"></script>
+
+    <!-- Start of userfunction Bot UF Chat Widget script -->
+    <!-- src="https://widget.botuf.chat/widget/index.js" -->
+    <!--<script id="script-botuf-chat-widget" src="https://widget.botuf.chat/widget/index.js" data-hostname="centerparts" data-form="nologged=false;texticon=false;fields=name,email" data-iframe="width=185">-->
+    <!--</script>-->
+    <!-- End of userfunction Bot UF Chat Widget script -->
+    <vtex:template id="2b - scripts" />
+  </body>
+</html>

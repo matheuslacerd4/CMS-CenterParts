@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+    <head>
+        <vtex:metaTags />
+        <vtex:contentPlaceHolder id="mz_head" />
+        <meta charset="UTF-8" />
+        <title>
+        <vtex.cmc:productPageTitle />
+        </title>
+        <vtex:template id="mz-cen-buckwell-head-tags-dev" />
+        <vtex:template id="2b - head" />
+        <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.product.dev.css" type="text/css" />
+    </head>
+
+    <body class="produto">
+        <!-- Header -->
+        <vtex:template id="mz-cen-buckwell-header" />
+        <!-- Header -->
+
+        <form class="form__register">
+      <div class="form__register-row">
+        <div class="form__register-col">
+          <p class="form__register-label">CNPJ:</p>
+          <input
+            id="cnpjMask"
+            type="text"
+            required="required"
+            class="form__register-field"
+            data-gtm-form-interact-field-id="0"
+          />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">E-mail:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+      </div>
+      <div class="form__register-row">
+        <div class="form__register-col">
+          <p class="form__register-label">Telefone:</p>
+          <input
+            id="itelMask"
+            type="text"
+            required="required"
+            class="form__register-field"
+          />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Vendedor:</p>
+          <input class="form__register-field" type="text" required="required" />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">CEP:</p>
+          <input
+            type="text"
+            required="required"
+            class="form__register-field disable"
+          />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Rua:</p>
+          <input
+            type="text"
+            required="required"
+            disabled="disabled"
+            class="form__register-field disable"
+          />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">Razão social:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Número:</p>
+          <input
+            type="text"
+            required="required"
+            disabled="disabled"
+            class="form__register-field disable"
+          />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">Nome Fantasia:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Complemento:</p>
+          <input type="text" class="form__register-field" />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">Insc. Estadual:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Bairro:</p>
+          <input
+            type="text"
+            required="required"
+            disabled="disabled"
+            class="form__register-field disable"
+          />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">Nome:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Cidade:</p>
+          <input
+            type="text"
+            required="required"
+            disabled="disabled"
+            class="form__register-field disable"
+          />
+        </div>
+      </div>
+      <div class="form__register-row none-input">
+        <div class="form__register-col">
+          <p class="form__register-label">Sobrenome:</p>
+          <input type="text" required="required" class="form__register-field" />
+        </div>
+        <div class="form__register-col">
+          <p class="form__register-label">Estado:</p>
+          <input
+            type="text"
+            required="required"
+            disabled="disabled"
+            class="form__register-field disable"
+          />
+        </div>
+      </div>
+      <div class="form__register-row">
+        <button class="form__register--btn">CONTINUAR</button>
+      </div>
+      <!---->
+    </form>
+    <script>
+      var inputTelefone = document.querySelector("#itelMask");
+
+      inputTelefone.addEventListener("input", (e) => {
+        var telefone = e.target.value;
+        inputTelefone.value = phoneMask(telefone);
+      });
+      function phoneMask(value) {
+        return value
+          .replace(/\D/g, "")
+          .replace(/(\d{2})(\d)/, "($1) $2")
+          .replace(/(\d{4})(\d)/, "$1-$2")
+          .replace(/(\d{4})-(\d{1})(\d{4})/, "$1$2-$3")
+          .replace(/(-\d{4})\d+$/, "$1");
+      }
+
+      var inputCnpj = document.querySelector("#cnpjMask");
+
+      inputCnpj.addEventListener("input", (e) => {
+        let value = e.target.value;
+        value = value.replace(/\D/g, "");
+
+        if (value.length > 14) {
+          value = value.substring(0, 14);
+        }
+
+        value = value.replace(/^(\d{2})(\d)/, "$1.$2");
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        value = value.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        value = value.replace(/(\d{4})(\d)/, "$1-$2");
+        e.target.value = value;
+      });
+    </script>
+        
+        <!-- Footer -->
+        <vtex:template id="2b - scripts" />
+        <vtex:template id="mz-cen-buckwell-footer" />
+        <!-- Footer -->
+    </body>
+</html>

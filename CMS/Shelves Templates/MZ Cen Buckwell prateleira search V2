@@ -1,0 +1,270 @@
+#set($id = $product.Id) #set($uri = $product.Uri) #set($escapedName =
+$product.HtmlEscapedName)
+
+<div
+  class="row mz-shelf-regular mz-shelf mz-search-table__item #if($product.IsInStock) qd-product-is-in-stock-true #else qd-product-is-in-stock-false #end"
+  id="$id"
+>
+  <!-- ID DA PRATELEIRA -->
+  <input type="hidden" class="mz-shelf__id" value="$id" />
+  <!-- // ID DA PRATELEIRA -->
+
+  <!-- Product image -->
+  <div class="mz-product-summary__image qd-sil-wrapper">
+    <a class="embed-responsive qd_sil_img_wrapper" href="$uri">
+      <span> $product.GetImageTag(50, 50) </span>
+    </a>
+  </div>
+
+  <!--Brand Name-->
+  <div class="col-12 col-lg-3 mz-product-summary__name">
+    <a class="embed-responsive qd_sil_img_wrapper" href="$uri">
+      <div>
+        $product.Name
+        <!-- | <a href="$product.CategoryLink" title="$product.CategoryName">$product.CategoryName</a> -->
+      </div>
+    </a>
+
+    <h3 class="shelf-product-brand">
+      <strong class="product-brand__strong">Marca:</strong> $product.BrandName
+    </h3>
+  </div>
+  <!--Brand Name-->
+
+  <!-- VARIAÇÃO -->
+  <div class="mz-shelf__price col-12 col-lg-2">
+    $product.InsertSku
+    <p class="mz-product-summary__best-price">$product.ListPrice</p>
+  </div>
+  <!-- VARIAÇÃO -->
+
+  <!-- preço -->
+  <div class="col-12 col-lg-2">
+    <div class="mz-search-table__price">
+      #if ($product.NumbersOfInstallment > 1)
+      <p class="mz-product-summary__instalments">
+        <span class="mz-product-summary__instalments-qtt"
+          >Ou ${product.NumbersOfInstallment}x de
+        </span>
+        <span class="mz-product-summary__instalments-value"
+          >$product.InstallmentValue</span
+        >
+      </p>
+      #end #if ($product.HasBestPrice)
+      <!--<p class="mz-product-summary__old-price">$product.ListPrice</p>-->
+      #end
+      <div class="mz-smart-quantity row">
+        <!-- Botao Quantidade -->
+        <div class="col-12 mz-smart-quantity__action">
+          <a class="qd-sq-minus"><i class="icon-minus"></i></a>
+
+          <div class="shelf-qd-v1-qty">
+            <!-- Input Quantidade -->
+            <input type="tel" class="qd-sq-quantity form-control" />
+            <!-- // Input Quantidade -->
+          </div>
+
+          <a class="qd-sq-more"><i class="icon-plus"></i></a>
+        </div>
+        <!-- // Botao Quantidade -->
+      </div>
+    </div>
+    <div class="mz-real-qtd"></div>
+  </div>
+
+  <!-- preço -->
+  <div class="mz-search-table__buy mz-buy-buttom col-12 col-lg">
+    <!-- Botao Comprar -->
+    <div
+      class="shelf-qd-v1-buy-button buy-buttom #if($product.IsInStock) qd_cpShow #else qd_cpHide #end"
+    >
+      <div class="mz-storefront__buy-button--aumont" style="display: none">
+        $product.AmountInCart
+      </div>
+
+      <!-- $product.BottomBuyAsynchronous -->
+      <div class="buy-button-shelf">$product.BottomBuyAsynchronous</div>
+    </div>
+    <!-- // Botao Comprar -->
+  </div>
+  <!-- view Wishlist -->
+  <div class="col-12 col-lg mz-search-table__view-fav d-flex">
+    <div class="mz-quickview-open" id="$id">
+      <i class="icon-eye" title="Saiba mais" class="icon-eye"></i>
+    </div>
+    <!-- giftlist -->
+
+    <div class="mz-giftlist-button">
+      <div class="qd-sss-wishlist-button">
+        <a href="#" title="Adicionar a lista de compras" class=""
+          ><i class="icon-Ativo-122"></i
+        ></a>
+      </div>
+    </div>
+    <!-- giftlist -->
+  </div>
+  <!-- view Wishlist -->
+</div>
+
+<!-- **************************************************************** -->
+<!-- ******************** PRATELEIRA QUICKVIEW ********************** -->
+<!-- **************************************************************** -->
+
+<div
+  class="mz-shelf-quickview mz-shelf mz-search-table__item #if($product.IsInStock) qd-product-is-in-stock-true #else qd-product-is-in-stock-false #end"
+>
+  <!-- ID DA PRATELEIRA -->
+  <input type="hidden" class="mz-shelf__id" value="$id" />
+  <!-- // ID DA PRATELEIRA -->
+  <div class="row">
+    <div class="row col-12 col-xl-7 pl-5 left-side">
+      <!-- Product image -->
+      <div class="col-12 col-md-4 mz-product-summary__image">
+        <a href="$uri">
+          $product.GetImageTag(206,206)
+          <!-- Smart Thumbnail Change -->
+          <span> $product.GetImageTag(16, 21, 'foto2') </span>
+          <!-- // -->
+        </a>
+      </div>
+      <!-- Product image -->
+      <div class="row col-12 col-md-8">
+        <!--Brand Name-->
+        <div class="col-12 mz-product-summary__name">
+          <a href="$uri">
+            $product.Name
+            <!-- <a href="$product.CategoryLink" title="$product.CategoryName">$product.CategoryName</a> -->
+            <!-- <span></span> -->
+            <div class="shelf-stamps">
+              <a title="$escapedName" class="highlightWrapper" href="$uri"
+                >$product.HightLight</a
+              >
+              <a title="$escapedName" class="highlightWrapper" href="$uri"
+                >$product.DiscountHightLight</a
+              >
+            </div>
+          </a>
+        </div>
+        <!--Brand Name-->
+
+        <div class="mz-brand col-2">$product.BrandName</div>
+        <!-- preço -->
+        <div class="col-4 mz-search-table__price">
+          $product.InsertSku
+          <div class="shelf-price">
+            <span></span>
+            <!-- #if ($product.IsInStock)
+						<div class="shelf-qd-v1-alternative-prices" style="display:none">
+							$product.ProductField(32)
+						</div> -->
+            <!-- <div class="shelf-price-old-price">
+							#if ($product.HasBestPrice)
+							<span>De:</span>
+							<span class="old-price">$product.ListPrice</span>
+							<span>Por </span>
+							#end
+						</div> -->
+            <div class="shelf-price-best-price">
+              <p class="mz-product-summary__best-price">$product.BestPrice</p>
+            </div>
+            <!-- <div class="shelf-price-instalment">
+							#if ($product.NumbersOfInstallment > 1)
+							<span>ou</span>
+							<span class="instalment-number">
+								${product.NumbersOfInstallment}x
+							</span>
+							<span>de</span>
+							<span class="instalment-value">
+								$product.InstallmentValue
+							</span>
+							<span>sem juros</span>
+							#end
+						</div> -->
+
+            <!-- #if ($product.HasBestPrice)
+						<div class="shelf-price-savings">
+							<span class="savings">economize $product.ListPriceMinusBestPrice
+								($product.ListPriceMinusBestPriceInPercent)</span>
+						</div>
+						#end -->
+            #else
+            <div class="shelf-no-stock">
+              <a title="$escapedName" href="$uri">
+                <span class="no-stock-message">Avise-me Quando Chegar</span>
+              </a>
+            </div>
+            #end
+          </div>
+        </div>
+        <!-- preço -->
+        <div class="col-5">
+          <div class="mz-smart-quantity row">
+            <!-- Botao Quantidade -->
+
+            #if ($product.IsInStock)
+            <div class="col-12 mz-smart-quantity__action">
+              <a class="qd-sq-minus"><i class="icon-minus"></i></a>
+
+              <div class="shelf-qd-v1-qty">
+                <!-- Input Quantidade -->
+                <input type="tel" class="qd-sq-quantity form-control" />
+                <!-- // Input Quantidade -->
+              </div>
+
+              <a class="qd-sq-more"><i class="icon-plus"></i></a>
+            </div>
+            #end
+            <!-- // Botao Quantidade -->
+            <div class="mz-real-qtd"></div>
+            <!-- Botao Comprar -->
+            <div
+              class="shelf-qd-v1-buy-button #if($product.IsInStock) qd_cpShow #else qd_cpHide #end"
+            >
+              <div
+                class="mz-storefront__buy-button--aumont"
+                style="display: none"
+              >
+                $product.AmountInCart
+              </div>
+
+              <div style="display: none">$product.BottomBuyAsynchronous</div>
+
+              <button
+                class="btn-add-buy-button-asynchronous buy-button-custom"
+                style="margin: 10px 0; border: none"
+              >
+                Comprar
+              </button>
+            </div>
+            <!-- // Botao Comprar -->
+          </div>
+        </div>
+        <!-- view Wishlist -->
+        <div class="col-1 mz-search-table__view-fav d-flex">
+          <!-- <div class="mz-quickview-open" id="$id">
+						<i class="icon-eye"></i>
+					</div> -->
+          <!-- giftlist -->
+
+          <div class="mz-giftlist-button">
+            <div class="qd-sss-wishlist-button firstInShelf">
+              <a href="#" title="Adicionar a lista de compras" class=""
+                ><i class="icon-Ativo-122"></i
+              ></a>
+            </div>
+          </div>
+          <!-- giftlist -->
+        </div>
+        <!-- view Wishlist -->
+      </div>
+    </div>
+
+    <div
+      title="saiba mais"
+      class="col-12 col-xl-5 mz-search-table__view-Qv"
+    ></div>
+  </div>
+  <!-- invisible content -->
+  <div class="mz-search-table__view-Qv-iframe d-none"></div>
+  <!-- invisible content -->
+</div>

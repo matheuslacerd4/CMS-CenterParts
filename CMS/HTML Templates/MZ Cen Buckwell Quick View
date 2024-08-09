@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+  <vtex:metaTags />
+  <vtex:contentPlaceHolder id="mz_head" />
+  <meta charset="UTF-8" />
+  <title>
+    <vtex.cmc:productPageTitle />
+  </title>
+  <vtex:template id="2b - head" />
+  <vtex:template id="mz-cen-buckwell-head-tags" />
+  <link rel="stylesheet" href="/arquivos/CSS.cen.buc.search.css" type="text/css" />
+</head>
+
+<body class="quickview">
+
+  <!-- Cart -->
+  <div class="mz-quickview__cart">
+    <a class="mz-menu__link mz-menu__item--cart mz-menu__item--cart qd_cart_auto"
+      title="Clique para ver os itens no carrinho" href="/checkout" data-qtt="">
+    </a>
+  </div>
+  <!-- Cart -->
+
+  <main class="">
+    <div class="mz-quickview__top row">
+      <div class="mz-quickview col-12 col-lg-6">
+        <!-- product image -->
+        <div class="quickview-image col-3 col-md-5">
+          <vtex.cmc:ProductImage />
+        </div>
+        <!-- product image -->
+        <div class="quickview-right col-9 col-md-7">
+          <!-- productName -->
+          <div class="quickview-name ">
+            <h1>
+              <vtex.cmc:productName />
+            </h1>
+          </div>
+          <!-- productName -->
+          <!-- productReference -->
+          <div class="quickview-ref">
+            <h2>
+              <vtex.cmc:productReference />
+            </h2>
+          </div>
+          <!-- productReference -->
+          <div class="row">
+            <!-- brandname -->
+            <div class="quickview-brand  col-3 ">
+              <vtex.cmc:brandName />
+            </div>
+            <!-- brandname -->
+            <!-- PRICE -->
+            <div class="quickview-price col-5">
+              <vtex.cmc:skuPrice />
+            </div>
+            <!-- PRICE -->
+            <div class="col-4">
+              <!-- Botao Quantidade -->
+              <div class="mz-smart-quantity">
+                <div class="mz-smart-quantity__action d-none">
+                  <a class="qd-sq-minus"><i class="icon-minus"></i></a>
+                  <div class="shelf-qd-v1-qty">
+                    <!-- Input Quantidade -->
+                    <input type="tel" class="qd-sq-quantity form-control" />
+                    <!-- // Input Quantidade -->
+                  </div>
+                  <a class="qd-sq-more"><i class="icon-plus"></i></a>
+                </div>
+              </div>
+              <!-- // Botao Quantidade -->
+              <div class="mz-real-qtd"></div>
+              <!-- Botao Comprar -->
+              <div class="shelf-qd-v1-buy-button mz-buy-button btn-add-buy-button-asynchronous">
+                <vtex.cmc:BuyInPage />
+              </div>
+              <!-- // Botao Comprar -->
+              <!-- productReference -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTRAS MARCAS -->
+      <div class="mz-quickview__brands col-12 col-lg-6 p-0">
+
+      </div>
+
+    </div>
+    <!-- <div class="mz-quickview__brands">
+      <vtex:contentPlaceHolder id="Outras Marcas" />
+    </div> -->
+    <!-- PRODUTOS SUGERIDOS -->
+    <div class="mz-quickview__sugestions">
+      <vtex:contentPlaceHolder id="Sugestões" />
+    </div>
+
+  </main>
+  <vtex:template id="2b - scripts" />
+</body>
+
+</html>

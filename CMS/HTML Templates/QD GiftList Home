@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.giftlist.css"
+    />
+  </head>
+  <body class="giftlist-home">
+    <vtex:template id="qd-lannister-header" />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="giftlistWrapper">
+            <div class="giftlist-banner-home text-center">
+              <div class="col-xs-6 col-xs-offset-6">
+                <div class="col-xs-12">
+                  <div class="textWrapper">
+                    <h2>
+                      <vtex:contentPlaceHolder id="Título" />
+                      <!--remover-->Lista de compras ou orçamento<!--remover-->
+                    </h2>
+                    <p>
+                      <vtex:contentPlaceHolder id="Texto de Introdução" />
+                      <!--remover-->
+                      Crie uma lista e facilite a navegação e resposição de
+                      estoque.
+                      <!--remover-->
+                    </p>
+                    <div class="buttonsWrapper">
+                      <a href="/giftlist/create" id="criar-lista"
+                        >Criar uma lista</a
+                      >
+                      <a href="/giftlist/manage" id="gerenciar-listas"
+                        >Gerenciar minhas listas</a
+                      >
+                    </div>
+
+                    <div class="searchWrapper">
+                      <vtex.cmc:GiftListSearchV2 />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="qd-list-search-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

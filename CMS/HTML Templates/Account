@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title>Loja Online</title>
+    <vtex:metaTags />
+    <link
+      href="http://fonts.googleapis.com/css?family=Oswald:400,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="/arquivos/bootstrap.css" rel="stylesheet" />
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="/arquivos/style.css" rel="stylesheet" />
+    <script src="/arquivos/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span10 offset1">
+          <!--  SubTemplate: Header -->
+          <vtex:template id="Header" />
+          <!--  /SubTemplate: Header -->
+
+          <div id="content" class="row-fluid">
+            <vtex.cmc:accountUserProfile />
+            <vtex.cmc:accountAddress />
+          </div>
+
+          <!--  SubTemplate: Footer -->
+          <vtex:template id="Footer" />
+          <!-- /SubTemplate: Footer -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/arquivos/centerparts.app.css?v=06122023v01" />
+<link rel="stylesheet" href="/arquivos/centerparts.vendor.css?v=06122023v01" />
+<link
+  rel="stylesheet"
+  href="/arquivos/inovaki-feature-banners.css?v=20240626v1"
+/>
+
+<style type="text/css">
+  #iframe-botuf-chat-widget {
+    display: none;
+  }
+
+  .new-icon-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    z-index: 1;
+    right: 35px;
+    width: 70px;
+    height: 70px;
+  }
+
+  @media (max-width: 767px) {
+    .new-icon-whatsapp {
+      bottom: 80px !important;
+      right: 24px;
+    }
+  }
+</style>
+
+<!-- TO DO: REMOVER TESTE -->
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />-->

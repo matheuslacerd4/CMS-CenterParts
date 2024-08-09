@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+  <title>
+    <vtex.cmc:productPageTitle />
+  </title>
+  <vtex:metaTags />
+
+  <meta property="fb:app_id" content="1690161787882053" />
+  <meta charset="UTF-8" />
+
+  <link rel="icon" href="/arquivos/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/arquivos/favicon.ico" />
+
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="//centerparts.vtexcommercestable.com.br/files/CSS.qd-bootstrap.css" type="text/css" />
+
+  <!-- Google Webmaster Tools -->
+  <meta name="google-site-verification" content="ODQklqx7T49Z_msZXR5Enh-7N5PDhLltYEyOq9k34-Q" />
+
+  <!-- VTEX checkout SDK -->
+  <script src="https://io.vtex.com.br/checkout-sdk/v01-00-00-stable-2/lib-bower/purl.js" type="text/javascript">
+  </script>
+  <script src="https://io.vtex.com.br/checkout-sdk/v01-00-00-stable-2/lib/jquery.ajaxQueue.js" type="text/javascript">
+  </script>
+  <script src="//centerparts.vtexcommercestable.com.br/files/JS.checkout-sdk.min.js" type="text/javascript"></script>
+
+  <!-- Padrão das lojas -->
+  <script src="/arquivos/JS.ctp.lan.functions.base-dev.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.common.css" type="text/css" />
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="//centerparts.vtexcommercestable.com.br/files/JS.jquery.validate.min.js" type="text/javascript">
+  </script>
+  <script src="//centerparts.vtexcommercestable.com.br/files/JS.jquery.mask.min.js" type="text/javascript"></script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'en,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+  <link rel="stylesheet" type="text/css"
+    href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.institucional.css" />
+</head>
+
+<body class="institucional">
+  <vtex:template id="qd-lannister-header" />
+  <div class="container">
+    <div class="row">
+      <div class="main-column col-xs-12">
+        <h2 class="basic-title">
+          <vtex:contentPlaceHolder id="Título da página" />
+        </h2>
+
+        <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+          <vtex:contentPlaceHolder id="Conteúdo da Página" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <vtex:template id="qd-lannister-footer" />
+</body>
+
+</html>

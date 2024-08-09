@@ -1,0 +1,82 @@
+<div class="col-12 col-xl-6">
+  <!-- listas -->
+  <ul class="row mz-footer-institucional-menu">
+    <li class="col-12 col-md-3 mb-4">
+      <div>
+        <div>
+          Institucional
+          <ul>
+            <li><a href="/institucional/quem-somos">Quem Somos</a></li>
+            <li>
+              <a href="/institucional/duvidas-frequentes/"
+                >Dúvidas Frequentes</a
+              >
+            </li>
+            <li><a href="/institucional/social">Social</a></li>
+            <li><a href="/institucional/eventos">Eventos</a></li>
+            <li>
+              <a href="/institucional/seja-fornecedor">Seja um Fornecedor</a>
+            </li>
+            <li>
+              <a href="/institucional/seja-colaborador">Seja um Colaborador</a>
+            </li>
+            <li><a href="/institucional/filiais">Filiais</a></li>
+          </ul>
+        </div>
+        <div>
+          Políticas
+          <ul>
+            <li>
+              <a href="/institucional/politicas-de-entregas"
+                >Políticas de Entregas</a
+              >
+            </li>
+            <li>
+              <a href="/institucional/politicas-de-troca-e-devolucao/"
+                >Políticas de Troca e Devolução</a
+              >
+            </li>
+            <li>
+              <a href="/institucional/politicas-de-privacidade/"
+                >Políticas de Privacidade</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li class="col-12 col-md-2 mb-4">
+      Ajuda
+      <ul>
+        <li><a href="/account">Minha Conta</a></li>
+        <li><a href="/account#/orders">Meus Pedidos</a></li>
+        <li>
+          <a href="/institucional/central-de-atendimento/">Fale Conosco</a>
+        </li>
+      </ul>
+    </li>
+    <li class="col-12 col-md-2 mb-4">
+      Downloads
+      <ul>
+        <li><a href="/downloads">Acesso Remoto</a></li>
+      </ul>
+    </li>
+    <li class="col-12 col-md-5 mb-4">
+      Contatos
+      <ul>
+        <li>
+          <a href="mailto:vendas@centerparts.com.br" target="_blank"
+            >vendas@centerparts.com.br</a
+          >
+        </li>
+        <!-- <li><a href="tel:+551140201744">Central de Atendimento: 4020-1744</a></li> -->
+        <li>
+          <a href="tel:08000201744" target="_blank"
+            >Canal de Vendas: 0800 020 1744</a
+          >
+        </li>
+        <li>CNPJ: 61.834.834/0001-97</li>
+      </ul>
+    </li>
+  </ul>
+</div>

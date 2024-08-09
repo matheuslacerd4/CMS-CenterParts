@@ -1,0 +1,73 @@
+#set($id = $product.Id)
+#set($uri = $product.Uri)
+#set($escapedName = $product.HtmlEscapedName)
+
+<div
+	class="mz-product-summary #if($product.IsInStock) qd-product-is-in-stock-true #else qd-product-is-in-stock-false #end">
+
+
+	<!-- Product image -->
+	<div class="mz-product-summary__image qd-sil-wrapper">
+		<a class="embed-responsive qd_sil_img_wrapper" href="$uri">
+			<span>
+				$product.GetImageTag(20, 20)
+			</span>
+			<!-- Smart Thumbnail Change -->
+			<span>
+				$product.GetImageTag(20, 20, 'foto2')
+			</span>
+			<!-- // -->
+		</a>
+	</div>
+	<!-- Product image -->
+
+	<!--Brand Name-->
+	<div class="mz-product-summary__brand">
+		$product.BrandLink | <a href="$product.CategoryLink" title="$product.CategoryName">$product.CategoryName</a>
+	</div>
+	<!--Brand Name-->
+
+	<h3 class="mz-product-summary__name">
+		<a href="$uri" title="$escapedName">$product.Name</a>
+	</h3>
+
+	<!-- Inicio Yourviews -->
+	<!-- Estrelas que carregam a nota do produto nas prateleiras, de preferência manter próximo ao nome do produto  -->
+	<div class="yv-review-quickreview" value="$product.Id"></div>
+	<!-- Final Yourviews -->
+
+	#if ($product.IsInStock)
+	<div class="mz-product-summary__price">
+		<p class="mz-product-summary__best-price">$product.ListPrice</p>
+
+		#if ($product.NumbersOfInstallment > 1)
+		<p class="mz-product-summary__instalments">
+			<span class="mz-product-summary__instalments-qtt">Ou ${product.NumbersOfInstallment}x de </span>
+			<span class="mz-product-summary__instalments-value">$product.InstallmentValue</span>
+		</p>
+		#end
+
+		#if ($product.HasBestPrice)
+		<span class="mz-product-summary__old-price">$product.ListPrice</span>
+		<span
+			class="mz-product-summary__percent qdAuto$product.ListPriceMinusBestPriceInPercent">$product.ListPriceMinusBestPriceInPercent</span>
+		#end
+	</div>
+	<div class="mz-button">
+		<a href="$uri">Ver Detalhes</a>
+	</div>
+	<div class="mz-stamps mz-flags">
+		<a class="mz-stamps__highlight mz-flags__highlight" href="$uri" title="$escapedName">$product.HightLight</a>
+		<a class="mz-stamps__highlight-discount mz-flags__highlight-discount" href="$uri"
+			title="$escapedName">$product.DiscountHightLight</a>
+		<a class="mz-stamps__highlight-discount-percentage mz-flags__highlight-discount-percentage flag qdAuto$product.ListPriceMinusBestPriceInPercent"
+			href="$uri" title="$escapedName">$product.ListPriceMinusBestPriceInPercent</a>
+	</div>
+	#else
+	<div class="mz-product-summary__no-stock">
+		<a title="$escapedName" href="$uri">
+			<span class="mz-product-summary__no-stock-message">Produto Esgotado</span>
+		</a>
+	</div>
+	#end
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/arquivos/ctp.lan.institucional.css"
+    />
+  </head>
+  <body class="institucional">
+    <vtex:template id="qd-lannister-header" />
+    <div class="container">
+      <div class="row">
+        <div class="column-left col-xs-3">
+          <div class="nav-left-dept qdSideMenu">
+            <div class="institucionalSideMenuWrapper institucionalSideMenu">
+              <vtex.cmc:institucionalSideMenu />
+              <!-- para esconder esse conteudo usar body class 'imoff' -->
+            </div>
+            <div class="helpCenterSideMenuWrapper institucionalSideMenu">
+              <vtex.cmc:helpCenterSideMenu />
+              <!-- para esconder esse conteudo usar body class 'hmoff' -->
+            </div>
+          </div>
+        </div>
+        <div class="main-column col-xs-9">
+          <h2 class="basic-title">
+            <vtex:contentPlaceHolder id="Título da página" />
+          </h2>
+          <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+            <vtex:contentPlaceHolder id="Conteúdo da Página" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

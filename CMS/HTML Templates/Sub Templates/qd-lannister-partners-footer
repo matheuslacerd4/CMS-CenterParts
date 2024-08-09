@@ -1,0 +1,461 @@
+<div class="store-footer">
+	<div class="container">
+		<dl class="contact-info clearfix row">
+			<dd class="buy-safely-wrapper col-xs-3">
+				<div class="padding-fix">
+					<span class="fa-lock"></span>
+					<span class="text">
+						COMPRA 100% SEGURA
+					</span>
+				</div>
+			</dd>
+
+			<dd class="email-wrapper col-xs-3">
+				<div class="padding-fix">
+					<span class="fa-envelope-o"></span>
+					<span class="text">
+						<vtex.cmc:emailAdress />
+					</span>
+				</div>
+			</dd>
+			<dd class="phone-wrapper col-xs-4">
+				<div class="padding-fix clearfix">
+					<span class="fa-phone"></span>
+					<span>
+						<strong>
+							<span class="label-phone">TELEVENDAS:</span>
+							<span class="phone">
+								<vtex.cmc:phoneNumber />
+							</span>
+						</strong>
+						<span class="time">
+							<vtex.cmc:workingTime />
+						</span>
+					</span>
+				</div>
+			</dd>
+			<dd class="social-stamps col-xs-2">
+				<div class="padding-fix">
+					<dl>
+						<dt>Redes Sociais</dt>
+						<!-- <dd><a href="#" target="_blank" class="fa-twitter"></a></dd> -->
+						<dd><a href="http://www.facebook.com/Centerparts" target="_blank" class="fa-facebook"></a></dd>
+						<!-- <dd><a href="#" target="_blank" class="fa-youtube"></a></dd> -->
+						<!-- <dd><a href="#" target="_blank" class="fa-instagram"></a></dd> -->
+						<dd><a href="http://www.linkedin.com/company/centerparts-distribuidora" target="_blank" class="fa-linkedin"></a></dd>
+					</dl>
+				</div>
+			</dd>
+		</dl>
+	</div>
+	<div class="container">
+		<div class="row nav-footer">
+			<div class="col-xs-6 col-xs-offset-1">
+				<div class="footer-text">
+					<vtex.cmc:footerText />
+				</div>
+			</div>
+			<div class="col-xs-3 col-xs-offset-1">
+				<div class="third-party-component facebook-likebox">
+					<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCenterparts&amp;width=244&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false&amp;appId=1453519881582828" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:244px; height:230px;" allowTransparency="true"></iframe>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="footer-nav-links padding-fix">
+					<vtex.cmc:footerLinks />
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="security-stamps padding-fix">
+					<h3>Segurança garantida</h3>
+					<dl>
+						<dd>
+							<a href="http://secure.vtex.com/?an=centerparts" target="_blank">
+								<img src="/arquivos/selo-pci-vtex.png" alt="PCI VTEX" />
+							</a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="footer-payment-options padding-fix">
+					<h3>Formas de pagamento</h3>
+					<ul class="payment-stamps">
+						<!-- <li class="stamp stamp-visa pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-elo pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-diners pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-amex pull-left payment-stamp"></li> -->
+						<li class="stamp stamp-boleto pull-left payment-stamp"></li>
+						<!-- <li class="stamp stamp-paypal pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-master pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-discover pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-pagseguro pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-bcash pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-mercadopago pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-bradesco pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-itau pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-brasil pull-left payment-stamp"></li> -->
+						<!-- <li class="stamp stamp-hipercard pull-left payment-stamp"></li> -->
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="footer-nav-links padding-fix">
+					<vtex.cmc:footerClientLinks />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer-company-stamps">
+	<div class="container copyright">
+		<div class="row">
+			<div class="col-xs-9">
+				<p><vtex.cmc:copyRight /></p>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+					<div class="qd-logoFooterVtex col-xs-6">
+						<a href="http://www.vtex.com.br/" target="_blank" title="VTEX e-Commerce Cloud Application">
+							<img src="//centerparts.vteximg.com.br/arquivos/powered_by_vtex.png" alt="VTEX e-Commerce Cloud Application" title="VTEX e-Commerce Cloud Application" />
+						</a>
+					</div>
+					<div class="qd-logoFooterQuatro col-xs-6">
+						<a href="https://quatrodigital.com/" target="_blank" title="Implantação e Design por Quatro Digital">
+							<img src="//centerparts.vteximg.com.br/arquivos/design_by_quatro_digital.png" style="position:relative; top:5px" alt="Implantar e-commerce VTEX - Quatro Digital" title="Implantar e-commerce VTEX - Quatro Digital" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer-legal-information">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 footer-legal-info small-text">
+				<p><vtex.cmc:legalInformation /></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="extra-footer-information">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 extra-footer-info small-text">
+				<p><vtex.cmc:companyInfo /></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="newsletter-form qd_news_auto" data-qd-cookie='"cookieName":"footer"'>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-10">
+				<div class="news-banner-close">
+					<span class="fa fa-times-circle"></span>
+				</div>
+				<div class="news-banner">
+					<vtex:newsletterFooterBanner />
+					<div class="news-inputs">
+						<fieldset>
+							<input type="text" class="qd_news_email" name="email" />
+							<input type="button" value="Cadastrar" class="qd_news_button" />
+							<input type="hidden" class="qd_news_animate_field_success" value="Obrigado!" />
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+<div class="modal fade modal-base">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Etapa Formulario -->
+<script class="first-step" type="text/template">
+	<div class="first-step-content">
+		<div class="text-header" style="display:none;">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>NOVO USUÁRIO</h3>
+					<span>Preencha as informações abaixo.</span>
+					<a class="btn btn-next-step">já sou cadastrado</a>
+				</div>
+			</div>
+
+			<div class="row padding-t-md">
+				<div class="col-xs-12">
+					<p>- O cadastro só será liberado para pessoa Jurídica habilitada no cadastro do SINTEGRA.</p>
+					<p>- No cadastro do CNPJ no Ministério da Fazenda, <strong>o ramo de atividade principal ou secundária da empresa deve ser o comércio de autopeças.</strong></p>
+					<p>- O limite da compra estará sujeito a  análise após o fechamento de cada compra.</p>
+				</div>
+			</div>
+		</div>
+
+		<form class="form-horizontal form-first-step">
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>E-mail:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="e-mail" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>CNPJ:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="cnpj" />
+							</div>
+						</div>
+					</div>
+
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>Razão social:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="razao_social" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>Nome Fantasia:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="nome_fantasia" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Insc. Estadual:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md" name="insc_estadual" />
+							</div>
+						</div>
+					</div>
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>Nome:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="nome" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>Sobrenome:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="sobrenome" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">CPF:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md" name="cpf" />
+							</div>
+						</div>
+					</div>
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>Tel. Comercial:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="tel_comercial" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Tel. Celular:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md" name="tel_celular" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label"><span>*</span>CEP:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="cep" />
+							</div>
+						</div>
+					</div>
+					<div class="content-block-form">
+						<div class="form-group">
+							<label class="col-md-4 control-label">Rua:</label>
+							<div class="col-md-7">
+								<textarea class="form-control required" name="rua"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Número:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="numero" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Complemento:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md" name="complemento" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Bairro:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="bairro" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Cidade:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="cidade" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Estado:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="estado" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">País:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md required" name="pais" />
+							</div>
+						</div>
+					</div>
+					<div class="content-block-form indicated">
+						<div class="form-group">
+							<label class="col-md-4 control-label">Indicado por um representante:</label>
+							<div class="col-md-3">
+								<input type="radio" name="was_indicated" value="true"/> Sim
+							</div>
+							<div class="col-md-3">
+								<input type="radio" name="was_indicated" value="false"/> Não
+							</div>
+						</div>
+						<div class="form-group" style="display:none;">
+							<label class="col-md-4 control-label">Nome do representante:</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control input-md" name="indicated_by" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="content-block-info">
+						<p class="text-left"><span class="obg">*</span>Campo Obrigatório</p>
+						<p>Em caso de dúvidas ligue para 0800 020 1744 (opção 1) de 2a a 5a feira das 8:00h às 18:00h. 6a f das 8:00h às 17:00h.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="content-block-btn">
+						<a class="btn btn-continue">CONTINUAR</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</script>
+
+<!-- Etapa Sucesso do Formulario -->
+<script class="second-step" type="text/template">
+	<div class="second-step-content">
+		<a href="//www.centerb2b.com.br/login" class="link-close">Fechar</a>
+		<div class="col-xs-12">
+			<div class="row">
+				<h2><i class="fa fa-check-circle-o"></i> Cadastro Aprovado</h2>
+				<h3>Seja bem-vindo(a) a loja da Centerparts!</h3>
+			</div>
+			
+			<div class="row">
+				<p><strong>Antes de prosseguir com a compra gostariamos de lembrar que:</strong></p>
+				<ul>
+					<li>O limite da compra estará sujeito a análise após o fechamento de cada compra.</li>
+					<li>É necessário que a primeira compra seja feita em até 30 dias para que o seu acesso não seja revogado. </li>
+				</ul>
+			</div>
+			
+			<div class="row">
+				<div class="box-info">
+					<p>Clique no botão "fazer login" e no campo e-mail e coloque o <strong>seu e-mail que utilizou no cadastro</strong> e clique em <strong> "Esqueci minha senha"</strong>   para criar uma nova senha de acesso.</p>
+					<p>
+						<a href="/login" class="btn btn-block btn-large call-page-login">Fazer login</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<!-- Etapa Login -->
+<script class="third-step" type="text/template">
+	<div class="third-step-content">
+		<div class="text-header" style="display:none;">
+			<div class="row">
+				<div class="col-xs-12">
+					<img src="/arquivos/logo.png" alt="Logo CENTERPARTS" />
+
+					<h3>Entrar com e-mail e senha</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-third-step">
+					<div class="form-group">
+						<label>Seu e-mail</label>
+						<input type="email" class="form-control required" name="email" />
+						<a href="#" class="forgot-password">Esqueci minha senha</a>
+					</div>
+
+					<div class="form-group">
+						<label>Senha</label>
+						<input type="password" class="form-control required" name="senha" />
+					</div>
+
+					<a class="btn btn-go-first-part">Não tem uma senha? Cadastre agora</a>
+				</form>
+			</div>
+		</div>
+
+		<div class="text-footer" style="display:none;">
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="#" class="btn btn-entrar">Entrar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>

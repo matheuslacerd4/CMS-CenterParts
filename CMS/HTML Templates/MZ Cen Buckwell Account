@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+      <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link
+      rel="stylesheet"
+      href="/arquivos/CSS.cen.buc.account.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="/arquivos/CSS.cen.buc.wishlist.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="account institucional">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+
+    <main>
+      <div class="mz-account">
+        <!-- TABS -->
+        <div class="container">
+          <div class="orders-qd-page-tabs">
+            <a class="active" href="#/orders">Meus Pedidos</a>
+            <a href="#/wishlist">Wishlist</a>
+          </div>
+        </div>
+
+        <section>
+          <div class="container">
+            <!-- Institucional Content -->
+            <div class="mz-account-IO">
+              <!-- accountUserProfile -->
+              <vtex.cmc:accountUserProfile />
+              <!-- accountUserProfile -->
+            </div>
+            <!-- Institucional Content -->
+          </div>
+        </section>
+
+        <section>
+          <!-- WISHLIST-->
+          <div class="container" style="display: none;">
+            <div class="mz-wishlist">
+              <div class="mz-wishlist__title">
+                <h2>Meus Favoritos</h2>
+              </div>
+              <!-- WishList shelf -->
+              <div class="mz-shelf"></div>
+              <!-- WishList shelf -->
+            </div>
+          </div>
+          <!-- WISHLIST-->
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//centerparts.vtexcommercestable.com.br/files/CSS.ctp.lan.institucional.css"
+    />
+  </head>
+  <body class="institucional">
+    <!-- <vtex:template id="qd-lannister-header" /> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <h1 class="nav-logo" id="logo">
+            <a href="/" title="CENTERPARTS">CENTERPARTS</a>
+          </h1>
+        </div>
+        <div class="col-xs-4 col-xs-offset-5">
+          <div class="televendas pull-right">
+            <span class="fa fa-phone fa-2"></span>
+            <span
+              class="nav-link store-phone-number"
+              title="Entre em contato com a Centerparts"
+            >
+              TELEVENDAS: <strong><vtex.cmc:phoneNumber /></strong
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+        <vtex:contentPlaceHolder id="Conteúdo da Página" />
+      </div>
+    </div>
+
+    <vtex:template id="qd-lannister-footer" />
+  </body>
+</html>

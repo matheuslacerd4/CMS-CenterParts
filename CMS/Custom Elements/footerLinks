@@ -1,0 +1,20 @@
+<ul itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+  <li>
+    <p class="qd_am_text">Institucional</p>
+    <ul>
+      <li>
+        <a href="/institucional/quem-somos" title="Quem somos" itemprop="url"
+          >Quem somos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://catalogo.centerb2b.com.br/institucional/duvidas-frequentes/"
+          title="Dúvidas Frequentes"
+          itemprop="url"
+          >Dúvidas frequentes</a
+        >
+      </li>
+    </ul>
+  </li>
+</ul>

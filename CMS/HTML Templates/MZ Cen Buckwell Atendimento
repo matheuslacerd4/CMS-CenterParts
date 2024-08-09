@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+    xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+         Fale Conosco
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link rel="stylesheet" href="/arquivos/CSS.cen.buc.institucional.css"
+        type="text/css" />
+</head>
+
+<body class="institucional">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    <main>
+        <div class="container">
+
+            <div class="mz-institucional">
+
+                <!-- <div class="basic-title">
+                    <vtex:contentPlaceHolder id="Título da página" />
+                </div> -->
+                <div class="basic-subtitle">
+                    <vtex:contentPlaceHolder id="Legenda" />
+                </div>
+                <div class="row">
+
+
+
+                    <div class="col-lg-2 d-none">
+                        <div class="nav-left-dept qdSideMenu">
+                            <div class="institucionalSideMenuWrapper institucionalSideMenu">
+                                <vtex.cmc:mzinstitucionalSideMenu />
+
+
+
+                                <!-- <ul itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                                    <li>
+                                    <p>INSTITUCIONAL</p>
+                                
+                                    <ul>
+                                        <li><a href="/institucional/quem-somos" itemprop="url" title="Quem Somos">Quem Somos</a></li>
+                                        <li><a href="/institucional/duvidas-frequentes/" itemprop="url" title="Dúvidas Frequentes">Dúvidas Frequentes</a></li>
+                                    </ul>
+                                    </li>
+                                    <li>
+                                    <p>CENTRAL DE ATENDIMENTO</p>
+      
+                                    <ul>
+                                        <li><a href="/institucional/central-de-atendimento/" itemprop="url" title="Atendimento">Atendimento</a></li>
+                                        <li><a href="/account/#profile" itemprop="url" title="Minha Conta">Minha Conta</a></li>
+                                        <li><a href="/accout/#orders" itemprop="url" title="Meus Pedidos">Meus Pedidos</a></li>
+                                    </ul>
+                                    </li>
+                                </ul> -->
+
+                                <!-- para esconder esse conteudo usar body class 'imoff' -->
+                            </div>
+                            <div class="helpCenterSideMenuWrapper institucionalSideMenu">
+                                <vtex.cmc:helpCenterSideMenu />
+                                <!-- para esconder esse conteudo usar body class 'hmoff' -->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class=" col-lg-12">
+                        <!-- <div class="institucionalContent ul p h1 h2 h3 h4 h5 h6 table">
+                            <div class="col-xs-12 phone-number-wrapper">
+                                <h3>Atendimento por Telefone</h3>
+                                <i class="icon-phone-alt"></i>
+                                <span>
+                                    <strong>
+                                        <span class="phone">
+                                            Telefone:
+                                            <vtex.cmc:phoneNumber />
+                                        </span>
+                                    </strong>
+                                    <span class="time">
+                                        <vtex.cmc:workingTime />
+                                    </span>
+                                </span>
+                            </div>
+                        </div> -->
+
+                        <div class="col-xs-7">
+                            <div class="form-contact-wrapper mz-institutional__email">
+                                <h2>Fale conosco</h2>
+
+                                <form class="form-horizontal form-contact" role="form">
+                                    <div class="form-group">
+                                        <label for="qd_form_name">Nome completo*</label>
+                                        <div class="col-xs-12">
+                                            <input type="text" class="form-control required" id="qd_form_name"
+                                                name="Nome" />
+                                        </div>
+                                    </div>
+                                    <div id="content-block">
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="qd_form_cnpj">CNPJ*</label>
+                                                <input type="text" class="form-control required" id="qd_form_cnpj"
+                                                    name="cnpj" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="qd_form_email">E-mail*</label>
+                                                <input type="email" class="form-control required" id="qd_form_email"
+                                                    name="E-mail" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="qd_form_phone">Telefone*</label>
+                                                <input type="tel" class="form-control required" id="qd_form_phone"
+                                                    name="Telefone" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="qd_form_subject" class="">Assunto*</label>
+                                                <select class="form-control required" id="qd_form_subject" name="Assunto">
+                                                    <option>Selecione</option>
+                                                    <option>Departamento de vendas</option>
+                                                    <option>Reclamações / Sugestões</option>
+                                                    <option>Quero ser Representante</option>
+                                                    <option>Export / Import Department</option>
+                                                    <option>Marketing</option>
+                                                    <option>Rh</option>
+                                                    <option>Seja um fornecedor</option>
+                                                    <option>Seja um colaborador</option>
+                                                    <option>Analise de limite de crédito</option>
+                                                    <option>Outros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="qd_form_msg">Mensagem*</label>
+                                        <div class="col-xs-12">
+                                            <textarea class="form-control required" rows="3" id="qd_form_msg"
+                                                name="Mensagem"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <div class="col-xs-12">
+                                            <button type="submit" class="btn btn-default">Enviar</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-succes green-alert d-none ">
+                                            <i class="fa fa-check-circle-o padding-r-sm font-size-sm"></i>Email enviado
+                                            com
+                                            sucesso
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </main>
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+</body>
+
+</html>

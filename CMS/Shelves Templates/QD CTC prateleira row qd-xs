@@ -1,0 +1,35 @@
+#set($id = $product.Id) #set($uri = $product.Uri) #set($escapedName =
+$product.HtmlEscapedName) #set($evaluationRate = $product.EvaluationRate)
+<div class="row">
+  <div class="col-xs-12">
+    <div class="shelf-image">
+      <a class="shelf-image-link" title="$escapedName" href="$uri">
+        $product.GetImageTag(206,206)
+      </a>
+    </div>
+    <div class="shelf-stamps">
+      <a title="$escapedName" class="highlightWrapper" href="$uri"
+        >$product.HightLight</a
+      >
+      <a title="$escapedName" class="highlightWrapper" href="$uri"
+        >$product.DiscountHightLight</a
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3 class="shelf-product-name">
+      <a title="$escapedName" href="$uri">$product.Name</a>
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="wrapper-buy-visualize">
+      <a href="$uri" class="btn btn-visualize">Visualizar</a>
+    </div>
+  </div>
+</div>

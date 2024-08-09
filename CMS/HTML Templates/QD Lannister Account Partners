@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//centerparts.vtexcommercestable.com.br/files/qd-bootstrap.2.3.2.css"
+    />
+    <vtex:template id="qd-lannister-partners-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.account.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css"
+      type="text/css"
+    />
+    <script
+      type="text/javascript"
+      src="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"
+    ></script>
+  </head>
+
+  <body class="account">
+    <vtex:template id="qd-lannister-partners-header" />
+    <div class="container">
+      <div class="row">
+        <!-- Institucional Content - vtex.io -->
+        <div class="main-column col-xs-12">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="bootstrap2-3-2">
+                <!-- My Account - vtex.io -->
+                <div class="account-qd-v1-accountUserProfile">
+                  <vtex.cmc:accountUserProfile />
+                </div>
+                <!-- My Account - vtex.io -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 accountAddress">
+              <div class="bootstrap2-3-2">
+                <vtex.cmc:accountAddress />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Institucional Content - vtex.io -->
+      </div>
+    </div>
+    <vtex:template id="qd-lannister-partners-footer" />
+  </body>
+</html>

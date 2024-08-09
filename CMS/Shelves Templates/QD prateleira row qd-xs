@@ -1,0 +1,103 @@
+#set($id = $product.Id) #set($uri = $product.Uri) #set($escapedName =
+$product.HtmlEscapedName) #set($evaluationRate = $product.EvaluationRate)
+
+<input type="hidden" class="qd_product_id" value="$id" />
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="shelf-image">
+      <a class="shelf-image-link" title="$escapedName" href="$uri">
+        $product.GetImageTag(206,206)
+      </a>
+    </div>
+    <div class="shelf-stamps">
+      <a title="$escapedName" class="highlightWrapper" href="$uri"
+        >$product.HightLight</a
+      >
+      <a title="$escapedName" class="highlightWrapper" href="$uri"
+        >$product.DiscountHightLight</a
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3 class="shelf-product-name">
+      <a title="$escapedName" href="$uri">$product.Name</a>
+    </h3>
+  </div>
+
+  <div class="col-xs-12">
+    <div class="shelf-price">
+      <div class="shelf-qd-v1-alternative-prices" style="display: none">
+        $product.ProductField(32)
+      </div>
+      #if ($product.IsInStock)
+      <div class="shelf-price-old-price">
+        #if ($product.HasBestPrice)
+        <span>De:</span>
+        <span class="old-price">$product.ListPrice</span>
+        #end
+      </div>
+      <div class="shelf-price-best-price">
+        <span>Por </span>
+        <span class="best-price">
+          $product.BestPrice
+          <span>À Vista</span>
+        </span>
+      </div>
+      <div class="shelf-price-instalment">
+        #if ($product.NumbersOfInstallment > 1)
+        <span>ou</span>
+        <span class="instalment-number">
+          ${product.NumbersOfInstallment}x
+        </span>
+        <span>de</span>
+        <span class="instalment-value"> $product.InstallmentValue </span>
+        <span>sem juros</span>
+        #end
+      </div>
+
+      #if ($product.HasBestPrice)
+      <div class="shelf-price-savings">
+        <span class="savings"
+          >economize $product.ListPriceMinusBestPrice
+          ($product.ListPriceMinusBestPriceInPercent)</span
+        >
+      </div>
+      #end #else
+      <div class="shelf-no-stock">
+        <a title="$escapedName" href="$uri">
+          <span class="no-stock-message">Avise-me Quando Chegar</span>
+        </a>
+      </div>
+      #end
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <div class="shelf-common-buy-button">
+      <span
+        class="qd_cpProductUnavailable #if($product.IsInStock) qd_cpHide #else qd_cpShow #end"
+        ><!-- vtexcp -->
+        <p class="outOfStock">Produto Esgotado</p>
+      </span>
+
+      <div class="#if($product.IsInStock) qd_cpShow #else qd_cpHide #end">
+        <a
+          class="buy-button qd-buy-button"
+          title="$escapedName"
+          href="/qd-buy-button?idproduto=$id"
+          >Comprar</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+    <div class="product-reference">$product.ProductField(12)</div>
+  </div>
+</div>

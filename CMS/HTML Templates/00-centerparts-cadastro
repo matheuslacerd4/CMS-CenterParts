@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+    <head>
+        <vtex:metaTags />
+        <vtex:contentPlaceHolder id="mz_head" />
+        <meta charset="UTF-8" />
+        <title>
+        <vtex.cmc:productPageTitle />
+        </title>
+        <vtex:template id="mz-cen-buckwell-head-tags-dev" />
+        <vtex:template id="2b - head" />
+        <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.product.dev.css" type="text/css" />
+    </head>
+
+    <body class="produto">
+        <!-- Header -->
+        <vtex:template id="mz-cen-buckwell-header" />
+        <!-- Header -->
+
+        <div id="app">
+            <Register />
+        </div>
+        
+        <!-- Footer -->
+        <vtex:template id="2b - scripts" />
+        <vtex:template id="mz-cen-buckwell-footer" />
+        <!-- Footer -->
+    </body>
+</html>

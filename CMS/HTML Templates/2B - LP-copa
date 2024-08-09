@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+  lang="en-us"
+>
+  <head>
+    <title>Revendedores</title>
+    <vtex:metaTags />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <vtex:template id="2b - head" />
+    <style>
+      .load.loading {
+        display: none !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="wrapper" id="app">
+        <header class="lp-copa__header">
+          <div class="lp-copa__logo">
+            <img
+              src="https://devcenterparts.vteximg.com.br/arquivos/lpcopa-logo.png"
+            />
+          </div>
+          <!--div class="lp-copa__menu">
+    		        <a href="#sobre">Sobre a campanha</a>
+    		        <a href="#validade">Validade</a>
+    		        <a href="#regulamento">Regulamento</a>
+    		        <a href="#participe" class="lp-copa__menuBtn">Participe</a>
+    		    </div-->
+        </header>
+
+        <section class="lp-copa__main">
+          <h1>
+            Campanha <br />
+            <strong>Marque 2 gols</strong>
+          </h1>
+        </section>
+
+        <section class="lp-copa__count">
+          <div class="lp-copa__count-box">
+            <p>Só acaba o jogo quando o juiz apita</p>
+          </div>
+        </section>
+
+        <section class="lp-copa__about">
+          <h2 class="lp-copa__about-title">Sobre a Campanha</h2>
+
+          <p class="lp-copa__about-text">
+            A cada R$250,00 comprados no site, você ganha 2 “GOLS
+          </p>
+
+          <p class="lp-copa__about-secondary">
+            A CENTERPARTS é uma distribuidora de autopeças fundada em 1989,
+            desde então, segue atuando no segmento de acabamento, carroceria e
+            acessórios em geral para automóveis nacionais e importados. São
+            12.000 m² situados na Vila Anastácio, Zona Oeste de São Paulo, de
+            onde saem os produtos distribuídos a todo o território nacional e
+            internacional.
+          </p>
+          <p class="lp-copa__about-secondary">
+            Com sua experiência de mercado, apresenta um serviço que preza pela
+            qualidade, rapidez e segurança em suas entregas, com índice de
+            atendimento próximo aos 100%. Como a CENTERPARTS valoriza a
+            satisfação do consumidor e preza por um bom relacionamento com seus
+            clientes.
+          </p>
+        </section>
+
+        <section class="lp-copa__rules">
+          <h2 class="lp-copa__rules-title">Regulamento</h2>
+
+          <div class="lp-copa__rules-list">
+            <div class="lp-copa__rules-list-item">
+              <img
+                src="https://devcenterparts.vteximg.com.br/arquivos/lpcopa-rules-ball-icon.png"
+              />
+              <h3>Promoção válida de 01/09/22 a 30/11/22</h3>
+              <p>
+                Podendo ser prorrogado conforme performance do Brasil na Copa do
+                Mundo e disponibilidade de prêmios.
+              </p>
+            </div>
+            <div class="lp-copa__rules-list-item">
+              <img
+                src="https://devcenterparts.vteximg.com.br/arquivos/lpcopa-rules-cards-icon.png"
+              />
+              <p>
+                Pedidos não faturados por falta de crédito ou qualquer outro
+                impedimento não serão considerados na pontuação do cliente.
+              </p>
+            </div>
+            <img
+              src="https://devcenterparts.vteximg.com.br/arquivos/lpcopa-rulesbg.png"
+            />
+          </div>
+        </section>
+
+        <section class="lp-copa__progress">
+          <div class="lp-capa__progress-box">
+            <worldcup-lp></worldcup-lp>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <div class="lp-copa__footer-links">
+          <a href="https://devcenterparts.myvtex.com/institucional/quem-somos"
+            >Institucional</a
+          >
+          <a href="https://www.facebook.com/Centerparts">Facebook</a>
+          <a href="https://www.instagram.com/centerpartsdistribuidora/"
+            >Instagram</a
+          >
+          <a href="mailto:vendas@centerparts.com.br">Contato</a>
+          <a
+            href="https://devcenterparts.myvtex.com/institucional/duvidas-frequentes/"
+            >Ajuda</a
+          >
+        </div>
+
+        <div class="lp-copa__footer-copy">
+          <p>Copyright ® 2022. Todos os direitos reservados</p>
+        </div>
+      </footer>
+    </div>
+
+    <vtex:template id="2b - scripts" />
+  </body>
+</html>

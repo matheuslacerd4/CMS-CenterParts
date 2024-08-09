@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+    xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+    <vtex:metaTags />
+    <vtex:contentPlaceHolder id="mz_head" />
+    <meta charset="UTF-8" />
+    <title>
+        <vtex.cmc:productPageTitle />
+    </title>
+    <vtex:template id="2b - head" />
+    <vtex:template id="mz-cen-buckwell-head-tags" />
+    <link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.giftlist.css"
+        type="text/css" />
+</head>
+
+<body class="giftlist-create">
+    <!-- Header -->
+    <vtex:template id="mz-cen-buckwell-header" />
+    <!-- Header -->
+    <div class="container">
+        <div class="mainTpl">
+            <div class="collectionsWrapper halfBannersWrapper">
+                <vtex:contentPlaceHolder id="Conteúdo Sup 980xLivre coleções 4colunas" />
+                <vtex:giftlSupContent />
+            </div>
+            <div id="columnMain" class="singleColumn">
+                <div class="paddingFix">
+                    <div class="giftlistWrapper">
+                        <div class="giftlist-create">
+                            <h2 class="text-center"> <span>Lista de compras ou orçamento</span> </h2>
+                            <vtex:contentPlaceHolder id="Banner Título 980xLivre" />
+                            <div class="GiftListFormV2Wrapper">
+                                <vtex.cmc:GiftListFormV2 />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collectionsWrapper halfBannersWrapper">
+                <vtex:contentPlaceHolder id="Conteúdo Inf 980xLivre coleções 4colunas" />
+                <vtex:giftlInfContent />
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <vtex:template id="2b - scripts" />
+    <vtex:template id="mz-cen-buckwell-footer" />
+    <!-- Footer -->
+</body>
+
+</html>

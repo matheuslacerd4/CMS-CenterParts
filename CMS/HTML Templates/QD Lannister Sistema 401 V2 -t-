@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce">
+
+<head>
+	<title>
+		<vtex.cmc:productPageTitle />
+	</title>
+	<vtex:template id="qd-lannister-head-tags" />
+	<link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.sistema.css" />
+	<link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.institucional.css" />
+</head>
+
+<body>
+	<vtex:template id="qd-lannister-header-sistema-v2" />
+	<div class="qd-v2-401">
+		<div class="container-fluid">
+			<div class="qd-v2-401-main-banner">
+				<div class="row">
+					<div class="col-xs-12">
+						<vtex:contentPlaceHolder id="Banner principal" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-choose-store">
+			<div class="container">
+				<div class="row">
+					<div class="qd-v2-401-catalog">
+						<div class="col-xs-6">
+							<a href="http://catalogo.centerb2b.com.br">
+								<div class="catalogo-wrapper">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="image-wrapper"><img src="/arquivos/icone-catalogo.jpg" title="Catálogo" /></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="title-wrapper">
+												<h3>Acesse nosso catálogo</h3>
+												<p>Liberado a todos os usuários</p>
+											</div>
+											<span>Entrar</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="qd-v2-401-store">
+						<div class="col-xs-6">
+							<a href="/login?ReturnUrl=/">
+								<div class="loja-wrapper">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="image-wrapper"><img src="/arquivos/icone-loja.jpg" title="Loja" /></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="title-wrapper">
+												<h3>Acesse nosssa loja online</h3>
+												<p>Exclusivo para lojistas de autopeças</p>
+											</div>
+											<span>Fazer Login</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-smaller-banners">
+			<div class="container">
+				<div class="row">
+					<div class="smaller-banner sb-1">
+						<div class="col-xs-6">
+							<vtex:contentPlaceHolder id="Banner menor 1" />
+						</div>
+					</div>
+					<div class="smaller-banner sb-2">
+						<div class="col-xs-6">
+							<vtex:contentPlaceHolder id="Banner menor 2" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-about">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h4 class="qd-v2-401-about-title">Nossa História</h4>
+						<p class="qd-v2-401-about-subtitle">Saiba mais sobre nós</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="qd-v2-401-about-banner">
+							<vtex:contentPlaceHolder id="Banner Sobre nós" />
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="qd-v2-401-about-text">
+							<vtex:contentPlaceHolder id="Texto Sobre nós" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-choose-store">
+			<div class="container">
+				<div class="row">
+					<div class="qd-v2-401-catalog">
+						<div class="col-xs-6">
+							<a href="http://catalogo.centerb2b.com.br">
+								<div class="catalogo-wrapper">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="image-wrapper"><img src="/arquivos/icone-catalogo.jpg" title="Catálogo" /></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="title-wrapper">
+												<h3>Acesse nosso catálogo</h3>
+												<p>Liberado a todos os usuários</p>
+											</div>
+											<span>Entrar</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="qd-v2-401-store">
+						<div class="col-xs-6">
+							<a href="/login?ReturnUrl=/">
+								<div class="loja-wrapper">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="image-wrapper"><img src="/arquivos/icone-loja.jpg" title="Loja" /></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="title-wrapper">
+												<h3>Acesse nosssa loja online</h3>
+												<p>Exclusivo para lojistas de autopeças</p>
+											</div>
+											<span>Fazer Login</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-help">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h4 class="qd-v2-401-help-title">Precisa de ajuda?</h4>
+						<p class="qd-v2-401-help-subtitle">Veja como navegar em nossa loja</p>
+					</div>
+				</div>
+				<div class="video-wrapper-qd-v1">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="video-wrapper-qd-v1-container">
+									<div class="video-wrapper-qd-v1-carousel">
+										<vtex:contentPlaceHolder id="Carrossel de Vídeos" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-testmonials">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h4 class="qd-v2-401-testmonials-title">Depoimentos</h4>
+						<p class="qd-v2-401-testmonials-subtitle">Confira o que pensam sobre nós</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="qd-v2-401-testimonial testm-1">
+							<vtex:contentPlaceHolder id="Depoimento 1" />
+						</div>
+					</div>
+
+					<div class="col-xs-4">
+						<div class="qd-v2-401-testimonial testm-2">
+							<vtex:contentPlaceHolder id="Depoimento 2" />
+						</div>
+					</div>
+
+					<div class="col-xs-4">
+						<div class="qd-v2-401-testimonial testm-3">
+							<vtex:contentPlaceHolder id="Depoimento 3" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qd-v2-401-choose-store">
+				<div class="container">
+					<div class="row">
+						<div class="qd-v2-401-catalog">
+							<div class="col-xs-6">
+								<a href="http://catalogo.centerb2b.com.br">
+									<div class="catalogo-wrapper">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="image-wrapper"><img src="/arquivos/icone-catalogo.jpg" title="Catálogo" /></div>
+											</div>
+											<div class="col-xs-7">
+												<div class="title-wrapper">
+													<h3>Acesse nosso catálogo</h3>
+													<p>Liberado a todos os usuários</p>
+												</div>
+												<span>Entrar</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="qd-v2-401-store">
+							<div class="col-xs-6">
+								<a href="/login?ReturnUrl=/">
+									<div class="loja-wrapper">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="image-wrapper"><img src="/arquivos/icone-loja.jpg" title="Loja" /></div>
+											</div>
+											<div class="col-xs-7">
+												<div class="title-wrapper">
+													<h3>Acesse nosssa loja online</h3>
+													<p>Exclusivo para lojistas de autopeças</p>
+												</div>
+												<span>Fazer Login</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<vtex:template id="qd-lannister-footer" />
+</body>
+
+</html>

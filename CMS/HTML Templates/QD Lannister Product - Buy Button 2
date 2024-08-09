@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html
+  lang="pt"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:vtex="http://www.vtex.com.br/2009/vtex-common"
+  xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce"
+>
+  <head>
+    <title><vtex.cmc:productPageTitle /></title>
+    <vtex:template id="qd-lannister-head-tags" />
+    <link
+      rel="stylesheet"
+      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.ctp.lan.product.list.css"
+      type="text/css"
+    />
+  </head>
+
+  <body class="produto" id="produto">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div
+            class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap qd-banner-responsive img-responsive qd-shelf-xs-6"
+          >
+            <vtex:contentPlaceHolder id="Conteúdo Acima da Seleção" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 padding-b-lg product-sku-info-wrapper">
+          <!-- Botão Comprar -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="product-buy-button">
+                <a class="buy-button qd-ssg-buy-button">
+                  ADICIONAR AO CARRINHO
+                </a>
+              </div>
+              <p class="sku-grid-alert">
+                <i class="fa fa-exclamation-triangle font-size-sm"></i> Insira
+                as quantidades desejadas nos campos abaixo
+              </p>
+            </div>
+          </div>
+
+          <div class="row product-sku-rich-selection-wrap">
+            <div class="col-xs-12 td-head-list">
+              <div class="td-product">PRODUTO</div>
+              <div class="td-variation">VARIAÇÃO</div>
+              <div class="td-amount">QUANTIDADE</div>
+              <div class="td-value">VALOR</div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="product-sku-rich-selection product-notifyme">
+                <vtex.cmc:skuRichSelection changeImage="1" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Totalizador -->
+          <div class="row sku-selected-summary">
+            <div class="col-xs-5 col-xs-offset-1">
+              <strong>
+                <span> TOTAL DE PRODUTOS: </span>
+                <span class="qd-selected-qtt-sku">0</span>
+              </strong>
+            </div>
+            <div class="col-xs-5 col-xs-offset-1">
+              <strong>
+                <span> VALOR TOTAL: </span>
+                <span class="qd-selected-sku-total">R$ 0,00</span>
+              </strong>
+            </div>
+          </div>
+
+          <!-- Botão Comprar -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="product-buy-button">
+                <a class="buy-button qd-ssg-buy-button">
+                  ADICIONAR AO CARRINHO
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-11 col-xs-offset-1">
+              <vtex:contentPlaceHolder id="Conteúdo abaixo da seleção de SKU" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div
+            class="vtx-placeholder vtx-banners-wrap vtx-collections-wrap qd-banner-responsive img-responsive qd-shelf-xs-6"
+          >
+            <vtex:contentPlaceHolder id="Conteúdo Abaixo da Seleção" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"></button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
