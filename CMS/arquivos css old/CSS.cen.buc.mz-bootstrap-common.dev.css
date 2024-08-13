@@ -1,5 +1,6 @@
 /* Lucario - 18/03/2022 15:51:28 GMT */
-:root {
+
+﻿:root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -496,7 +497,7 @@ mark,
 }
 
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
@@ -6393,7 +6394,7 @@ body.body-order-form .mz-header .mz-header__top .mz-google-translate::after,
   transform: translateY(-50%);
   z-index: 10;
   font-family: "icomoon";
-  color: #015ac2;
+  color: #37326d;
   width: 48px;
   height: 48px;
 }
@@ -6442,9 +6443,9 @@ body.body-order-form .mz-header .mz-header__top .mz-google-translate::after,
 .mz-product__related .wrapper-buy-button-asynchronous span {
   line-height: 30px;
   background: transparent;
-  color: #015ac2;
+  color: #37326d;
   border-radius: 25px;
-  border: 1px solid #015ac2;
+  border: 1px solid #37326d;
   font-size: 16px !important;
   display: inline-block;
   outline: none;
@@ -6832,7 +6833,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
   background: #fff;
   font-size: 18px;
   font-weight: 600;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-shelf.mz-shelf-regular .mz-shelf__price li label {
@@ -6853,7 +6854,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
   .mz-product-summary__best-price::before {
   content: "Avise-me quando estiver disponível";
   font-size: 16px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-shelf.mz-shelf-regular.qd-product-is-in-stock-false
@@ -6872,7 +6873,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
 
 .mz-shelf h2 {
   color: #fff;
-  background: #015ac2;
+  background: #37326d;
   border-radius: 10px 10px 0 0;
   line-height: 30px;
   font-size: 12px;
@@ -6903,7 +6904,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
   height: 100px;
   font-size: 16px;
   line-height: 24px;
-  color: #015ac2;
+  color: #37326d;
   overflow: hidden;
 }
 
@@ -6990,7 +6991,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
 }
 
 .mz-product__related {
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-product__related .mz-product-summary__name {
@@ -7022,7 +7023,7 @@ body.body-order-form .mz-breadcrumb ul li::after {
   position: relative;
   float: left;
   text-align: center;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-product__related .mz-shelf .mz-product-summary__brand {
@@ -7139,7 +7140,7 @@ ul:only-of-type .mz-product-summary {
   line-height: 1.29;
   font-size: 15px;
   font-weight: 600;
-  color: #015ac2;
+  color: #37326d;
   height: fit-content;
 }
 
@@ -7346,7 +7347,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
   font-size: 16px;
   position: absolute;
   transform: translate(-20px, 2px);
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-header .mz-header__item > a,
@@ -7366,7 +7367,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
 
 .mz-header .mz-header__item .bluetext,
 .mz-header .mz-header__username .bluetext {
-  color: #015ac2;
+  color: #37326d;
   font-weight: 600;
   font-size: 20px;
 }
@@ -7385,7 +7386,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
 
 .mz-header .mz-header__item a.border-right,
 .mz-header .mz-header__username a.border-right {
-  border-right: 1px solid #015ac2 !important;
+  border-right: 1px solid #37326d !important;
 }
 
 .mz-header .mz-header__item:nth-of-type(2) {
@@ -7417,7 +7418,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
   position: absolute;
   right: -7px;
   top: 3px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-header .mz-header__username i {
@@ -7449,7 +7450,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
   border: none;
   background: none;
   text-decoration-line: underline;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-header .mz-header__baloon h2 {
@@ -7493,7 +7494,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
   display: flex;
   position: relative;
   z-index: 0;
-  color: #015ac2;
+  color: #37326d;
   font-weight: 600;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -7517,7 +7518,7 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
   max-width: 200px;
   width: 100%;
   height: 40px;
-  background-color: #015ac2;
+  background-color: #37326d;
   padding: 6px;
 }
 
@@ -7685,10 +7686,9 @@ body.mz-sidebar-off .mz-sidebar .mz-translate {
 }
 
 .mz-sidebar .mz-sidebar__brand {
-  background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg");
+  background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg?v=1");
   background-repeat: no-repeat;
   background-color: #fff;
-  background-size: 176px;
   z-index: 5;
   background-position: center;
   width: 285px;
@@ -7705,7 +7705,7 @@ body.mz-sidebar-off .mz-sidebar .mz-translate {
 .mz-sidebar .mz-sidebar__shippingbox i,
 .mz-sidebar .mz-sidebar__freeshipping i,
 .mz-sidebar ul i {
-  color: #015ac2;
+  color: #37326d;
   float: left;
   position: relative;
   display: block;
@@ -7849,13 +7849,13 @@ body.mz-sidebar-off .mz-sidebar .mz-translate {
 .mz-sidebar .mz-sidebar__secure p::before {
   content: "";
   font-size: 25px;
-  color: #015ac2;
+  color: #37326d;
   display: inline-block;
   transform: translate(-5px, 5px);
 }
 
 .mz-sidebar > ul {
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-sidebar > ul p,
@@ -8198,7 +8198,7 @@ body.categoria .mz-search {
 
 .mz-search h4 {
   font-size: 14px;
-  color: #015ac2;
+  color: #37326d;
   font-weight: bold;
   width: 100%;
   cursor: pointer;
@@ -8307,7 +8307,7 @@ body.categoria .mz-search {
 
 .mz-search .mz-search__dropresults .mz-dr__block--variations > span,
 .mz-search .mz-search__dropresults .mz-dr__block--similars > span {
-  color: #015ac2;
+  color: #37326d;
   font-size: 12px;
   font-weight: bold;
 }
@@ -8530,7 +8530,7 @@ body.qd-bb-lightBoxBodyProdAdd.qd-ddc-product-add-time
   font-weight: 600;
   text-align: center;
   text-decoration-line: underline;
-  background-color: #015ac2;
+  background-color: #37326d;
   border-top: 1px solid #fff;
   content: "Produto adicionado ao carrinho com sucesso!";
 }
@@ -8591,7 +8591,7 @@ body.qd-bb-lightBoxBodyProdAdd.qd-ddc-product-add-time
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     content: "";
-    color: #015ac2;
+    color: #37326d;
     font-size: 14px;
   }
 
@@ -8862,7 +8862,7 @@ body.body-order-form .smart-cart-qd-v2-wrapper .qd_ddc_lightBoxClose:before {
 
 .smart-cart-qd-v2-wrapper .qd-cartTitle {
   color: #fff;
-  background: #015ac2;
+  background: #37326d;
 }
 
 .smart-cart-qd-v2-wrapper .qd-cartTitle h3 {
@@ -8934,7 +8934,7 @@ body.body-order-form .smart-cart-qd-v2-wrapper .qd-ddc-scrollDown:before {
 
 .smart-cart-qd-v2-wrapper .qd-ddc-scrollUp:before,
 .smart-cart-qd-v2-wrapper .qd-ddc-scrollDown:before {
-  color: #015ac2;
+  color: #37326d;
   font-weight: 600;
   background: #fff;
   border-radius: 50%;
@@ -9267,8 +9267,8 @@ body.body-order-form .smart-cart-qd-v2-wrapper .qd-ddc-viewCart:before {
 
 .smart-cart-qd-v2-wrapper .qd-ddc-quantityMinus:hover {
   color: #fff;
-  background-color: #015ac2;
-  border-color: #015ac2;
+  background-color: #37326d;
+  border-color: #37326d;
 }
 
 .smart-cart-qd-v2-wrapper .qd-ddc-quantityMinus:before {
@@ -9294,8 +9294,8 @@ body.body-order-form .smart-cart-qd-v2-wrapper .qd-ddc-viewCart:before {
 
 .smart-cart-qd-v2-wrapper .qd-ddc-quantityMore:hover {
   color: #fff;
-  background-color: #015ac2;
-  border-color: #015ac2;
+  background-color: #37326d;
+  border-color: #37326d;
 }
 
 .smart-cart-qd-v2-wrapper .qd-ddc-quantityMore:before {
@@ -9379,7 +9379,7 @@ body.body-order-form .smart-cart-qd-v2-wrapper .qd-ddc-remove:before {
 
 footer {
   background-color: #fff;
-  border-bottom: 37px solid #015ac2;
+  border-bottom: 37px solid #37326d;
   box-shadow: 3px 4px 12px rgba(55, 50, 109, 0.05);
 }
 
@@ -9393,7 +9393,7 @@ footer {
   overflow: hidden;
   left: -14px;
   position: relative;
-  background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg"),
+  background: url("https://centerparts.vteximg.com.br/arquivos/logo.png"),
     176px 40px;
   background-repeat: no-repeat;
   margin-left: 15px;
@@ -9417,7 +9417,7 @@ footer {
 
 .mz-footer__social p {
   margin: 20px 0 5px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-footer__social li {
@@ -9456,7 +9456,7 @@ footer {
 
 .mz-footer-institucional-menu > li li {
   font-size: 12px;
-  color: #015ac2;
+  color: #37326d;
   line-height: 25px;
   white-space: nowrap;
 }
@@ -9623,7 +9623,7 @@ footer {
 }
 
 .mz-sign-in-form h3 {
-  color: #015ac2;
+  color: #37326d;
   text-align: center;
   font-size: 20px;
   font-weight: 600;
@@ -9673,7 +9673,7 @@ footer {
 .mz-sign-in-form .first-step .link-close i,
 .mz-sign-in-form .second-step .link-close i {
   background: #fff;
-  color: #015ac2;
+  color: #37326d;
   border-radius: 50%;
   font-size: 25px;
   transform: translateY(5px);
@@ -9689,7 +9689,7 @@ footer {
 }
 
 .mz-sign-in-form .second-step h2 {
-  color: #015ac2;
+  color: #37326d;
   font-size: 16px;
   font-weight: 600;
   text-align: center;
@@ -9722,7 +9722,7 @@ footer {
 
 .mz-sign-in-form__bluebox h4,
 .mz-sign-in-form .box-info h4 {
-  color: #015ac2;
+  color: #37326d;
   font-weight: 600;
   padding-left: 5px;
 }
@@ -9759,14 +9759,14 @@ footer {
   top: -3px;
   left: 1px;
   position: relative;
-  background-color: #015ac2;
+  background-color: #37326d;
   content: "";
   display: inline-block;
   visibility: visible;
   border: 2px solid #fff;
-  -webkit-box-shadow: 0px 0px 0px 1px #015ac2;
-  -moz-box-shadow: 0px 0px 0px 1px #015ac2;
-  box-shadow: 0px 0px 0px 1px #015ac2;
+  -webkit-box-shadow: 0px 0px 0px 1px #37326d;
+  -moz-box-shadow: 0px 0px 0px 1px #37326d;
+  box-shadow: 0px 0px 0px 1px #37326d;
 }
 
 .mz-sign-in-form .btn-next-step {
@@ -9855,7 +9855,7 @@ footer {
 
 .mz-search-loader i {
   font-size: 40px;
-  color: #015ac2;
+  color: #37326d;
   width: 100%;
   text-align: center;
   display: block;
@@ -9907,7 +9907,7 @@ footer {
 
 .icon-Group-194:before {
   content: "";
-  color: #015ac2;
+  color: #37326d;
 }
 
 .icon-check-circle:before {
@@ -10256,7 +10256,7 @@ body.produto {
 
 .styles_overlay__CLSq- span {
   font-size: 16px;
-  color: #015ac2;
+  color: #37326d;
   padding: 0;
 }
 
@@ -10335,7 +10335,7 @@ p {
 
 .html-content h2 {
   font-size: 35px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .html-content h3 {
@@ -10345,7 +10345,7 @@ p {
 
 .html-content h4 {
   font-size: 25px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .html-content h5 {
@@ -10543,13 +10543,13 @@ div#ajaxBusy p {
   font-size: 10px;
   color: #444;
   text-align: center;
-  border-bottom: 2px solid #015ac2;
+  border-bottom: 2px solid #37326d;
   padding-bottom: 10px;
   padding-top: 78px;
 }
 
 .mz-tipbar span {
-  color: #015ac2;
+  color: #37326d;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -10617,7 +10617,7 @@ div#ajaxBusy p {
   font-size: 10px;
   color: #444;
   text-align: left;
-  border-bottom: 2px solid #015ac2;
+  border-bottom: 2px solid #37326d;
   padding-bottom: 10px;
   padding-top: 78px;
 }
@@ -10682,7 +10682,7 @@ div#ajaxBusy p {
 }
 
 .mz-tipbar__mobile span {
-  color: #015ac2;
+  color: #37326d;
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
@@ -10729,7 +10729,7 @@ div#ajaxBusy p {
 .mz-smart-quantity .qd-sq-more,
 .qd-smart-quantity .qd-sq-minus,
 .qd-smart-quantity .qd-sq-more {
-  background: #015ac2;
+  background: #37326d;
   position: relative;
   display: inline-block;
   min-width: 25px;
@@ -10848,14 +10848,14 @@ div#ajaxBusy p {
   line-height: 20px;
   text-align: center;
   text-transform: uppercase;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-shipping-progress-bar-cart .progress-bar-text span {
   font-weight: bold;
   line-height: 20px;
   margin-left: 5px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 .mz-shipping-progress-bar-cart i {
@@ -10863,7 +10863,7 @@ div#ajaxBusy p {
   right: 0;
   line-height: 20px;
   font-size: 10px;
-  color: #015ac2;
+  color: #37326d;
 }
 
 body.qd-ddc-product-add-time-v2 .mz-shipping-progress-bar-cart {
@@ -10986,9 +10986,8 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
   width: 100%;
   height: 75px;
   display: block;
-  background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg")
+  background: url("https://centerparts.vteximg.com.br/arquivos/logo.png")
     no-repeat scroll center center;
-  background-size: 176px;
 }
 
 #vtexIdContainer .vtexIdUI {
@@ -11111,7 +11110,7 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
 #vtexIdContainer .btn-success#tryChangePswdBtn {
   border-radius: 25px;
   box-shadow: none;
-  background-color: #015ac2 !important;
+  background-color: #37326d !important;
   background-image: none;
   height: 30px;
   height: 30px;
@@ -11151,7 +11150,7 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
 
 #vtexIdContainer .vtexIdUI #loginWithAccessKeyBtn {
   white-space: nowrap;
-  background: #015ac2;
+  background: #37326d;
   color: #fff !important;
   border-radius: 25px;
   box-shadow: none;
@@ -11197,7 +11196,7 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
 
 #vtexIdContainer .vtexIdUI .vtexIdUI-others-send-email {
   border-radius: 25px;
-  background: #015ac2;
+  background: #37326d;
   color: #fff !important;
   text-shadow: none;
   box-shadow: none;
@@ -11324,7 +11323,7 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
 .ui-autocomplete a:hover {
   color: #fff;
   text-decoration: none;
-  background: #015ac2;
+  background: #37326d;
 }
 
 .ui-autocomplete .ui-menu-item {
@@ -11383,7 +11382,7 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
 
 .mz-search__customsearch .mz-search__customsearch--text span,
 .mz-search__customsearch .mz-search__customsearch--text a {
-  color: #015ac2;
+  color: #37326d;
   font-size: 14px;
   margin: 0 5px;
 }

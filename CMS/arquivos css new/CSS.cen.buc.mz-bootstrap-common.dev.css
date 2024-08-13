@@ -1,5 +1,6 @@
 /* Lucario - 18/03/2022 15:51:28 GMT */
-:root {
+
+﻿:root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -496,7 +497,7 @@ mark,
 }
 
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
@@ -7688,7 +7689,6 @@ body.mz-sidebar-off .mz-sidebar .mz-translate {
   background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg");
   background-repeat: no-repeat;
   background-color: #fff;
-  background-size: 176px;
   z-index: 5;
   background-position: center;
   width: 285px;
@@ -10988,7 +10988,6 @@ body.body-order-form #vtexIdContainer .modal-header .close:before {
   display: block;
   background: url("https://centerparts.vteximg.com.br/arquivos/logo-top.jpg")
     no-repeat scroll center center;
-  background-size: 176px;
 }
 
 #vtexIdContainer .vtexIdUI {
