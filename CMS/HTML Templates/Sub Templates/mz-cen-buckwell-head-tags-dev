@@ -32,7 +32,7 @@ src="https://www.facebook.com/tr?id=3730074620642724"
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
   integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.mz-bootstrap-common.dev.css"
+<link rel="stylesheet" href="/arquivos/CSS.cen.buc.mz-bootstrap-common.dev.css"
   type="text/css" />
 
 <!-- GOOGLE FONTS -->
