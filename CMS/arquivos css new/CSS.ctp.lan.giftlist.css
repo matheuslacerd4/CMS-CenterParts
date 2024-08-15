@@ -168,7 +168,7 @@ h2 span {
 
 .searchWrapper h2.glsearch-title {
   font-size: 12px !important;
-  color: #242056;
+  color: #015ac2;
   text-transform: uppercase;
   font-weight: 700;
   font-family: "Open Sans", "Helvetica Neue", "sans-serif", Helvetica, Arial;
@@ -200,7 +200,7 @@ h2 span {
   display: block;
   font-size: 12px;
   text-transform: uppercase;
-  color: #242056;
+  color: #015ac2;
   font-weight: normal;
   margin-top: 10px;
 }
@@ -294,7 +294,7 @@ h2 span {
 }
 
 .qd-list-search-result .giftlist-table thead tr th {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
   font-weight: normal;
   text-transform: uppercase;
@@ -306,7 +306,7 @@ h2 span {
 
 .qd-list-search-result .giftlist-table tbody tr {
   font-size: 12px;
-  color: #242056;
+  color: #015ac2;
 }
 
 .qd-list-search-result .giftlist-table tbody tr:hover {
@@ -364,7 +364,7 @@ h2 span {
 
 .GiftListFormV2Wrapper .image #giftlistimageload label {
   font-size: 14px;
-  color: #242056;
+  color: #015ac2;
   text-transform: uppercase;
   font-weight: 700;
   text-align: left;
@@ -380,7 +380,7 @@ h2 span {
   text-align: center;
   outline: none;
   border-radius: 3px;
-  background: #242056;
+  background: #015ac2;
   color: #fff;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -417,7 +417,7 @@ h2 span {
   text-align: center;
   outline: none;
   border-radius: 3px;
-  background: #242056;
+  background: #015ac2;
   color: #fff;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -749,7 +749,7 @@ h2 span {
 .GiftListManagerV2Wrapper table thead td,
 .GiftListManagerV2Wrapper table thead th {
   background: #bab3d5;
-  color: #242056;
+  color: #015ac2;
   text-transform: uppercase;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -795,7 +795,7 @@ h2 span {
 }
 
 .GiftListManagerV2Wrapper .glmanager-actions a {
-  background-color: #242056;
+  background-color: #015ac2;
   color: #fff;
   border-radius: 3px;
   display: inline-block;
@@ -866,7 +866,7 @@ h2 span {
 }
 
 .GiftListManagerV2Wrapper .giftlist-body-name a {
-  color: #242056;
+  color: #015ac2;
   font-size: 14px;
   font-weight: 700;
 }
@@ -1009,7 +1009,7 @@ h2 span {
   background: #b6973a;
   border-radius: 6px;
   border-radius: 4px;
-  background: #242056;
+  background: #015ac2;
   color: #fff;
   font-weight: 700;
   font-size: 12px;
@@ -1161,7 +1161,7 @@ h2 span {
 
 .GiftListProductsV2 .giftlistWrapper .glstat-table td {
   color: #b6973a;
-  background-color: #242056;
+  background-color: #015ac2;
   font-size: 14px;
   font-weight: 700;
   text-align: center;
@@ -1236,7 +1236,7 @@ h2 span {
 .GiftListProductsV2 .giftlistWrapper .giftlistproductsv2 th,
 .GiftListProductsV2 .giftlistWrapper .giftlistproductsv2 td {
   border-bottom: 1px solid #e7e7e7;
-  color: #242056;
+  color: #015ac2;
   text-align: center;
   padding-left: 23px;
 }
@@ -1326,7 +1326,7 @@ h2 span {
 
 .GiftListProductsV2 .giftlistWrapper .glstat-table td {
   background: transparent !important;
-  color: #242056;
+  color: #015ac2;
 }
 
 .GiftListInfoV2 {
@@ -1354,7 +1354,7 @@ h2 span {
 }
 
 .GiftListInfoV2 .giftlistinfo-title {
-  color: #242056;
+  color: #015ac2;
   margin-bottom: 20px;
   font-size: 18px;
   text-transform: uppercase;
@@ -1377,7 +1377,7 @@ h2 span {
 .GiftListInfoV2 .name,
 .GiftListInfoV2 .surname {
   font-size: 14px;
-  color: #242056;
+  color: #015ac2;
 }
 
 .GiftListInfoV2 .member:before {
@@ -1397,12 +1397,12 @@ h2 span {
   margin-top: 10px;
   float: left;
   font-size: 18px;
-  color: #242056;
+  color: #015ac2;
 }
 
 .GiftListInfoV2 .link-title {
   font-size: 14px;
-  color: #242056;
+  color: #015ac2;
   margin-right: 20px;
 }
 
@@ -1418,7 +1418,7 @@ h2 span {
   text-rendering: optimizelegibility;
   width: 1em;
   font-family: "FontAwesome";
-  color: #242056;
+  color: #015ac2;
   margin-right: 5px;
 }
 
@@ -1578,7 +1578,7 @@ h2 span {
 }
 
 .pager.bottom .pages li {
-  color: #242056;
+  color: #015ac2;
   display: inline-block;
   font-size: 20px;
   font-weight: 700;
@@ -1725,7 +1725,7 @@ h2 span {
 .shelfWrapper .giftlistinfo .giftlistinfo-title {
   font-weight: bold;
   font-size: 18px;
-  color: #242056;
+  color: #015ac2;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -1755,7 +1755,7 @@ h2 span {
   margin-top: 8px;
   margin-right: 10px;
   font-size: 20px;
-  color: #242056;
+  color: #015ac2;
 }
 
 .productWrapper .giftlistinfo .action-edit a,
@@ -1775,9 +1775,9 @@ h2 span {
   background: #b6973a;
   border-radius: 6px;
   background: #fff;
-  color: #242056;
+  color: #015ac2;
   padding: 2px 20px 2px 20px;
-  border: 1px solid #242056;
+  border: 1px solid #015ac2;
   font-size: 14px;
   font-weight: 700;
   border-radius: 3px;
@@ -1835,7 +1835,7 @@ h2 span {
 
 .productWrapper .giftlistinfo .action-edit a:hover,
 .shelfWrapper .giftlistinfo .action-edit a:hover {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
 }
 
@@ -1856,9 +1856,9 @@ h2 span {
   background: #b6973a;
   border-radius: 6px;
   background: #fff;
-  color: #242056;
+  color: #015ac2;
   padding: 2px 20px 2px 20px;
-  border: 1px solid #242056;
+  border: 1px solid #015ac2;
   font-size: 14px;
   font-weight: 700;
   border-radius: 3px;
@@ -1917,7 +1917,7 @@ h2 span {
 
 .productWrapper .giftlistinfo .action-manage a:hover,
 .shelfWrapper .giftlistinfo .action-manage a:hover {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
 }
 
@@ -1938,7 +1938,7 @@ h2 span {
   background: #b6973a;
   color: #fff;
   padding: 2px 10px 2px 10px;
-  border: 1px solid #242056;
+  border: 1px solid #015ac2;
   font-size: 14px;
   font-weight: 700;
   border-radius: 3px;
@@ -2023,7 +2023,7 @@ h2 span {
 
 .giftlistproductsv2-gridwrapper table thead tr th {
   padding: 5px 5px 5px 10px;
-  background: #242056;
+  background: #015ac2;
   height: 33px;
   color: #fff;
   font-size: 12px;
@@ -2067,7 +2067,7 @@ h2 span {
   font-family: "FontAwesome";
   float: left;
   margin-top: 3px;
-  color: #242056;
+  color: #015ac2;
   font-size: 14px;
 }
 
@@ -2093,7 +2093,7 @@ h2 span {
 }
 
 .ko-grid-pageLinks a {
-  color: #242056;
+  color: #015ac2;
   display: inline-block;
   font-size: 20px;
   font-weight: 700;
@@ -2139,9 +2139,9 @@ h2 span {
   background: #b6973a;
   border-radius: 6px;
   background: #fff;
-  color: #242056;
+  color: #015ac2;
   padding: 2px 20px 2px 20px;
-  border: 1px solid #242056;
+  border: 1px solid #015ac2;
   font-size: 14px;
   font-weight: bold;
   border-radius: 3px;
@@ -2191,7 +2191,7 @@ h2 span {
 }
 
 #giftlistremovecheckedskus:hover {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
 }
 

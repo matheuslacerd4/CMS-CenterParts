@@ -464,7 +464,7 @@ body.body-order-form .mz-header.mz-system__header .mz-google-translate::after,
 
 .mz-system .mz-marcas__white-bg {
   background: #fff;
-  margin-top: -70px;
+  margin-top: 0;
   padding: 10px 0;
   margin-bottom: 10px;
   position: relative;

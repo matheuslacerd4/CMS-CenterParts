@@ -216,6 +216,7 @@
 /*     altura minima do carrossel das logomarcas      */
 .mz-system .mz-marcas__white-bg {
   min-height: 90px;
+  margin-top: 0;
 }
 
 .inovaki-centerparts-product {

@@ -871,7 +871,7 @@ div#ajaxBusy p {
 }
 
 .floatingTopBar .nav-logo {
-  background: url("//centerparts.vteximg.com.br/arquivos/logo-floatingbar.png")
+  background: url("//centerparts.vteximg.com.br/arquivos/-logofloatingbar.png")
     no-repeat center 10px;
   width: 98%;
   height: 63px;
@@ -943,9 +943,9 @@ div#ajaxBusy p {
   width: 470px;
   border-radius: 5px;
   border: 2px solid;
-  border-width: #242056;
-  border: 1px 2px #242056;
-  border-color: #242056 !important;
+  border-width: #015ac2;
+  border: 1px 2px #015ac2;
+  border-color: #015ac2 !important;
   background: #fff;
   position: absolute;
   top: 100%;
@@ -1080,7 +1080,7 @@ div#ajaxBusy p {
 }
 
 .v2-vtexsc-cart .cartFooter .cartTotal {
-  color: #242056;
+  color: #015ac2;
   font-size: 14px;
   font-weight: 700;
   float: left;
@@ -1366,7 +1366,7 @@ body[class*="catalogo"] .link-login-catalog-qd-v1 {
 .link-login-catalog-qd-v1 > a {
   transition: all 0.2s ease-out;
   display: block;
-  background-color: #242056;
+  background-color: #015ac2;
   color: #fff;
   border-radius: 5px;
   padding: 9px 10px;
@@ -1519,7 +1519,7 @@ body[data-qd-scroll-0="1"] .floatingTopBar {
 }
 
 .main-amazing-menu {
-  background: #242056;
+  background: #015ac2;
   width: 996px;
   border-radius: 5px;
   margin-left: auto;
@@ -1654,7 +1654,7 @@ body[data-qd-scroll-0="1"] .floatingTopBar {
 }
 
 .main-amazing-menu .qd-am-dropdown-menu > li > ul > li > a {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
   font-size: 12px;
   padding: 5px 10px;
@@ -1668,7 +1668,7 @@ body[data-qd-scroll-0="1"] .floatingTopBar {
 }
 
 .main-amazing-menu .qd-am-dropdown-menu > li > ul > li strong a {
-  background: #242056;
+  background: #015ac2;
 }
 
 .main-amazing-menu .qd-am-dropdown-menu > li a {
@@ -1807,7 +1807,7 @@ body[data-qd-scroll-0="1"] .floatingTopBar {
   left: auto;
   right: 0;
   z-index: 99999;
-  border: #242056 solid;
+  border: #015ac2 solid;
   border-width: 2px;
   background: #fff;
   padding: 0 8px 8px;
@@ -2084,7 +2084,7 @@ body[data-qd-scroll-0] .header-smart-cart .qd-ddc-wrapper {
   padding: 0 12px;
   line-height: 32px;
   font-size: 15px;
-  background: #242056 !important;
+  background: #015ac2 !important;
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 3px;
@@ -2358,7 +2358,7 @@ body[data-qd-scroll-0]
 
 .qd-user-info p {
   font-size: 12px;
-  color: #242056;
+  color: #015ac2;
   padding: 2px;
 }
 
@@ -2385,13 +2385,13 @@ body[data-qd-scroll-0]
   border-width: 1px;
   padding: 0 5px;
   border-radius: 4px;
-  color: #242056;
+  color: #015ac2;
   box-shadow: 0 -1px 2px #a5a5a5 inset;
   cursor: pointer;
 }
 
 .qd-user-info .qd-user-title {
-  background: #242056;
+  background: #015ac2;
   color: #fff !important;
   font-size: 14px;
   font-weight: 700;
@@ -2460,7 +2460,7 @@ body[data-qd-scroll-0]
   border: 1px solid #999;
   border-bottom: 1px solid #fff;
   padding: 0 5px;
-  color: #242056;
+  color: #015ac2;
   position: relative;
   z-index: 999;
   background: white;
@@ -2863,7 +2863,7 @@ body[data-qd-scroll-0]
 }
 
 .store-footer {
-  background-color: #242056;
+  background-color: #015ac2;
   padding: 20px 0;
 }
 
@@ -3361,7 +3361,7 @@ body[data-qd-scroll-0]
   float: right;
   border-radius: 5px;
   background-color: #fff;
-  color: #242056;
+  color: #015ac2;
   font-weight: 700;
   font-size: 16px;
 }
@@ -3658,7 +3658,7 @@ body[data-qd-scroll-0]
 .pop-ups-identification.first-step .header-first-step h3 {
   display: inline-block;
   font-weight: bold;
-  color: #242056;
+  color: #015ac2;
   font-size: 23px;
   margin-right: 3px;
 }
@@ -4017,7 +4017,7 @@ body[data-qd-scroll-0]
   text-rendering: optimizelegibility;
   width: 1em;
   font-family: "FontAwesome";
-  color: #242056;
+  color: #015ac2;
   font-size: 17px;
   line-height: 1;
 }
@@ -4413,7 +4413,7 @@ body.prod-buybutton {
 }
 
 #TB_window #TB_title {
-  background: #242056;
+  background: #015ac2;
   color: #fff;
 }
 

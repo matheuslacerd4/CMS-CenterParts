@@ -539,8 +539,8 @@ body.account {
   .vtex-account__user-info
   .vtex-account__user-image
   button {
-  border: 2px solid #242056;
-  background-color: #242056;
+  border: 2px solid #015ac2;
+  background-color: #015ac2;
   font-size: 13px;
   height: 2em;
   width: 2em;
@@ -595,14 +595,14 @@ body.account {
   .vtex-account__menu
   .vtex-account__menu-links
   a {
-  color: #242056;
+  color: #015ac2;
 }
 
 .account-qd-v1-accountUserProfile
   .vtex-account__menu
   .vtex-account__menu-links
   a.b--action-primary {
-  border-color: #242056;
+  border-color: #015ac2;
 }
 
 @media (max-width: 767px) {
@@ -693,17 +693,17 @@ body.account {
 }
 
 .account-qd-v1-accountUserProfile .vtex-account__page .c-action-primary {
-  color: #242056;
+  color: #015ac2;
 }
 
 .account-qd-v1-accountUserProfile .vtex-account__page .b--action-primary {
   color: #fff;
-  background-color: #242056;
-  border-color: #242056;
+  background-color: #015ac2;
+  border-color: #015ac2;
 }
 
 .account-qd-v1-accountUserProfile .vtex-account__page .c-link {
-  color: #242056;
+  color: #015ac2;
 }
 
 .account-qd-v1-accountUserProfile .vtex-account__page .bg-danger {
@@ -798,8 +798,8 @@ body.account {
 .vtex-modal__overlay .vtex-modal__modal button {
   color: #fff;
   transition: 0.4s !important;
-  background-color: #242056;
-  border-color: #242056;
+  background-color: #015ac2;
+  border-color: #015ac2;
 }
 
 .vtex-modal__overlay .vtex-modal__modal button:hover {
@@ -808,7 +808,7 @@ body.account {
 }
 
 .vtex-modal__overlay .vtex-modal__modal .vtex__icon-spinner {
-  color: #242056;
+  color: #015ac2;
 }
 
 .account-qd-v1-accountUserProfile

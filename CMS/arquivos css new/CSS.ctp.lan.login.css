@@ -19,7 +19,7 @@
   width: 100%;
   height: 120px;
   display: block;
-  background: url("//centerparts.vteximg.com.br/arquivos/logo-top.png")
+  background: url("//centerparts.vteximg.com.br/arquivos/logo-top.jpg")
     no-repeat scroll center 8px;
   background-size: 50%;
 }
@@ -321,7 +321,7 @@
   color: #fff;
   background: #b6973a;
   border-radius: 6px;
-  background: #4b649d;
+  background: #015ac2;
 }
 
 #vtexIdContainer .vtexIdUI #vtexIdUI-facebook:hover {
@@ -552,7 +552,7 @@
   color: #fff;
   background: #b6973a;
   border-radius: 6px;
-  background: #242056 !important;
+  background: #015ac2 !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -727,7 +727,7 @@
 }
 
 #vtexIdContainer .btn-success {
-  background: #242056 !important;
+  background: #015ac2 !important;
   color: #fff !important;
   margin-top: 10px;
   border: none !important;
@@ -761,18 +761,18 @@
 
 #vtexIdContainer .vtexIdUI #vtexIdUI-facebook {
   border-radius: 0;
-  background: #475f96;
+  background: #015ac2;
   color: #fff !important;
   border: none;
 }
 
 #vtexIdContainer .vtexIdUI #vtexIdUI-facebook:hover {
-  background: #374973;
+  background: #015ac2;
 }
 
 #vtexIdContainer .vtexIdUI #vtexIdUI-facebook:active,
 #vtexIdContainer .vtexIdUI #vtexIdUI-facebook:focus {
-  background: #374973;
+  background: #015ac2;
 }
 
 #vtexIdContainer .vtexIdUI #vtexIdUI-google-plus {
