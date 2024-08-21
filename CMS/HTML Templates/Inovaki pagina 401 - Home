@@ -48,7 +48,7 @@
                     style="display: none !important"
                   ></div>
 
-                  <div class="mz-google-translate">
+                  <div class="mz-google-translate" style="display: none">
                     <ul>
                       <li>
                         <img src="/arquivos/pt.png" alt="Translate" />
@@ -91,7 +91,7 @@
                 <div class="mz-header__item" id="menu-assistant">
                   <a id="btnVendedorHome" href="https://devcenterparts.myvtex.com">Área do Vendedor</a>
                   <a id="login" href="/login?ReturnUrl=/"> Área do Cliente </a>
-                  <a id="signIn" href="/cadastro"> Cadastrar </a>
+                  <a id="signIn" href="#"> Primeiro Acesso </a>
                 </div>
               </div>
             </div>
@@ -101,9 +101,11 @@
     </header>
     <!-- Header -->
 
-    <div id="app">
-      <Register />
-    </div>
+    <!--<div id="app">-->
+    <!--  <Register />-->
+    <!--</div>-->
+    
+    <div id="registerFormCNPJ"></div>
 
     <main>
       <style type="text/css">
@@ -318,6 +320,7 @@
     </main>
     <!-- Footer -->
     <vtex:template id="mz-cen-buckwell-footer" />
+    <script src="/arquivos/signup-form.js?v=1"></script>
     <!-- Footer -->
     <vtex:template id="2b - scripts" />
 
