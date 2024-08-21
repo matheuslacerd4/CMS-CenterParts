@@ -14,7 +14,7 @@
     <vtex:template id="mz-cen-buckwell-head-tags-dev" />
     <link
       rel="stylesheet"
-      href="//cdn.quatrodigital.com/centerparts-arquivos/CSS.cen.buc.search.dev.css"
+      href="/arquivos/CSS.cen.buc.search.dev.css"
       type="text/css"
     />
   </head>

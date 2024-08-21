@@ -349,7 +349,7 @@ body.body-order-form .mz-search-navigation button.showHide::before,
 
 .mz-result .bt-refinar span:hover,
 .mz-result .btnFilterBy:hover {
-  background: #2e2a5c;
+  background: #003cc3;
 }
 
 .mz-result .bt-refinar span:focus,
@@ -358,7 +358,7 @@ body.body-order-form .mz-search-navigation button.showHide::before,
 .mz-result .btnFilterBy:active,
 .mz-result .bt-refinar span.active,
 .mz-result .active.btnFilterBy {
-  background: #2e2a5c;
+  background: #003cc3;
 }
 
 .mz-result .bt-refinar span,
