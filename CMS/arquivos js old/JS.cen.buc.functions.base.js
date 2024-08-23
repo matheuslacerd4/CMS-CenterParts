@@ -1,4 +1,4 @@
-/* Lucario - 25/03/2022 15:20:34 GMT */
+/* Peterturkish - 31/08/2023 06:37:24 GMT */
 "function" !== typeof String.prototype.trim &&
   (String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
@@ -10,47 +10,47 @@
 "function" !== typeof String.prototype.replaceSpecialChars &&
   (String.prototype.replaceSpecialChars = function () {
     var b = {
-      ç: "c",
-      æ: "ae",
-      œ: "oe",
-      á: "a",
-      é: "e",
-      í: "i",
-      ó: "o",
-      ú: "u",
-      à: "a",
-      è: "e",
-      ì: "i",
-      ò: "o",
-      ù: "u",
-      ä: "a",
-      ë: "e",
-      ï: "i",
-      ö: "o",
-      ü: "u",
-      ÿ: "y",
-      â: "a",
-      ê: "e",
-      î: "i",
-      ô: "o",
-      û: "u",
-      å: "a",
-      ã: "a",
-      ø: "o",
-      õ: "o",
+      "\u00e7": "c",
+      "\u00e6": "ae",
+      "\u0153": "oe",
+      "\u00e1": "a",
+      "\u00e9": "e",
+      "\u00ed": "i",
+      "\u00f3": "o",
+      "\u00fa": "u",
+      "\u00e0": "a",
+      "\u00e8": "e",
+      "\u00ec": "i",
+      "\u00f2": "o",
+      "\u00f9": "u",
+      "\u00e4": "a",
+      "\u00eb": "e",
+      "\u00ef": "i",
+      "\u00f6": "o",
+      "\u00fc": "u",
+      "\u00ff": "y",
+      "\u00e2": "a",
+      "\u00ea": "e",
+      "\u00ee": "i",
+      "\u00f4": "o",
+      "\u00fb": "u",
+      "\u00e5": "a",
+      "\u00e3": "a",
+      "\u00f8": "o",
+      "\u00f5": "o",
       u: "u",
-      Á: "A",
-      É: "E",
-      Í: "I",
-      Ó: "O",
-      Ú: "U",
-      Ê: "E",
-      Ô: "O",
-      Ü: "U",
-      Ã: "A",
-      Õ: "O",
-      À: "A",
-      Ç: "C",
+      "\u00c1": "A",
+      "\u00c9": "E",
+      "\u00cd": "I",
+      "\u00d3": "O",
+      "\u00da": "U",
+      "\u00ca": "E",
+      "\u00d4": "O",
+      "\u00dc": "U",
+      "\u00c3": "A",
+      "\u00d5": "O",
+      "\u00c0": "A",
+      "\u00c7": "C",
     };
     return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
       return "undefined" != typeof b[a] ? b[a] : a;
@@ -72,7 +72,10 @@ Array.prototype.indexOf ||
     }
     return -1;
   });
+
+/**Funções base */
 try {
+  /* COMMON */
   var Common = {
     run: function () {},
     init: function () {
@@ -81,6 +84,7 @@ try {
       Common.applySlickSlider();
       Common.applyBoxBanner();
       Common.saveAmount();
+      //Função de rolagem
       Common.setDataScrollToggle();
       Common.expressPurchase();
       Common.applyAmazingMenu();
@@ -103,8 +107,9 @@ try {
       Common.smartCart();
       Common.applyImageLoad();
       Common.addLinkToUnavailableProductText();
-      Common.saveCurrentCart();
-      Common.loadCurrentCart();
+      //Common.saveCurrentCart();
+      //Common.loadCurrentCart();
+      Common.userLogout();
     },
     ready: function () {
       $('a[href="#"]').on("click", function (e) {
@@ -114,7 +119,9 @@ try {
     ajaxStop: function () {
       Common.checkLogin();
       Common.saveAmount();
+
       Common.smartQuantityShelf();
+      // Search.quickViewBrand();
       Common.searchAutoComplete();
       Common.nameBreaklinePipe();
       Common.applyImageLoad();
@@ -135,159 +142,368 @@ try {
     redirectMGUsersByCommertialPolicy: function (clientState) {
       var url = window.location.href;
       var scVal = $.cookie("VTEXSC");
+      //se o cookie não existe, não deixe seguir
+      //se o cookie for vazio, pode seguir
       if (scVal == undefined) return;
-      function redirectUser(filialID) {
-        if (!url.includes("sc=")) {
-          if (url.includes("?")) {
-            window.location.href = url + "&sc=" + filialID;
-          } else {
-            window.location.href = url + "?sc=" + filialID;
-          }
-        } else {
-          var newUrl = url.replace(/sc=[0-9]*/, "");
-          if (url.includes("?")) {
-            window.location.href = newUrl + "&sc=" + filialID;
-          } else {
-            window.location.href = newUrl + "?sc=" + filialID;
-          }
+
+      // function redirectUser(filialID) {
+      //   if (!url.includes("sc=")) {
+      //     if (url.includes("?")) {
+      //       window.location.href = url + "&sc=" + filialID;
+      //     } else {
+      //       window.location.href = url + "?sc=" + filialID;
+      //     }
+      //   } else {
+      //     var newUrl = url.replace(/sc=[0-9]*/, "");
+      //     if (url.includes("?")) {
+      //       window.location.href = newUrl + "&sc=" + filialID;
+      //     } else {
+      //       window.location.href = newUrl + "?sc=" + filialID;
+      //     }
+      //   }
+      // }
+
+      function getSc(filial){
+        switch (filial) {
+          case "LojaFilial_03":
+            return 5;
+          case "LojaFilial_02":
+            return 4;
+          case "LojaFilial_01":
+            return 3;
         }
       }
-      if (clientState == "MG") {
-        if (!scVal || scVal !== "sc=4") {
-          redirectUser(4);
-        }
-      } else {
-        if (!scVal || scVal !== "sc=3") {
-          redirectUser(3);
-        }
-      }
+
+      if(!vtexjs.checkout.orderForm.loggedIn && !window.location.href.match("devcenterparts.myvtex.com") ) return;
+
+      fetch(`https://centerparts.vtexcommercestable.com.br/api/dataentities/CL/search?_fields=priceTables&userId=${vtexjs.checkout.orderForm.userProfileId}`)
+        .then((response) => response.json())
+        .then((result) => {
+          const [resp] = result;
+          console.log(">>>>>>> Filial do Cliente: ", resp);
+
+          if (!scVal || scVal.split("=")[1] != getSc(resp.priceTables))
+            setUrlParam('sc', getSc(resp.priceTables))
+        })
+        .catch((error) => console.error(error));
+
+      
+
+      // if (clientState == "MG") {
+      //   if (!scVal || scVal !== "sc=4") {
+      //     // Apenas para clientes de Minas Gerais
+      //     setUrlParam('sc', 4); // LOJA FILIAL 02
+      //   }
+      // } else if (clientState == "BA") {
+      //   if (!scVal || scVal !== "sc=5") {
+      //     setUrlParam('sc', 5); // LOJA FILIAL 03
+      //   }
+      // } else if (clientState == "AL") {
+      //   if (!scVal || scVal !== "sc=5") {
+      //     setUrlParam('sc', 5); // LOJA FILIAL 03
+      //   }
+      // } else if (clientState == "SE") {
+      //   if (!scVal || scVal !== "sc=5") {
+      //     setUrlParam('sc', 5); // LOJA FILIAL 03
+      //   }
+      // } else if (clientState == "MA") {
+      //   if (!scVal || scVal !== "sc=5") {
+      //     setUrlParam('sc', 5); // LOJA FILIAL 03
+      //   }
+      // } else if (clientState == "PI") {
+      //   if (!scVal || scVal !== "sc=5") {
+      //     setUrlParam('sc', 5); // LOJA FILIAL 03
+      //   }
+      // } else {
+      //   if (!scVal || scVal !== "sc=3") {
+      //     setUrlParam('sc', 3); // LOJA FILIAL 01
+      //   }
+      // }
     },
     applyBackDrop: function () {
       var qdOverlayClass =
         "qd-am-on qd-cart-show qd-sn-on mz-sn-on mz-fitting-on";
+
       $(document.body).removeClass(qdOverlayClass);
+
       $(".mz-backdrop").click(function () {
         $(document.body).removeClass(qdOverlayClass);
       });
     },
     expressPurchase: function () {
       if (!$(document.body).is(".compra-express")) return;
+
       var table = $(".qd-products-table tbody");
       var textarea = $(".express-purchase-title-qd-v1 textarea");
       var purchaseShelf = $(".express-purchase-shelf-qd-v1");
       var purchaseContent = $(".express-purchase-content");
       var orderId = {};
+
       purchaseShelf.hide();
+
       $(".qd-products-table thead").html(
         '<tr> <th class="id-table">ID</th> <th class="product-name-table" colspan="3">Produto</th> <th class="price-table">Preço</th> <th class="buy-table"></th> </tr>'
       );
+
+      function buildImage(image, width, height) {
+        if (!image || !width || !height) {
+          return false;
+        }
+
+        image = image
+          .replace(/~/g, "")
+          .replace(/#width#/g, width)
+          .replace(/#height#/g, height);
+
+        const regex = /<img.*?src="(.*?)"/.exec(image)[1];
+
+        return `https://devcenterparts.vteximg.com.br/${regex}`;
+      }
+
+      function formatMoney(number, decPoint, thousandsSep) {
+        if (!number || Number.isNaN(number) || !decPoint || !thousandsSep) {
+          return "";
+        }
+
+        const n = !Number.isFinite(+number) ? 0 : +number;
+        const decimals = 2;
+        const prec = !Number.isFinite(+decimals) ? 0 : Math.abs(decimals);
+        const sep = typeof thousandsSep === "undefined" ? "," : thousandsSep;
+        const dec = typeof decPoint === "undefined" ? "." : decPoint;
+        const s = "";
+        function toFixedFix(n, prec) {
+          const k = 10 ** prec;
+          return `${Math.round(n * k) / k}`;
+        }
+
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        const ss = (prec ? toFixedFix(n, prec) : `${Math.round(n)}`).split(".");
+
+        if (ss[0].length > 3) {
+          ss[0] = ss[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+
+        if ((s[1] || "").length < prec) {
+          ss[1] = ss[1] || "";
+          ss[1] += new Array(prec - ss[1].length + 1).join("0");
+        }
+
+        return `R$ ${ss.join(dec)}`;
+      }
+
+      function getCookie(cname) {
+        const name = `${cname}=`;
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const ca = decodedCookie.split(";");
+
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function renderItemAvailable({ quantity, skuId, available }) {
+        if (!available) {
+          return `
+                        <span class="product-unavailable">
+                            Indisponível
+                        </span>
+                    `;
+        }
+
+        return `
+                    <input
+                        type="text"
+                        class="quant qd-sq-quantity qd-sq-on"
+                        value="${quantity}"
+                        data-sku-id="${skuId}"
+                        data-available="${available}"
+                    />
+
+                    <a href="#" class="buy-button" id="btn-cart-fast-buy">
+                        Adicionar
+                    </a>
+                `;
+      }
+
       purchaseShelf.find(".buy-all").click(function () {
         table.find(".buy-button").click();
         return false;
       });
+
       $(".btn-search-product").click(function () {
         var value = (textarea.val() || "").trim();
         var lines = value.split("\n");
         var line;
         table.empty();
         purchaseShelf.hide();
+
         for (var i = 0; i < lines.length; i++) {
           line = lines[i].match(/([^\,\;\s\t]+)([\,\;\s\t]+)?([0-9]+)?/i) || [];
+
           if (line[1]) {
             orderId[line[1]] = i + 1;
             getItem(line[1], line[3] || 1);
           }
         }
       });
+
+      $("body").on("click", "#btn-cart-fast-buy", function (event) {
+        event.preventDefault();
+
+        const skuId = $(this).prev().attr("data-sku-id");
+        const quantity = window.parseInt($(this).prev().val());
+        const availableQuantity = window.parseInt(
+          $(this).prev().attr("data-available")
+        );
+        const salesChannel = getCookie("VTEXSC").split("=")[1];
+
+        if (quantity > availableQuantity) {
+          $(this).prev().val(availableQuantity);
+
+          Swal.fire({
+            title: "Estoque indosponivel!",
+            text: `A quantidade em estoque desse produto é de ${availableQuantity} unidades.`,
+            icon: "warning",
+            confirmButtonText: "Fechar",
+          });
+
+          return;
+        }
+
+        vtexjs.checkout
+          .addToCart(
+            [
+              {
+                id: skuId,
+                quantity: quantity,
+                seller: "1",
+              },
+            ],
+            null,
+            salesChannel
+          )
+          .done(() => {
+            window.AppCart.$store.dispatch("FETCH_ORDER_FORM");
+
+            Swal.fire({
+              title: "Produto adicionado ao carrinho",
+              icon: "success",
+              confirmButtonText: "Fechar",
+            });
+          });
+      });
+
+      $("body").on("change", ".qd-sq-quantity", function (event) {
+        event.preventDefault();
+
+        const quantity = window.parseInt($(this).val());
+        const availableQuantity = window.parseInt(
+          $(this).attr("data-available")
+        );
+
+        if (quantity > availableQuantity) {
+          $(this).val(availableQuantity);
+
+          Swal.fire({
+            title: "Estoque indosponivel!",
+            text: `A quantidade em estoque desse produto é de ${availableQuantity} unidades.`,
+            icon: "warning",
+            confirmButtonText: "Fechar",
+          });
+        }
+      });
+
       var request = 0;
       var requestComplete = 0;
+
       function getItem(id, qty) {
         request++;
+
         purchaseContent.addClass("qd-loading");
+
         $.ajax({
           url: "/api/catalog_system/pub/products/search/" + id,
           dataType: "json",
-          headers: {
-            "REST-Range": "resources=0-99",
-          },
+          headers: { "REST-Range": "resources=0-99" },
           success: function (data) {
             var html, $html;
+
+            console.log(data);
+
             if (!data.length) {
-              table.append(
-                '<tr class="qd-item-not-found" data-qd-id-table="' +
-                  id +
-                  '"><td>' +
-                  id +
-                  '</td><td class="not-found-item-table" colspan="4"><div class="shelf-not-found-item"><p>Item não encontrado</p></div></td></tr>'
-              );
-              return purchaseShelf.show();
+              Swal.fire({
+                title: "Item não encontrado!",
+                text: `O Item ${id} não foi encontrado.`,
+                icon: "warning",
+                confirmButtonText: "Fechar",
+              });
+
+              return;
             }
-            for (var i = 0; i < data.length; i++)
-              for (var l = 0; l < data[i].items.length; l++) {
-                if (
-                  purchaseShelf.find("#qd-sku-" + data[i].items[l].itemId)
-                    .length
-                )
-                  continue;
-                html =
-                  '<tr id="qd-sku-' +
-                  data[i].items[l].itemId +
-                  '" data-qd-id-table="' +
-                  id +
-                  '">';
-                html +=
-                  '<td class="id-table">' +
-                  id +
-                  " " +
-                  data[i].items[l].itemId +
-                  "</td>";
-                html += '<td class="id-sku">' + "</td>";
-                html +=
-                  '<td class="image-table shelf-image"><img src="' +
-                  data[i].items[l].images[0].imageUrl.replace(
-                    /(ids\/[0-9]+)(\-[0-9]+\-[0-9]+)?/i,
-                    "$1-60-60"
-                  ) +
-                  '" /></td>';
-                html += '<td class="product-name-table">';
-                html +=
-                  '<div class="shelf-product-name"><a href="' +
-                  data[i].link +
-                  '" target="_blank">' +
-                  data[i].items[l].nameComplete +
-                  "</a></div>";
-                html += "</td>";
-                if (
-                  data[i].items[l].sellers[0].commertialOffer.AvailableQuantity
-                ) {
-                  html += '<td class="price-table">';
-                  html +=
-                    '<div class="shelf-price-best-price"><span class="best-price">R$ ' +
-                    qd_number_format(
-                      data[i].items[l].sellers[0].commertialOffer.Price,
-                      2,
-                      ",",
-                      "."
-                    ) +
-                    "</span></div>";
-                  html += "</td>";
-                  html +=
-                    '<td class="buy-table shelf-common-buy-button d-flex" data-qd-qty="' +
-                    qty +
-                    '">';
-                  html += '<input type="text" class="quant qd-sq-quantity ">';
-                  html +=
-                    '<a href="' +
-                    data[i].items[l].sellers[0].addToCartLink +
-                    '" class="buy-button qd-buy-button btn-add-buy-button-asynchronous remove-href">Adicionar</a>';
-                  html += "</td>";
-                } else
-                  html +=
-                    '<td colspan="2" class="no-stock-table found-item-table"> <div class="shelf-no-stock"> <p>indisponível</p> </div> </td>';
-                html += "</tr>";
-                $html = $(html);
-                table.append($html);
-              }
+
+            const { itemId, nameComplete, sellers, images } = data[0].items[0];
+
+            const {
+              commertialOffer: { Price, AvailableQuantity },
+            } = sellers[0];
+
+            const { productId, link } = data[0];
+
+            const { imageTag } = images[0];
+
+            html = `
+                            <tr id="qd-sku-${itemId}" data-qd-id-table="${id}">
+                                <td class="id-table">
+                                    ${productId} ${itemId}
+                                </td>
+
+                                <td class="id-sku"></td>
+
+                                <td class="image-table shelf-image">
+                                    <img src="${buildImage(
+                                      imageTag,
+                                      "60",
+                                      "60"
+                                    )}">
+                                </td>
+
+                                <td class="product-name-table">
+                                    <div class="shelf-product-name">
+                                        <a href="${link}" target="_blank">
+                                           ${nameComplete}
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td class="price-table">
+                                    <div class="shelf-price-best-price">
+                                        <span class="best-price">
+                                            ${formatMoney(Price, ",", ".")}
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td class="buy-table shelf-common-buy-button d-flex" data-qd-qty="${qty}">
+                                    ${renderItemAvailable({
+                                      quantity: qty,
+                                      skuId: itemId,
+                                      available: AvailableQuantity,
+                                    })}
+                                </td>
+                            </tr>
+                        `;
+
+            $html = $(html);
+            table.append($html);
+
             purchaseShelf.show();
           },
           error: function () {
@@ -305,21 +521,27 @@ try {
           },
           complete: function () {
             requestComplete++;
+
             if (!(requestComplete >= request)) return;
+
             var items = purchaseShelf.find("tbody tr").sort(function (f, s) {
               var a = orderId[$(f).attr("data-qd-id-table")];
               var b = orderId[$(s).attr("data-qd-id-table")];
+
               if (a < b) return -1;
               else if (a > b) return 1;
               return 0;
             });
+
             purchaseShelf.find(".shelf-common-buy-button").each(function () {
               var $t = $(this);
               $t.QD_smartQuantity({
                 initialValue: $t.attr("data-qd-qty"),
               });
             });
+
             $(".qd_cart_auto").QD_buyButton();
+
             purchaseContent.removeClass("qd-loading");
             purchaseShelf.find("tbody").append(items);
           },
@@ -333,6 +555,7 @@ try {
           height: "278",
         },
       });
+      // Aplica Image Load no menu
       $(window).one("QuatroDigital.am.callback", function () {
         $(".mz-amazing-menu .qd-am-dropdown").one("mouseenter", function () {
           $(window).trigger("QD_SIL_individualChildRender", $(this));
@@ -341,7 +564,9 @@ try {
     },
     applyBoxBanner: function () {
       var bannerSlide = $(".mz-box-banner--slide");
+
       if (!bannerSlide.length) return;
+
       bannerSlide
         .find(".box-banner")
         .wrapAll('<div class="mz-box-banner-wrapper"></div>');
@@ -377,6 +602,7 @@ try {
     },
     applySlickSlider: function () {
       var wrapper = $(".mz-slider-marcas:visible > ul:not(.slick-initialized)");
+
       if (!wrapper.length) return;
       wrapper.slick({
         slidesToShow: 10,
@@ -386,7 +612,7 @@ try {
         infinite: true,
         speed: 500,
         autoplay: true,
-        autoplaySpeed: 7e3,
+        autoplaySpeed: 7000,
         draggable: false,
       });
       wrapper.each(function () {
@@ -396,18 +622,24 @@ try {
     },
     setActionAddToCart: function (el, activeMsg, paramSku) {
       el.addClass("mz-custom-action-apply");
+
       el.on("click", function (e) {
         e.preventDefault();
+
         var productId = $(this).attr("id").replace("idprod", "");
+
         var _this = $(this);
-        $.ajax({
-          url: _this.attr("href"),
-        }).done(function () {
+
+        $.ajax({ url: _this.attr("href") }).done(function () {
           $(window).trigger("productAddedToCart");
           $(window).trigger("minicartUpdated.vtex.qdDdcVtex");
           if (activeMsg) {
             vtexjs.checkout.getOrderForm().done(function (orderForm) {
               window.top.postMessage("updateCart");
+              // window.postMessage([productId, paramSku]);
+              // window.parent.postMessage([productId, paramSku]);
+              // window.postMessage('productAdded',1);
+              // window.parent.postMessage('productAdded',1);
             });
           }
         });
@@ -418,9 +650,11 @@ try {
     },
     applyAmazingMenuMobile: function () {
       var wrapper = $(".mz-amazing-menu-mobile");
+
       wrapper.find("> ul > li > ul").prepend(function () {
         return $(this).prev().clone().wrap("<li></li>").parent();
       });
+
       wrapper.QD_amazingMenu({
         callback: function () {
           $(
@@ -432,6 +666,7 @@ try {
               $.merge($t.parent(), $t.closest("ul")).toggleClass(
                 "qd-am-is-active"
               );
+
               $t.filter(function () {
                 return !$(this).closest("ul").is(".qd-amazing-menu");
               })
@@ -439,6 +674,7 @@ try {
                 .stop(true, true)
                 .slideToggle();
             });
+
           wrapper
             .find("nav > ul > li > .qd-am-dropdown-trigger")
             .click(function () {
@@ -450,6 +686,7 @@ try {
                 200
               );
             });
+
           wrapper.find("> ul > li > ul > li:first-child").click(function (e) {
             e.preventDefault();
             $(this)
@@ -464,10 +701,12 @@ try {
           });
         },
       });
+
       $(".header-qd-v1-amazing-menu-trigger").click(function (evt) {
         evt.preventDefault();
         $(document.body).toggleClass("qd-am-on");
       });
+
       $(".mz-amazing-menu-mobile-wrapper .header-qd-v1-user-message").on(
         "click",
         "a#login",
@@ -475,6 +714,7 @@ try {
           $(document.body).removeClass("qd-am-on");
         }
       );
+
       $(".mz-navigation__close, .mz-menu__link--login").click(function (evt) {
         Common.applyBackDrop();
       });
@@ -497,7 +737,9 @@ try {
       $(".mz-fixed-bar__search").click(function (evt) {
         evt.preventDefault();
         $(document.body).toggleClass("qd-am-on");
-        $("#ftBox4fec277407c244afaea5748650d52317").focus().delay(2e3);
+
+        //MAKE FOCUS HERE
+        $("#ftBox4fec277407c244afaea5748650d52317").focus().delay(2000);
       });
     },
     smartCart: function () {
@@ -505,7 +747,9 @@ try {
       $(document.body).append(
         '<div class="smart-cart-qd-v2-wrapper"><div class="qd-sc-wrapper"></div></div>'
       );
+
       var wrapper = $(".qd-sc-wrapper");
+
       $.QD_smartCart({
         selector: wrapper,
         dropDown: {
@@ -537,11 +781,9 @@ try {
             Common.setShippingProgressBar();
           },
         },
-        buyButton: {
-          buyButton:
-            "body .mz-buy-button .buy-button, .btn-add-buy-button-asynchronous",
-        },
       });
+
+      // Callback do Quick View
       window._QuatroDigital_prodBuyCallback = function (
         jqXHR,
         textStatus,
@@ -555,20 +797,25 @@ try {
           skus[0] || 0,
         ]);
       };
+
       $(".mz-menu__item--cart").click(function (evt) {
         $("body").removeClass(
           "qd-bb-lightBoxBodyProdAdd qd-ddc-product-add-time-v2 qd-ddc-product-add-time"
         );
         evt.preventDefault();
         $(document.body).toggleClass("qd-cart-show");
+
         wrapper.height($(window).height());
         wrapper
           .find(".qd-ddc-prodWrapper")
           .css("max-height", $(window).height() - 193);
+
         if (window.Tawk_API) window.Tawk_API.toggleVisibility();
       });
+
       $(".qd_ddc_lightBoxClose").click(function (evt) {
         $(document.body).removeClass("qd-cart-show");
+
         if (window.Tawk_API) window.Tawk_API.toggleVisibility();
       });
     },
@@ -577,13 +824,17 @@ try {
         wrapper === undefined
           ? $("main .prateleira:not(.slick-initialized)")
           : wrapper;
+
       if (!target.length) return;
+
       target.has("h2").each(function () {
         var $t = $(this);
         $t.find("h2").insertBefore($t);
       });
+
       target.each(function () {
         if ($(this).closest(".mz-product-accessories").length) return;
+
         $(this).slick({
           prevArrow:
             '<button type="button" class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
@@ -628,6 +879,7 @@ try {
     checkLogin: function () {
       var wrapper = $(".mz-menu__link--login");
       var urlLogin = "/login";
+
       $.qdAjax({
         url: "/no-cache/profileSystem/getProfile",
         dataType: "json",
@@ -640,7 +892,7 @@ try {
               wrapper.html(
                 '<p class="logout"><i class="icon-user-11"></i><span>Olá</span> <span class="name-user">' +
                   nameUser +
-                  '</span> <a id="logout" href="/no-cache/user/logout"> | Sair</a></p>'
+                  '</span> <a id="logout" href="#"> | Sair</a></p>'
               );
             } else {
               wrapper.html(
@@ -675,7 +927,7 @@ try {
               wrapper.html(
                 '<p class="logout"><i class="icon-user-11"></i><span>Olá</span> <span class="name-user">' +
                   nameUser +
-                  '</span> <a id="logout" href="/no-cache/user/logout"> | Sair</a></p>' +
+                  '</span> <a id="logout" href="#"> | Sair</a></p>' +
                   "<span>Ganhe pontos e resgate prêmios!</span>"
               );
             } else {
@@ -705,24 +957,36 @@ try {
       $("#openClose").click(function () {
         $(document.body).toggleClass("mz-sidebar-off");
         $("#categorias >div").addClass("d-none");
+        // if (mobile) {
+        // $(document.body).toggleClass("mz-baloon");
+        // }
       });
       $("#categorias").click(function () {
         $(document.body).removeClass("mz-sidebar-off");
         $("#categorias >div").toggleClass("d-none");
+        // if (mobile) {
+        //   $(document.body).toggleClass("mz-baloon");
+        // }
       });
+
       var onOff = false;
       var shipping = function () {
         $(".mz-sidebar__shippingbox").toggleClass("mz-sidebar__shippingbox-on");
       };
+      // action on hover
       $("#openCloseShipping").mouseenter(shipping);
       $("#openCloseShipping").mouseleave(shipping);
+
       $("#usernameInfo").click(function () {
         $(".mz-header__baloon").fadeToggle();
       });
+      // if mobile device action on click
       $("#openCloseShipping").click(shipping);
       $("body .mz-backdrop").click(function () {
+        // $(document.body).removeClass("mz-baloon");
         $(document.body).removeClass("mz-sidebar-off");
         $(".mz-sidebar__shippingbox").removeClass("mz-sidebar__shippingbox-on");
+        // $("#categorias >div").addClass("d-none");
       });
       if (mobile) {
         $(document.body).addClass("mz-sidebar-off");
@@ -740,6 +1004,7 @@ try {
             "; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
           $.ajax(href).always(function () {
             $.removeCookie("qd_current_cart_loaded");
+
             window.location.href = "/Sistema/401";
           });
         });
@@ -747,7 +1012,9 @@ try {
     },
     formCadastreMask: function () {
       var form = $(".modal form.form-first-step");
+
       if (!form.length || typeof $.fn.mask !== "function") return;
+
       form.find("[name=cnpj]").mask("00.000.000/0000-00");
       form.find("[name=cpf]").mask("000.000.000-00");
       form.find("[name=tel_comercial]").mask("(00) 0000-00009");
@@ -776,6 +1043,7 @@ try {
             window.QD_checkEmailExist_request = undefined;
           },
         }).done(function () {});
+
       return window.QD_checkEmailExist_request;
     },
     checkCnpjExist: function (cnpj) {
@@ -798,10 +1066,12 @@ try {
             window.QD_checkCnpjExist_request = undefined;
           },
         });
+
       return window.QD_checkCnpjExist_request;
     },
     checkCnpjActivities: function (cnpj) {
       var $form = $(".form-first-step");
+
       window.QD_checkValidCnpj = false;
       window.QD_checkCnpjActivities_request =
         window.QD_checkCnpjActivities_request ||
@@ -813,15 +1083,22 @@ try {
           dataType: "jsonp",
           crossDomain: true,
           cache: true,
-          timeout: 3e3,
+          timeout: 3000,
           success: function (data) {
             if (!data) return;
+
             if (data.status == "ERROR" || data.message) {
               alert("Erro! " + data.message);
               return;
             }
-            var activitiesCodes = ["45.30-7-03", "45.30-7-01", "45.30-7-04"];
+
+            var activitiesCodes = [
+              "45.30-7-03", // COMÉRCIO A VAREJO DE PEÇAS E ACESSÓRIOS NOVOS PARA VEÍCULOS AUTOMOTORES
+              "45.30-7-01", // Comércio por atacado de peças e acessórios novos para veículos automotores
+              "45.30-7-04", // Comércio a varejo de peças e acessórios usados para veículos automotores
+            ];
             var isApprovedActivity = false;
+
             for (var i = 0; i < data.atividade_principal.length; i++) {
               for (var j = 0; j < activitiesCodes.length; j++) {
                 if (data.atividade_principal[i].code == activitiesCodes[j])
@@ -832,6 +1109,7 @@ try {
               for (var j = 0; j < activitiesCodes.length; j++) {
                 if (data.atividades_secundarias[i].code == activitiesCodes[j])
                   isApprovedActivity = true;
+
                 $form.find('input[name="razao_social"]').val(data.nome || "");
                 $form
                   .find('input[name="nome_fantasia"]')
@@ -839,11 +1117,13 @@ try {
                 $form
                   .find('input[name="cep"]')
                   .val((data.cep || "").replace(".", ""));
+
                 $form
                   .find(
                     "textarea[name=rua], input[name=numero], input[name=complemento], input[name=bairro], input[name=cidade], input[name=estado], input[name=pais]"
                   )
                   .removeAttr("disabled");
+
                 $form.find('textarea[name="rua"]').val(data.logradouro || "");
                 $form.find('input[name="numero"]').val(data.numero || "");
                 $form
@@ -855,6 +1135,7 @@ try {
                 $form.find('input[name="pais"]').val("Brasil");
               }
             }
+
             if (!isApprovedActivity)
               alert(
                 "A empresa com esse CNPJ não é um Comércio de Autopeças. Por isso, o cadastro não pode ser feito. Em casos de dúvidas ligue para 0800-020-1744"
@@ -869,12 +1150,14 @@ try {
               alert(
                 "Erro! O servidor da Receita não está respondendo no momento. Por favor, tente novamente mais tarde."
               );
+
               var form = $(".pop-ups-identification form");
               form.find(".qdLoading").slideUp();
               window.QD_checkValidCnpj = false;
             }
           },
         });
+
       return window.QD_checkCnpjActivities_request;
     },
     modalCallChange: function () {
@@ -892,7 +1175,7 @@ try {
           '<div class="modal-call-page-register"></div>'
         ).appendTo(parentWrapper);
         wrapper.append(
-          '<a href="/login?ReturnUrl=/account&register=true" class="btn btn-block btn-large call-page-register">Fazer Cadastro</a>'
+          '<a href="/cadastro" class="btn btn-block btn-large call-page-register">Fazer Cadastro</a>'
         );
         wrapper.append(
           '<p class="text-footer">Ainda não é cadastrado? Clique no botão acima e cadastre-se para poder acessar nossa loja.</p>'
@@ -906,16 +1189,26 @@ try {
         if (
           window.location.search.includes("?ReturnUrl=/account&register=true")
         ) {
+          // evt.preventDefault();
           $("body").addClass("form-register-open");
           $("#vtexIdContainer").hide();
           $("vtexIdUI-global-loader").hide();
+          // $(".modal-base .modal-body, .modal-base .modal-footer").empty();
+          // $(".modal-base .modal-header .close").siblings().empty();
+
           $(".f-step").show();
+          // $("vtexIdUI-global-loader").append($(".first-step"));
+          // $(".modal-base .modal-header").html($(".first-step-content .text-header").addClass("header-first-step"));
+          // $(".modal-base").removeClass("third-step").removeClass("second-step").addClass("pop-ups-identification first-step").modal({ backdrop: 'static', keyboard: false });
+
           Common.formCadastreMask();
+
           var $form = $(".form-first-step");
           var loading = $(
             '<div class="container mz-search-loader"><i class="icon-spinner mx-auto"></i></div>'
           ).hide();
           $form.find(".btn-continue").after(loading);
+
           var cnpj = $form.find("[name='cnpj']");
           cnpj.keyup(function (e) {
             if ((cnpj.val() || "").length > 17) {
@@ -925,21 +1218,42 @@ try {
               });
             }
           });
+
           var email = $form.find("[name='e-mail']");
           email.focusout(function (e) {
             if ((email.val() || "").length > 0)
               Common.checkEmailExist(email.val() || "");
           });
+
+          // price table automática no cadastro
+          function setCorrectPriceTable(clientState) {
+            var priceTableSP;
+            var priceTableMG;
+            var priceTableBA;
+
+            if (clientState == "MG") {
+              return (priceTableMG = "LojaFilial_02");
+            } else if (clientState == "BA") {
+              return (priceTableBA = "LojaFilial_03");
+            } else {
+              return (priceTableSP = "LojaFilial_01");
+            }
+          }
+
+          // Preenchendo o endereço a partir do CEP
           var cepInputs = $form
             .find(
               "textarea[name=rua], input[name=numero], input[name=complemento], input[name=bairro], input[name=cidade], input[name=estado], input[name=pais]"
             )
             .attr("disabled", "disabled");
           var cep = $form.find("input[name=cep]");
+
           $("input[name=cep]").mask("00000-000");
           cep.keyup(function (e) {
             if ((cep.val() || "").length < 9) return;
+
             loading.slideDown();
+
             $.ajax({
               url: "/api/checkout/pub/postal-code/BRA/" + cep.val(),
               dataType: "json",
@@ -958,19 +1272,25 @@ try {
               },
             });
           });
+
           $("input[name=was_indicated]").on("click", function () {
             if ($(this).val() == "true")
               $(this).closest(".form-group").next().show();
             else $(this).closest(".form-group").next().hide();
           });
+
           $(".btn-continue").click(function () {
             if (typeof $.fn.validate !== "function") return;
+
             $form.validate({
               submitHandler: function (form) {
                 var $form = $(form);
+
                 if (!$form.valid()) return;
+
                 loading.slideDown();
                 var inputs = $form.find("input, textarea");
+
                 Common.checkEmailExist(
                   inputs.filter("[name='e-mail']").val() || ""
                 )
@@ -979,6 +1299,7 @@ try {
                     if (data.out.length) {
                       return;
                     }
+
                     Common.checkCnpjExist(
                       inputs.filter("[name='cnpj']").val() || ""
                     )
@@ -987,6 +1308,7 @@ try {
                         if (data.out.length) {
                           return;
                         }
+
                         Common.checkCnpjActivities(
                           inputs.filter("[name='cnpj']").val() || ""
                         )
@@ -998,6 +1320,7 @@ try {
                               loading.slideUp();
                               return;
                             }
+
                             var stateRegistration = (
                               inputs.filter("[name='insc_estadual']").val() ||
                               "Isento"
@@ -1009,6 +1332,7 @@ try {
                               /i.+ento/g,
                               "Isento"
                             );
+
                             var mobileNumber = (
                               inputs.filter("[name='tel_celular']").val() || ""
                             )
@@ -1017,10 +1341,12 @@ try {
                             mobileNumber = mobileNumber.length
                               ? "+55" + mobileNumber
                               : "";
+
                             $.ajax({
                               url: "https://centerb2b.websiteseguro.com/vtex-user-sign-up/insert.php",
                               type: "POST",
                               dataType: "json",
+                              // contentType: "application/json",
                               data: {
                                 e: "CL",
                                 data: JSON.stringify({
@@ -1064,6 +1390,9 @@ try {
                                   isCorporate: true,
                                   isNewsletterOptIn: false,
                                   localeDefault: "pt-BR",
+                                  priceTables: setCorrectPriceTable(
+                                    inputs.filter("[name='estado']").val()
+                                  ),
                                 }),
                               },
                               success: function (data) {
@@ -1071,10 +1400,12 @@ try {
                                   url: "https://centerb2b.websiteseguro.com/vtex-user-sign-up/insert.php",
                                   type: "POST",
                                   dataType: "json",
+                                  // contentType: "application/json",
                                   data: {
                                     e: "AD",
                                     data: JSON.stringify({
                                       addressName: "Principal",
+                                      // userId:			(data.response.DocumentId || ""),
                                       userId: (data.response.Id || "").replace(
                                         /^[a-z]{2}\-/i,
                                         ""
@@ -1120,7 +1451,7 @@ try {
                                     $(".s-step").show();
                                     setTimeout(function () {
                                       window.location.href = "/login";
-                                    }, 5e3);
+                                    }, 5000);
                                   },
                                   error: function (data) {
                                     alert(
@@ -1149,16 +1480,22 @@ try {
               },
               errorPlacement: function (error, element) {},
             });
+
             $form.submit();
           });
         }
+
         var register = (
           (location.search || "").match(/register=([^&]+)/i) || [""]
         ).pop();
+
         if (register) $(".call-page-register").click();
       });
     },
     mzGoogleTranslate: function () {
+      // Esta função é necessaria por que o
+      // google translate plugin tras os labels
+      // escritos na lingua nativa do seu navegador
       $("#en").click(function (evt) {
         evt.preventDefault();
         var english = ["Inglés", "Inglês", "English"];
@@ -1204,8 +1541,10 @@ try {
             /(\+[0-9]{2})([0-9]{2})([0-9]{1})([0-9]{4})([0-9]{4})/,
             "$1 ($2) $3-$4-$5"
           );
+
         return;
       };
+
       var addHtml = function (data) {
         var dataFill = {
           address: {
@@ -1237,9 +1576,11 @@ try {
             lastName: data.user.lastName || " ",
           },
         };
+
         try {
           $("#usernameInfo > div > p").html(dataFill.user.firstName);
           $("#userName").append(dataFill.user.firstName);
+
           if (dataFill.user.NomeRep1 != " " || dataFill.user.NomeRep2 != " ") {
             var repaSpan = document.createElement("span");
             var repname = document.createTextNode(
@@ -1251,16 +1592,21 @@ try {
           } else {
             $(".mz-fill-username span").remove();
           }
+
+          //Top box <p>
           var p = document.createElement("p");
           var nodeCreation = function (wrapper, list) {
             for (var i = 0; i < list.length; i++) {
               clone = p.cloneNode();
               clone.appendChild(document.createTextNode(list[i]));
+
               if (wrapper.length && list[i] != undefined) {
                 wrapper.append(clone);
               }
             }
           };
+
+          // Address
           var add = [
             dataFill.address.street,
             dataFill.address.complementstreet,
@@ -1269,12 +1615,18 @@ try {
             dataFill.address.citystreet,
             dataFill.address.state,
           ];
+
           var address = $("#add");
+
+          // CHAMADA PRA REDIRECIONAMENTO POR POLITICA COMERCIAL - FOCO EM CLIENTE DE MG
           if (dataFill.address.state) {
             Common.redirectMGUsersByCommertialPolicy(dataFill.address.state);
           }
+
           var address = $("#add");
           nodeCreation(address, add);
+
+          //Rep 1
           var rep1 = [
             dataFill.user.CodRep1,
             dataFill.user.NomeRep1,
@@ -1283,6 +1635,8 @@ try {
           ];
           var representante = $("#rep");
           nodeCreation(representante, rep1);
+
+          //Rep 2
           var rep2 = [
             dataFill.user.CodRep2,
             dataFill.user.NomeRep2,
@@ -1291,6 +1645,8 @@ try {
           ];
           var representante = $("#rep");
           nodeCreation(representante, rep2);
+
+          //resp
           var res = [
             dataFill.user.firstName + " " + dataFill.user.lastName,
             dataFill.user.email,
@@ -1298,6 +1654,8 @@ try {
           ];
           var responsavel = $("#res");
           nodeCreation(responsavel, res);
+
+          //apoio1
           var apo1 = [
             dataFill.user.CodApoio1,
             dataFill.user.NomeApoio1,
@@ -1306,6 +1664,8 @@ try {
           ];
           var apoio = $("#apo");
           nodeCreation(apoio, apo1);
+
+          //apoio2
           var apo2 = [
             dataFill.user.CodApoio2,
             dataFill.user.NomeApoio2,
@@ -1322,22 +1682,26 @@ try {
             console.error(e);
         }
       };
-      $.qdAjax({
-        url: "/no-cache/profileSystem/getProfile",
-        dataType: "json",
-        clearQueueDelay: null,
-        success: function (data) {
+
+      vtexjs.checkout.getOrderForm().done((orderForm) => {
+        console.log(orderForm);
+
+        const { loggedIn, userProfileId, userType } = orderForm;
+
+        if (loggedIn || userType === "callCenterOperator") {
           try {
-            if (!data.UserId) {
+            if (!userProfileId) {
               var html =
                 '<div class="qd-user-info"><p>Olá visitante!</p></div>';
               $(".user-messenger .ajax-content-loader").before(html);
+
               return;
             }
+
             $.qdAjax({
               url:
                 "https://centerb2b.websiteseguro.com/vtex-user-info/vtex-crm.php?u=" +
-                data.UserId,
+                userProfileId,
               dataType: "json",
               clearQueueDelay: null,
               success: addHtml,
@@ -1349,7 +1713,7 @@ try {
             )
               console.error(e.message);
           }
-        },
+        }
       });
     },
     searchField: function () {
@@ -1370,6 +1734,7 @@ try {
     applyTipBarCarousel: function () {
       var wrapper = $(".mz-system__badges ul");
       if (!wrapper.length) return;
+
       var options = {
         arrows: false,
         autoplay: true,
@@ -1377,7 +1742,7 @@ try {
         slidesToScroll: 4,
         infinite: false,
         draggable: false,
-        speed: 1e3,
+        speed: 1000,
         responsive: [
           {
             breakpoint: 1200,
@@ -1393,6 +1758,7 @@ try {
               slidesToScroll: 3,
             },
           },
+
           {
             breakpoint: 767,
             settings: {
@@ -1400,6 +1766,7 @@ try {
               slidesToScroll: 2,
             },
           },
+
           {
             breakpoint: 400,
             settings: {
@@ -1409,15 +1776,15 @@ try {
           },
         ],
       };
+
       wrapper.slick(
         $.extend(
           true,
           options,
           (function () {
+            // Se estiver dentro do product-qd-v1-sku-selection-box, ele mostrará só 2 slides por vez, mantendo as outras propriedades da variável options
             if (wrapper.closest(".product-qd-v1-sku-selection-box").length)
-              return {
-                slidesToShow: 3,
-              };
+              return { slidesToShow: 3 };
             return {};
           })()
         )
@@ -1454,17 +1821,23 @@ try {
           !window._QuatroDigital_DropDown.getOrderForm
         )
           return;
+
         var targetPrice = window.mz_ShippingTargetPrice;
         var wrapper = $(".mz-shipping-progress-bar-cart");
         var currentPrice = 0;
+
         if (window._QuatroDigital_DropDown.getOrderForm.totalizers[0]) {
           currentPrice =
             window._QuatroDigital_DropDown.getOrderForm.totalizers[0].value /
             100;
         }
+
         var percentage = (currentPrice / targetPrice) * 100;
         var difference = targetPrice - currentPrice;
+
         if (!difference || difference < 0) {
+          // $('.mz-sidebar__freeshipping').hide();
+          // $('.mz-sidebar>ul').css('margin-top', '50px');
           difference = 0;
         }
         if (!wrapper.length) {
@@ -1475,6 +1848,7 @@ try {
           ).prependTo(
             ".qd-ddc-wrapper3 .qd-ddc-info, .mz-productpopup--progressbar"
           );
+          $(".mz-sidebar__freeshipping").show();
         }
         console.log("difference: " + difference);
         if ($(".mz-shipping-counter strong").length) {
@@ -1483,6 +1857,7 @@ try {
             "R$: " + difference.toFixed(2)
           ).replace(".", ",");
         }
+
         wrapper
           .find(".progress-bar-text")
           .html(
@@ -1494,8 +1869,10 @@ try {
           .find(".progress-bar")
           .css("width", percentage + "%")
           .attr("aria-valuenow", percentage);
+
         if (difference <= 0) {
           wrapper.remove();
+
           return;
         }
       } catch (e) {
@@ -1503,6 +1880,46 @@ try {
           (typeof console !== "undefined" &&
             typeof console.error === "function" &&
             console.error("Problemas :( . Detalhes: ", e));
+      }
+
+      $(".mz-sidebar__shippingbox").hide();
+      $(".mz-sidebar > ul").css("margin-top", "50px;");
+
+      var clientCEP = null;
+
+      if (vtexjs.checkout.orderForm.shippingData) {
+        clientCEP =
+          vtexjs.checkout.orderForm.shippingData.address?.postalCode.replace(
+            "-",
+            ""
+          );
+      }
+
+      console.log("cep!", clientCEP);
+
+      if (clientCEP > "13670000" && clientCEP < "14860999") {
+        $(".mz-sidebar__shippingbox").show();
+        $(".mz-sidebar>ul").css("margin-top", "0px;");
+      } else if (clientCEP > "01000001" && clientCEP < "18190999") {
+        $(".mz-sidebar__shippingbox").show();
+        $(".mz-sidebar>ul").css("margin-top", "0px;");
+      } else if (
+        (clientCEP > "18195000" && clientCEP < "18560999") ||
+        (clientCEP > "6500000" && clientCEP < "6549999") ||
+        (clientCEP > "6700000" && clientCEP < "6729999") ||
+        (clientCEP > "7400000" && clientCEP < "7500999") ||
+        (clientCEP > "7600000" && clientCEP < "7600999") ||
+        (clientCEP > "7700000" && clientCEP < "7749999") ||
+        (clientCEP > "7800000" && clientCEP < "7899999") ||
+        (clientCEP > "8900000" && clientCEP < "8900999") ||
+        (clientCEP > "11000000" && clientCEP < "13985999") ||
+        (clientCEP > "18000000" && clientCEP < "18560999")
+      ) {
+        $(".mz-sidebar__shippingbox").show();
+        $(".mz-sidebar>ul").css("margin-top", "0px;");
+      } else {
+        $(".mz-sidebar__shippingbox").hide();
+        $(".mz-sidebar>ul").css("margin-top", "50px;");
       }
     },
     smartQuantityShelf: function () {
@@ -1532,8 +1949,10 @@ try {
           },
         }).done(function (data) {
           if (data.length) {
+            // console.log(data);
             for (i = 0; data.length > i; i++) {
               var item = document.createElement("div");
+              //brand
               var brandDiv = document.createElement("div");
               var brandP = document.createElement("p");
               var brandText = document.createTextNode(data[i].brand || " ");
@@ -1541,19 +1960,23 @@ try {
               brandDiv.appendChild(brandP);
               brandP.className = data[i].brand.toLowerCase().replace(" ", "-");
               brandDiv.className = "mz-brand";
+              //name
               var nameDiv = document.createElement("div");
               var nameA = document.createElement("a");
               var nameP = document.createElement("p");
               var nameStrong = document.createElement("strong");
+              // var nameText = document.createTextNode(data[i].brand || " "); versão 1 do QV carregava isso
               var strongText = document.createTextNode(
                 data[i].items[0].name || " "
               );
               $(nameA).attr("href", data[i].link);
+              // nameP.appendChild(nameText);versão 1 do QV carregava isso
               nameStrong.appendChild(strongText);
               nameA.appendChild(nameStrong);
               nameDiv.appendChild(nameP);
               nameDiv.appendChild(nameA);
               nameDiv.className = "mz-name";
+              //price
               var priceDiv = document.createElement("div");
               var priceh3 = document.createElement("h3");
               var qttP = document.createElement("p");
@@ -1574,10 +1997,14 @@ try {
               priceDiv.className = "mz-price";
               nameDiv.appendChild(priceDiv);
               nameDiv.appendChild(qttP);
+
+              //smartquantity
               var smartQuantity =
                 '<div class="mz-smart-quantity"><div class="col-12 mz-smart-quantity__action"><a class="qd-sq-minus"><i class="icon-minus"></i></a><div class="shelf-qd-v1-qty"><input type="tel" class="qd-sq-quantity form-control" /></div><a class="qd-sq-more"><i class="icon-plus"></i></a></div></div>';
+              //buy-button
               var buyDiv = document.createElement("div");
               var buyA = document.createElement("a");
+              // var qttP = document.createElement('p');
               buyA.setAttribute(
                 "href",
                 data[i].items[0].sellers[0].addToCartLink || " "
@@ -1591,14 +2018,21 @@ try {
               buyDiv.appendChild(buyA);
               buyDiv.className =
                 "mz-buy mz-buy-button wrapper-buy-button-asynchronous";
+              //RENDER
               item.appendChild(brandDiv);
               item.appendChild(nameDiv);
+              // item.appendChild(priceDiv);
+
+              //creating a holder to SQ and buy-button
               var SqBuyDiv = document.createElement("div");
               $(SqBuyDiv).append(smartQuantity);
               SqBuyDiv.appendChild(buyDiv);
               SqBuyDiv.className = "mz-SqBuy";
+              // item.appendChild(starDiv);
+
               item.appendChild(SqBuyDiv);
               item.className = "mz-quickview__brands--item row";
+
               if ($(".mz-quickview__brands").length) {
                 $(".mz-quickview__brands").append(item);
               }
@@ -1607,6 +2041,7 @@ try {
             $(".mz-SqBuy, .mz-quickview__brands--item  .mz-brand").addClass(
               "col-12 col-md-3"
             );
+            // ' .mz-buy , .mz-star'
           } else {
             $(".mz-quickview__brands").hide();
           }
@@ -1620,6 +2055,8 @@ try {
       }
     },
     searchAutoComplete: function () {
+      //o cliente pediu para remover os produtos do auto complete e deixar sómente as categorias
+      //para voltar os produtos desabilitar esta função
       if ($(".ui-autocomplete li a img").length) {
         $(".ui-autocomplete li a img").each(function () {
           $(this).parent().parent().css("display", "none");
@@ -1646,16 +2083,21 @@ try {
       if ($("body").is(".resultado-busca-codigo")) return;
       var prodArraySkus = [];
       var shelves = $(".mz-shelf");
+
       shelves.each(function () {
         if ($(this).is(".mz-qtt-added")) return;
         $(this).addClass("mz-qtt-added");
+        //fazendo só uma req, ou pelo menos fazendo de 50 em 50
         var buyWrapper = $(this).find(
           ".wrapper-buy-button-asynchronous .add a"
         );
+
         if (!buyWrapper.length) return;
+
         var prodId = $(this).find(".mz-shelf__id").attr("value");
         prodArraySkus.push("fq=productId:" + prodId);
       });
+
       var queryUrl = prodArraySkus.join("&");
       if (productData) {
         Common.smartQuantityAddMaxValue(productData, shelves);
@@ -1664,7 +2106,7 @@ try {
         $.ajax({
           type: "GET",
           method: "GET",
-          url: "/api/catalog_system/pub/products/search?" + queryUrl,
+          url: "/api/catalog_system/pub/products/search?" + queryUrl, // pode se com qualquer um dos seguintesskuJson.skus[0].sku ||  skuJson.productId
           dataType: "json",
           headers: {
             Accept: "application/vnd.vtex.ds.v10+json",
@@ -1678,12 +2120,14 @@ try {
       }
     },
     smartQuantityAddMaxValue: function (data, shelves) {
+      //aqui q duplica na shelf
       var respProdId = data.productId;
       var shelf = shelves
         .find(".mz-shelf__id[value=" + respProdId + "]")
         .parent();
       if (!shelf.length) return;
       var maxValue = data.items[0].sellers[0].commertialOffer.AvailableQuantity;
+
       if (!$(shelf).find(".mz-qtd").length) {
         $(shelf)
           .find(".mz-search-table__price,.quickview-price .productPrice")
@@ -1693,10 +2137,13 @@ try {
               "</span></p>"
           );
       }
+
       $(shelf)
         .find(".qd-sq-quantity")
         .on("change", function () {
           var inputVal = Number($(this).val());
+          // var params = new URLSearchParams(hrefButtonBuy);
+          // var qtd = params.get("qty");
           var parent = $(this).closest(".mz-shelf,.quickview-right");
           var btn = parent.find(
             ".mz-buy-button a,.wrapper-buy-button-asynchronous .add a"
@@ -1753,18 +2200,20 @@ try {
     },
     saveCurrentCart: function () {
       $(window).on("orderFormUpdated.vtex", function (e, orderForm) {
+        //esperar o carrinho ser carregado
         if (!$.cookie("qd_current_cart_loaded")) return;
         try {
           if (!orderForm.userProfileId) {
             return;
           }
+
           var items = orderForm.items;
-          var itemsJson = {
-            items: [],
-          };
+
+          var itemsJson = { items: [] };
           var userProfileId = orderForm.userProfileId
             .replace(/-/gi, "")
             .toLowerCase();
+
           for (var i = 0; i < items.length; i++) {
             itemsJson.items.push({
               id: items[i].id,
@@ -1775,24 +2224,29 @@ try {
               detailUrl: items[i].detailUrl,
             });
           }
-          $.ajax({
-            url: "/api/dataentities/SC/documents?an=centerparts",
-            type: "PATCH",
-            headers: {
-              Accept: "application/vnd.vtex.ds.v10+json",
-              "Content-Type": "application/json; charset=utf-8",
-            },
-            data: JSON.stringify({
-              id: userProfileId,
-              profileId: userProfileId,
-              data: JSON.stringify(itemsJson),
-            }),
-            success: function (data) {
-              $.cookie("QD-SC-OFI", userProfileId, {
-                path: "/",
-              });
-            },
+
+          console.log({
+            id: userProfileId,
+            profileId: userProfileId,
+            data: JSON.stringify(itemsJson),
           });
+
+          // $.ajax({
+          //     url: '/api/dataentities/SC/documents?an=centerparts',
+          //     type: 'PATCH',
+          //     headers: {
+          //         Accept: 'application/vnd.vtex.ds.v10+json',
+          //         'Content-Type': 'application/json; charset=utf-8',
+          //     },
+          //     data: JSON.stringify({
+          //         id: userProfileId,
+          //         profileId: userProfileId,
+          //         data: JSON.stringify(itemsJson),
+          //     }),
+          //     success: function (data) {
+          //         $.cookie('QD-SC-OFI', userProfileId, { path: '/' });
+          //     },
+          // });
         } catch (e) {
           console.warn(e.message);
         }
@@ -1802,10 +2256,12 @@ try {
       if ($.cookie("qd_current_cart_loaded")) {
         return;
       }
+
       vtexjs.checkout.getOrderForm().done(function (orderForm) {
         if (!orderForm.userProfileId) {
           return;
         }
+
         if (orderForm.items.length > 0) {
           $.cookie("qd_current_cart_loaded", 1, {
             expires: 1,
@@ -1836,6 +2292,7 @@ try {
               return;
             }
             var latestCartItems = JSON.parse(latestCart.data);
+
             if (
               !latestCartItems ||
               !latestCartItems.items ||
@@ -1859,6 +2316,7 @@ try {
             vtexjs.checkout
               .addToCart(items, null, jssalesChannel)
               .done(function (orderForm) {
+                // $(window).trigger("productAddedToCart");
                 $(window).trigger("cartProductAdded.vtex");
                 $(window).trigger("minicartUpdated.vtex.qdDdcVtex");
                 $.cookie("qd_current_cart_loaded", 1, {
@@ -1870,7 +2328,20 @@ try {
         });
       });
     },
+    userLogout: function () {
+      $(".btn-clear-session").on("click", function (event) {
+        vtexjs.checkout.removeAllItems().done(function (orderForm) {
+          const logoutURL = vtexjs.checkout.getLogoutURL();
+
+          fetch(logoutURL).then((response) => {
+            window.location.href = "/Sistema/401";
+          });
+        });
+      });
+    },
   };
+
+  /* HOME */
   var Home = {
     init: function () {
       Common.defaultCarroseulShelf();
@@ -1881,24 +2352,44 @@ try {
     },
     windowOnload: function () {},
     newsletter: function () {
+      // Opções do Plugin
       var options = {
-        cookie: "QdSn1",
-        cookieExpires: 30,
-        cookiePath: "/",
-        button: false,
-        isOverflowHidden: true,
+        cookie: "QdSn1", // Nome do Cookie
+        cookieExpires: 30, // Expiração do Cookie tempo em dias
+        cookiePath: "/", // Path do Cookie
+        button: false, // Diz se vai ter um botão para chamar o modal na tela
+        isOverflowHidden: true, // Diz se a tela vai ter overflow:hidden
         code: "",
         email: "",
         iframeCss: "{}",
-        displayTimes: 2,
-        manual: false,
+        displayTimes: 2, // quantas vezes o popup será exibido até que o cookie diga para não exibir mais
+        manual: false, // Controla se o disparo será manual ou não
       };
-      var cookie = parseInt($.cookie(options.cookie)) || 0;
+
+      // Verifica se o valor do cookie é maior do que o número de vezes (displayTimes)
+      var cookie = parseInt($.cookie(options.cookie)) || 0; // Cookie
       if (cookie >= options.displayTimes) return;
+
+      // if($('.qd-v1-modal-newsletter').length){
+      // 	console.log('--------------------------------CARREGOU AQuI');
+      // }
+
+      /*
+            PARA FUNCIONAR, DEVE-SE ADICIONAR O SUBTEMPLATE DE HTML DA NEWSLETTER
+            NA PAGINA QUE DESEJA SE UTILIZAR A NEWSLETTER
+            */
+
+      // Modal
       var modal = $(".qd-v1-modal-newsletter");
+
       if (!$(".qd-v1-modal-newsletter").length) return;
+
       modal.addClass("in show").show();
+
+      // Adiciona Body Class (Modal Aberto)
       $(document.body).addClass("modal-open");
+
+      // Função de fechar o modal
       $(".qd-v1-modal-newsletter, .qd_news_success .qd_news_button").on(
         "click",
         function (e) {
@@ -1908,15 +2399,21 @@ try {
               expires: parseInt(options.cookieExpires),
               path: options.cookiePath,
             });
+
             modal.removeClass("in show").hide();
             $(document.body).removeClass("modal-open");
           }
         }
       );
+
+      ///Envio do form
       $(function () {
+        // Formulário
         var form = $("form");
         var entity = "NL";
         var emailInput = form.find("[name=qd_email]");
+
+        // Não alterar aqui
         form.validate({
           rules: {
             email: {
@@ -2008,6 +2505,8 @@ try {
           errorPlacement: function (error, element) {},
         });
       });
+
+      // Adicionando o da entidade NL
       $(window).on("QD.crmSuccess", function (e, data) {
         $.cookie(options.cookie, options.displayTimes, {
           expires: parseInt(options.cookieExpires),
@@ -2016,6 +2515,7 @@ try {
       });
     },
   };
+  /* SEARCH */
   var Search = {
     init: function () {
       Search.infinityScroll();
@@ -2023,12 +2523,13 @@ try {
       Search.openSearchNavigation();
       Search.selectEdit();
       CustomSearch.quickViewOpenModal();
-      Search.applyActionBotaoComprarShelf();
+      //Search.applyActionBotaoComprarShelf();
     },
     ajaxStop: function () {
       CustomSearch.quickViewOpenModal();
+      // Search.quickViewBrand();
       Search.hidePageFilter();
-      Search.applyActionBotaoComprarShelf();
+      //Search.applyActionBotaoComprarShelf();
     },
     windowOnload: function () {},
     shelfLineFix: function () {
@@ -2040,14 +2541,17 @@ try {
           ).addClass("qd-fi-on");
           var shelf = wrapper.children("ul").removeClass("qd-first-line");
           shelf.first().addClass("qd-first-line");
+
           var setFirst = function () {
             shelf.each(function () {
               var $t = $(this);
+
               if ($t.is(".qd-first-line")) {
                 curTop = $t.offset().top;
                 shelf = shelf.not($t);
                 return;
               }
+
               var offsetTop = $t.offset().top;
               if (offsetTop >= curTop - 10 && offsetTop <= curTop + 10)
                 shelf = shelf.not($t);
@@ -2056,19 +2560,25 @@ try {
                 return false;
               }
             });
+
             if (shelf.length) setFirst();
           };
           setFirst();
         };
         exec();
+
+        // Olhando para o Smart Research
         if (!window.qd_shelf_line_fix_) {
           $(window).on("QuatroDigital.sr_shelfCallback", exec);
           window.qd_shelf_line_fix_ = true;
         }
+        // Olhando tbm para o Infinity Scroll
         if (!window.qd_shelf_line_fix_is) {
           $(window).on("QuatroDigital.is_Callback", exec);
           window.qd_shelf_line_fix_is = true;
         }
+
+        // Olhando para o evento window resize
         var resize = $._data(window).events.resize;
         var allowResize = true;
         if (resize)
@@ -2098,12 +2608,14 @@ try {
       var ref = $(".bt-refinar");
       ref.prev().hide();
       ref.html("<span>Aplicar Filtros</span>");
+
       function applyButton(elem) {
         elem.removeClass("even");
         elem.addClass("showHide");
         var className = elem.attr("class");
         elem.after("<button class='" + className + "'>Mostrar Mais</button>");
       }
+
       $(".mz-search-navigation ul").each(function () {
         var height = $(this).height();
         var maxSize = 180;
@@ -2111,6 +2623,7 @@ try {
           applyButton($(this));
         }
       });
+
       $(".search-multiple-navigator fieldset div").each(function () {
         var maxSize = 6;
         var children = $(this)[0].childNodes.length;
@@ -2118,6 +2631,7 @@ try {
           applyButton($(this));
         }
       });
+
       $("button.showHide").click(function () {
         $(this).prev().toggleClass("openclose");
         $(this).toggleClass("openclose");
@@ -2140,6 +2654,7 @@ try {
         var cleanText = $(this).text().split(" ")[0];
         $(this).text(cleanText);
       });
+
       $("h5.TAMANHO + ul, h5.HideTAMANHO + ul").show();
     },
     checkURLtoFindOrder: function () {
@@ -2153,18 +2668,22 @@ try {
         $("a.maiorpreco:not(.active)").addClass("active");
       }
     },
-    applyActionBotaoComprarShelf: function () {
-      var el = $(
-        ".mz-search-table__item .add > a.fake-button:not(.mz-custom-action-apply)"
-      );
-      if (!el.length) {
-        setTimeout(function () {
-          Search.applyActionBotaoComprarShelf();
-        }, 1e3);
-        return;
-      }
-      Common.setActionAddToCart(el, true, true);
-    },
+    /*  applyActionBotaoComprarShelf: function () {
+             var el = $(
+                 '.mz-search-table__item .add > a.fake-button:not(.mz-custom-action-apply)',
+             );
+
+             // console.log(el)
+             if (!el.length) {
+                 setTimeout(function () {
+                     Search.applyActionBotaoComprarShelf();
+                 }, 1000);
+                 return;
+             }
+
+             Common.setActionAddToCart(el, true, true);
+         }, */
+
     ajustSearchTerms: function () {
       if ($("body").is(".categoria")) {
         $(".mz-result__label span.label").text(" resultados para a categoria");
@@ -2174,10 +2693,13 @@ try {
         );
       }
       if ($(".resultado-busca-numero").length) {
+        // number
         var num = document.createTextNode(
           $(".resultado-busca-numero")[0].innerText.substring(21) || "0"
         );
+
         $(num).appendTo(".mz-result__label span:first");
+        //term
         if ($(".resultado-busca-termo .value")[0].innerText) {
           var ter = document.createTextNode(
             ' "' + $(".resultado-busca-termo .value")[0].innerText + '".' || " "
@@ -2191,9 +2713,11 @@ try {
     infinityScroll: function () {
       $(".prateleira[id*=ResultItems]").QD_infinityScroll({
         callback: function () {
+          // CustomSearch.shelfVariations();
           Common.realQuantity();
+          // Common.applyInventoryShelf();
           Common.nameBreaklinePipe();
-          Search.applyActionBotaoComprarShelf();
+          //Search.applyActionBotaoComprarShelf();
           CustomSearch.customSmartQuantity(
             $(".mz-search-result .mz-search-table__item:not(.customSmartQtd)")
           );
@@ -2217,7 +2741,9 @@ try {
     },
     addFilterByButton: function () {
       var target = $(".dropdown");
+
       if (!target.length) return;
+
       var button = $(
         '<button class="btnFilterBy" id="filter">Filtrar<i class="icon-chevron-down"></i></button>'
       );
@@ -2233,7 +2759,9 @@ try {
       if (!$(".mz-search__top-menu div").is(":empty")) {
         $(".mz-search__top-menu").addClass("has-item");
       }
+
       var currentPath = window.location;
+
       $('.mz-search__top-menu a[href="' + currentPath + '"]').addClass(
         "active"
       );
@@ -2264,6 +2792,7 @@ try {
         $("body").removeClass("modalquickview");
       });
     },
+
     alternativePrices: function (el) {
       (el || $("li[layout]"))
         .not(".qd-alt-on")
@@ -2272,6 +2801,7 @@ try {
             .find(".shelf-qd-v1-alternative-prices")
             .filter(function (i, el) {
               el = $(el);
+
               var match = el
                 .find("li")
                 .text()
@@ -2279,6 +2809,7 @@ try {
               for (var i = 0, item; (item = (match || [])[i]); i++) {
                 if (parseFloat(item.replace(",", ".")) == 0) return false;
               }
+
               return el.text().trim().length;
             })
             .show()
@@ -2293,15 +2824,19 @@ try {
     forceImageZoom: function () {
       try {
         var orig = window.ImageControl;
+
         window.ImageControl = function (par1, par2) {
           $("ul.thumbs a").each(function () {
             var $t = $(this);
+
             if ($t.attr("zoom")) return;
+
             $t.attr(
               "zoom",
               $t.attr("rel").replace(/(ids\/[0-9]+)[0-9-]+/i, "$1-1000-1000")
             );
           });
+
           orig.call(this, par1, par2);
         };
       } catch (e) {
@@ -2324,9 +2859,12 @@ try {
       }
     },
   };
+
+  /* CUSTOM SEARCH */
   var CustomSearch = {
     loadingBuscaPorCodigo: false,
     buscaPorCodigo: false,
+
     init: function () {
       CustomSearch.loadQuickViewModal();
       CustomSearch.eventWishlistButton();
@@ -2334,25 +2872,34 @@ try {
       CustomSearch.searchItem();
       CustomSearch.updateCart();
       CustomSearch.initSearchCode();
+
       vtexjs.checkout.getOrderForm().done(function () {
         CustomSearch.initAfterOrderForm();
       });
     },
+
     windowOnload: function () {},
+
     ajaxStop: function () {
       CustomSearch.ajustQVSuggestion();
       CustomSearch.customSmartQuantity();
     },
+
     initAfterOrderForm: function () {},
+
     initSearchCode: function () {
       CustomSearch.verifyTypeSearch(function (res) {
         if (res) {
           if (window.innerWidth <= 1600) {
             $("body").addClass("mz-sidebar-off");
           }
+
+          /** Caso seja uma busca por código */
           var item = $($(".prateleira .mz-search-table__item")[0]);
           var itemID = item.find(".mz-shelf__id").val();
+
           item.append($('<div class="mz-product-data-code"></div>'));
+
           CustomSearch.getProduct(itemID, "productId", function (res_product) {
             var brandName = res_product[0].brand;
             var brandImg =
@@ -2365,6 +2912,7 @@ try {
               '"><img class="variacao-img-name"  src="' +
               brandImg +
               '" onerror="this.onerror=null;this.src=\'https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png\'"/></div>';
+            //aqui parece ok
             var inventory = "";
             var maxValue =
               res_product[0].items[0].sellers[0].commertialOffer
@@ -2376,6 +2924,8 @@ try {
                 "</span></p>";
               item.find(".qd-sq-quantity").on("change", function () {
                 var inputVal = Number($(this).val());
+                // var params = new URLSearchParams(hrefButtonBuy);
+                // var qtd = params.get("qty");
                 var parent = $(this).closest(".mz-shelf,.quickview-right");
                 var btn = parent.find(
                   ".mz-buy-button a,.wrapper-buy-button-asynchronous .add a"
@@ -2402,7 +2952,9 @@ try {
               item.find(".mz-smart-quantity").remove();
               inventory = '<p class="mz-qtd">Indisponível</p>';
             }
+
             item.find(".mz-shelf__price").append(inventory);
+
             $(".mz-product-data-code").append($(tagImg));
             $(".mz-product-data-code").append(
               item.find(".mz-search-table__price")
@@ -2414,18 +2966,28 @@ try {
             $(".mz-product-data-code").append(
               item.find(".mz-search-table__view-fav")
             );
+
             CustomSearch.getForSimilarProducts(
               itemID,
               function (res_similares) {
                 $(".mz-smart-quantity__action .shelf-qd-v1-qty input").val(1);
+
                 Common.setActionAddToCart(
                   $(".mz-product-data-code .add > a.fake-button"),
                   true,
                   true
                 );
+
                 var html = "";
+
                 if (res_similares.length) {
                   var similares = res_similares;
+
+                  // html += "<div class='variacoes-container'>";
+
+                  // CustomSearch.generateHtmlSimilares(similares, 0, html, function (html) {
+                  //     $(html).insertAfter(item);
+                  // })
                   CustomSearch.generateHtmlSimilares2(res_similares).then(
                     function (html) {
                       $(html).insertAfter(item);
@@ -2439,14 +3001,18 @@ try {
                   CustomSearch.customSmartQuantity();
                   CustomSearch.quickViewOpenModal();
                 });
+                // }
               }
             );
           });
         }
       });
     },
+
     verifyTypeSearch: function (callback_verifyTypeSearch) {
+      /** Verifica é uma página de busca */
       if ($("body").hasClass("resultado-busca")) {
+        /** Verifica se a busca é por código */
         var busca = location.pathname.split("/")[1].replace(/\./g, "");
         if (busca.length >= 6) {
           if (Number.isInteger(busca * 1)) {
@@ -2460,27 +3026,31 @@ try {
         }
       }
     },
+
     generateHtmlSugestao: function (product_id, callback_generateHtmlSugestao) {
-      $.ajax({
-        url: "/id-produto?idproduto=" + product_id,
-      }).done(function (res) {
+      $.ajax({ url: "/id-produto?idproduto=" + product_id }).done(function (
+        res
+      ) {
         var prateleiraSugestao =
           '<div class="mz-quickview__sugestions">' +
           $(res).find(".mz-quickview__sugestions").html() +
           "</div>";
+
         if (!$(".mz-product-quick-view").length)
           $(prateleiraSugestao).insertAfter(
             $(".mz-search-result .prateleira .prateleira")
           );
         else $(prateleiraSugestao).insertAfter($(".mz-product-quick-view"));
+
         setTimeout(function () {
           Common.nameBreaklinePipe();
           Common.smartQuantityShelf();
           callback_generateHtmlSugestao();
           CustomSearch.quickViewOpenModal();
-        }, 1e3);
+        }, 1000);
       });
     },
+
     getForSimilarProducts: function (
       product_id,
       callback_getForSimilarProducts
@@ -2490,6 +3060,7 @@ try {
         product_id.split("&")[0] +
         "?" +
         $.cookie("VTEXSC");
+
       $.ajax({
         url: url,
         type: "GET",
@@ -2503,6 +3074,7 @@ try {
         callback_getForSimilarProducts(res_similares);
       });
     },
+
     getProduct: function (product_id, key, callback_getProduct) {
       $.ajax({
         url:
@@ -2521,12 +3093,18 @@ try {
         callback_getProduct(res_similares);
       });
     },
+
     loadInventoryShelfSuggestions: function () {
+      // console.log(1)
       if (!$(".mz-quickview__sugestions").length) return;
+      // console.log(2)
       if (!$(".mz-quickview__sugestions ul").length) return;
+      // console.log(3)
       $(".mz-quickview__sugestions .prateleira > ul").each(function (i, e) {
         var ID = $(e).find("> li .mz-shelf__id").val();
+
         CustomSearch.getProduct(ID, "productId", function (res) {
+          //esse está correto
           var inventory = "";
           var avQuantity =
             res[0].items[0].sellers[0].commertialOffer.AvailableQuantity;
@@ -2536,12 +3114,15 @@ try {
               (res[0].items[0].sellers[0].commertialOffer.AvailableQuantity ||
                 "0") +
               "</span></p>";
+
             $(e)
               .find(">li .qd-sq-quantity")
               .off("change")
               .on("change", function () {
                 var inputVal = Number($(this).val());
                 var maxValue = avQuantity;
+                // var params = new URLSearchParams(hrefButtonBuy);
+                // var qtd = params.get("qty");
                 var parent = $(this).closest(".mz-shelf,.quickview-right");
                 var btn = parent.find(
                   ".mz-buy-button a,.wrapper-buy-button-asynchronous .add a"
@@ -2567,10 +3148,12 @@ try {
           } else {
             inventory = '<p class="mz-qtd">Indisponível</p>';
           }
+
           $(e).find("> li .shelf-price").append(inventory);
         });
       });
     },
+
     ajustQVSuggestion: function () {
       $(".mz-search-table__view-Qv").insertBefore(
         $(".mz-search-table__view-Qv")
@@ -2578,6 +3161,7 @@ try {
           .find(">.row .mz-quickview__sugestions")
       );
     },
+
     quickViewOpenModal: function () {
       var modal = $(".mz-modal-quickview");
       $(".mz-quickview-open:not(.modal-binded)")
@@ -2585,20 +3169,23 @@ try {
         .off("click")
         .on("click", function () {
           $("body").addClass("modalquickview");
+
           var productId = $(this).attr("id");
           var iframe = $(
             '<iframe src="/product-details?idproduto=' +
               productId +
               '" frameborder="0"></iframe>'
           );
+
           modal.find(".modal-body").empty().append(iframe);
+
           setTimeout(function () {
             var html = $(".productName").html();
             if (html) {
               html = html.replace("||", "|").replace(/\|/g, "<br />");
               $(".productName").html(html);
             }
-          }, 1e3);
+          }, 1000);
         });
       $(".mz-modal-quickview")
         .off("click")
@@ -2606,13 +3193,16 @@ try {
           $("body").removeClass("modalquickview");
         });
     },
+
     updateCart: function () {
       $(window).on("cartProductAdded.vtex", function () {
         $.fn.simpleCart(true, undefined, false);
       });
     },
+
     loadQuickViewModal: function () {
       if (!$("body").hasClass("mz-quick-view")) return;
+
       var itemID = location.search.replace("?", "").split("=")[1];
       CustomSearch.getProduct(itemID, "productId", function (res_product) {
         var brandName = res_product[0].brand.toLowerCase().replace(/ /g, "-");
@@ -2626,9 +3216,11 @@ try {
           brandName
         );
         $(".mz-product-data-code .mz-product-data-code-img").html(tagImg);
+
         var nameSku = res_product[0].items[0].name;
         var tagNameSku = '<div class="product-insertsku">' + nameSku + "</div>";
         $(tagNameSku).insertBefore($(".mz-product-data-code .plugin-preco"));
+
         var inventory =
           res_product[0].items[0].sellers[0].commertialOffer
             .AvailableQuantity || "0";
@@ -2637,6 +3229,7 @@ try {
           inventory +
           "</span></p>";
         $(tagInventory).insertAfter($(".mz-product-data-code .plugin-preco"));
+
         $(".productName").html(
           $(".productName").html().replace("||", "|").replace(/\|/g, "<br />")
         );
@@ -2645,6 +3238,7 @@ try {
           "idprod" + res_product[0].productId
         );
         $(".qd-sq-quantity").val(1);
+
         CustomSearch.getForSimilarProducts(itemID, function (res_similares) {
           Common.setActionAddToCart(
             $(
@@ -2653,8 +3247,12 @@ try {
             true
           );
           var html = "";
+
           if (res_similares.length) {
             var similares = res_similares;
+
+            // html += "<div class='variacoes-container'>";
+
             CustomSearch.generateHtmlSimilares2(similares).then(function (
               html
             ) {
@@ -2662,26 +3260,37 @@ try {
                 $(".mz-product-quick-view .mz-search-table__item")
               );
             });
+
+            // CustomSearch.generateHtmlSimilares(similares, 0, html, function (html) {
+            //     $(html).insertAfter($('.mz-product-quick-view .mz-search-table__item'));
+            // })
           }
+
           CustomSearch.generateHtmlSugestao(itemID, function () {
             CustomSearch.loadInventoryShelfSuggestions();
             CustomSearch.eventWishlistButton();
             CustomSearch.smartQuantity();
             CustomSearch.customSmartQuantity();
             Common.smartCart();
+
             setTimeout(function () {
               $("body").removeClass("loadingData");
-            }, 1e3);
+            }, 1000);
           });
         });
       });
     },
+
     generateHtmlSimilares2: function (similares) {
+      //n tem promise :(
       var def = $.Deferred();
+
       var html = "<div class='variacoes-container'>";
+
       var queryString = similares.map(function (item) {
         return "fq=productId:" + item.productId;
       });
+
       CustomSearch.getMultipleProducts(queryString.join("&")).then(function (
         resp
       ) {
@@ -2702,9 +3311,11 @@ try {
               '"><img class="variacao-img-name"  src="' +
               brandImg +
               '" onerror="this.onerror=null;this.src=\'https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png\'"/></div>';
+
             var price = sku.sellers[0].commertialOffer.ListPrice || "0";
             var name = sku.name;
             var addToCartLink = sku.sellers[0].addToCartLink || "";
+
             var tagData =
               '<div class="variacao-data"><div class="variacao-data-name">' +
               name +
@@ -2713,6 +3324,7 @@ try {
               '</div><div class="variacao-data-inventory">Estoque: <span class="mz-qtd-value">' +
               inventory +
               "</span></div></div>";
+
             var smartQuantity =
               '<div class="mz-smart-quantity"><div class="col-12 mz-smart-quantity__action"><a class="qd-sq-minus"><i class="icon-minus"></i></a><div class="shelf-qd-v1-qty"><input type="tel" class="qd-sq-quantity form-control" value="1" /></div><a class="qd-sq-more"><i class="icon-plus"></i></a></div></div>';
             var buyButton =
@@ -2721,15 +3333,27 @@ try {
               '" class="btn-add-buy-button-asynchronous" id="idprod' +
               productId +
               '">Comprar</a>';
+
             var tagBuy =
               '<div class="variacao-buy">' +
               smartQuantity +
               buyButton +
               "</div>";
+
             var tagFav =
-              '<div class="mz-search-table__view-fav d-flex">                                    <div class="mz-quickview-open" id="' +
+              '<div class="mz-search-table__view-fav d-flex">\
+                                    <div class="mz-quickview-open" id="' +
               productId +
-              '">                                        <i class="icon-eye" title="Saiba mais"></i>                                    </div>                                    <div class="mz-giftlist-button">                                        <div class="qd-sss-wishlist-button qd-sss-on">                                        <a href="#" title="Adicionar a lista de compras" class=""><i class="icon-Ativo-122"></i></a>                                        </div>                                    </div>                                </div>';
+              '">\
+                                        <i class="icon-eye" title="Saiba mais"></i>\
+                                    </div>\
+                                    <div class="mz-giftlist-button">\
+                                        <div class="qd-sss-wishlist-button qd-sss-on">\
+                                        <a href="#" title="Adicionar a lista de compras" class=""><i class="icon-Ativo-122"></i></a>\
+                                        </div>\
+                                    </div>\
+                                </div>';
+
             html +=
               '<div class="variacao">' +
               tagImg +
@@ -2739,9 +3363,11 @@ try {
               "</div>";
           }
         });
+
         html += "</div>";
         def.resolve(html);
       });
+
       return def;
     },
     getMultipleProducts: function (queryString) {
@@ -2757,12 +3383,14 @@ try {
       });
     },
     eventWishlistButton: function () {
+      //evitando evento duplicado com off
       $(".mz-search-table__item  .mz-giftlist-button")
         .off("click")
         .on("click", function () {
           var _this = $(this);
           _this.trigger(".qd-sss-wishlist-button  selectSku.qd_click");
           $(".glis-popup-link.glis-thickbox.tb-added.qvBinded").click();
+          //resetando
           $(".mz-shelf__price input.insert-sku-checkbox:checked").each(
             function (index, checkbox) {
               var $checkbox = $(checkbox);
@@ -2772,7 +3400,9 @@ try {
               }
             }
           );
+
           var parent = _this.closest(".mz-shelf-regular");
+
           var checkbox = parent.find(
             ".mz-shelf__price input.insert-sku-checkbox"
           );
@@ -2791,24 +3421,41 @@ try {
       }
       return output;
     },
-    smartQuantity: function () {},
+
+    smartQuantity: function () {
+      // $(".mz-search-table__item:not(qd-on)").addClass('qd-on').QD_smartQuantity({
+      //   buyButton: ".btn-add-buy-button-asynchronous",
+      //   setQuantityByUrl: true
+      // });
+      // $(".variacao:not(qd-on)").addClass('qd-on').QD_smartQuantity({
+      //   buyButton: ".btn-add-buy-button-asynchronous",
+      //   setQuantityByUrl: true
+      // });
+    },
+
     customSmartQuantity: function () {
       var containerQTD = $.merge(
         $(".variacao:not(.customSmartQtd)"),
         $(".mz-product-quick-view .mz-search-table__item:not(.customSmartQtd)")
       );
+
       containerQTD.addClass("customSmartQtd");
+
       containerQTD.each(function (i, e) {
         var input = $(e).find(".mz-smart-quantity__action").find("input");
+
         var comprar = $(e).find("div.variacao-buy > a");
+
         if ($(e).find("a.buy-in-page-button").length) {
           comprar = $(e).find("a.buy-in-page-button");
           comprar.off();
         }
+
         $(e)
           .find("a.qd-sq-minus")
           .on("click", function () {
             var val = input.val() * 1;
+
             if (val > 1) {
               input.val(val - 1);
               comprar.attr(
@@ -2824,14 +3471,17 @@ try {
               );
             }
           });
+
         $(e)
           .find("a.qd-sq-more")
           .on("click", function () {
             var val = input.val() * 1;
             var limit = $(e).find(".mz-qtd-value").html() * 1;
+
             if (val + 1 <= limit) {
               input.val(val + 1);
             }
+
             comprar.attr(
               "href",
               comprar
@@ -2844,13 +3494,16 @@ try {
                 )
             );
           });
+
         input.on("change", function () {
           var limit = $(e).find(".mz-qtd-value").html() * 1;
           var val = $(this).val() * 1;
+
           if (val > limit) {
             $(this).val(limit);
           }
         });
+
         Common.setActionAddToCart(comprar, true);
       });
     },
@@ -2867,6 +3520,7 @@ try {
     },
     searchItem: function () {
       var inputSearch = $(".mz-search__customsearch--input input.form-control");
+      // inputSearch.mask('00000.00');
       var regex = /(?=[0-9_.])/gm;
       inputSearch.on("keyup", function (e) {
         var ind = inputSearch.val().length - 1;
@@ -2883,14 +3537,18 @@ try {
           alert("Você não pesquisou nenhum dado especifico.");
           return;
         }
+
         var url = window.location.origin;
         window.location.href = window.location.origin + "/" + inputSearch.val();
       });
     },
   };
+
+  /* PRODUCT */
   var Product = {
     run: function () {},
     init: function () {
+      // Product.setAvailableBodyClass();
       Product.infoTabs();
       Product.fixSkuInfo();
       Product.applyWishlist();
@@ -2911,7 +3569,11 @@ try {
       Product.contactForm();
       Product.uniqueBuyButton();
       Product.productListCallBuyButton();
+      // Product.skuSum();
       Product.autoFillNotifyme();
+      // Product.descriptionVideo();
+
+      // Product.qdClickTableMeasures();
       Common.defaultCarroseulShelf();
       Product.productListSkuQuantity();
     },
@@ -2925,19 +3587,36 @@ try {
       Product.fixProductName();
     },
     fixProductName: function () {
-      var str = $(".productName").text();
+      var str = skuJson.name;
+      // var str = $('.productName').text();
       while (str.indexOf("|") >= 0) {
         var newStr = str.replace("|", "</p><p>");
         str = newStr;
         $(".productName").html("<p>" + str + "</p>");
       }
       var str = $(".productName").html();
+
       $(".mz-product__name h1").prepend(
         '<div class="product-name">' + str + "</div>"
       );
     },
+    // setAvailableBodyClass: function () {
+    //   function checkVisibleNotify(available) {
+    //     if (available)
+    //       $(document.body).addClass('qd-product-available').removeClass('qd-product-unavailable');
+    //     else
+    //       $(document.body).addClass('qd-product-unavailable').removeClass('qd-product-available');
+    //   }
+
+    //   $(document).on("skuSelected.vtex", function (e, id, sku) {
+    //     checkVisibleNotify(sku.available);
+    //   });
+
+    //   checkVisibleNotify(skuJson.available);
+    // },
     dynamicDiscountFlag: function () {
       $(".dynamic-discount-flag").remove();
+
       var $de = $(".skuListPrice").first().text();
       var $por = $(".skuBestPrice").first().text();
       var $porcentagemFinal;
@@ -2949,21 +3628,33 @@ try {
       );
       var $novoDe = $('<span class="produto-novo-de"></span>');
       var $productPrice = $(".productPrice").first();
+
       $boxDynamicDiscountFlag.appendTo($productPrice);
       $novoDe.appendTo($boxDynamicDiscountFlag);
       $highlightDiscount.appendTo($boxDynamicDiscountFlag);
+
+      //---------REGEX PARA RETIRAR OS R$ DOS VALORES DE POR
       $de = $de.replace(/[R$ ]+/g, "");
       $de = $de.replace(/[,]+/g, ".");
       $de = parseFloat($de);
+
       $por = $por.replace(/[R$ ]+/g, "");
       $por = $por.replace(/[,]+/g, ".");
       $por = parseFloat($por);
+
+      // console.log('POR: '+ $por);
+
+      //---------REGEX PARA RETIRAR OS R$ DOS VALORES DE POR
+
       $porcentagemFinal = 100 - ($por * 100) / $de;
+      // console.log('porcentagem: '+ parseInt($porcentagemFinal));
+
       $(".produto-novo-de").text($(".skuListPrice").first().text());
       $(".product-highlight-discount").text(
         "" + Math.floor($porcentagemFinal) + "% OFF"
       );
     },
+
     applyWishlist: function () {
       $(
         ".mz-product__content , .product-sku-rich-selection  .skuList"
@@ -2974,6 +3665,8 @@ try {
     },
     productThumbCarousel: function () {
       var initialSku = (location.search.match(/idsku=([0-9]+)/i) || [""]).pop();
+
+      // Verifica qual é o primeiro sku e coloca na variável initialSku para ser utilizada no plugin QD_smartPhotoCarousel
       if (!initialSku) {
         var color = $("li.item-dimension-Cor input[data-value]")
           .first()
@@ -3025,7 +3718,8 @@ try {
           },
         },
         initialSku
-      );
+      ); // Pega sku da url se houver [Cores Prateleira]
+
       var initialColor = "";
       for (var j = 0; j < skuJson.skus.length; j++) {
         if (skuJson.skus[j].sku == initialSku) {
@@ -3033,6 +3727,7 @@ try {
           break;
         }
       }
+
       if (initialColor)
         $(
           'li.item-dimension-Cor input[data-value="' + initialColor + '"]'
@@ -3041,20 +3736,24 @@ try {
     },
     checkDescription: function () {
       var wrapper = $(".mz-product-description");
+
       if (wrapper.find(".productDescription").text().trim().length <= 0) {
         $(".mz-product__description-link").addClass("d-none");
       }
     },
     checkSpecification: function () {
       var wrapper = $(".mz-product__specification");
+
       if (wrapper.find("#caracteristicas > *").text().trim().length <= 0) {
         wrapper.addClass("hidden");
       }
     },
     shipping: function () {
       setTimeout(function () {
+        // Calcular o valor do frete e verificar disponibilidade:
         $("#btnFreteSimulacao").before($("#txtCep"));
       }, 500);
+      // console.log("test", $(".mz-product__sku--ship"));
     },
     openShipping: function () {
       if (typeof window.ShippingValue === "function") window.ShippingValue();
@@ -3071,6 +3770,7 @@ try {
     scrollToDescription: function () {
       $(".product-mz-v1-link-description").click(function (e) {
         e.preventDefault();
+
         $("html, body")
           .stop()
           .animate(
@@ -3086,6 +3786,7 @@ try {
       $(".mz-product-fixed-bar__buy, .mz-product-fixed-bar__price").click(
         function (e) {
           e.preventDefault();
+
           $("html, body")
             .stop()
             .animate(
@@ -3100,11 +3801,17 @@ try {
     },
     fixSkuInfo: function () {
       var sku_rich_selection = $(".mz-sku-rich-selection");
+
       if (!sku_rich_selection.length) return;
+
       var measure_guide = sku_rich_selection
         .find(".mz-sku-rich-selection__measure-guide")
         .detach();
+      // var fitting_room = sku_rich_selection.find('.mz-sku-rich-selection__fitting-room').detach();
+
       measure_guide.insertAfter($('li.specification:contains("TAMANHO")'));
+      // $('mz-sku-rich-selection').append(fitting_room);
+      // $('li.specification').append(measure_guide);
     },
     expandsDescription: function () {
       $(".mz-product__description-link a").on("click", function (e) {
@@ -3125,9 +3832,13 @@ try {
     },
     accessoriesApplyCarousel: function () {
       var item = $(".accessories-qd-v1-item");
+
       if (!item.length) return;
+
       item.wrapAll('<div class="accessories-qd-v1-carousel"></div>');
+
       var wrapper = $(".accessories-qd-v1-carousel");
+
       wrapper.slick({
         prevArrow:
           '<button type="button" class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
@@ -3140,6 +3851,7 @@ try {
         slidesToScroll: 4,
         infinite: true,
         draggable: false,
+        // centerMode: true,
         responsive: [
           {
             breakpoint: 991,
@@ -3161,25 +3873,34 @@ try {
     specialBanner: function () {
       var container = $(".mz-special-banner__container");
       var viewMore = $(".mz-special-banner__view-more a");
+
       var maxHeight = 95;
+
       if (container.find(".mz-special-banner__content").height() < maxHeight) {
         container.removeClass("collapsed").addClass("non-collapsed");
         return;
       }
+
       var viewMoreText = viewMore.text();
+
       viewMore.on("click", function () {
         container.toggleClass("collapsed");
+
         var toogleText = container.hasClass("collapsed")
           ? viewMoreText
           : "Ver Menos";
+
         $(this).text(toogleText);
       });
     },
     infoTabs: function () {
       var currentPage = window.location.href;
       var tabsLink = $(".mz-tabs__link");
+
       var productField = $("#caracteristicas .value-field.Tipo-de-Grade");
+
       if (!productField.length) return;
+
       var currentTab = $(
         '<ul><li><div class="mz-tabs__item"><a href="' +
           currentPage +
@@ -3187,10 +3908,15 @@ try {
           productField.text() +
           "</li></ul></a></div></li></ul>"
       );
+
       currentTab.addClass("active");
+
       $(".shelf-tabs h2").after(currentTab);
+
       if (!tabsLink.length) return;
+
       if (tabsLink.closest("ul").length <= 1) return;
+
       tabsLink.each(function (index, tabLink) {
         if (tabLink.href === currentPage) {
           $(tabLink).closest("ul").addClass("active");
@@ -3204,9 +3930,11 @@ try {
     },
     smartSkuColor: function () {
       if ($(".mz-colors").is(":empty")) return;
+
       var thumbCopy = $(".mz-product-image img").first().clone();
       var skuName = $(".productName");
       var skuLink = window.location.href;
+
       var currentSkuColor = $(
         '<ul><li><div class="mz-colors__item"><a href="' +
           skuLink +
@@ -3217,11 +3945,13 @@ try {
           '"></a></div></li></ul>'
       );
       currentSkuColor.addClass("active");
+
       $(".shelf-colors h2").after(currentSkuColor);
     },
     productListSkuQuantity: function () {
       var htmlSkuQuantity =
         '<div class="amount product-sku-single-wrapper "> <div class="qd-smart-quantity"> <a href="#" class="qd-add-btn qd-sq-minus qd-sq-inactive"> <i class="icon-minus"></i> </a> <input type="tel" class="form-control input-type-text qd-sq-quantity" /> <a href="#" class="qd-add-btn qd-sq-more"> <i class="icon-plus"></i> </a> </div> </div>';
+
       var options = {
         buyButton: ".buy-button",
         qttInput: ".qd-sq-quantity",
@@ -3229,23 +3959,32 @@ try {
         btnMinus: ".qd-sq-minus",
         initialValue: 0,
       };
+
       $(".form-control.input-type-text.qd-sq-quantity.qd-sq-on").mask(
         "000000000000000000000"
       );
+
       var skuWrapper = $(".product-sku-rich-selection .skuList");
+
       skuWrapper.find(".nomeSku").after(htmlSkuQuantity);
+      // skuWrapper.append(htmlSkuQuantityMbl);
       skuWrapper.addClass("qd-smart-quantity-on").QD_smartQuantity(options);
+
       $(".product-sku-rich-selection").QD_smartSkuTotalizer(options);
+
       $(".qd-smart-quantity-on").each(function () {
         $t = $(this);
+
         $t.find(".preco").after('<div class="qd-buy"></div>');
         $(".qd-buy:not('.qd-on')")
           .addClass("qd-on")
           .append($t.find(".buy-button"));
       });
+
       skuWrapper.each(function () {
         var self = $(this);
-        var selfName = $(this).find(".nomeSku")[0].innerText;
+        // var selfName = $(this).find('.nomeSku')[0].innerText;
+        var selfName = skuJson.name;
         skuJson.skus.forEach(function (item) {
           var skuName = item.skuname;
           var skuId = item.sku;
@@ -3253,7 +3992,7 @@ try {
             $.ajax({
               type: "GET",
               method: "GET",
-              url: "/api/catalog_system/pub/products/search?fq=skuId:" + skuId,
+              url: "/api/catalog_system/pub/products/search?fq=skuId:" + skuId, // pode se com qualquer um dos seguintesskuJson.skus[0].sku ||  skuJson.productId
               dataType: "json",
               headers: {
                 Accept: "application/vnd.vtex.ds.v10+json",
@@ -3275,10 +4014,12 @@ try {
           this.querySelector(".qd-smart-quantity").remove();
         }
       });
+
       var input = $(".product-sku-single-wrapper input");
       input.each(function () {
         $(this).on("change", function () {
           var max = Number($(this).attr("max"));
+
           if (Number($(this).val()) >= max) {
             $(this).val(max);
             $(this).parent().find(".qd-sq-more").attr("disabled", "disabled");
@@ -3290,32 +4031,39 @@ try {
         });
       });
     },
+
     contactForm: function () {
       if (!$(document.body).is(".produto")) return;
+
       var form = $(".mz-product__email form");
       form.find("#qd_form_phone").mask("(00) 0000-00009");
+
       form.validate({
-        rules: {
-          email: {
-            email: true,
-          },
-        },
+        rules: { email: { email: true } },
         submitHandler: function (form) {
           var $form = $(form);
+
           if (!$form.valid()) return;
+
+          // Enviando os dados para o CRM
           (function () {
+            // Adicionando classe de carregando
             var submitWrapper = $form
               .find("[type=submit]")
               .parent()
               .addClass("qd-loading");
+
+            // Obtendo o e-mail
             var email = $form.find("#qd_form_email").val() || "";
             if (!email.length) return alert("Preencha seu e-mail");
+
             var saveContact = function (userId) {
               var phone = ($form.find("#qd_form_phone").val() || "").replace(
                 /[^0-9]+/gi,
                 ""
               );
               phone = phone.length ? "+55" + phone : null;
+
               $.ajax({
                 url: "//api.ipify.org?format=jsonp",
                 dataType: "jsonp",
@@ -3335,6 +4083,7 @@ try {
                   });
                 },
               });
+
               var sendData = function (ip) {
                 $.ajax({
                   url: "/api/dataentities/FP/documents",
@@ -3394,6 +4143,7 @@ try {
               },
             });
           })();
+
           return false;
         },
         errorPlacement: function (error, element) {},
@@ -3422,10 +4172,25 @@ try {
         buyButton: ".product-sku-rich-selection .skuList .buy-button",
       });
     },
+    // skuSum: function () {
+    //   $(".product-sku-info-wrapper").click(function () {
+    //     var inputs = $(".qd-sq-quantity");
+    //     var prices = $(".valor-por strong");
+    //     var total = 0;
+    //     for (i = 0; i < inputs.length; i++) {
+    //       var inp = parseInt(inputs[i].value);
+    //       var pri = parseFloat(prices[i].innerHTML.substring(2).replace(",", "."));
+    //       total = total + (inp * pri);
+    //     }
+    //     document.querySelector(".qd-selected-sku-total").innerHTML = ("R$ " + total.toFixed(2)).replace(".", ",");
+    //   }
+    //   );
+    // },
     productListSetUnavailable: function () {
       $(".skuList .notifyme-skuid").each(function () {
         var $t = $(this);
         var skuId = ($t.val() || "") + "";
+
         if (skuId.length && skuJson) {
           for (var i = 0; i < skuJson.skus.length; i++) {
             if (skuJson.skus[i].sku == skuId && !skuJson.skus[i].available) {
@@ -3450,13 +4215,16 @@ try {
     },
     selectSku: function () {
       var wrapper = $(".skuList");
+
       wrapper.on("selectSku.qd_click", function () {
         try {
           var $t = $(this);
+
           var buyButton = $t.find(".buy-button");
           if (buyButton.length)
             var skuId = buyButton.attr("href").match(/sku\=([0-9]+)/i)[1];
           else var skuId = $t.find(".sku-notifyme-skuid").val();
+
           var selectedSku;
           for (var i = 0; i < skuJson.skus.length; i++) {
             if (skuJson.skus[i].sku == skuId) {
@@ -3466,10 +4234,13 @@ try {
           }
           if (selectedSku)
             $(document).trigger("skuSelected.vtex", [skuId, selectedSku]);
+
           wrapper.removeClass(
             "qd-sku-list-selected qd-sku-list-selected-by-click"
           );
           $t.addClass("qd-sku-list-selected");
+
+          // Adicionando as flags de promoções por SKU
         } catch (e) {
           if (
             typeof console !== "undefined" &&
@@ -3478,6 +4249,7 @@ try {
             console.info("Problemas ao selecionar o SKU", e.message);
         }
       });
+
       wrapper.click(function () {
         var $t = $(this);
         $t.trigger("selectSku.qd_click");
@@ -3492,10 +4264,14 @@ try {
       wrapper.each(function () {
         var star =
           '        <div class="mz-wishlist-button"><div class=""><div class="qd-sss-wishlist-filled "> <i class="icon-Ativo-122"></i></div></div></div>      ';
+        // para mostrar o sku descomente a linha abaixo
+        // $(this).find('.preco').after(sku.match(regex));
         $(this).find(".preco").after(star);
       });
     },
   };
+
+  /* LIST */
   var List = {
     run: function () {},
     init: function () {
@@ -3507,10 +4283,12 @@ try {
     },
     checkTermAgreement: function () {
       if ($("body").is(".giftlist-create")) {
+        //CHECA O CHECKBOX ASSIM Q A PAGINA DE CRIAR LISTA É CARREGADA
         setTimeout($("#giftlistaccept").attr("checked", "checked"), 1500);
       }
     },
   };
+  /* INSTITUCIONAL */
   var Institutional = {
     init: function () {
       Institutional.sidemenuToggle();
@@ -3520,6 +4298,7 @@ try {
     },
     ajaxStop: function () {},
     windowOnload: function () {},
+
     sidemenuToggle: function () {
       $(".mz-institucional__navigation--menu-mobile").click(function (ev) {
         ev.preventDefault();
@@ -3544,9 +4323,14 @@ try {
       }
     },
     contactForm: function () {
+      // if(!$(document.body).is(".atendimento"))
+      // return;
+
       var form = $(".form-contact-wrapper form");
       form.find("#qd_form_phone").mask("(00) 0000-00009");
       form.find("#qd_form_cnpj").mask("99.999.999/9999-99");
+
+      //fix select
       var select = form.find(".form-control");
       if (select.length) {
         select.find("option").each(function () {
@@ -3557,6 +4341,7 @@ try {
           }
         });
       }
+
       form.validate({
         messages: {
           "E-mail": "Preencha o campo email",
@@ -3566,27 +4351,31 @@ try {
           Assunto: "Escolha um assunto",
           Mensagem: "Escreva uma mensagem",
         },
-        rules: {
-          email: {
-            email: true,
-          },
-        },
+        rules: { email: { email: true } },
         submitHandler: function (form) {
           var $form = $(form);
+
           if (!$form.valid()) return;
+
+          // Enviando os dados para o CRM
           (function () {
+            // Adicionando classe de carregando
             var submitWrapper = $form
               .find("[type=submit]")
               .parent()
               .addClass("qd-loading");
+
+            // Obtendo o e-mail
             var email = $form.find("#qd_form_email").val() || "";
             if (!email.length) return alert("Preencha seu e-mail");
+
             var saveContact = function () {
               var phone = ($form.find("#qd_form_phone").val() || "").replace(
                 /[^0-9]+/gi,
                 ""
               );
               phone = phone.length ? "+55" + phone : null;
+
               $.ajax({
                 url: "//api.ipify.org?format=jsonp",
                 dataType: "jsonp",
@@ -3606,6 +4395,7 @@ try {
                   });
                 },
               });
+
               var sendData = function (ip) {
                 $.ajax({
                   url: "/api/dataentities/AT/documents?an=centerparts",
@@ -3645,8 +4435,10 @@ try {
             };
             saveContact();
           })();
+
           return false;
         },
+        // errorPlacement: function (error, element) { }
       });
     },
     openVideoModal: function () {
@@ -3674,6 +4466,8 @@ try {
       };
     },
   };
+
+  /* ORDERS */
   var Orders = {
     init: function () {
       Orders.bootstrapCssFix();
@@ -3696,6 +4490,7 @@ try {
       }
     },
   };
+  /* ACCOUNT */
   var Account = {
     init: function () {
       Account.bootstrapCssFix();
@@ -3721,6 +4516,7 @@ try {
     applyWishlist: function () {
       $(window).on("hashchange", displayWishlist);
       displayWishlist();
+
       function displayWishlist() {
         if (window.location.href.indexOf("wishlist") > -1) {
           $(".mz-account-IO").hide();
@@ -3737,8 +4533,18 @@ try {
       }
     },
   };
+
+  /* Infinity scroll */
+  /**
+   * Infinity Scroll
+   * @author Carlos Vinicius [Quatro Digital]
+   * @version 3.14
+   * @license MIT
+   */
+
   var loadingHtml =
     '<div class="container mz-search-loader "><i class="icon-spinner mx-auto"></i><p class="mx-auto">Carregando mais itens. Por favor, aguarde.</p></div>';
+
   "function" !== typeof String.prototype.trim &&
     (String.prototype.trim = function () {
       return this.replace(/^\s+|\s+$/g, "");
@@ -3823,7 +4629,7 @@ try {
               b.selector +
               ") retornou " +
               b.length +
-              " elementos.\n Para solucionar o problema estou selecionando automáticamente o primeiro com o id: #" +
+              " elementos.\n Para solucionar o problema estou selecionando autom\u00e1ticamente o primeiro com o id: #" +
               (b.filter("[id^=ResultItems]:first").attr("id") || "!Not Found"),
             "Aviso"
           ),
@@ -3831,7 +4637,7 @@ try {
         b.filter("[id^=ResultItems]").length ||
           e(
             [
-              "Certifique-se que esta selecionando o elemento correto.\n O plugin espera que o elemento seja o que contém o id: #" +
+              "Certifique-se que esta selecionando o elemento correto.\n O plugin espera que o elemento seja o que cont\u00e9m o id: #" +
                 (c("div[id^=ResultItems]").attr("id") || "!Not Found"),
               c("div[id^=ResultItems]"),
             ],
@@ -3841,9 +4647,9 @@ try {
           ((b = b.parent()),
           e(
             [
-              "Identifiquei que o seletor pai do elemento que você informou é o #" +
+              "Identifiquei que o seletor pai do elemento que voc\u00ea informou \u00e9 o #" +
                 (jQuery("div[id^=ResultItems]").attr("id") || "!Not Found") +
-                ".\n Como forma de corrigir esse problema de seleção de elemento, assumirei a prateleira correta.",
+                ".\n Como forma de corrigir esse problema de sele\u00e7\u00e3o de elemento, assumirei a prateleira correta.",
               b,
             ],
             "Aviso"
@@ -3868,7 +4674,7 @@ try {
           if ("object" === typeof a && "undefined" !== typeof a[0])
             return a[0].replace("paginaprateleira", "buscapagina");
           e(
-            "Não foi possível localizar a url de busca da página.\n Tente adicionar o .js ao final da página. \n[Método: getSearchUrl]"
+            "N\u00e3o foi poss\u00edvel localizar a url de busca da p\u00e1gina.\n Tente adicionar o .js ao final da p\u00e1gina. \n[M\u00e9todo: getSearchUrl]"
           );
           return "";
         };
@@ -3891,12 +4697,7 @@ try {
           a.buttonToTop = a.toTopE
             .find("a")
             .bind("click.QD_infinityScroll", function () {
-              jQuery("html,body").animate(
-                {
-                  scrollTop: 0,
-                },
-                "slow"
-              );
+              jQuery("html,body").animate({ scrollTop: 0 }, "slow");
               return !1;
             });
         })();
@@ -3921,7 +4722,7 @@ try {
               if (1 > f.length)
                 return (
                   e(
-                    "Última Prateleira/Vitrine não encontrada \n (" +
+                    "\u00daltima Prateleira/Vitrine n\u00e3o encontrada \n (" +
                       f.selector +
                       ")"
                   ),
@@ -3940,7 +4741,8 @@ try {
                   1 > b.trim().length
                     ? ((a.moreResults = !1),
                       e(
-                        "Não existem mais resultados a partir da página: " + g,
+                        "N\u00e3o existem mais resultados a partir da p\u00e1gina: " +
+                          g,
                         "Aviso"
                       ),
                       c(window).trigger("QuatroDigital.is_noMoreResults"))
@@ -3949,7 +4751,9 @@ try {
                   n.remove();
                 },
                 error: function () {
-                  e("Houve um erro na requisição Ajax de uma nova página.");
+                  e(
+                    "Houve um erro na requisi\u00e7\u00e3o Ajax de uma nova p\u00e1gina."
+                  );
                 },
                 complete: function (a, b) {
                   d.callback();
@@ -3994,9 +4798,11 @@ try {
     typeof console.error === "function" &&
     console.error("Houve um erro nos objetos. Detalhes: " + e.message);
 }
+
 try {
   (function () {
     var body, ajaxStop, windowLoad;
+
     windowLoad = function () {
       Common.windowOnload();
       CustomSearch.windowOnload();
@@ -4012,6 +4818,7 @@ try {
         List.windowOnload();
       else if (body.is(".institucional")) Institutional.windowOnload();
     };
+
     ajaxStop = function () {
       Common.ajaxStop();
       CustomSearch.ajaxStop();
@@ -4028,10 +4835,13 @@ try {
       else if (body.is(".institucional")) Institutional.ajaxStop();
       else if (body.is(".account, .orders")) Account.ajaxStop();
     };
+
     $(function () {
-      body = $(document.body);
       Common.init();
       CustomSearch.init();
+
+      body = $(document.body);
+
       if (body.is(".home")) Home.init();
       else if (body.is(".resultado-busca, .departamento, .categoria")) {
         Search.isSearch = $(document.body).is(".resultado-busca");
@@ -4047,11 +4857,13 @@ try {
         List.init();
       else if (body.is(".institucional")) Institutional.init();
       else if (body.is(".account, .orders")) Account.init();
+
       $(document).ajaxStop(ajaxStop);
       $(window).load(windowLoad);
       body.addClass("jsFullLoaded");
       Common.ready();
     });
+
     Common.run();
     if (
       location.pathname.substr(location.pathname.length - 2, 2).toLowerCase() ==
@@ -4069,6 +4881,9 @@ try {
       "Houve um erro ao iniciar os objetos. Detalhes: " + e.message
     );
 }
+
+// jQuery Mask Plugin v1.6.5
+// github.com/igorescobar/jQuery-Mask-Plugin
 (function (g) {
   "function" === typeof define && define.amd
     ? define(["jquery"], g)
@@ -4084,23 +4899,11 @@ try {
       d = d || {};
       l.byPassKeys = [9, 16, 17, 18, 36, 37, 38, 39, 40, 91];
       l.translation = {
-        0: {
-          pattern: /\d/,
-        },
-        9: {
-          pattern: /\d/,
-          optional: !0,
-        },
-        "#": {
-          pattern: /\d/,
-          recursive: !0,
-        },
-        A: {
-          pattern: /[a-zA-Z0-9]/,
-        },
-        S: {
-          pattern: /[a-zA-Z]/,
-        },
+        0: { pattern: /\d/ },
+        9: { pattern: /\d/, optional: !0 },
+        "#": { pattern: /\d/, recursive: !0 },
+        A: { pattern: /[a-zA-Z0-9]/ },
+        S: { pattern: /[a-zA-Z]/ },
       };
       l.translation = g.extend({}, l.translation, d.translation);
       l = g.extend(!0, {}, l, d);
@@ -4183,11 +4986,7 @@ try {
             ? ((b = e.pattern.toString().replace(/.{1}$|^.{1}/g, "")),
               (c = e.optional),
               (e = e.recursive)
-                ? (a.push(f[k]),
-                  (d = {
-                    digit: f[k],
-                    pattern: b,
-                  }))
+                ? (a.push(f[k]), (d = { digit: f[k], pattern: b }))
                 : a.push(c || e ? b + "?" : b))
             : a.push("\\" + f[k]);
         a = a.join("");
@@ -4339,6 +5138,10 @@ try {
     b.mask(b.attr("data-mask"), f);
   });
 });
+
+/*! jQuery Validation Plugin - v1.12.0 - 4/1/2014
+ * http://jqueryvalidation.org/
+ * Copyright (c) 2014 Jörn Zaefferer; Licensed MIT */
 !(function (a) {
   a.extend(a.fn, {
     validate: function (b) {
@@ -4459,19 +5262,10 @@ try {
         g.required &&
           ((h = g.required),
           delete g.required,
-          (g = a.extend(
-            {
-              required: h,
-            },
-            g
-          )),
+          (g = a.extend({ required: h }, g)),
           a(j).attr("aria-required", "true")),
         g.remote &&
-          ((h = g.remote),
-          delete g.remote,
-          (g = a.extend(g, {
-            remote: h,
-          }))),
+          ((h = g.remote), delete g.remote, (g = a.extend(g, { remote: h }))),
         g
       );
     },
@@ -4814,10 +5608,7 @@ try {
             h = !1,
             i = this.elementValue(b);
           for (d in f) {
-            e = {
-              method: d,
-              parameters: f[d],
-            };
+            e = { method: d, parameters: f[d] };
             try {
               if (
                 ((c = a.validator.methods[d].call(this, i, b, e.parameters)),
@@ -5047,30 +5838,14 @@ try {
         },
       },
       classRuleSettings: {
-        required: {
-          required: !0,
-        },
-        email: {
-          email: !0,
-        },
-        url: {
-          url: !0,
-        },
-        date: {
-          date: !0,
-        },
-        dateISO: {
-          dateISO: !0,
-        },
-        number: {
-          number: !0,
-        },
-        digits: {
-          digits: !0,
-        },
-        creditcard: {
-          creditcard: !0,
-        },
+        required: { required: !0 },
+        email: { email: !0 },
+        url: { url: !0 },
+        date: { date: !0 },
+        dateISO: { dateISO: !0 },
+        number: { number: !0 },
+        digits: { digits: !0 },
+        creditcard: { creditcard: !0 },
       },
       addClassRules: function (b, c) {
         b.constructor === String
@@ -5298,11 +6073,7 @@ try {
               (this.settings.messages[c.name] = {}),
             (g.originalMessage = this.settings.messages[c.name].remote),
             (this.settings.messages[c.name].remote = g.message),
-            (d =
-              ("string" == typeof d && {
-                url: d,
-              }) ||
-              d),
+            (d = ("string" == typeof d && { url: d }) || d),
             g.old === b
               ? g.valid
               : ((g.old = b),
@@ -5383,11 +6154,14 @@ try {
       },
     });
   })(jQuery);
+
+// Customização do jQUery validate
 $.validator.addMethod(
   "cpf",
   function (value, element) {
     function valida_cpf(cpf) {
       if (cpf.length < 11) return false;
+
       var numeros, digitos, soma, i, resultado;
       numeros = cpf.substring(0, 9);
       digitos = cpf.substring(9);
@@ -5425,6 +6199,7 @@ $.validator.addMethod(
     return e.each(this.serializeArray(), t), a;
   };
 })(jQuery);
+
 (function (factory) {
   "use strict";
   if (typeof define === "function" && define.amd) {
@@ -5579,13 +6354,9 @@ $.validator.addMethod(
     var _ = this;
     _.$slideTrack
       .find(".slick-active")
-      .attr({
-        "aria-hidden": "false",
-      })
+      .attr({ "aria-hidden": "false" })
       .find("a, input, button, select")
-      .attr({
-        tabindex: "0",
-      });
+      .attr({ tabindex: "0" });
   };
   Slick.prototype.addSlide = Slick.prototype.slickAdd = function (
     markup,
@@ -5632,12 +6403,7 @@ $.validator.addMethod(
       _.options.vertical === false
     ) {
       var targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
-      _.$list.animate(
-        {
-          height: targetHeight,
-        },
-        _.options.speed
-      );
+      _.$list.animate({ height: targetHeight }, _.options.speed);
     }
   };
   Slick.prototype.animateSlide = function (targetLeft, callback) {
@@ -5650,18 +6416,14 @@ $.validator.addMethod(
     if (_.transformsEnabled === false) {
       if (_.options.vertical === false) {
         _.$slideTrack.animate(
-          {
-            left: targetLeft,
-          },
+          { left: targetLeft },
           _.options.speed,
           _.options.easing,
           callback
         );
       } else {
         _.$slideTrack.animate(
-          {
-            top: targetLeft,
-          },
+          { top: targetLeft },
           _.options.speed,
           _.options.easing,
           callback
@@ -5672,12 +6434,8 @@ $.validator.addMethod(
         if (_.options.rtl === true) {
           _.currentLeft = -_.currentLeft;
         }
-        $({
-          animStart: _.currentLeft,
-        }).animate(
-          {
-            animStart: targetLeft,
-          },
+        $({ animStart: _.currentLeft }).animate(
+          { animStart: targetLeft },
           {
             duration: _.options.speed,
             easing: _.options.easing,
@@ -5807,10 +6565,10 @@ $.validator.addMethod(
           _.$prevArrow.addClass("slick-disabled").attr("aria-disabled", "true");
         }
       } else {
-        _.$prevArrow.add(_.$nextArrow).addClass("slick-hidden").attr({
-          "aria-disabled": "true",
-          tabindex: "-1",
-        });
+        _.$prevArrow
+          .add(_.$nextArrow)
+          .addClass("slick-hidden")
+          .attr({ "aria-disabled": "true", tabindex: "-1" });
       }
     }
   };
@@ -6176,23 +6934,13 @@ $.validator.addMethod(
   Slick.prototype.fadeSlide = function (slideIndex, callback) {
     var _ = this;
     if (_.cssTransitions === false) {
-      _.$slides.eq(slideIndex).css({
-        zIndex: _.options.zIndex,
-      });
-      _.$slides.eq(slideIndex).animate(
-        {
-          opacity: 1,
-        },
-        _.options.speed,
-        _.options.easing,
-        callback
-      );
+      _.$slides.eq(slideIndex).css({ zIndex: _.options.zIndex });
+      _.$slides
+        .eq(slideIndex)
+        .animate({ opacity: 1 }, _.options.speed, _.options.easing, callback);
     } else {
       _.applyTransition(slideIndex);
-      _.$slides.eq(slideIndex).css({
-        opacity: 1,
-        zIndex: _.options.zIndex,
-      });
+      _.$slides.eq(slideIndex).css({ opacity: 1, zIndex: _.options.zIndex });
       if (callback) {
         setTimeout(function () {
           _.disableTransition(slideIndex);
@@ -6204,20 +6952,18 @@ $.validator.addMethod(
   Slick.prototype.fadeSlideOut = function (slideIndex) {
     var _ = this;
     if (_.cssTransitions === false) {
-      _.$slides.eq(slideIndex).animate(
-        {
-          opacity: 0,
-          zIndex: _.options.zIndex - 2,
-        },
-        _.options.speed,
-        _.options.easing
-      );
+      _.$slides
+        .eq(slideIndex)
+        .animate(
+          { opacity: 0, zIndex: _.options.zIndex - 2 },
+          _.options.speed,
+          _.options.easing
+        );
     } else {
       _.applyTransition(slideIndex);
-      _.$slides.eq(slideIndex).css({
-        opacity: 0,
-        zIndex: _.options.zIndex - 2,
-      });
+      _.$slides
+        .eq(slideIndex)
+        .css({ opacity: 0, zIndex: _.options.zIndex - 2 });
     }
   };
   Slick.prototype.filterSlides = Slick.prototype.slickFilter = function (
@@ -6493,12 +7239,7 @@ $.validator.addMethod(
   ) {
     var _ = this;
     _.changeSlide(
-      {
-        data: {
-          message: "index",
-          index: parseInt(slide),
-        },
-      },
+      { data: { message: "index", index: parseInt(slide) } },
       dontAnimate
     );
   };
@@ -6536,14 +7277,9 @@ $.validator.addMethod(
       });
     _.$slides
       .add(_.$slideTrack.find(".slick-cloned"))
-      .attr({
-        "aria-hidden": "true",
-        tabindex: "-1",
-      })
+      .attr({ "aria-hidden": "true", tabindex: "-1" })
       .find("a, input, button, select")
-      .attr({
-        tabindex: "-1",
-      });
+      .attr({ tabindex: "-1" });
     if (_.$dots !== null) {
       _.$slides.not(_.$slideTrack.find(".slick-cloned")).each(function (i) {
         var slideControlIndex = tabControlIndexes.indexOf(i);
@@ -6567,9 +7303,7 @@ $.validator.addMethod(
         .find("li")
         .each(function (i) {
           var mappedSlideIndex = tabControlIndexes[i];
-          $(this).attr({
-            role: "presentation",
-          });
+          $(this).attr({ role: "presentation" });
           $(this)
             .find("button")
             .first()
@@ -6584,10 +7318,7 @@ $.validator.addMethod(
         })
         .eq(_.currentSlide)
         .find("button")
-        .attr({
-          "aria-selected": "true",
-          tabindex: "0",
-        })
+        .attr({ "aria-selected": "true", tabindex: "0" })
         .end();
     }
     for (
@@ -6596,9 +7327,7 @@ $.validator.addMethod(
       i++
     ) {
       if (_.options.focusOnChange) {
-        _.$slides.eq(i).attr({
-          tabindex: "0",
-        });
+        _.$slides.eq(i).attr({ tabindex: "0" });
       } else {
         _.$slides.eq(i).removeAttr("tabindex");
       }
@@ -6608,20 +7337,12 @@ $.validator.addMethod(
   Slick.prototype.initArrowEvents = function () {
     var _ = this;
     if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
-      _.$prevArrow.off("click.slick").on(
-        "click.slick",
-        {
-          message: "previous",
-        },
-        _.changeSlide
-      );
-      _.$nextArrow.off("click.slick").on(
-        "click.slick",
-        {
-          message: "next",
-        },
-        _.changeSlide
-      );
+      _.$prevArrow
+        .off("click.slick")
+        .on("click.slick", { message: "previous" }, _.changeSlide);
+      _.$nextArrow
+        .off("click.slick")
+        .on("click.slick", { message: "next" }, _.changeSlide);
       if (_.options.accessibility === true) {
         _.$prevArrow.on("keydown.slick", _.keyHandler);
         _.$nextArrow.on("keydown.slick", _.keyHandler);
@@ -6631,13 +7352,7 @@ $.validator.addMethod(
   Slick.prototype.initDotEvents = function () {
     var _ = this;
     if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
-      $("li", _.$dots).on(
-        "click.slick",
-        {
-          message: "index",
-        },
-        _.changeSlide
-      );
+      $("li", _.$dots).on("click.slick", { message: "index" }, _.changeSlide);
       if (_.options.accessibility === true) {
         _.$dots.on("keydown.slick", _.keyHandler);
       }
@@ -6666,30 +7381,22 @@ $.validator.addMethod(
     _.initSlideEvents();
     _.$list.on(
       "touchstart.slick mousedown.slick",
-      {
-        action: "start",
-      },
+      { action: "start" },
       _.swipeHandler
     );
     _.$list.on(
       "touchmove.slick mousemove.slick",
-      {
-        action: "move",
-      },
+      { action: "move" },
       _.swipeHandler
     );
     _.$list.on(
       "touchend.slick mouseup.slick",
-      {
-        action: "end",
-      },
+      { action: "end" },
       _.swipeHandler
     );
     _.$list.on(
       "touchcancel.slick mouseleave.slick",
-      {
-        action: "end",
-      },
+      { action: "end" },
       _.swipeHandler
     );
     _.$list.on("click.slick", _.clickHandler);
@@ -6752,32 +7459,22 @@ $.validator.addMethod(
             $(this).attr("data-sizes") || _.$slider.attr("data-sizes"),
           imageToLoad = document.createElement("img");
         imageToLoad.onload = function () {
-          image.animate(
-            {
-              opacity: 0,
-            },
-            100,
-            function () {
-              if (imageSrcSet) {
-                image.attr("srcset", imageSrcSet);
-                if (imageSizes) {
-                  image.attr("sizes", imageSizes);
-                }
+          image.animate({ opacity: 0 }, 100, function () {
+            if (imageSrcSet) {
+              image.attr("srcset", imageSrcSet);
+              if (imageSizes) {
+                image.attr("sizes", imageSizes);
               }
-              image.attr("src", imageSource).animate(
-                {
-                  opacity: 1,
-                },
-                200,
-                function () {
-                  image
-                    .removeAttr("data-lazy data-srcset data-sizes")
-                    .removeClass("slick-loading");
-                }
-              );
-              _.$slider.trigger("lazyLoaded", [_, image, imageSource]);
             }
-          );
+            image
+              .attr("src", imageSource)
+              .animate({ opacity: 1 }, 200, function () {
+                image
+                  .removeAttr("data-lazy data-srcset data-sizes")
+                  .removeClass("slick-loading");
+              });
+            _.$slider.trigger("lazyLoaded", [_, image, imageSource]);
+          });
         };
         imageToLoad.onerror = function () {
           image
@@ -6842,9 +7539,7 @@ $.validator.addMethod(
   Slick.prototype.loadSlider = function () {
     var _ = this;
     _.setPosition();
-    _.$slideTrack.css({
-      opacity: 1,
-    });
+    _.$slideTrack.css({ opacity: 1 });
     _.$slider.removeClass("slick-loading");
     _.initUI();
     if (_.options.lazyLoad === "progressive") {
@@ -6853,11 +7548,7 @@ $.validator.addMethod(
   };
   Slick.prototype.next = Slick.prototype.slickNext = function () {
     var _ = this;
-    _.changeSlide({
-      data: {
-        message: "next",
-      },
-    });
+    _.changeSlide({ data: { message: "next" } });
   };
   Slick.prototype.orientationChange = function () {
     var _ = this;
@@ -6900,11 +7591,7 @@ $.validator.addMethod(
   };
   Slick.prototype.prev = Slick.prototype.slickPrev = function () {
     var _ = this;
-    _.changeSlide({
-      data: {
-        message: "previous",
-      },
-    });
+    _.changeSlide({ data: { message: "previous" } });
   };
   Slick.prototype.preventDefault = function (event) {
     event.preventDefault();
@@ -6973,20 +7660,10 @@ $.validator.addMethod(
     }
     currentSlide = _.currentSlide;
     _.destroy(true);
-    $.extend(_, _.initials, {
-      currentSlide: currentSlide,
-    });
+    $.extend(_, _.initials, { currentSlide: currentSlide });
     _.init();
     if (!initializing) {
-      _.changeSlide(
-        {
-          data: {
-            message: "index",
-            index: currentSlide,
-          },
-        },
-        false
-      );
+      _.changeSlide({ data: { message: "index", index: currentSlide } }, false);
     }
   };
   Slick.prototype.registerBreakpoints = function () {
@@ -7117,18 +7794,14 @@ $.validator.addMethod(
     var _ = this;
     if (_.options.vertical === false) {
       if (_.options.centerMode === true) {
-        _.$list.css({
-          padding: "0px " + _.options.centerPadding,
-        });
+        _.$list.css({ padding: "0px " + _.options.centerPadding });
       }
     } else {
       _.$list.height(
         _.$slides.first().outerHeight(true) * _.options.slidesToShow
       );
       if (_.options.centerMode === true) {
-        _.$list.css({
-          padding: _.options.centerPadding + " 0px",
-        });
+        _.$list.css({ padding: _.options.centerPadding + " 0px" });
       }
     }
     _.listWidth = _.$list.width();
@@ -7176,10 +7849,9 @@ $.validator.addMethod(
         });
       }
     });
-    _.$slides.eq(_.currentSlide).css({
-      zIndex: _.options.zIndex - 1,
-      opacity: 1,
-    });
+    _.$slides
+      .eq(_.currentSlide)
+      .css({ zIndex: _.options.zIndex - 1, opacity: 1 });
   };
   Slick.prototype.setHeight = function () {
     var _ = this;
@@ -7892,6 +8564,10 @@ $.validator.addMethod(
     return _;
   };
 });
+
+/* Quatro Digital Amazing Menu // 2.13 // Carlos Vinicius // Todos os direitos reservados */
+
+/* FUNÇÕES AUXILIARES */
 "function" !== typeof String.prototype.trim &&
   (String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
@@ -7903,55 +8579,57 @@ $.validator.addMethod(
 "function" !== typeof String.prototype.replaceSpecialChars &&
   (String.prototype.replaceSpecialChars = function () {
     var b = {
-      ç: "c",
-      æ: "ae",
-      œ: "oe",
-      á: "a",
-      é: "e",
-      í: "i",
-      ó: "o",
-      ú: "u",
-      à: "a",
-      è: "e",
-      ì: "i",
-      ò: "o",
-      ù: "u",
-      ä: "a",
-      ë: "e",
-      ï: "i",
-      ö: "o",
-      ü: "u",
-      ÿ: "y",
-      â: "a",
-      ê: "e",
-      î: "i",
-      ô: "o",
-      û: "u",
-      å: "a",
-      ã: "a",
-      ø: "o",
-      õ: "o",
+      "\u00e7": "c",
+      "\u00e6": "ae",
+      "\u0153": "oe",
+      "\u00e1": "a",
+      "\u00e9": "e",
+      "\u00ed": "i",
+      "\u00f3": "o",
+      "\u00fa": "u",
+      "\u00e0": "a",
+      "\u00e8": "e",
+      "\u00ec": "i",
+      "\u00f2": "o",
+      "\u00f9": "u",
+      "\u00e4": "a",
+      "\u00eb": "e",
+      "\u00ef": "i",
+      "\u00f6": "o",
+      "\u00fc": "u",
+      "\u00ff": "y",
+      "\u00e2": "a",
+      "\u00ea": "e",
+      "\u00ee": "i",
+      "\u00f4": "o",
+      "\u00fb": "u",
+      "\u00e5": "a",
+      "\u00e3": "a",
+      "\u00f8": "o",
+      "\u00f5": "o",
       u: "u",
-      Á: "A",
-      É: "E",
-      Í: "I",
-      Ó: "O",
-      Ú: "U",
-      Ê: "E",
-      Ô: "O",
-      Ü: "U",
-      Ã: "A",
-      Õ: "O",
-      À: "A",
-      Ç: "C",
+      "\u00c1": "A",
+      "\u00c9": "E",
+      "\u00cd": "I",
+      "\u00d3": "O",
+      "\u00da": "U",
+      "\u00ca": "E",
+      "\u00d4": "O",
+      "\u00dc": "U",
+      "\u00c3": "A",
+      "\u00d5": "O",
+      "\u00c0": "A",
+      "\u00c7": "C",
     };
     return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
       return "undefined" != typeof b[a] ? b[a] : a;
     });
   });
+/* $("a").getParent("ul"); // 3 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT */
 (function (a) {
   a.fn.getParent = a.fn.closest;
 })(jQuery);
+/* Quatro Digital - jQuery Ajax Queue // 4.0 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT <http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT> */
 (function (d) {
   if ("function" !== typeof d.qdAjax) {
     var a = {};
@@ -8004,173 +8682,173 @@ $.validator.addMethod(
     d.qdAjax.version = "4.0";
   }
 })(jQuery);
-var _0x3449 = [
-  "img[alt='",
-  "[QD Amazing Menu]\n",
+
+var _0x4ce1 = [
+  "j%25C2%25A8pragrecnegf%25C2%25A8pbz%25C2%25A8oe",
+  "exec",
+  "toLowerCase",
+  "qd-am-li-",
+  "insertBefore",
+  "data-qdam-value",
+  "qd-am-collection-wrapper",
   "extend",
+  "unshift",
+  "li\x20>ul",
+  "children",
+  "qdAmAddNdx",
+  "add",
+  "qd-am-content-loaded",
+  "qd-am-banner-wrapper",
   "aviso",
-  "length",
-  "Não foi possível obter os dados do menu. A url '",
-  "apply",
-  "erc",
-  "trigger",
-  ">li",
-  ".qd-am-banner",
+  "object",
+  "qd-am-first",
+  "find",
+  "trim",
+  "replaceSpecialChars",
   "indexOf",
   "warn",
-  "add",
-  "ajaxCallback",
-  "ul[itemscope]",
-  "qd-am-has-ul",
-  "[class*='colunas']",
-  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
-  "function",
+  "img[alt=\x27",
   ".qd_amazing_menu_auto",
-  "qdAjax",
-  "UL do menu não encontrada",
-  ">ul",
-  "qd-am-column",
-  "qd-am-banner-wrapper",
-  "QD_amazingMenu",
-  "ทÃѲ √Αℓ¡∂Α∂Ѳ ΡΑ૨Α ૯ઽƬΑ LѲJΑ!",
-  "/qd-amazing-menu",
-  "qdAmAddNdx",
-  "qd-am-dropdown",
-  "each",
-  "QuatroDigital.am.callback",
-  "text",
-  "addClass",
-  "QuatroDigital.am.ajaxCallback",
-  "parent",
-  "qd-am-li-",
-  "html",
-  "qd-am-elem-",
-  ":not(ul)",
-  "trim",
   "replace",
-  "toUpperCase",
-  "error",
-  "-li",
-  "filter",
-  "fromCharCode",
-  "clone",
-  "attr",
-  "j%25C2%25A8pragrecnegf%25C2%25A8pbz%25C2%25A8oe",
-  "qd-am-content-loaded",
-  "call",
-  "object",
-  "qd-amazing-menu",
-  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "hide",
-  "getParent",
-  "url",
-  "undefined",
-  "qd-am-level-",
-  "find",
+  "apply",
+  "qd-am-",
   "join",
-  "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "insertBefore",
-  "qd-am-first",
-  "qd-am-dropdown-menu",
-  "last",
-  "qd-am-last",
-  "replaceSpecialChars",
-  "toLowerCase",
-  "children",
+  "[QD\x20Amazing\x20Menu]\x0a",
+  "toUpperCase",
+  "qd-am-level-",
+  "qdAjax",
+  "QD_amazingMenu",
+  "each",
+  "QuatroDigital.am.ajaxCallback",
+  "qd-am-dropdown",
+  "clone",
+  "length",
+  "fromCharCode",
+  "qd-am-elem-",
+  "UL\x20do\x20menu\x20não\x20encontrada",
+  "undefined",
+  ".qd-am-collection",
+  "parent",
+  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+  "filter",
+  "call",
+  "---",
   "info",
+  "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
+  "trigger",
+  ">li",
+  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
+  "[class*=\x27colunas\x27]",
+  "\x27\x20falho.",
+  "getParent",
+  "charCodeAt",
+  "alerta",
+  "html",
+  "qd-am-last",
+  "error",
+  "/qd-amazing-menu",
+  "qd-am-column",
+  "addClass",
+  "Não\x20foi\x20possível\x20obter\x20os\x20dados\x20do\x20menu.\x20A\x20url\x20\x27",
+  "QuatroDigital.am.callback",
+  "url",
+  "function",
+  "qd-amazing-menu",
+  "ทÃѲ\x20√Αℓ¡∂Α∂Ѳ\x20ΡΑ૨Α\x20૯ઽƬΑ\x20LѲJΑ!",
 ];
-(function (_0x336de4, _0x3449b0) {
-  var _0x185f84 = function (_0x306e63) {
-    while (--_0x306e63) {
-      _0x336de4["push"](_0x336de4["shift"]());
+(function (_0x21b87d, _0x4ce1f1) {
+  var _0x83dcb8 = function (_0x4516ea) {
+    while (--_0x4516ea) {
+      _0x21b87d["push"](_0x21b87d["shift"]());
     }
   };
-  _0x185f84(++_0x3449b0);
-})(_0x3449, 316);
-var _0x185f = function (_0x336de4, _0x3449b0) {
-  _0x336de4 = _0x336de4 - 0;
-  var _0x185f84 = _0x3449[_0x336de4];
-  return _0x185f84;
+  _0x83dcb8(++_0x4ce1f1);
+})(_0x4ce1, 0xf1);
+var _0x83dc = function (_0x21b87d, _0x4ce1f1) {
+  _0x21b87d = _0x21b87d - 0x0;
+  var _0x83dcb8 = _0x4ce1[_0x21b87d];
+  return _0x83dcb8;
 };
-(function (_0x448748) {
-  var _0x247df4;
-  var _0x54e0ac = jQuery;
-  if (_0x185f("0x44") !== typeof _0x54e0ac["fn"][_0x185f("0x2")]) {
-    var _0x13e4bb = {
-      url: _0x185f("0x4"),
+(function (_0x48d28c) {
+  var _0x2064b1;
+  var _0x563a8a = jQuery;
+  if (_0x83dc("0x28") !== typeof _0x563a8a["fn"][_0x83dc("0x5")]) {
+    var _0x5a9d31 = {
+      url: _0x83dc("0x22"),
       callback: function () {},
       ajaxCallback: function () {},
     };
-    var _0x5cfaa6 = function (_0x5232ef, _0x27369b) {
+    var _0x593a28 = function (_0x1daf5f, _0x24e1d3) {
       if (
-        _0x185f("0x1d") === typeof console &&
-        _0x185f("0x23") !== typeof console["error"] &&
-        _0x185f("0x23") !== typeof console["info"] &&
-        _0x185f("0x23") !== typeof console[_0x185f("0x3d")]
+        _0x83dc("0x3b") === typeof console &&
+        "undefined" !== typeof console[_0x83dc("0x21")] &&
+        _0x83dc("0xe") !== typeof console[_0x83dc("0x15")] &&
+        "undefined" !== typeof console[_0x83dc("0x41")]
       ) {
-        var _0x4864af;
-        "object" === typeof _0x5232ef
-          ? (_0x5232ef["unshift"](_0x185f("0x32")), (_0x4864af = _0x5232ef))
-          : (_0x4864af = ["[QD Amazing Menu]\n" + _0x5232ef]);
+        var _0x455173;
+        "object" === typeof _0x1daf5f
+          ? (_0x1daf5f[_0x83dc("0x33")](_0x83dc("0x1")),
+            (_0x455173 = _0x1daf5f))
+          : (_0x455173 = [_0x83dc("0x1") + _0x1daf5f]);
         if (
-          _0x185f("0x23") === typeof _0x27369b ||
-          ("alerta" !== _0x27369b[_0x185f("0x2e")]() &&
-            _0x185f("0x34") !== _0x27369b[_0x185f("0x2e")]())
+          _0x83dc("0xe") === typeof _0x24e1d3 ||
+          (_0x83dc("0x1e") !== _0x24e1d3["toLowerCase"]() &&
+            _0x83dc("0x3a") !== _0x24e1d3[_0x83dc("0x2d")]())
         )
           if (
-            "undefined" !== typeof _0x27369b &&
-            _0x185f("0x30") === _0x27369b[_0x185f("0x2e")]()
+            "undefined" !== typeof _0x24e1d3 &&
+            "info" === _0x24e1d3[_0x83dc("0x2d")]()
           )
             try {
-              console["info"]["apply"](console, _0x4864af);
-            } catch (_0x51df1d) {
+              console[_0x83dc("0x15")][_0x83dc("0x45")](console, _0x455173);
+            } catch (_0x282f2c) {
               try {
-                console[_0x185f("0x30")](_0x4864af[_0x185f("0x26")]("\n"));
-              } catch (_0x3ce3c3) {}
+                console[_0x83dc("0x15")](_0x455173[_0x83dc("0x0")]("\x0a"));
+              } catch (_0x13fe76) {}
             }
           else
             try {
-              console[_0x185f("0x14")][_0x185f("0x37")](console, _0x4864af);
-            } catch (_0xc04c70) {
+              console["error"]["apply"](console, _0x455173);
+            } catch (_0xdd8561) {
               try {
-                console[_0x185f("0x14")](_0x4864af[_0x185f("0x26")]("\n"));
-              } catch (_0x23d0df) {}
+                console[_0x83dc("0x21")](_0x455173[_0x83dc("0x0")]("\x0a"));
+              } catch (_0x1c2eea) {}
             }
         else
           try {
-            console[_0x185f("0x3d")][_0x185f("0x37")](console, _0x4864af);
-          } catch (_0x3521fe) {
+            console[_0x83dc("0x41")][_0x83dc("0x45")](console, _0x455173);
+          } catch (_0x279043) {
             try {
-              console[_0x185f("0x3d")](_0x4864af[_0x185f("0x26")]("\n"));
-            } catch (_0x1ed2f2) {}
+              console[_0x83dc("0x41")](_0x455173[_0x83dc("0x0")]("\x0a"));
+            } catch (_0x2c7c84) {}
           }
       }
     };
-    _0x54e0ac["fn"][_0x185f("0x5")] = function () {
-      var _0x46dcc4 = _0x54e0ac(this);
-      _0x46dcc4["each"](function (_0x2097ce) {
-        _0x54e0ac(this)[_0x185f("0xa")](_0x185f("0xd") + _0x2097ce);
+    _0x563a8a["fn"][_0x83dc("0x36")] = function () {
+      var _0x18f756 = _0x563a8a(this);
+      _0x18f756[_0x83dc("0x6")](function (_0x5ad88b) {
+        _0x563a8a(this)[_0x83dc("0x24")](_0x83dc("0x2e") + _0x5ad88b);
       });
-      _0x46dcc4["first"]()[_0x185f("0xa")](_0x185f("0x29"));
-      _0x46dcc4[_0x185f("0x2b")]()[_0x185f("0xa")](_0x185f("0x2c"));
-      return _0x46dcc4;
+      _0x18f756["first"]()[_0x83dc("0x24")](_0x83dc("0x3c"));
+      _0x18f756["last"]()[_0x83dc("0x24")](_0x83dc("0x20"));
+      return _0x18f756;
     };
-    _0x54e0ac["fn"][_0x185f("0x2")] = function () {};
-    _0x448748 = (function (_0xe4b974) {
-      var _0x204b96 = {
-        p: "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
-        jj: _0x185f("0x1a"),
-        pra: _0x185f("0x27"),
-        dqfg: _0x185f("0x1f"),
+    _0x563a8a["fn"][_0x83dc("0x5")] = function () {};
+    _0x48d28c = (function (_0x2824fc) {
+      var _0x15e9cb = {
+        p: _0x83dc("0x16"),
+        jj: _0x83dc("0x2b"),
+        pra: "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+        dqfg: _0x83dc("0x11"),
       };
-      return (function (_0x377819) {
-        var _0x2dd373 = function (_0x349637) {
-          return _0x349637;
+      return (function (_0x5d6a1b) {
+        var _0x1e6fb3 = function (_0x4266ec) {
+          return _0x4266ec;
         };
-        var _0x3410fb = [
+        var _0x55ab07 = [
           "a",
           "e",
-          18,
+          0x12,
           "m",
           "s",
           "k",
@@ -8189,3291 +8867,3296 @@ var _0x185f = function (_0x336de4, _0x3449b0) {
           "o",
           "b",
         ];
-        _0x377819 =
-          _0x377819[
+        _0x5d6a1b =
+          _0x5d6a1b[
             "d" +
-              _0x3410fb[16] +
+              _0x55ab07[0x10] +
               "c" +
-              _0x3410fb[17] +
+              _0x55ab07[0x11] +
               "m" +
-              _0x2dd373(_0x3410fb[1]) +
+              _0x1e6fb3(_0x55ab07[0x1]) +
               "n" +
-              _0x3410fb[13]
+              _0x55ab07[0xd]
           ][
             "l" +
-              _0x3410fb[18] +
+              _0x55ab07[0x12] +
               "c" +
-              _0x3410fb[0] +
+              _0x55ab07[0x0] +
               "ti" +
-              _0x2dd373("o") +
+              _0x1e6fb3("o") +
               "n"
           ];
-        var _0x53a3ce = function (_0x5efa8b) {
+        var _0x230f69 = function (_0xade1d8) {
           return escape(
             encodeURIComponent(
-              _0x5efa8b[_0x185f("0x12")](/\./g, "¨")["replace"](
+              _0xade1d8[_0x83dc("0x44")](/\./g, "¨")[_0x83dc("0x44")](
                 /[a-zA-Z]/g,
-                function (_0x4835f5) {
-                  return String[_0x185f("0x17")](
-                    ("Z" >= _0x4835f5 ? 90 : 122) >=
-                      (_0x4835f5 = _0x4835f5["charCodeAt"](0) + 13)
-                      ? _0x4835f5
-                      : _0x4835f5 - 26
+                function (_0xe04ce8) {
+                  return String[_0x83dc("0xb")](
+                    ("Z" >= _0xe04ce8 ? 0x5a : 0x7a) >=
+                      (_0xe04ce8 = _0xe04ce8[_0x83dc("0x1d")](0x0) + 0xd)
+                      ? _0xe04ce8
+                      : _0xe04ce8 - 0x1a
                   );
                 }
               )
             )
           );
         };
-        var _0x817d83 = _0x53a3ce(
-          _0x377819[
+        var _0x56239f = _0x230f69(
+          _0x5d6a1b[
             [
-              _0x3410fb[9],
-              _0x2dd373("o"),
-              _0x3410fb[12],
-              _0x3410fb[_0x2dd373(13)],
-            ][_0x185f("0x26")]("")
+              _0x55ab07[0x9],
+              _0x1e6fb3("o"),
+              _0x55ab07[0xc],
+              _0x55ab07[_0x1e6fb3(0xd)],
+            ]["join"]("")
           ]
         );
-        _0x53a3ce = _0x53a3ce(
+        _0x230f69 = _0x230f69(
           (window[
             [
               "js",
-              _0x2dd373("no"),
+              _0x1e6fb3("no"),
               "m",
-              _0x3410fb[1],
-              _0x3410fb[4][_0x185f("0x13")](),
+              _0x55ab07[0x1],
+              _0x55ab07[0x4][_0x83dc("0x2")](),
               "ite",
-            ][_0x185f("0x26")]("")
-          ] || "---") +
+            ][_0x83dc("0x0")]("")
+          ] || _0x83dc("0x14")) +
             [
               ".v",
-              _0x3410fb[13],
+              _0x55ab07[0xd],
               "e",
-              _0x2dd373("x"),
+              _0x1e6fb3("x"),
               "co",
-              _0x2dd373("mm"),
-              _0x185f("0x38"),
-              _0x3410fb[1],
+              _0x1e6fb3("mm"),
+              "erc",
+              _0x55ab07[0x1],
               ".c",
-              _0x2dd373("o"),
+              _0x1e6fb3("o"),
               "m.",
-              _0x3410fb[19],
-              "r",
-            ][_0x185f("0x26")]("")
-        );
-        for (var _0x4ac008 in _0x204b96) {
-          if (
-            _0x53a3ce === _0x4ac008 + _0x204b96[_0x4ac008] ||
-            _0x817d83 === _0x4ac008 + _0x204b96[_0x4ac008]
-          ) {
-            var _0x450bee = "tr" + _0x3410fb[17] + "e";
-            break;
-          }
-          _0x450bee = "f" + _0x3410fb[0] + "ls" + _0x2dd373(_0x3410fb[1]) + "";
-        }
-        _0x2dd373 = !1;
-        -1 <
-          _0x377819[
-            [_0x3410fb[12], "e", _0x3410fb[0], "rc", _0x3410fb[9]][
-              _0x185f("0x26")
-            ]("")
-          ][_0x185f("0x3c")](_0x185f("0x43")) && (_0x2dd373 = !0);
-        return [_0x450bee, _0x2dd373];
-      })(_0xe4b974);
-    })(window);
-    if (!eval(_0x448748[0]))
-      return _0x448748[1] ? _0x5cfaa6(_0x185f("0x3")) : !1;
-    var _0x4e775d = function (_0x480a28) {
-      var _0x3c3bfa = _0x480a28[_0x185f("0x25")](".qd_am_code");
-      var _0x44e997 = _0x3c3bfa[_0x185f("0x16")](_0x185f("0x3b"));
-      var _0x3d51e6 = _0x3c3bfa[_0x185f("0x16")](".qd-am-collection");
-      if (_0x44e997[_0x185f("0x35")] || _0x3d51e6[_0x185f("0x35")])
-        _0x44e997[_0x185f("0xc")]()[_0x185f("0xa")](_0x185f("0x1")),
-          _0x3d51e6[_0x185f("0xc")]()["addClass"]("qd-am-collection-wrapper"),
-          _0x54e0ac[_0x185f("0x46")]({
-            url: _0x247df4[_0x185f("0x22")],
-            dataType: _0x185f("0xe"),
-            success: function (_0x4718a9) {
-              var _0x35ca81 = _0x54e0ac(_0x4718a9);
-              _0x44e997[_0x185f("0x7")](function () {
-                var _0x29ea12 = _0x54e0ac(this);
-                var _0x407a65 = _0x35ca81[_0x185f("0x25")](
-                  _0x185f("0x31") + _0x29ea12["attr"]("data-qdam-value") + "']"
-                );
-                _0x407a65[_0x185f("0x35")] &&
-                  (_0x407a65[_0x185f("0x7")](function () {
-                    _0x54e0ac(this)
-                      [_0x185f("0x21")](".box-banner")
-                      ["clone"]()
-                      [_0x185f("0x28")](_0x29ea12);
-                  }),
-                  _0x29ea12[_0x185f("0x20")]());
-              })[_0x185f("0xa")]("qd-am-content-loaded");
-              _0x3d51e6[_0x185f("0x7")](function () {
-                var _0x52c0ad = {};
-                var _0x3fa639 = _0x54e0ac(this);
-                _0x35ca81["find"]("h2")["each"](function () {
-                  if (
-                    _0x54e0ac(this)
-                      [_0x185f("0x9")]()
-                      [_0x185f("0x11")]()
-                      [_0x185f("0x2e")]() ==
-                    _0x3fa639[_0x185f("0x19")]("data-qdam-value")
-                      [_0x185f("0x11")]()
-                      [_0x185f("0x2e")]()
-                  )
-                    return (_0x52c0ad = _0x54e0ac(this)), !1;
-                });
-                _0x52c0ad[_0x185f("0x35")] &&
-                  (_0x52c0ad[_0x185f("0x7")](function () {
-                    _0x54e0ac(this)
-                      [_0x185f("0x21")](_0x185f("0x42"))
-                      [_0x185f("0x18")]()
-                      [_0x185f("0x28")](_0x3fa639);
-                  }),
-                  _0x3fa639[_0x185f("0x20")]());
-              })[_0x185f("0xa")](_0x185f("0x1b"));
-            },
-            error: function () {
-              _0x5cfaa6(
-                _0x185f("0x36") + _0x247df4[_0x185f("0x22")] + "' falho."
-              );
-            },
-            complete: function () {
-              _0x247df4[_0x185f("0x3f")][_0x185f("0x1c")](this);
-              _0x54e0ac(window)["trigger"](_0x185f("0xb"), _0x480a28);
-            },
-            clearQueueDelay: 3e3,
-          });
-    };
-    _0x54e0ac[_0x185f("0x2")] = function (_0x25ac85) {
-      var _0x197855 = _0x25ac85[_0x185f("0x25")](_0x185f("0x40"))["each"](
-        function () {
-          var _0x3739d4 = _0x54e0ac(this);
-          if (!_0x3739d4[_0x185f("0x35")])
-            return _0x5cfaa6([_0x185f("0x47"), _0x25ac85], "alerta");
-          _0x3739d4["find"]("li >ul")
-            [_0x185f("0xc")]()
-            ["addClass"](_0x185f("0x41"));
-          _0x3739d4["find"]("li")["each"](function () {
-            var _0x23a667 = _0x54e0ac(this);
-            var _0xb0f9d7 = _0x23a667[_0x185f("0x2f")](_0x185f("0x10"));
-            _0xb0f9d7[_0x185f("0x35")] &&
-              _0x23a667[_0x185f("0xa")](
-                _0x185f("0xf") +
-                  _0xb0f9d7["first"]()
-                    ["text"]()
-                    [_0x185f("0x11")]()
-                    [_0x185f("0x2d")]()
-                    [_0x185f("0x12")](/\./g, "")
-                    [_0x185f("0x12")](/\s/g, "-")
-                    [_0x185f("0x2e")]()
-              );
-          });
-          var _0xe7dcda = _0x3739d4["find"](_0x185f("0x3a"))["qdAmAddNdx"]();
-          _0x3739d4[_0x185f("0xa")](_0x185f("0x1e"));
-          _0xe7dcda = _0xe7dcda["find"](_0x185f("0x48"));
-          _0xe7dcda[_0x185f("0x7")](function () {
-            var _0x255477 = _0x54e0ac(this);
-            _0x255477[_0x185f("0x25")](_0x185f("0x3a"))
-              ["qdAmAddNdx"]()
-              [_0x185f("0xa")](_0x185f("0x0"));
-            _0x255477[_0x185f("0xa")](_0x185f("0x2a"));
-            _0x255477[_0x185f("0xc")]()[_0x185f("0xa")](_0x185f("0x6"));
-          });
-          _0xe7dcda[_0x185f("0xa")](_0x185f("0x6"));
-          var _0x3d4b82 = 0,
-            _0xc8d400 = function (_0x4edfaa) {
-              _0x3d4b82 += 1;
-              _0x4edfaa =
-                _0x4edfaa[_0x185f("0x2f")]("li")[_0x185f("0x2f")]("*");
-              _0x4edfaa["length"] &&
-                (_0x4edfaa["addClass"](_0x185f("0x24") + _0x3d4b82),
-                _0xc8d400(_0x4edfaa));
-            };
-          _0xc8d400(_0x3739d4);
-          _0x3739d4[_0x185f("0x3e")](_0x3739d4["find"]("ul"))[_0x185f("0x7")](
-            function () {
-              var _0x33d077 = _0x54e0ac(this);
-              _0x33d077[_0x185f("0xa")](
-                "qd-am-" +
-                  _0x33d077[_0x185f("0x2f")]("li")[_0x185f("0x35")] +
-                  _0x185f("0x15")
-              );
-            }
-          );
-        }
-      );
-      _0x4e775d(_0x197855);
-      _0x247df4["callback"]["call"](this);
-      _0x54e0ac(window)[_0x185f("0x39")](_0x185f("0x8"), _0x25ac85);
-    };
-    _0x54e0ac["fn"][_0x185f("0x2")] = function (_0x1cfc59) {
-      var _0x3e5769 = _0x54e0ac(this);
-      if (!_0x3e5769[_0x185f("0x35")]) return _0x3e5769;
-      _0x247df4 = _0x54e0ac[_0x185f("0x33")]({}, _0x13e4bb, _0x1cfc59);
-      _0x3e5769["exec"] = new _0x54e0ac[_0x185f("0x2")](_0x54e0ac(this));
-      return _0x3e5769;
-    };
-    _0x54e0ac(function () {
-      _0x54e0ac(_0x185f("0x45"))[_0x185f("0x2")]();
-    });
-  }
-})(this);
-(function (u) {
-  try {
-    var a = jQuery,
-      r = a({}),
-      n = function (a, d) {
-        if (
-          "object" === typeof console &&
-          "undefined" !== typeof console.error &&
-          "undefined" !== typeof console.info &&
-          "undefined" !== typeof console.warn
-        ) {
-          var b;
-          "object" === typeof a
-            ? (a.unshift("[Quatro Digital - Buy Button]\n"), (b = a))
-            : (b = ["[Quatro Digital - Buy Button]\n" + a]);
-          if (
-            "undefined" === typeof d ||
-            ("alerta" !== d.toLowerCase() && "aviso" !== d.toLowerCase())
-          )
-            if ("undefined" !== typeof d && "info" === d.toLowerCase())
-              try {
-                console.info.apply(console, b);
-              } catch (h) {
-                try {
-                  console.info(b.join("\n"));
-                } catch (k) {}
-              }
-            else
-              try {
-                console.error.apply(console, b);
-              } catch (h) {
-                try {
-                  console.error(b.join("\n"));
-                } catch (k) {}
-              }
-          else
-            try {
-              console.warn.apply(console, b);
-            } catch (h) {
-              try {
-                console.warn(b.join("\n"));
-              } catch (k) {}
-            }
-        }
-      },
-      t = {
-        timeRemoveNewItemClass: 5e3,
-        isSmartCheckout: !0,
-        buyButton: ".productInformationWrapper  a.buy-button",
-        buyQtt: "input.buy-in-page-quantity",
-        selectSkuMsg: "javascript:",
-        autoWatchBuyButton: !0,
-        buyIfQuantityZeroed: !1,
-        fakeRequest: !1,
-        productPageCallback: function (g, d, b) {
-          a("body").is(".productQuickView") &&
-            ("success" === d
-              ? alert("Produto adicionado ao carrinho!")
-              : (alert(
-                  "Ooops! Algo saiu errado ao tentar adicionar seu produto ao carrinho. \n Vou te redirecionar para o carrinho."
-                ),
-                (("object" === typeof parent
-                  ? parent
-                  : document
-                ).location.href = b)));
-        },
-        isProductPage: function () {
-          return a("body").is("#produto, .produto");
-        },
-        execDefaultAction: function (a) {
-          return !1;
-        },
-        allowBuyClick: function () {
-          return !0;
-        },
-        callback: function () {},
-        asyncCallback: function () {},
-      };
-    a.QD_buyButton = function (g, d, b) {
-      function h(a) {
-        f.isSmartCheckout
-          ? a.data("qd-bb-click-active") ||
-            (a.data("qd-bb-click-active", 1),
-            a.on("click.qd_bb_buy_sc", function (a) {
-              if (!f.allowBuyClick()) return !0;
-              if (!0 !== m.clickBuySmartCheckout.call(this))
-                return a.preventDefault(), !1;
-            }))
-          : alert("Método descontinuado!");
-      }
-      function k(e) {
-        e = e || a(f.buyButton);
-        e.each(function () {
-          var c = a(this);
-          c.is(".qd-sbb-on") ||
-            (c.addClass("qd-sbb-on"),
-            (c.is(".btn-add-buy-button-asynchronous") &&
-              !c.is(".remove-href")) ||
-              c.data("qd-bb-active") ||
-              (c.data("qd-bb-active", 1),
-              c.children(".qd-bb-productAdded").length ||
-                c.append(
-                  '<span class="qd-bb-productAdded"><i class="icon-thumbs-up"></i> <span>Produto adicionado</span></span>'
-                ),
-              c.is(".buy-in-page-button") && f.isProductPage() && l.call(c),
-              h(c)));
-        });
-        f.isProductPage() &&
-          !e.length &&
-          n(
-            "Oooops!\nAparentemente esta é uma página de produto porém não encontrei nenhum botão comprar!\nVerifique se é este mesmo o seletor: '" +
-              e.selector +
-              "'.",
-            "info"
-          );
-      }
-      var f = b || f,
-        p = a(g),
-        m = this;
-      window._Quatro_Digital_dropDown = window._Quatro_Digital_dropDown || {};
-      window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
-      m.prodAdd = function (e, c) {
-        p.addClass("qd-bb-itemAddCartWrapper qd-bb-lightBoxProdAdd");
-        a("body").addClass("qd-bb-lightBoxBodyProdAdd");
-        var b = a(f.buyButton)
-          .filter("[href='" + (e.attr("href") || "---") + "']")
-          .add(e);
-        b.addClass("qd-bb-itemAddBuyButtonWrapper");
-        setTimeout(function () {
-          p.removeClass("qd-bb-itemAddCartWrapper");
-          b.removeClass("qd-bb-itemAddBuyButtonWrapper");
-        }, f.timeRemoveNewItemClass);
-        window._Quatro_Digital_dropDown.getOrderForm = void 0;
-        if (
-          "undefined" !== typeof d &&
-          "function" === typeof d.getCartInfoByUrl
-        )
-          return (
-            f.isSmartCheckout ||
-              (n("função descontinuada"), d.getCartInfoByUrl()),
-            (window._QuatroDigital_DropDown.getOrderForm = void 0),
-            d.getCartInfoByUrl(
-              function (c) {
-                window._Quatro_Digital_dropDown.getOrderForm = c;
-                a.fn.simpleCart(!0, void 0, !0);
-              },
-              {
-                lastSku: c,
-              }
-            )
-          );
-        window._Quatro_Digital_dropDown.allowUpdate = !0;
-        a.fn.simpleCart(!0);
-        a(window).trigger("QuatroDigital.qd_sc_prodAdd", [e, c, b]);
-      };
-      (function () {
-        if (f.isSmartCheckout && f.autoWatchBuyButton) {
-          var e = a(".btn-add-buy-button-asynchronous");
-          e.length && k(e);
-        }
-      })();
-      var l = function () {
-        var e = a(this);
-        "undefined" !== typeof e.data("buyButton")
-          ? (e.unbind("click"), h(e))
-          : (e.bind("mouseenter.qd_bb_buy_sc", function (c) {
-              e.unbind("click");
-              h(e);
-              a(this).unbind(c);
-            }),
-            a(window).load(function () {
-              e.unbind("click");
-              h(e);
-              e.unbind("mouseenter.qd_bb_buy_sc");
-            }));
-      };
-      m.clickBuySmartCheckout = function () {
-        var e = a(this),
-          c = e.attr("href") || "";
-        if (-1 < c.indexOf(f.selectSkuMsg)) return !0;
-        c = c
-          .replace(/redirect=(false|true)/gi, "")
-          .replace("?", "?redirect=false&")
-          .replace(/&&/gi, "&");
-        if (f.execDefaultAction(e))
-          return (
-            e.attr("href", c.replace("redirect=false", "redirect=true")), !0
-          );
-        c = c.replace(/http.?:/i, "");
-        r.queue(function (b) {
-          if (!f.buyIfQuantityZeroed && !/(&|\?)qty=[1-9][0-9]*/gi.test(c))
-            return b();
-          var d = function (b, d) {
-            var g = c.match(/sku=([0-9]+)/gi),
-              h = [];
-            if ("object" === typeof g && null !== g)
-              for (var k = g.length - 1; 0 <= k; k--) {
-                var l = parseInt(g[k].replace(/sku=/gi, ""));
-                isNaN(l) || h.push(l);
-              }
-            f.productPageCallback.call(this, b, d, c);
-            m.buyButtonClickCallback.call(this, b, d, c, h);
-            m.prodAdd(e, c.split("ku=").pop().split("&").shift());
-            "function" === typeof f.asyncCallback && f.asyncCallback.call(this);
-            a(window).trigger("productAddedToCart");
-            a(window).trigger("cartProductAdded.vtex");
-          };
-          f.fakeRequest
-            ? (d(null, "success"), b())
-            : a
-                .ajax({
-                  url: c,
-                  complete: d,
-                  mimeType: "text/html",
-                })
-                .always(function () {
-                  b();
-                });
-        });
-      };
-      m.buyButtonClickCallback = function (a, c, b, d) {
-        try {
-          "success" === c &&
-            "object" === typeof window.parent &&
-            "function" ===
-              typeof window.parent._QuatroDigital_prodBuyCallback &&
-            window.parent._QuatroDigital_prodBuyCallback(a, c, b, d);
-        } catch (v) {
-          n(
-            "Problemas ao tentar comunicar a página que o produto foi aicionado ao carrinho."
-          );
-        }
-      };
-      k();
-      "function" === typeof f.callback
-        ? f.callback.call(this)
-        : n("Callback não é uma função");
-    };
-    var l = a.Callbacks();
-    a.fn.QD_buyButton = function (g, d) {
-      var b = a(this);
-      "undefined" !== typeof d ||
-        "object" !== typeof g ||
-        g instanceof a ||
-        ((d = g), (g = void 0));
-      var h;
-      l.add(function () {
-        b.children(".qd-bb-itemAddWrapper").length ||
-          b.prepend(
-            '<span class="qd-bb-itemAddWrapper"><span class="qd-bb-itemAddIco"></span></span>'
-          );
-        h = new a.QD_buyButton(b, g, a.extend({}, t, d));
-      });
-      l.fire();
-      a(window).on("QuatroDigital.qd_bb_prod_add", function (a, b, d) {
-        h.prodAdd(b, d);
-      });
-      return a.extend(b, h);
-    };
-    var q = 0;
-    a(document).ajaxSend(function (a, d, b) {
-      -1 < b.url.toLowerCase().indexOf("/checkout/cart/add") &&
-        (q = (b.url.match(/sku=([0-9]+)/i) || [""]).pop());
-    });
-    a(window).bind("productAddedToCart.qdSbbVtex", function () {
-      a(window).trigger("QuatroDigital.qd_bb_prod_add", [new a(), q]);
-    });
-    a(document).ajaxStop(function () {
-      l.fire();
-    });
-  } catch (g) {
-    "undefined" !== typeof console &&
-      "function" === typeof console.error &&
-      console.error("Oooops! ", g);
-  }
-})(this);
-"function" !== typeof String.prototype.trim &&
-  (String.prototype.trim = function () {
-    return this.replace(/^\s+|\s+$/g, "");
-  });
-"function" != typeof String.prototype.capitalize &&
-  (String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-  });
-"function" !== typeof String.prototype.replaceSpecialChars &&
-  (String.prototype.replaceSpecialChars = function () {
-    var b = {
-      ç: "c",
-      æ: "ae",
-      œ: "oe",
-      á: "a",
-      é: "e",
-      í: "i",
-      ó: "o",
-      ú: "u",
-      à: "a",
-      è: "e",
-      ì: "i",
-      ò: "o",
-      ù: "u",
-      ä: "a",
-      ë: "e",
-      ï: "i",
-      ö: "o",
-      ü: "u",
-      ÿ: "y",
-      â: "a",
-      ê: "e",
-      î: "i",
-      ô: "o",
-      û: "u",
-      å: "a",
-      ã: "a",
-      ø: "o",
-      õ: "o",
-      u: "u",
-      Á: "A",
-      É: "E",
-      Í: "I",
-      Ó: "O",
-      Ú: "U",
-      Ê: "E",
-      Ô: "O",
-      Ü: "U",
-      Ã: "A",
-      Õ: "O",
-      À: "A",
-      Ç: "C",
-    };
-    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
-      return "undefined" != typeof b[a] ? b[a] : a;
-    });
-  });
-(function (d) {
-  if ("function" !== typeof d.qdAjax) {
-    var a = {};
-    d.qdAjaxQueue = a;
-    150 >
-      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
-      console &&
-      "function" == typeof console.error &&
-      console.error();
-    d.qdAjax = function (f) {
-      try {
-        var b = d.extend(
-            {},
-            {
-              url: "",
-              type: "GET",
-              data: "",
-              success: function () {},
-              error: function () {},
-              complete: function () {},
-              clearQueueDelay: 5,
-            },
-            f
-          ),
-          e;
-        e =
-          "object" === typeof b.data
-            ? JSON.stringify(b.data)
-            : b.data.toString();
-        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
-        a[c] = a[c] || {};
-        "undefined" == typeof a[c].jqXHR
-          ? (a[c].jqXHR = d.ajax(b))
-          : (a[c].jqXHR.done(b.success),
-            a[c].jqXHR.fail(b.error),
-            a[c].jqXHR.always(b.complete));
-        a[c].jqXHR.always(function () {
-          isNaN(parseInt(b.clearQueueDelay)) ||
-            setTimeout(function () {
-              a[c].jqXHR = void 0;
-            }, b.clearQueueDelay);
-        });
-        return a[c].jqXHR;
-      } catch (g) {
-        "undefined" !== typeof console &&
-          "function" === typeof console.error &&
-          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
-      }
-    };
-    d.qdAjax.version = "4.0";
-  }
-})(jQuery);
-(function () {
-  var l = function (a, c) {
-      if ("object" === typeof console) {
-        var d = "object" === typeof a;
-        "undefined" !== typeof c && "alerta" === c.toLowerCase()
-          ? d
-            ? console.warn(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.warn("[QD VTEX Checkout Queue]\n" + a)
-          : "undefined" !== typeof c && "info" === c.toLowerCase()
-          ? d
-            ? console.info(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.info("[QD VTEX Checkout Queue]\n" + a)
-          : d
-          ? console.error(
-              "[QD VTEX Checkout Queue]\n",
-              a[0],
-              a[1],
-              a[2],
-              a[3],
-              a[4],
-              a[5],
-              a[6],
-              a[7]
-            )
-          : console.error("[QD VTEX Checkout Queue]\n" + a);
-      }
-    },
-    f = null,
-    g = {},
-    h = {},
-    e = {};
-  $.QD_checkoutQueue = function (a, c) {
-    if (null === f)
-      if (
-        "object" === typeof window.vtexjs &&
-        "undefined" !== typeof window.vtexjs.checkout
-      )
-        f = window.vtexjs.checkout;
-      else
-        return l(
-          "Não foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a força não esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
-        );
-    var d = $.extend(
-        {
-          done: function () {},
-          fail: function () {},
-        },
-        c
-      ),
-      b = a.join(";"),
-      k = function () {
-        g[b].add(d.done);
-        h[b].add(d.fail);
-      };
-    e[b]
-      ? k()
-      : ((g[b] = $.Callbacks()),
-        (h[b] = $.Callbacks()),
-        k(),
-        (e[b] = !0),
-        f
-          .getOrderForm(a)
-          .done(function (a) {
-            e[b] = !1;
-            g[b].fire(a);
-          })
-          .fail(function (a) {
-            e[b] = !1;
-            h[b].fire(a);
-          }));
-  };
-})();
-function qd_number_format(b, c, d, e) {
-  b = (b + "").replace(/[^0-9+\-Ee.]/g, "");
-  b = isFinite(+b) ? +b : 0;
-  c = isFinite(+c) ? Math.abs(c) : 0;
-  e = "undefined" === typeof e ? "," : e;
-  d = "undefined" === typeof d ? "." : d;
-  var a = "",
-    a = function (a, b) {
-      var c = Math.pow(10, b);
-      return "" + (Math.round(a * c) / c).toFixed(b);
-    },
-    a = (c ? a(b, c) : "" + Math.round(b)).split(".");
-  3 < a[0].length && (a[0] = a[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, e));
-  (a[1] || "").length < c &&
-    ((a[1] = a[1] || ""), (a[1] += Array(c - a[1].length + 1).join("0")));
-  return a.join(d);
-}
-(function () {
-  var b = jQuery;
-  if ("function" !== typeof b.fn.simpleCart) {
-    b(function () {
-      var b = vtexjs.checkout.getOrderForm;
-      vtexjs.checkout.getOrderForm = function () {
-        return b.call();
-      };
-    });
-    try {
-      window.QuatroDigital_simpleCart = window.QuatroDigital_simpleCart || {};
-      window.QuatroDigital_simpleCart.ajaxStopOn = !1;
-      b.fn.simpleCart = function (c, p, g) {
-        var d, h, m, l, f, k, q, r, t, n;
-        h = function (a, b) {
-          if ("object" === typeof console) {
-            var e = "object" === typeof a;
-            "undefined" !== typeof b && "alerta" === b.toLowerCase()
-              ? e
-                ? console.warn(
-                    "[Simple Cart]\n",
-                    a[0],
-                    a[1],
-                    a[2],
-                    a[3],
-                    a[4],
-                    a[5],
-                    a[6],
-                    a[7]
-                  )
-                : console.warn("[Simple Cart]\n" + a)
-              : "undefined" !== typeof b && "info" === b.toLowerCase()
-              ? e
-                ? console.info(
-                    "[Simple Cart]\n",
-                    a[0],
-                    a[1],
-                    a[2],
-                    a[3],
-                    a[4],
-                    a[5],
-                    a[6],
-                    a[7]
-                  )
-                : console.info("[Simple Cart]\n" + a)
-              : e
-              ? console.error(
-                  "[Simple Cart]\n",
-                  a[0],
-                  a[1],
-                  a[2],
-                  a[3],
-                  a[4],
-                  a[5],
-                  a[6],
-                  a[7]
-                )
-              : console.error("[Simple Cart]\n" + a);
-          }
-        };
-        d = b(this);
-        "object" === typeof c
-          ? (p = c)
-          : ((c = c || !1), (d = d.add(b.QD_simpleCart.elements)));
-        if (!d.length) return d;
-        b.QD_simpleCart.elements = b.QD_simpleCart.elements.add(d);
-        g = "undefined" === typeof g ? !1 : g;
-        m = {
-          cartQtt: ".qd_cart_qtt",
-          cartTotal: ".qd_cart_total",
-          itemsText: ".qd_items_text",
-          currencySymbol:
-            (b("meta[name=currency]").attr("content") || "R$") + " ",
-          showQuantityByItems: !0,
-          smartCheckout: !0,
-          callback: function () {},
-        };
-        f = b.extend({}, m, p);
-        l = b("");
-        d.each(function () {
-          var a = b(this);
-          a.data("qd_simpleCartOpts") || a.data("qd_simpleCartOpts", f);
-        });
-        n = function (a) {
-          window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
-          for (var b = 0, e = 0, c = 0; c < a.totalizers.length; c++)
-            "Shipping" == a.totalizers[c].id && (e += a.totalizers[c].value),
-              (b += a.totalizers[c].value);
-          window._QuatroDigital_CartData.total =
-            f.currencySymbol + qd_number_format(b / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.shipping =
-            f.currencySymbol + qd_number_format(e / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.allTotal =
-            f.currencySymbol + qd_number_format((b + e) / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.qtt = 0;
-          if (f.showQuantityByItems)
-            for (c = 0; c < a.items.length; c++)
-              window._QuatroDigital_CartData.qtt += a.items[c].quantity;
-          else window._QuatroDigital_CartData.qtt = a.items.length || 0;
-          try {
-            window._QuatroDigital_CartData.callback &&
-              window._QuatroDigital_CartData.callback.fire &&
-              window._QuatroDigital_CartData.callback.fire();
-          } catch (u) {
-            h("Problemas com o callback do Smart Cart");
-          }
-          t(l);
-        };
-        k = function (a, b) {
-          1 === a
-            ? b.hide().filter(".singular").show()
-            : b.hide().filter(".plural").show();
-        };
-        r = function (a) {
-          1 > a ? d.addClass("qd-emptyCart") : d.removeClass("qd-emptyCart");
-        };
-        q = function (a, b) {
-          var c;
-          c = parseInt(window._QuatroDigital_CartData.qtt, 10);
-          b.$this.show();
-          isNaN(c) &&
-            (h(
-              "O valor obtido para calcular o plural/singular não é um número! O valor será definido para 0.",
-              "alerta"
-            ),
-            (c = 0));
-          b.cartTotalE.html(window._QuatroDigital_CartData.total);
-          b.cartQttE.html(c);
-          k(c, b.itemsTextE);
-          r(c);
-        };
-        t = function (a) {
-          d.each(function () {
-            var d = {},
-              e;
-            e = b(this);
-            c &&
-              e.data("qd_simpleCartOpts") &&
-              b.extend(f, e.data("qd_simpleCartOpts"));
-            d.$this = e;
-            d.cartQttE = e.find(f.cartQtt) || l;
-            d.cartTotalE = e.find(f.cartTotal) || l;
-            d.itemsTextE = e.find(f.itemsText) || l;
-            d.emptyElem = e.find(f.emptyCart) || l;
-            q(a, d);
-            e.addClass("qd-sc-populated");
-          });
-        };
-        (function () {
-          if (f.smartCheckout) {
-            window._QuatroDigital_DropDown =
-              window._QuatroDigital_DropDown || {};
-            if (
-              "undefined" !==
-                typeof window._QuatroDigital_DropDown.getOrderForm &&
-              (g ? g : !c)
-            )
-              return n(window._QuatroDigital_DropDown.getOrderForm);
-            if (
-              "object" !== typeof window.vtexjs ||
-              "undefined" === typeof window.vtexjs.checkout
-            )
-              if (
-                "object" === typeof vtex &&
-                "object" === typeof vtex.checkout &&
-                "undefined" !== typeof vtex.checkout.SDK
-              )
-                new vtex.checkout.SDK();
-              else return h("Não foi encontrada a biblioteca VTEX.js");
-            b.QD_checkoutQueue(["items", "totalizers", "shippingData"], {
-              done: function (a) {
-                n(a);
-                window._QuatroDigital_DropDown.getOrderForm = a;
-              },
-              fail: function (a) {
-                h(["Não foi possível obter os dados para o carrinho.", a]);
-              },
-            });
-          } else alert("Esta é uma função descontinuada =/");
-        })();
-        f.callback();
-        b(window).trigger("simpleCartCallback.quatro_digital");
-        return d;
-      };
-      b.QD_simpleCart = {
-        elements: b(""),
-      };
-      b(function () {
-        var c;
-        "function" === typeof window.ajaxRequestbuyButtonAsynchronous &&
-          ((c = window.ajaxRequestbuyButtonAsynchronous),
-          (window.ajaxRequestbuyButtonAsynchronous = function (k, g, d, h, m) {
-            c.call(this, k, g, d, h, function () {
-              "function" === typeof m && m();
-              b.QD_simpleCart.elements.each(function () {
-                var c;
-                c = b(this);
-                c.simpleCart(c.data("qd_simpleCartOpts"));
-              });
-            });
-          }));
-      });
-      var k = window.ReloadItemsCart || void 0;
-      window.ReloadItemsCart = function (c) {
-        b.fn.simpleCart(!0);
-        "function" === typeof k ? k.call(this, c) : alert(c);
-      };
-      b(function () {
-        var c = b(".qd_cart_auto");
-        c.length && c.simpleCart();
-      });
-      b(function () {
-        b(window).bind(
-          "productAddedToCart minicartUpdated.vtex cartProductAdded.vtex",
-          function () {
-            b.fn.simpleCart(!0);
-          }
-        );
-      });
-    } catch (c) {
-      "undefined" !== typeof console &&
-        "function" === typeof console.error &&
-        console.error("Oooops! ", c);
-    }
-  }
-})();
-"function" !== typeof String.prototype.trim &&
-  (String.prototype.trim = function () {
-    return this.replace(/^\s+|\s+$/g, "");
-  });
-"function" != typeof String.prototype.capitalize &&
-  (String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-  });
-"function" !== typeof String.prototype.replaceSpecialChars &&
-  (String.prototype.replaceSpecialChars = function () {
-    var b = {
-      ç: "c",
-      æ: "ae",
-      œ: "oe",
-      á: "a",
-      é: "e",
-      í: "i",
-      ó: "o",
-      ú: "u",
-      à: "a",
-      è: "e",
-      ì: "i",
-      ò: "o",
-      ù: "u",
-      ä: "a",
-      ë: "e",
-      ï: "i",
-      ö: "o",
-      ü: "u",
-      ÿ: "y",
-      â: "a",
-      ê: "e",
-      î: "i",
-      ô: "o",
-      û: "u",
-      å: "a",
-      ã: "a",
-      ø: "o",
-      õ: "o",
-      u: "u",
-      Á: "A",
-      É: "E",
-      Í: "I",
-      Ó: "O",
-      Ú: "U",
-      Ê: "E",
-      Ô: "O",
-      Ü: "U",
-      Ã: "A",
-      Õ: "O",
-      À: "A",
-      Ç: "C",
-    };
-    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
-      return "undefined" != typeof b[a] ? b[a] : a;
-    });
-  });
-(function (d) {
-  if ("function" !== typeof d.qdAjax) {
-    var a = {};
-    d.qdAjaxQueue = a;
-    150 >
-      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
-      console &&
-      "function" == typeof console.error &&
-      console.error();
-    d.qdAjax = function (f) {
-      try {
-        var b = d.extend(
-            {},
-            {
-              url: "",
-              type: "GET",
-              data: "",
-              success: function () {},
-              error: function () {},
-              complete: function () {},
-              clearQueueDelay: 5,
-            },
-            f
-          ),
-          e;
-        e =
-          "object" === typeof b.data
-            ? JSON.stringify(b.data)
-            : b.data.toString();
-        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
-        a[c] = a[c] || {};
-        "undefined" == typeof a[c].jqXHR
-          ? (a[c].jqXHR = d.ajax(b))
-          : (a[c].jqXHR.done(b.success),
-            a[c].jqXHR.fail(b.error),
-            a[c].jqXHR.always(b.complete));
-        a[c].jqXHR.always(function () {
-          isNaN(parseInt(b.clearQueueDelay)) ||
-            setTimeout(function () {
-              a[c].jqXHR = void 0;
-            }, b.clearQueueDelay);
-        });
-        return a[c].jqXHR;
-      } catch (g) {
-        "undefined" !== typeof console &&
-          "function" === typeof console.error &&
-          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
-      }
-    };
-    d.qdAjax.version = "4.0";
-  }
-})(jQuery);
-"function" !== typeof String.prototype.trim &&
-  (String.prototype.trim = function () {
-    return this.replace(/^\s+|\s+$/g, "");
-  });
-"function" != typeof String.prototype.capitalize &&
-  (String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-  });
-"function" !== typeof String.prototype.replaceSpecialChars &&
-  (String.prototype.replaceSpecialChars = function () {
-    var b = {
-      ç: "c",
-      æ: "ae",
-      œ: "oe",
-      á: "a",
-      é: "e",
-      í: "i",
-      ó: "o",
-      ú: "u",
-      à: "a",
-      è: "e",
-      ì: "i",
-      ò: "o",
-      ù: "u",
-      ä: "a",
-      ë: "e",
-      ï: "i",
-      ö: "o",
-      ü: "u",
-      ÿ: "y",
-      â: "a",
-      ê: "e",
-      î: "i",
-      ô: "o",
-      û: "u",
-      å: "a",
-      ã: "a",
-      ø: "o",
-      õ: "o",
-      u: "u",
-      Á: "A",
-      É: "E",
-      Í: "I",
-      Ó: "O",
-      Ú: "U",
-      Ê: "E",
-      Ô: "O",
-      Ü: "U",
-      Ã: "A",
-      Õ: "O",
-      À: "A",
-      Ç: "C",
-    };
-    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
-      return "undefined" != typeof b[a] ? b[a] : a;
-    });
-  });
-(function (d) {
-  if ("function" !== typeof d.qdAjax) {
-    var a = {};
-    d.qdAjaxQueue = a;
-    150 >
-      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
-      console &&
-      "function" == typeof console.error &&
-      console.error();
-    d.qdAjax = function (f) {
-      try {
-        var b = d.extend(
-            {},
-            {
-              url: "",
-              type: "GET",
-              data: "",
-              success: function () {},
-              error: function () {},
-              complete: function () {},
-              clearQueueDelay: 5,
-            },
-            f
-          ),
-          e;
-        e =
-          "object" === typeof b.data
-            ? JSON.stringify(b.data)
-            : b.data.toString();
-        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
-        a[c] = a[c] || {};
-        "undefined" == typeof a[c].jqXHR
-          ? (a[c].jqXHR = d.ajax(b))
-          : (a[c].jqXHR.done(b.success),
-            a[c].jqXHR.fail(b.error),
-            a[c].jqXHR.always(b.complete));
-        a[c].jqXHR.always(function () {
-          isNaN(parseInt(b.clearQueueDelay)) ||
-            setTimeout(function () {
-              a[c].jqXHR = void 0;
-            }, b.clearQueueDelay);
-        });
-        return a[c].jqXHR;
-      } catch (g) {
-        "undefined" !== typeof console &&
-          "function" === typeof console.error &&
-          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
-      }
-    };
-    d.qdAjax.version = "4.0";
-  }
-})(jQuery);
-(function () {
-  var l = function (a, c) {
-      if ("object" === typeof console) {
-        var d = "object" === typeof a;
-        "undefined" !== typeof c && "alerta" === c.toLowerCase()
-          ? d
-            ? console.warn(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.warn("[QD VTEX Checkout Queue]\n" + a)
-          : "undefined" !== typeof c && "info" === c.toLowerCase()
-          ? d
-            ? console.info(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.info("[QD VTEX Checkout Queue]\n" + a)
-          : d
-          ? console.error(
-              "[QD VTEX Checkout Queue]\n",
-              a[0],
-              a[1],
-              a[2],
-              a[3],
-              a[4],
-              a[5],
-              a[6],
-              a[7]
-            )
-          : console.error("[QD VTEX Checkout Queue]\n" + a);
-      }
-    },
-    f = null,
-    g = {},
-    h = {},
-    e = {};
-  $.QD_checkoutQueue = function (a, c) {
-    if (null === f)
-      if (
-        "object" === typeof window.vtexjs &&
-        "undefined" !== typeof window.vtexjs.checkout
-      )
-        f = window.vtexjs.checkout;
-      else
-        return l(
-          "Não foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a força não esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
-        );
-    var d = $.extend(
-        {
-          done: function () {},
-          fail: function () {},
-        },
-        c
-      ),
-      b = a.join(";"),
-      k = function () {
-        g[b].add(d.done);
-        h[b].add(d.fail);
-      };
-    e[b]
-      ? k()
-      : ((g[b] = $.Callbacks()),
-        (h[b] = $.Callbacks()),
-        k(),
-        (e[b] = !0),
-        f
-          .getOrderForm(a)
-          .done(function (a) {
-            e[b] = !1;
-            g[b].fire(a);
-          })
-          .fail(function (a) {
-            e[b] = !1;
-            h[b].fire(a);
-          }));
-  };
-})();
-function qd_number_format(b, c, d, e) {
-  b = (b + "").replace(/[^0-9+\-Ee.]/g, "");
-  b = isFinite(+b) ? +b : 0;
-  c = isFinite(+c) ? Math.abs(c) : 0;
-  e = "undefined" === typeof e ? "," : e;
-  d = "undefined" === typeof d ? "." : d;
-  var a = "",
-    a = function (a, b) {
-      var c = Math.pow(10, b);
-      return "" + (Math.round(a * c) / c).toFixed(b);
-    },
-    a = (c ? a(b, c) : "" + Math.round(b)).split(".");
-  3 < a[0].length && (a[0] = a[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, e));
-  (a[1] || "").length < c &&
-    ((a[1] = a[1] || ""), (a[1] += Array(c - a[1].length + 1).join("0")));
-  return a.join(d);
-}
-(function () {
-  var b = jQuery;
-  if ("function" !== typeof b.fn.simpleCart) {
-    b(function () {
-      var b = vtexjs.checkout.getOrderForm;
-      vtexjs.checkout.getOrderForm = function () {
-        return b.call();
-      };
-    });
-    try {
-      window.QuatroDigital_simpleCart = window.QuatroDigital_simpleCart || {};
-      window.QuatroDigital_simpleCart.ajaxStopOn = !1;
-      b.fn.simpleCart = function (c, p, g) {
-        var d, h, m, l, f, k, q, r, t, n;
-        h = function (a, b) {
-          if ("object" === typeof console) {
-            var e = "object" === typeof a;
-            "undefined" !== typeof b && "alerta" === b.toLowerCase()
-              ? e
-                ? console.warn(
-                    "[Simple Cart]\n",
-                    a[0],
-                    a[1],
-                    a[2],
-                    a[3],
-                    a[4],
-                    a[5],
-                    a[6],
-                    a[7]
-                  )
-                : console.warn("[Simple Cart]\n" + a)
-              : "undefined" !== typeof b && "info" === b.toLowerCase()
-              ? e
-                ? console.info(
-                    "[Simple Cart]\n",
-                    a[0],
-                    a[1],
-                    a[2],
-                    a[3],
-                    a[4],
-                    a[5],
-                    a[6],
-                    a[7]
-                  )
-                : console.info("[Simple Cart]\n" + a)
-              : e
-              ? console.error(
-                  "[Simple Cart]\n",
-                  a[0],
-                  a[1],
-                  a[2],
-                  a[3],
-                  a[4],
-                  a[5],
-                  a[6],
-                  a[7]
-                )
-              : console.error("[Simple Cart]\n" + a);
-          }
-        };
-        d = b(this);
-        "object" === typeof c
-          ? (p = c)
-          : ((c = c || !1), (d = d.add(b.QD_simpleCart.elements)));
-        if (!d.length) return d;
-        b.QD_simpleCart.elements = b.QD_simpleCart.elements.add(d);
-        g = "undefined" === typeof g ? !1 : g;
-        m = {
-          cartQtt: ".qd_cart_qtt",
-          cartTotal: ".qd_cart_total",
-          itemsText: ".qd_items_text",
-          currencySymbol:
-            (b("meta[name=currency]").attr("content") || "R$") + " ",
-          showQuantityByItems: !0,
-          smartCheckout: !0,
-          callback: function () {},
-        };
-        f = b.extend({}, m, p);
-        l = b("");
-        d.each(function () {
-          var a = b(this);
-          a.data("qd_simpleCartOpts") || a.data("qd_simpleCartOpts", f);
-        });
-        n = function (a) {
-          window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
-          for (var b = 0, e = 0, c = 0; c < a.totalizers.length; c++)
-            "Shipping" == a.totalizers[c].id && (e += a.totalizers[c].value),
-              (b += a.totalizers[c].value);
-          window._QuatroDigital_CartData.total =
-            f.currencySymbol + qd_number_format(b / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.shipping =
-            f.currencySymbol + qd_number_format(e / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.allTotal =
-            f.currencySymbol + qd_number_format((b + e) / 100, 2, ",", ".");
-          window._QuatroDigital_CartData.qtt = 0;
-          if (f.showQuantityByItems)
-            for (c = 0; c < a.items.length; c++)
-              window._QuatroDigital_CartData.qtt += a.items[c].quantity;
-          else window._QuatroDigital_CartData.qtt = a.items.length || 0;
-          try {
-            window._QuatroDigital_CartData.callback &&
-              window._QuatroDigital_CartData.callback.fire &&
-              window._QuatroDigital_CartData.callback.fire();
-          } catch (u) {
-            h("Problemas com o callback do Smart Cart");
-          }
-          t(l);
-        };
-        k = function (a, b) {
-          1 === a
-            ? b.hide().filter(".singular").show()
-            : b.hide().filter(".plural").show();
-        };
-        r = function (a) {
-          1 > a ? d.addClass("qd-emptyCart") : d.removeClass("qd-emptyCart");
-        };
-        q = function (a, b) {
-          var c;
-          c = parseInt(window._QuatroDigital_CartData.qtt, 10);
-          b.$this.show();
-          isNaN(c) &&
-            (h(
-              "O valor obtido para calcular o plural/singular não é um número! O valor será definido para 0.",
-              "alerta"
-            ),
-            (c = 0));
-          b.cartTotalE.html(window._QuatroDigital_CartData.total);
-          b.cartQttE.html(c);
-          k(c, b.itemsTextE);
-          r(c);
-        };
-        t = function (a) {
-          d.each(function () {
-            var d = {},
-              e;
-            e = b(this);
-            c &&
-              e.data("qd_simpleCartOpts") &&
-              b.extend(f, e.data("qd_simpleCartOpts"));
-            d.$this = e;
-            d.cartQttE = e.find(f.cartQtt) || l;
-            d.cartTotalE = e.find(f.cartTotal) || l;
-            d.itemsTextE = e.find(f.itemsText) || l;
-            d.emptyElem = e.find(f.emptyCart) || l;
-            q(a, d);
-            e.addClass("qd-sc-populated");
-          });
-        };
-        (function () {
-          if (f.smartCheckout) {
-            window._QuatroDigital_DropDown =
-              window._QuatroDigital_DropDown || {};
-            if (
-              "undefined" !==
-                typeof window._QuatroDigital_DropDown.getOrderForm &&
-              (g ? g : !c)
-            )
-              return n(window._QuatroDigital_DropDown.getOrderForm);
-            if (
-              "object" !== typeof window.vtexjs ||
-              "undefined" === typeof window.vtexjs.checkout
-            )
-              if (
-                "object" === typeof vtex &&
-                "object" === typeof vtex.checkout &&
-                "undefined" !== typeof vtex.checkout.SDK
-              )
-                new vtex.checkout.SDK();
-              else return h("Não foi encontrada a biblioteca VTEX.js");
-            b.QD_checkoutQueue(["items", "totalizers", "shippingData"], {
-              done: function (a) {
-                n(a);
-                window._QuatroDigital_DropDown.getOrderForm = a;
-              },
-              fail: function (a) {
-                h(["Não foi possível obter os dados para o carrinho.", a]);
-              },
-            });
-          } else alert("Esta é uma função descontinuada =/");
-        })();
-        f.callback();
-        b(window).trigger("simpleCartCallback.quatro_digital");
-        return d;
-      };
-      b.QD_simpleCart = {
-        elements: b(""),
-      };
-      b(function () {
-        var c;
-        "function" === typeof window.ajaxRequestbuyButtonAsynchronous &&
-          ((c = window.ajaxRequestbuyButtonAsynchronous),
-          (window.ajaxRequestbuyButtonAsynchronous = function (k, g, d, h, m) {
-            c.call(this, k, g, d, h, function () {
-              "function" === typeof m && m();
-              b.QD_simpleCart.elements.each(function () {
-                var c;
-                c = b(this);
-                c.simpleCart(c.data("qd_simpleCartOpts"));
-              });
-            });
-          }));
-      });
-      var k = window.ReloadItemsCart || void 0;
-      window.ReloadItemsCart = function (c) {
-        b.fn.simpleCart(!0);
-        "function" === typeof k ? k.call(this, c) : alert(c);
-      };
-      b(function () {
-        var c = b(".qd_cart_auto");
-        c.length && c.simpleCart();
-      });
-      b(function () {
-        b(window).bind(
-          "productAddedToCart minicartUpdated.vtex cartProductAdded.vtex",
-          function () {
-            b.fn.simpleCart(!0);
-          }
-        );
-      });
-    } catch (c) {
-      "undefined" !== typeof console &&
-        "function" === typeof console.error &&
-        console.error("Oooops! ", c);
-    }
-  }
-})();
-(function () {
-  var l = function (a, c) {
-      if ("object" === typeof console) {
-        var d = "object" === typeof a;
-        "undefined" !== typeof c && "alerta" === c.toLowerCase()
-          ? d
-            ? console.warn(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.warn("[QD VTEX Checkout Queue]\n" + a)
-          : "undefined" !== typeof c && "info" === c.toLowerCase()
-          ? d
-            ? console.info(
-                "[QD VTEX Checkout Queue]\n",
-                a[0],
-                a[1],
-                a[2],
-                a[3],
-                a[4],
-                a[5],
-                a[6],
-                a[7]
-              )
-            : console.info("[QD VTEX Checkout Queue]\n" + a)
-          : d
-          ? console.error(
-              "[QD VTEX Checkout Queue]\n",
-              a[0],
-              a[1],
-              a[2],
-              a[3],
-              a[4],
-              a[5],
-              a[6],
-              a[7]
-            )
-          : console.error("[QD VTEX Checkout Queue]\n" + a);
-      }
-    },
-    f = null,
-    g = {},
-    h = {},
-    e = {};
-  $.QD_checkoutQueue = function (a, c) {
-    if (null === f)
-      if (
-        "object" === typeof window.vtexjs &&
-        "undefined" !== typeof window.vtexjs.checkout
-      )
-        f = window.vtexjs.checkout;
-      else
-        return l(
-          "Não foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a força não esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
-        );
-    var d = $.extend(
-        {
-          done: function () {},
-          fail: function () {},
-        },
-        c
-      ),
-      b = a.join(";"),
-      k = function () {
-        g[b].add(d.done);
-        h[b].add(d.fail);
-      };
-    e[b]
-      ? k()
-      : ((g[b] = $.Callbacks()),
-        (h[b] = $.Callbacks()),
-        k(),
-        (e[b] = !0),
-        f
-          .getOrderForm(a)
-          .done(function (a) {
-            e[b] = !1;
-            g[b].fire(a);
-          })
-          .fail(function (a) {
-            e[b] = !1;
-            h[b].fire(a);
-          }));
-  };
-})();
-(function (u) {
-  try {
-    var a = jQuery,
-      r = a({}),
-      n = function (a, d) {
-        if (
-          "object" === typeof console &&
-          "undefined" !== typeof console.error &&
-          "undefined" !== typeof console.info &&
-          "undefined" !== typeof console.warn
-        ) {
-          var b;
-          "object" === typeof a
-            ? (a.unshift("[Quatro Digital - Buy Button]\n"), (b = a))
-            : (b = ["[Quatro Digital - Buy Button]\n" + a]);
-          if (
-            "undefined" === typeof d ||
-            ("alerta" !== d.toLowerCase() && "aviso" !== d.toLowerCase())
-          )
-            if ("undefined" !== typeof d && "info" === d.toLowerCase())
-              try {
-                console.info.apply(console, b);
-              } catch (h) {
-                try {
-                  console.info(b.join("\n"));
-                } catch (k) {}
-              }
-            else
-              try {
-                console.error.apply(console, b);
-              } catch (h) {
-                try {
-                  console.error(b.join("\n"));
-                } catch (k) {}
-              }
-          else
-            try {
-              console.warn.apply(console, b);
-            } catch (h) {
-              try {
-                console.warn(b.join("\n"));
-              } catch (k) {}
-            }
-        }
-      },
-      t = {
-        timeRemoveNewItemClass: 5e3,
-        isSmartCheckout: !0,
-        buyButton: ".productInformationWrapper  a.buy-button",
-        buyQtt: "input.buy-in-page-quantity",
-        selectSkuMsg: "javascript:",
-        autoWatchBuyButton: !0,
-        buyIfQuantityZeroed: !1,
-        fakeRequest: !1,
-        productPageCallback: function (g, d, b) {
-          a("body").is(".productQuickView") &&
-            ("success" === d
-              ? alert("Produto adicionado ao carrinho!")
-              : (alert(
-                  "Ooops! Algo saiu errado ao tentar adicionar seu produto ao carrinho. \n Vou te redirecionar para o carrinho."
-                ),
-                (("object" === typeof parent
-                  ? parent
-                  : document
-                ).location.href = b)));
-        },
-        isProductPage: function () {
-          return a("body").is("#produto, .produto");
-        },
-        execDefaultAction: function (a) {
-          return !1;
-        },
-        allowBuyClick: function () {
-          return !0;
-        },
-        callback: function () {},
-        asyncCallback: function () {},
-      };
-    a.QD_buyButton = function (g, d, b) {
-      function h(a) {
-        f.isSmartCheckout
-          ? a.data("qd-bb-click-active") ||
-            (a.data("qd-bb-click-active", 1),
-            a.on("click.qd_bb_buy_sc", function (a) {
-              if (!f.allowBuyClick()) return !0;
-              if (!0 !== m.clickBuySmartCheckout.call(this))
-                return a.preventDefault(), !1;
-            }))
-          : alert("Método descontinuado!");
-      }
-      function k(e) {
-        e = e || a(f.buyButton);
-        e.each(function () {
-          var c = a(this);
-          c.is(".qd-sbb-on") ||
-            (c.addClass("qd-sbb-on"),
-            (c.is(".btn-add-buy-button-asynchronous") &&
-              !c.is(".remove-href")) ||
-              c.data("qd-bb-active") ||
-              (c.data("qd-bb-active", 1),
-              c.children(".qd-bb-productAdded").length ||
-                c.append(
-                  '<span class="qd-bb-productAdded"><i class="icon-thumbs-up"></i> <span>Produto adicionado</span></span>'
-                ),
-              c.is(".buy-in-page-button") && f.isProductPage() && l.call(c),
-              h(c)));
-        });
-        f.isProductPage() &&
-          !e.length &&
-          n(
-            "Oooops!\nAparentemente esta é uma página de produto porém não encontrei nenhum botão comprar!\nVerifique se é este mesmo o seletor: '" +
-              e.selector +
-              "'.",
-            "info"
-          );
-      }
-      var f = b || f,
-        p = a(g),
-        m = this;
-      window._Quatro_Digital_dropDown = window._Quatro_Digital_dropDown || {};
-      window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
-      m.prodAdd = function (e, c) {
-        p.addClass("qd-bb-itemAddCartWrapper qd-bb-lightBoxProdAdd");
-        a("body").addClass("qd-bb-lightBoxBodyProdAdd");
-        var b = a(f.buyButton)
-          .filter("[href='" + (e.attr("href") || "---") + "']")
-          .add(e);
-        b.addClass("qd-bb-itemAddBuyButtonWrapper");
-        setTimeout(function () {
-          p.removeClass("qd-bb-itemAddCartWrapper");
-          b.removeClass("qd-bb-itemAddBuyButtonWrapper");
-        }, f.timeRemoveNewItemClass);
-        window._Quatro_Digital_dropDown.getOrderForm = void 0;
-        if (
-          "undefined" !== typeof d &&
-          "function" === typeof d.getCartInfoByUrl
-        )
-          return (
-            f.isSmartCheckout ||
-              (n("função descontinuada"), d.getCartInfoByUrl()),
-            (window._QuatroDigital_DropDown.getOrderForm = void 0),
-            d.getCartInfoByUrl(
-              function (c) {
-                window._Quatro_Digital_dropDown.getOrderForm = c;
-                a.fn.simpleCart(!0, void 0, !0);
-              },
-              {
-                lastSku: c,
-              }
-            )
-          );
-        window._Quatro_Digital_dropDown.allowUpdate = !0;
-        a.fn.simpleCart(!0);
-        a(window).trigger("QuatroDigital.qd_sc_prodAdd", [e, c, b]);
-      };
-      (function () {
-        if (f.isSmartCheckout && f.autoWatchBuyButton) {
-          var e = a(".btn-add-buy-button-asynchronous");
-          e.length && k(e);
-        }
-      })();
-      var l = function () {
-        var e = a(this);
-        "undefined" !== typeof e.data("buyButton")
-          ? (e.unbind("click"), h(e))
-          : (e.bind("mouseenter.qd_bb_buy_sc", function (c) {
-              e.unbind("click");
-              h(e);
-              a(this).unbind(c);
-            }),
-            a(window).load(function () {
-              e.unbind("click");
-              h(e);
-              e.unbind("mouseenter.qd_bb_buy_sc");
-            }));
-      };
-      m.clickBuySmartCheckout = function () {
-        var e = a(this),
-          c = e.attr("href") || "";
-        if (-1 < c.indexOf(f.selectSkuMsg)) return !0;
-        c = c
-          .replace(/redirect=(false|true)/gi, "")
-          .replace("?", "?redirect=false&")
-          .replace(/&&/gi, "&");
-        if (f.execDefaultAction(e))
-          return (
-            e.attr("href", c.replace("redirect=false", "redirect=true")), !0
-          );
-        c = c.replace(/http.?:/i, "");
-        r.queue(function (b) {
-          if (!f.buyIfQuantityZeroed && !/(&|\?)qty=[1-9][0-9]*/gi.test(c))
-            return b();
-          var d = function (b, d) {
-            var g = c.match(/sku=([0-9]+)/gi),
-              h = [];
-            if ("object" === typeof g && null !== g)
-              for (var k = g.length - 1; 0 <= k; k--) {
-                var l = parseInt(g[k].replace(/sku=/gi, ""));
-                isNaN(l) || h.push(l);
-              }
-            f.productPageCallback.call(this, b, d, c);
-            m.buyButtonClickCallback.call(this, b, d, c, h);
-            m.prodAdd(e, c.split("ku=").pop().split("&").shift());
-            "function" === typeof f.asyncCallback && f.asyncCallback.call(this);
-            a(window).trigger("productAddedToCart");
-            a(window).trigger("cartProductAdded.vtex");
-          };
-          f.fakeRequest
-            ? (d(null, "success"), b())
-            : a
-                .ajax({
-                  url: c,
-                  complete: d,
-                  mimeType: "text/html",
-                })
-                .always(function () {
-                  b();
-                });
-        });
-      };
-      m.buyButtonClickCallback = function (a, c, b, d) {
-        try {
-          "success" === c &&
-            "object" === typeof window.parent &&
-            "function" ===
-              typeof window.parent._QuatroDigital_prodBuyCallback &&
-            window.parent._QuatroDigital_prodBuyCallback(a, c, b, d);
-        } catch (v) {
-          n(
-            "Problemas ao tentar comunicar a página que o produto foi aicionado ao carrinho."
-          );
-        }
-      };
-      k();
-      "function" === typeof f.callback
-        ? f.callback.call(this)
-        : n("Callback não é uma função");
-    };
-    var l = a.Callbacks();
-    a.fn.QD_buyButton = function (g, d) {
-      var b = a(this);
-      "undefined" !== typeof d ||
-        "object" !== typeof g ||
-        g instanceof a ||
-        ((d = g), (g = void 0));
-      var h;
-      l.add(function () {
-        b.children(".qd-bb-itemAddWrapper").length ||
-          b.prepend(
-            '<span class="qd-bb-itemAddWrapper"><span class="qd-bb-itemAddIco"></span></span>'
-          );
-        h = new a.QD_buyButton(b, g, a.extend({}, t, d));
-      });
-      l.fire();
-      a(window).on("QuatroDigital.qd_bb_prod_add", function (a, b, d) {
-        h.prodAdd(b, d);
-      });
-      return a.extend(b, h);
-    };
-    var q = 0;
-    a(document).ajaxSend(function (a, d, b) {
-      -1 < b.url.toLowerCase().indexOf("/checkout/cart/add") &&
-        (q = (b.url.match(/sku=([0-9]+)/i) || [""]).pop());
-    });
-    a(window).bind("productAddedToCart.qdSbbVtex", function () {
-      a(window).trigger("QuatroDigital.qd_bb_prod_add", [new a(), q]);
-    });
-    a(document).ajaxStop(function () {
-      l.fire();
-    });
-  } catch (g) {
-    "undefined" !== typeof console &&
-      "function" === typeof console.error &&
-      console.error("Oooops! ", g);
-  }
-})(this);
-(function (a) {
-  a.fn.getParent = a.fn.closest;
-})(jQuery);
-var _0x5759 = [
-  "erc",
-  "https",
-  "outerHeight",
-  "emptyCart",
-  "target",
-  "simpleCart",
-  "attr",
-  "object",
-  "[Quatro Digital - DropDown Cart]\n",
-  "string",
-  "</td>",
-  "productAddedToCart.qdDdcVtex minicartUpdated.vtex.qdDdcVtex",
-  "Não foi informada uma URL para a imagem e nem um SKU",
-  "Não foi encontrada a biblioteca VTEX.js",
-  "productId",
-  "click.qd_ddc_scrollUp",
-  "error",
-  "call",
-  "apply",
-  "name",
-  "replace",
-  "load",
-  "aviso",
-  ".qd-ddc-quantityMore,.qd-ddc-quantityMinus",
-  "buyButtonClicked",
-  ".qd-ddc-emptyCart p",
-  "messages",
-  "selector",
-  "removeClass",
-  "Seu carrinho ainda não tem nenhum produto.",
-  ".qdDdcContainer",
-  "fail",
-  "shippingCalculate",
-  ".qd-ddc-infoTotal",
-  "_QuatroDigital_CartData",
-  "charCodeAt",
-  "closest",
-  "#value",
-  "updateItems",
-  ".qd-ddc-prodWrapper, .qd-ddc-prodWrapper2",
-  "SDK",
-  "slideUp",
-  "shippingEstimate",
-  ".qd_ddc_continueShopping, .qd_ddc_lightBoxClose",
-  "qd-ddc-lastAdded",
-  ".qd-ddc-prodWrapper2",
-  "timeRemoveNewItemClass",
-  "qd-bb-lightBoxBodyProdAdd sc-qd-cart-opened qd-ddc-product-add-time-v2",
-  "cartTotal",
-  '<div class="qd-ddc-notification">',
-  "click.qd_ddc_scrollDown",
-  "_QuatroDigital_AmountProduct",
-  "callback",
-  "buildNotification",
-  "info",
-  "postalCode",
-  "QD_checkoutQueue",
-  "thumbSize",
-  "<div><span>Itens: #items</span><span>Subtotal: #value</span></div><div><span>Frete: #shipping</span><span>Total: #total</span></div>",
-  "focusout.qd_ddc_change",
-  "html",
-  ".qd-dd-cep-slas",
-  ".qd-ddc-remove",
-  "Não foi possível remover o item do carrinho",
-  "keyup.qd_ddc_cep",
-  ".qd-ddc-infoAllTotal",
-  "availability",
-  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "qtt",
-  "remove",
-  "qd-ddc-product-add-time",
-  "smartCart",
-  "vtexjs",
-  ".qd-ddc-prodWrapper",
-  "keyCode",
-  "qd-ddc-lastAddedFixed",
-  "insertBefore",
-  "animate",
-  "qd-ddc-cart-rendered",
-  "qd-ddc-product-add-time-v2",
-  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
-  "appendTo",
-  "#items",
-  '<span class="qd-ddc-infoTotalShipping"></span>',
-  "ite",
-  "src",
-  "allowRecalculate",
-  "BRA",
-  "alerta",
-  " para o CEP ",
-  "stop",
-  "clearNotification",
-  ".qd-ddc-quantityMore",
-  "scrollCart",
-  ".qd-ddc-quantityMinus",
-  "indexOf",
-  "extend",
-  '<span class="qd-bap-wrapper" title="Itens no carrinho para este produto."><span class="qd-bap-wrapper2"><span class="qd-bap-qtt"></span></span></span>',
-  "parent",
-  "prepend",
-  "join",
-  "qd-ddc-",
-  "$1-",
-  "smartCheckout",
-  "---",
-  "renderProductsList",
-  "clone",
-  "formatCepField",
-  "Não foi possível obter os dados do carrinho",
-  "price",
-  "changeQantity",
-  "undefined",
-  "Problemas ao atualizar os dados do carrinho a partir do eveento da VTEX. Detalhes: ",
-  "Grátis",
-  "content",
-  ".qd-ddc-shipping",
-  "A biblioteca VTEX.js não foi encontrada. o Script tentará buscar no CDN",
-  "text",
-  "boolean",
-  "sellingPrice",
-  ".qd-ddc-viewCart",
-  "cartContainer",
-  ".qd-ddc-cep-tooltip-text",
-  "qd-loading",
-  '<div class="qd-ddc-cep-tooltip"><a href="#" class="qd-ddc-cep-btn">Consulte o prazo e o valor do frete</a><div class="qd-ddc-cep-tooltip-text"><h4 class="qd-ddc-cep-title">Consulte o prazo e o valor do frete</h4><div class="qd-ddc-cep-wrapper"><input type="tel" class="qd-ddc-cep" placeholder="Digite o CEP de entrega"><a class="qd-ddc-cep-ok" href="#">OK</a></div><a class="qd-ddc-cep-close" href="#"><i class="fa fa-times" aria-hidden="true"></i> Fechar</a></div></div>',
-  "fromCharCode",
-  "input.qd-productId[value=",
-  "mouseleave.qd_ddc_hover",
-  "QD_smartCart",
-  "click.qd_ddc_closeFn",
-  "prod_",
-  "forceImageHTTPS",
-  "setOrderForm",
-  '<span class="qd-ddc-notification-close">X</span><p>#messageText</p>',
-  "callbackProductsList não é uma função",
-  "enableNotification",
-  "data-sku",
-  ".qd-ddc-cep-ok",
-  "#shipping",
-  "empty",
-  "Não foi possível calcular o frete",
-  "removeProduct",
-  "dropDown",
-  "insertProdImg",
-  "ทÃѲ √Αℓ¡∂Α∂Ѳ ΡΑ૨Α ૯ઽƬΑ LѲJΑ!",
-  "length",
-  ".qd-ddc-scrollUp",
-  ".qd-ddc-quantity",
-  "items",
-  ".qd_ddc_lightBoxOverlay",
-  "qd_on",
-  "ajax",
-  "Atenção, este método esta descontinuado.",
-  "avisso",
-  "Finalizar Compra",
-  "logisticsInfo",
-  "meta[name=currency]",
-  "click.qd_ddc_minus",
-  ".qd-ddc-infoTotalShipping",
-  "qd-ddc-noItems",
-  "exec",
-  "getParent",
-  "qd-loaded",
-  "add",
-  "_QuatroDigital_DropDown",
-  "totalizers",
-  "notification",
-  "Atenção este é um método descontinuado. Contacte o SAC.",
-  "click",
-  "keyup.qd_ddc_closeFn",
-  "continueShopping",
-  "find",
-  "linkCart",
-  "getCartInfoByUrl",
-  "done",
-  "ProdAddTimeV2",
-  "Não foi possível obter '//io.vtex.com.br/vtex.js/1.0.0/vtex.min.js' o DropDown não será executado.",
-  "Oooops! ",
-  "function",
-  "script",
-  "shippingForm",
-  "callbackProductsList",
-  "quantity",
-  '<div class="qd-ddc-prodRow qd_ddc_prodRow"><div class="qd-ddc-prodCell qd-ddc-column1 qd-ddc-prodImg"><div class="qd-ddc-prodImgWrapper"><img src="" class="qd-ddc-image" /><span class="qd-ddc-imgLoading"></span></div></div><div class="qd-ddc-prodCell qd-ddc-column2 qd-ddc-prodName"></div><div class="qd-ddc-prodCell qd-ddc-column3 qd-ddc-prodPrice"></div><div class="qd-ddc-prodCell qd-ddc-column4 qd-ddc-prodQtt"><div class="qd-ddc-prodQttWrapper clearfix"><a href="#" class="qd-ddc-quantityMinus"></a><input type="text" class="qd-ddc-quantity" /><a href="#" class="qd-ddc-quantityMore"></a><span class="qd-ddc-qttLoading"></span></div></div><div class="qd-ddc-prodCell qd-ddc-column5 qd-ddc-prodRemove"><div class="qd-ddc-removeWrapper clearfix"><a href="#" class="qd-ddc-remove"></a><span class="qd-ddc-prodRowLoading"></span></div></div></div>',
-  ".qd-ddc-wrapper",
-  "dataOptionsCache",
-  "Callback não é uma função",
-  "productCategoryIds",
-  "texts",
-  "checkout",
-  "preventDefault",
-  ".qd_bap_wrapper_content",
-  "Não foi possível localizar os dados do item. A chave buscada é composta pelo SKU: cItems[",
-  ".qd-ddc-prodRow",
-  "skuName",
-  ".qd-ddc-cep-close",
-  ".qd_ddc_continueShopping",
-  '<span class="qd-ddc-infoTotalItems"></span>',
-  "address",
-  "allowUpdate",
-  " dia útil",
-  "click.qd_ddc_remove",
-  '<span class="qd-ddc-infoAllTotal"></span>',
-  ".qd-ddc-infoTotalItems",
-  "slas",
-  "QD_buyButton",
-  "addClass",
-  ".qd-ddc-cep",
-  " dias útéis",
-  "cartIsEmpty",
-  "hide",
-  "total",
-  "O Smart Cart não é mais iniciado desta forma. A versão que você esta executando tem licença restrita e todos os direitos reservados à Quatro Digital.",
-  "lastSku",
-  "qd-bb-lightBoxProdAdd sc-qd-cart-opened qd-ddc-product-add-time-v2",
-  "updateOnlyHover",
-  "val",
-  "message",
-  "allTotal",
-  "Este método esta descontinuado!",
-  "split",
-  '<span class="qd-ddc-infoTotalValue"></span>',
-  "getOrderForm",
-  "append",
-  "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "toLowerCase",
-  ".qd-ddc-image",
-  "warn",
-  "atenção esta método esta descontinuado",
-  ".qd-ddc-notification",
-  "Não foi possível obter os items da requisição",
-  "actionButtons",
-  "qd-bap-item-added",
-  "body",
-  "calculateShipping",
-  "click._QD_DDC_closeShipping",
-  "height",
-  "filter",
-  "shippingData",
-  "[data-sku='",
-  "unshift",
-  '<div class="qd-ddc-wrapper qd-ddc-noItems"><div class="qd-ddc-wrapper2"><div class="qd_ddc_lightBoxClose"></div><div class="qd-ddc-wrapper3"><div class="qd-ddc-emptyCart"><p></p></div><div class="qd-ddc-row qd-ddc-products"><a href="#" class="qd-ddc-scrollUp"></a><div class="qd-ddc-prodWrapper"> <div class="qd-ddc-prodWrapper2"></div> </div><span class="qd-ddc-prodLoading"></span><a href="#" class="qd-ddc-scrollDown"></a></div><div class="qd-ddc-row qd-ddc-info"><div class="qd-ddc-shipping"></div><div class="qd-ddc-infoTotal"></div><div class="qd-ddc-infoBts"><a href="/checkout/#/cart" class="qd-ddc-viewCart"></a><a href="#" class="qd_ddc_continueShopping"></a><a href="/checkout/#/orderform" class="qd-ddc-checkout"></a></div></div></div></div></div>',
-  "toggle",
-  ", entrega em ",
-  "imageUrl",
-  "each",
-  "QD_dropDownCart",
-  "data-sku-index",
-  "buyButton",
-  "toUpperCase",
-  ".qd-ddc-prodPrice",
-  ".qd-bap-wrapper",
-];
-(function (_0x3f07e6, _0x5759e3) {
-  var _0x28e250 = function (_0x47e582) {
-    while (--_0x47e582) {
-      _0x3f07e6["push"](_0x3f07e6["shift"]());
-    }
-  };
-  _0x28e250(++_0x5759e3);
-})(_0x5759, 365);
-var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
-  _0x3f07e6 = _0x3f07e6 - 0;
-  var _0x28e250 = _0x5759[_0x3f07e6];
-  return _0x28e250;
-};
-(function () {
-  try {
-    (window["_QuatroDigital_CartData"] = window[_0x28e2("0xad")] || {}),
-      (window[_0x28e2("0xad")]["callback"] =
-        window[_0x28e2("0xad")][_0x28e2("0xbf")] || $["Callbacks"]());
-  } catch (_0x4dc288) {
-    _0x28e2("0xfa") !== typeof console &&
-      _0x28e2("0x41") === typeof console["error"] &&
-      console[_0x28e2("0x9b")](_0x28e2("0x40"), _0x4dc288[_0x28e2("0x68")]);
-  }
-})();
-(function (_0x5dc8d8) {
-  try {
-    var _0x293211 = jQuery,
-      _0x328fc7 = function (_0x4b654d, _0x463a80) {
-        if (
-          "object" === typeof console &&
-          _0x28e2("0xfa") !== typeof console["error"] &&
-          _0x28e2("0xfa") !== typeof console[_0x28e2("0xc1")] &&
-          _0x28e2("0xfa") !== typeof console[_0x28e2("0x72")]
-        ) {
-          var _0x6e676a;
-          _0x28e2("0x92") === typeof _0x4b654d
-            ? (_0x4b654d[_0x28e2("0x7f")](_0x28e2("0x93")),
-              (_0x6e676a = _0x4b654d))
-            : (_0x6e676a = [_0x28e2("0x93") + _0x4b654d]);
-          if (
-            "undefined" === typeof _0x463a80 ||
-            (_0x28e2("0xe3") !== _0x463a80[_0x28e2("0x70")]() &&
-              _0x28e2("0xa1") !== _0x463a80[_0x28e2("0x70")]())
-          )
-            if (
-              _0x28e2("0xfa") !== typeof _0x463a80 &&
-              _0x28e2("0xc1") === _0x463a80[_0x28e2("0x70")]()
-            )
-              try {
-                console[_0x28e2("0xc1")][_0x28e2("0x9d")](console, _0x6e676a);
-              } catch (_0x5055d1) {
-                try {
-                  console["info"](_0x6e676a[_0x28e2("0xef")]("\n"));
-                } catch (_0x29dccf) {}
-              }
-            else
-              try {
-                console[_0x28e2("0x9b")][_0x28e2("0x9d")](console, _0x6e676a);
-              } catch (_0x31daea) {
-                try {
-                  console[_0x28e2("0x9b")](_0x6e676a[_0x28e2("0xef")]("\n"));
-                } catch (_0x4437e4) {}
-              }
-          else
-            try {
-              console[_0x28e2("0x72")][_0x28e2("0x9d")](console, _0x6e676a);
-            } catch (_0x399c39) {
-              try {
-                console["warn"](_0x6e676a[_0x28e2("0xef")]("\n"));
-              } catch (_0x5a17aa) {}
-            }
-        }
-      };
-    window["_QuatroDigital_DropDown"] = window[_0x28e2("0x33")] || {};
-    window["_QuatroDigital_DropDown"][_0x28e2("0x56")] = !0;
-    _0x293211[_0x28e2("0x85")] = function () {};
-    _0x293211["fn"][_0x28e2("0x85")] = function () {
-      return {
-        fn: new _0x293211(),
-      };
-    };
-    var _0x315e94 = (function (_0x2beb47) {
-      var _0x386069 = {
-        p: "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
-        jj: "j%25C2%25A8pragrecnegf%25C2%25A8pbz%25C2%25A8oe",
-        pra: _0x28e2("0x6f"),
-        dqfg: _0x28e2("0xce"),
-      };
-      return (function (_0x51f96f) {
-        var _0x365109 = function (_0x20ece2) {
-          return _0x20ece2;
-        };
-        var _0x51e12b = [
-          "a",
-          "e",
-          18,
-          "m",
-          "s",
-          "k",
-          "d",
-          "u",
-          "g",
-          "h",
-          "a",
-          "g",
-          "s",
-          "t",
-          "z",
-          "y",
-          "o",
-          "u",
-          "o",
-          "b",
-        ];
-        _0x51f96f =
-          _0x51f96f[
-            "d" +
-              _0x51e12b[16] +
-              "c" +
-              _0x51e12b[17] +
-              "m" +
-              _0x365109(_0x51e12b[1]) +
-              "n" +
-              _0x51e12b[13]
-          ][
-            "l" +
-              _0x51e12b[18] +
-              "c" +
-              _0x51e12b[0] +
-              "ti" +
-              _0x365109("o") +
-              "n"
-          ];
-        var _0x5bcca3 = function (_0x464ad1) {
-          return escape(
-            encodeURIComponent(
-              _0x464ad1[_0x28e2("0x9f")](/\./g, "¨")[_0x28e2("0x9f")](
-                /[a-zA-Z]/g,
-                function (_0x1d4cc5) {
-                  return String[_0x28e2("0xc")](
-                    ("Z" >= _0x1d4cc5 ? 90 : 122) >=
-                      (_0x1d4cc5 = _0x1d4cc5[_0x28e2("0xae")](0) + 13)
-                      ? _0x1d4cc5
-                      : _0x1d4cc5 - 26
-                  );
-                }
-              )
-            )
-          );
-        };
-        var _0xc0e8cf = _0x5bcca3(
-          _0x51f96f[
-            [
-              _0x51e12b[9],
-              _0x365109("o"),
-              _0x51e12b[12],
-              _0x51e12b[_0x365109(13)],
-            ][_0x28e2("0xef")]("")
-          ]
-        );
-        _0x5bcca3 = _0x5bcca3(
-          (window[
-            [
-              "js",
-              _0x365109("no"),
-              "m",
-              _0x51e12b[1],
-              _0x51e12b[4][_0x28e2("0x88")](),
-              _0x28e2("0xdf"),
-            ][_0x28e2("0xef")]("")
-          ] || _0x28e2("0xf3")) +
-            [
-              ".v",
-              _0x51e12b[13],
-              "e",
-              _0x365109("x"),
-              "co",
-              _0x365109("mm"),
-              _0x28e2("0x8b"),
-              _0x51e12b[1],
-              ".c",
-              _0x365109("o"),
-              "m.",
-              _0x51e12b[19],
+              _0x55ab07[0x13],
               "r",
             ]["join"]("")
         );
-        for (var _0x45c171 in _0x386069) {
+        for (var _0x33afe9 in _0x15e9cb) {
           if (
-            _0x5bcca3 === _0x45c171 + _0x386069[_0x45c171] ||
-            _0xc0e8cf === _0x45c171 + _0x386069[_0x45c171]
+            _0x230f69 === _0x33afe9 + _0x15e9cb[_0x33afe9] ||
+            _0x56239f === _0x33afe9 + _0x15e9cb[_0x33afe9]
           ) {
-            var _0x1a879d = "tr" + _0x51e12b[17] + "e";
+            var _0x5169e4 = "tr" + _0x55ab07[0x11] + "e";
             break;
           }
-          _0x1a879d = "f" + _0x51e12b[0] + "ls" + _0x365109(_0x51e12b[1]);
+          _0x5169e4 =
+            "f" + _0x55ab07[0x0] + "ls" + _0x1e6fb3(_0x55ab07[0x1]) + "";
         }
-        _0x365109 = !1;
-        -1 <
-          _0x51f96f[
-            [_0x51e12b[12], "e", _0x51e12b[0], "rc", _0x51e12b[9]][
-              _0x28e2("0xef")
+        _0x1e6fb3 = !0x1;
+        -0x1 <
+          _0x5d6a1b[
+            [_0x55ab07[0xc], "e", _0x55ab07[0x0], "rc", _0x55ab07[0x9]][
+              _0x83dc("0x0")
             ]("")
-          ][_0x28e2("0xea")](_0x28e2("0xdb")) && (_0x365109 = !0);
-        return [_0x1a879d, _0x365109];
-      })(_0x2beb47);
+          ][_0x83dc("0x40")](_0x83dc("0x19")) && (_0x1e6fb3 = !0x0);
+        return [_0x5169e4, _0x1e6fb3];
+      })(_0x2824fc);
     })(window);
-    if (!eval(_0x315e94[0]))
-      return _0x315e94[1] ? _0x328fc7(_0x28e2("0x1f")) : !1;
-    _0x293211[_0x28e2("0x85")] = function (_0x78c104, _0x385b93) {
-      var _0x4f29a3 = _0x293211(_0x78c104);
-      if (!_0x4f29a3[_0x28e2("0x20")]) return _0x4f29a3;
-      var _0x4974e1 = _0x293211[_0x28e2("0xeb")](
-        !0,
+    if (!eval(_0x48d28c[0x0]))
+      return _0x48d28c[0x1] ? _0x593a28(_0x83dc("0x2a")) : !0x1;
+    var _0x470d98 = function (_0x5ba5cf) {
+      var _0x34acf3 = _0x5ba5cf[_0x83dc("0x3d")](".qd_am_code");
+      var _0x3f2474 = _0x34acf3[_0x83dc("0x12")](".qd-am-banner");
+      var _0xf00e67 = _0x34acf3[_0x83dc("0x12")](_0x83dc("0xf"));
+      if (_0x3f2474[_0x83dc("0xa")] || _0xf00e67["length"])
+        _0x3f2474[_0x83dc("0x10")]()[_0x83dc("0x24")](_0x83dc("0x39")),
+          _0xf00e67[_0x83dc("0x10")]()["addClass"](_0x83dc("0x31")),
+          _0x563a8a[_0x83dc("0x4")]({
+            url: _0x2064b1[_0x83dc("0x27")],
+            dataType: _0x83dc("0x1f"),
+            success: function (_0x321d7b) {
+              var _0x4061f3 = _0x563a8a(_0x321d7b);
+              _0x3f2474[_0x83dc("0x6")](function () {
+                var _0x3fbc07 = _0x563a8a(this);
+                var _0x183df6 = _0x4061f3[_0x83dc("0x3d")](
+                  _0x83dc("0x42") + _0x3fbc07["attr"](_0x83dc("0x30")) + "\x27]"
+                );
+                _0x183df6["length"] &&
+                  (_0x183df6["each"](function () {
+                    _0x563a8a(this)
+                      [_0x83dc("0x1c")](".box-banner")
+                      [_0x83dc("0x9")]()
+                      ["insertBefore"](_0x3fbc07);
+                  }),
+                  _0x3fbc07["hide"]());
+              })[_0x83dc("0x24")]("qd-am-content-loaded");
+              _0xf00e67[_0x83dc("0x6")](function () {
+                var _0x1d36a3 = {};
+                var _0x4e9c91 = _0x563a8a(this);
+                _0x4061f3[_0x83dc("0x3d")]("h2")[_0x83dc("0x6")](function () {
+                  if (
+                    _0x563a8a(this)
+                      ["text"]()
+                      [_0x83dc("0x3e")]()
+                      [_0x83dc("0x2d")]() ==
+                    _0x4e9c91["attr"]("data-qdam-value")
+                      [_0x83dc("0x3e")]()
+                      [_0x83dc("0x2d")]()
+                  )
+                    return (_0x1d36a3 = _0x563a8a(this)), !0x1;
+                });
+                _0x1d36a3["length"] &&
+                  (_0x1d36a3["each"](function () {
+                    _0x563a8a(this)
+                      [_0x83dc("0x1c")](_0x83dc("0x1a"))
+                      [_0x83dc("0x9")]()
+                      [_0x83dc("0x2f")](_0x4e9c91);
+                  }),
+                  _0x4e9c91["hide"]());
+              })[_0x83dc("0x24")](_0x83dc("0x38"));
+            },
+            error: function () {
+              _0x593a28(_0x83dc("0x25") + _0x2064b1["url"] + _0x83dc("0x1b"));
+            },
+            complete: function () {
+              _0x2064b1["ajaxCallback"][_0x83dc("0x13")](this);
+              _0x563a8a(window)["trigger"](_0x83dc("0x7"), _0x5ba5cf);
+            },
+            clearQueueDelay: 0xbb8,
+          });
+    };
+    _0x563a8a[_0x83dc("0x5")] = function (_0xf9be3e) {
+      var _0x2e12c5 = _0xf9be3e[_0x83dc("0x3d")]("ul[itemscope]")["each"](
+        function () {
+          var _0x4c00b4 = _0x563a8a(this);
+          if (!_0x4c00b4[_0x83dc("0xa")])
+            return _0x593a28([_0x83dc("0xd"), _0xf9be3e], _0x83dc("0x1e"));
+          _0x4c00b4["find"](_0x83dc("0x34"))
+            ["parent"]()
+            ["addClass"]("qd-am-has-ul");
+          _0x4c00b4[_0x83dc("0x3d")]("li")["each"](function () {
+            var _0x18e041 = _0x563a8a(this);
+            var _0x560b07 = _0x18e041["children"](":not(ul)");
+            _0x560b07["length"] &&
+              _0x18e041[_0x83dc("0x24")](
+                _0x83dc("0xc") +
+                  _0x560b07["first"]()
+                    ["text"]()
+                    [_0x83dc("0x3e")]()
+                    [_0x83dc("0x3f")]()
+                    [_0x83dc("0x44")](/\./g, "")
+                    [_0x83dc("0x44")](/\s/g, "-")
+                    [_0x83dc("0x2d")]()
+              );
+          });
+          var _0x5d370c = _0x4c00b4[_0x83dc("0x3d")](_0x83dc("0x18"))[
+            _0x83dc("0x36")
+          ]();
+          _0x4c00b4[_0x83dc("0x24")](_0x83dc("0x29"));
+          _0x5d370c = _0x5d370c[_0x83dc("0x3d")](">ul");
+          _0x5d370c["each"](function () {
+            var _0x553057 = _0x563a8a(this);
+            _0x553057[_0x83dc("0x3d")](_0x83dc("0x18"))
+              [_0x83dc("0x36")]()
+              [_0x83dc("0x24")](_0x83dc("0x23"));
+            _0x553057[_0x83dc("0x24")]("qd-am-dropdown-menu");
+            _0x553057[_0x83dc("0x10")]()[_0x83dc("0x24")](_0x83dc("0x8"));
+          });
+          _0x5d370c[_0x83dc("0x24")]("qd-am-dropdown");
+          var _0x3a62cd = 0x0,
+            _0x339df9 = function (_0x216b88) {
+              _0x3a62cd += 0x1;
+              _0x216b88 =
+                _0x216b88[_0x83dc("0x35")]("li")[_0x83dc("0x35")]("*");
+              _0x216b88[_0x83dc("0xa")] &&
+                (_0x216b88["addClass"](_0x83dc("0x3") + _0x3a62cd),
+                _0x339df9(_0x216b88));
+            };
+          _0x339df9(_0x4c00b4);
+          _0x4c00b4[_0x83dc("0x37")](_0x4c00b4["find"]("ul"))[_0x83dc("0x6")](
+            function () {
+              var _0x119395 = _0x563a8a(this);
+              _0x119395[_0x83dc("0x24")](
+                _0x83dc("0x46") +
+                  _0x119395[_0x83dc("0x35")]("li")[_0x83dc("0xa")] +
+                  "-li"
+              );
+            }
+          );
+        }
+      );
+      _0x470d98(_0x2e12c5);
+      _0x2064b1["callback"][_0x83dc("0x13")](this);
+      _0x563a8a(window)[_0x83dc("0x17")](_0x83dc("0x26"), _0xf9be3e);
+    };
+    _0x563a8a["fn"][_0x83dc("0x5")] = function (_0x46b0c4) {
+      var _0x43f0ca = _0x563a8a(this);
+      if (!_0x43f0ca["length"]) return _0x43f0ca;
+      _0x2064b1 = _0x563a8a[_0x83dc("0x32")]({}, _0x5a9d31, _0x46b0c4);
+      _0x43f0ca[_0x83dc("0x2c")] = new _0x563a8a[_0x83dc("0x5")](
+        _0x563a8a(this)
+      );
+      return _0x43f0ca;
+    };
+    _0x563a8a(function () {
+      _0x563a8a(_0x83dc("0x43"))["QD_amazingMenu"]();
+    });
+  }
+})(this);
+/* Quatro Digital - Smart Buy Button // 2.1 // Carlos Vinicius // Todos os direitos reservados */
+(function (u) {
+  try {
+    var a = jQuery,
+      r = a({}),
+      n = function (a, d) {
+        if (
+          "object" === typeof console &&
+          "undefined" !== typeof console.error &&
+          "undefined" !== typeof console.info &&
+          "undefined" !== typeof console.warn
+        ) {
+          var b;
+          "object" === typeof a
+            ? (a.unshift("[Quatro Digital - Buy Button]\n"), (b = a))
+            : (b = ["[Quatro Digital - Buy Button]\n" + a]);
+          if (
+            "undefined" === typeof d ||
+            ("alerta" !== d.toLowerCase() && "aviso" !== d.toLowerCase())
+          )
+            if ("undefined" !== typeof d && "info" === d.toLowerCase())
+              try {
+                console.info.apply(console, b);
+              } catch (h) {
+                try {
+                  console.info(b.join("\n"));
+                } catch (k) {}
+              }
+            else
+              try {
+                console.error.apply(console, b);
+              } catch (h) {
+                try {
+                  console.error(b.join("\n"));
+                } catch (k) {}
+              }
+          else
+            try {
+              console.warn.apply(console, b);
+            } catch (h) {
+              try {
+                console.warn(b.join("\n"));
+              } catch (k) {}
+            }
+        }
+      },
+      t = {
+        timeRemoveNewItemClass: 5e3,
+        isSmartCheckout: !0,
+        buyQtt: "input.buy-in-page-quantity",
+        selectSkuMsg: "javascript:",
+        autoWatchBuyButton: !0,
+        buyIfQuantityZeroed: !1,
+        fakeRequest: !1,
+        productPageCallback: function (g, d, b) {
+          a("body").is(".productQuickView") &&
+            ("success" === d
+              ? alert("Produto adicionado ao carrinho!")
+              : (alert(
+                  "Ooops! Algo saiu errado ao tentar adicionar seu produto ao carrinho. \n Vou te redirecionar para o carrinho."
+                ),
+                (("object" === typeof parent
+                  ? parent
+                  : document
+                ).location.href = b)));
+        },
+        isProductPage: function () {
+          return a("body").is("#produto, .produto");
+        },
+        execDefaultAction: function (a) {
+          return !1;
+        },
+        allowBuyClick: function () {
+          return !0;
+        },
+        callback: function () {},
+        asyncCallback: function () {},
+      };
+    a.QD_buyButton = function (g, d, b) {
+      function h(a) {
+        f.isSmartCheckout
+          ? a.data("qd-bb-click-active") ||
+            (a.data("qd-bb-click-active", 1),
+            a.on("click.qd_bb_buy_sc", function (a) {
+              if (!f.allowBuyClick()) return !0;
+              if (!0 !== m.clickBuySmartCheckout.call(this))
+                return a.preventDefault(), !1;
+            }))
+          : alert("M\u00e9todo descontinuado!");
+      }
+      function k(e) {
+        e = e || a(f.buyButton);
+        e.each(function () {
+          var c = a(this);
+          c.is(".qd-sbb-on") ||
+            (c.addClass("qd-sbb-on"),
+            (c.is(".btn-add-buy-button-asynchronous") &&
+              !c.is(".remove-href")) ||
+              c.data("qd-bb-active") ||
+              (c.data("qd-bb-active", 1),
+              c.children(".qd-bb-productAdded").length ||
+                c.append(
+                  '<span class="qd-bb-productAdded"><i class="icon-thumbs-up"></i> <span>Produto adicionado</span></span>'
+                ),
+              c.is(".buy-in-page-button") && f.isProductPage() && l.call(c),
+              h(c)));
+        });
+        f.isProductPage() &&
+          !e.length &&
+          n(
+            "Oooops!\nAparentemente esta \u00e9 uma p\u00e1gina de produto por\u00e9m n\u00e3o encontrei nenhum bot\u00e3o comprar!\nVerifique se \u00e9 este mesmo o seletor: '" +
+              e.selector +
+              "'.",
+            "info"
+          );
+      }
+      var f = b || f,
+        p = a(g),
+        m = this;
+      window._Quatro_Digital_dropDown = window._Quatro_Digital_dropDown || {};
+      window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
+      m.prodAdd = function (e, c) {
+        p.addClass("qd-bb-itemAddCartWrapper qd-bb-lightBoxProdAdd");
+        a("body").addClass("qd-bb-lightBoxBodyProdAdd");
+        var b = a(f.buyButton)
+          .filter("[href='" + (e.attr("href") || "---") + "']")
+          .add(e);
+        b.addClass("qd-bb-itemAddBuyButtonWrapper");
+        setTimeout(function () {
+          p.removeClass("qd-bb-itemAddCartWrapper");
+          b.removeClass("qd-bb-itemAddBuyButtonWrapper");
+        }, f.timeRemoveNewItemClass);
+        window._Quatro_Digital_dropDown.getOrderForm = void 0;
+        if (
+          "undefined" !== typeof d &&
+          "function" === typeof d.getCartInfoByUrl
+        )
+          return (
+            f.isSmartCheckout ||
+              (n("fun\u00e7\u00e3o descontinuada"), d.getCartInfoByUrl()),
+            (window._QuatroDigital_DropDown.getOrderForm = void 0),
+            d.getCartInfoByUrl(
+              function (c) {
+                window._Quatro_Digital_dropDown.getOrderForm = c;
+                a.fn.simpleCart(!0, void 0, !0);
+              },
+              { lastSku: c }
+            )
+          );
+        window._Quatro_Digital_dropDown.allowUpdate = !0;
+        a.fn.simpleCart(!0);
+        a(window).trigger("QuatroDigital.qd_sc_prodAdd", [e, c, b]);
+      };
+      (function () {
+        if (f.isSmartCheckout && f.autoWatchBuyButton) {
+          var e = a(".btn-add-buy-button-asynchronous");
+          e.length && k(e);
+        }
+      })();
+      var l = function () {
+        var e = a(this);
+        "undefined" !== typeof e.data("buyButton")
+          ? (e.unbind("click"), h(e))
+          : (e.bind("mouseenter.qd_bb_buy_sc", function (c) {
+              e.unbind("click");
+              h(e);
+              a(this).unbind(c);
+            }),
+            a(window).load(function () {
+              e.unbind("click");
+              h(e);
+              e.unbind("mouseenter.qd_bb_buy_sc");
+            }));
+      };
+      m.clickBuySmartCheckout = function () {
+        var e = a(this),
+          c = e.attr("href") || "";
+        if (-1 < c.indexOf(f.selectSkuMsg)) return !0;
+        c = c
+          .replace(/redirect=(false|true)/gi, "")
+          .replace("?", "?redirect=false&")
+          .replace(/&&/gi, "&");
+        if (f.execDefaultAction(e))
+          return (
+            e.attr("href", c.replace("redirect=false", "redirect=true")), !0
+          );
+        c = c.replace(/http.?:/i, "");
+        r.queue(function (b) {
+          if (!f.buyIfQuantityZeroed && !/(&|\?)qty=[1-9][0-9]*/gi.test(c))
+            return b();
+          var d = function (b, d) {
+            var g = c.match(/sku=([0-9]+)/gi),
+              h = [];
+            if ("object" === typeof g && null !== g)
+              for (var k = g.length - 1; 0 <= k; k--) {
+                var l = parseInt(g[k].replace(/sku=/gi, ""));
+                isNaN(l) || h.push(l);
+              }
+            f.productPageCallback.call(this, b, d, c);
+            m.buyButtonClickCallback.call(this, b, d, c, h);
+            m.prodAdd(e, c.split("ku=").pop().split("&").shift());
+            "function" === typeof f.asyncCallback && f.asyncCallback.call(this);
+            a(window).trigger("productAddedToCart");
+            a(window).trigger("cartProductAdded.vtex");
+          };
+          f.fakeRequest
+            ? (d(null, "success"), b())
+            : a
+                .ajax({
+                  url: c,
+                  complete: d,
+                  mimeType: "text/html",
+                })
+                .always(function () {
+                  b();
+                });
+        });
+      };
+      m.buyButtonClickCallback = function (a, c, b, d) {
+        try {
+          "success" === c &&
+            "object" === typeof window.parent &&
+            "function" ===
+              typeof window.parent._QuatroDigital_prodBuyCallback &&
+            window.parent._QuatroDigital_prodBuyCallback(a, c, b, d);
+        } catch (v) {
+          n(
+            "Problemas ao tentar comunicar a p\u00e1gina que o produto foi aicionado ao carrinho."
+          );
+        }
+      };
+      k();
+      "function" === typeof f.callback
+        ? f.callback.call(this)
+        : n("Callback n\u00e3o \u00e9 uma fun\u00e7\u00e3o");
+    };
+    var l = a.Callbacks();
+    a.fn.QD_buyButton = function (g, d) {
+      var b = a(this);
+      "undefined" !== typeof d ||
+        "object" !== typeof g ||
+        g instanceof a ||
+        ((d = g), (g = void 0));
+      var h;
+      l.add(function () {
+        b.children(".qd-bb-itemAddWrapper").length ||
+          b.prepend(
+            '<span class="qd-bb-itemAddWrapper"><span class="qd-bb-itemAddIco"></span></span>'
+          );
+        h = new a.QD_buyButton(b, g, a.extend({}, t, d));
+      });
+      l.fire();
+      a(window).on("QuatroDigital.qd_bb_prod_add", function (a, b, d) {
+        h.prodAdd(b, d);
+      });
+      return a.extend(b, h);
+    };
+    var q = 0;
+    a(document).ajaxSend(function (a, d, b) {
+      -1 < b.url.toLowerCase().indexOf("/checkout/cart/add") &&
+        (q = (b.url.match(/sku=([0-9]+)/i) || [""]).pop());
+    });
+    a(window).bind("productAddedToCart.qdSbbVtex", function () {
+      a(window).trigger("QuatroDigital.qd_bb_prod_add", [new a(), q]);
+    });
+    a(document).ajaxStop(function () {
+      l.fire();
+    });
+  } catch (g) {
+    "undefined" !== typeof console &&
+      "function" === typeof console.error &&
+      console.error("Oooops! ", g);
+  }
+})(this);
+/* FUNÇÕES AUXILIARES */
+
+"function" !== typeof String.prototype.trim &&
+  (String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, "");
+  });
+"function" != typeof String.prototype.capitalize &&
+  (String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+  });
+"function" !== typeof String.prototype.replaceSpecialChars &&
+  (String.prototype.replaceSpecialChars = function () {
+    var b = {
+      "\u00e7": "c",
+      "\u00e6": "ae",
+      "\u0153": "oe",
+      "\u00e1": "a",
+      "\u00e9": "e",
+      "\u00ed": "i",
+      "\u00f3": "o",
+      "\u00fa": "u",
+      "\u00e0": "a",
+      "\u00e8": "e",
+      "\u00ec": "i",
+      "\u00f2": "o",
+      "\u00f9": "u",
+      "\u00e4": "a",
+      "\u00eb": "e",
+      "\u00ef": "i",
+      "\u00f6": "o",
+      "\u00fc": "u",
+      "\u00ff": "y",
+      "\u00e2": "a",
+      "\u00ea": "e",
+      "\u00ee": "i",
+      "\u00f4": "o",
+      "\u00fb": "u",
+      "\u00e5": "a",
+      "\u00e3": "a",
+      "\u00f8": "o",
+      "\u00f5": "o",
+      u: "u",
+      "\u00c1": "A",
+      "\u00c9": "E",
+      "\u00cd": "I",
+      "\u00d3": "O",
+      "\u00da": "U",
+      "\u00ca": "E",
+      "\u00d4": "O",
+      "\u00dc": "U",
+      "\u00c3": "A",
+      "\u00d5": "O",
+      "\u00c0": "A",
+      "\u00c7": "C",
+    };
+    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
+      return "undefined" != typeof b[a] ? b[a] : a;
+    });
+  });
+/* Quatro Digital - jQuery Ajax Queue // 4.0 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT <http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT> */
+(function (d) {
+  if ("function" !== typeof d.qdAjax) {
+    var a = {};
+    d.qdAjaxQueue = a;
+    150 >
+      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
+      console &&
+      "function" == typeof console.error &&
+      console.error();
+    d.qdAjax = function (f) {
+      try {
+        var b = d.extend(
+            {},
+            {
+              url: "",
+              type: "GET",
+              data: "",
+              success: function () {},
+              error: function () {},
+              complete: function () {},
+              clearQueueDelay: 5,
+            },
+            f
+          ),
+          e;
+        e =
+          "object" === typeof b.data
+            ? JSON.stringify(b.data)
+            : b.data.toString();
+        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
+        a[c] = a[c] || {};
+        "undefined" == typeof a[c].jqXHR
+          ? (a[c].jqXHR = d.ajax(b))
+          : (a[c].jqXHR.done(b.success),
+            a[c].jqXHR.fail(b.error),
+            a[c].jqXHR.always(b.complete));
+        a[c].jqXHR.always(function () {
+          isNaN(parseInt(b.clearQueueDelay)) ||
+            setTimeout(function () {
+              a[c].jqXHR = void 0;
+            }, b.clearQueueDelay);
+        });
+        return a[c].jqXHR;
+      } catch (g) {
+        "undefined" !== typeof console &&
+          "function" === typeof console.error &&
+          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
+      }
+    };
+    d.qdAjax.version = "4.0";
+  }
+})(jQuery);
+/* Quatro Digital - VTEX Checkout Queue // 1.1 //  Carlos Vinicius [ QUATRO DIGITAL ] // Todos os direitos reservados */
+(function () {
+  var l = function (a, c) {
+      if ("object" === typeof console) {
+        var d = "object" === typeof a;
+        "undefined" !== typeof c && "alerta" === c.toLowerCase()
+          ? d
+            ? console.warn(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.warn("[QD VTEX Checkout Queue]\n" + a)
+          : "undefined" !== typeof c && "info" === c.toLowerCase()
+          ? d
+            ? console.info(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.info("[QD VTEX Checkout Queue]\n" + a)
+          : d
+          ? console.error(
+              "[QD VTEX Checkout Queue]\n",
+              a[0],
+              a[1],
+              a[2],
+              a[3],
+              a[4],
+              a[5],
+              a[6],
+              a[7]
+            )
+          : console.error("[QD VTEX Checkout Queue]\n" + a);
+      }
+    },
+    f = null,
+    g = {},
+    h = {},
+    e = {};
+  $.QD_checkoutQueue = function (a, c) {
+    if (null === f)
+      if (
+        "object" === typeof window.vtexjs &&
+        "undefined" !== typeof window.vtexjs.checkout
+      )
+        f = window.vtexjs.checkout;
+      else
+        return l(
+          "N\u00e3o foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a for\u00e7a n\u00e3o esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
+        );
+    var d = $.extend({ done: function () {}, fail: function () {} }, c),
+      b = a.join(";"),
+      k = function () {
+        g[b].add(d.done);
+        h[b].add(d.fail);
+      };
+    e[b]
+      ? k()
+      : ((g[b] = $.Callbacks()),
+        (h[b] = $.Callbacks()),
+        k(),
+        (e[b] = !0),
+        f
+          .getOrderForm(a)
+          .done(function (a) {
+            e[b] = !1;
+            g[b].fire(a);
+          })
+          .fail(function (a) {
+            e[b] = !1;
+            h[b].fire(a);
+          }));
+  };
+})();
+/*PHP JS - Number Format - http://phpjs.org/functions/number_format/*/
+function qd_number_format(b, c, d, e) {
+  b = (b + "").replace(/[^0-9+\-Ee.]/g, "");
+  b = isFinite(+b) ? +b : 0;
+  c = isFinite(+c) ? Math.abs(c) : 0;
+  e = "undefined" === typeof e ? "," : e;
+  d = "undefined" === typeof d ? "." : d;
+  var a = "",
+    a = function (a, b) {
+      var c = Math.pow(10, b);
+      return "" + (Math.round(a * c) / c).toFixed(b);
+    },
+    a = (c ? a(b, c) : "" + Math.round(b)).split(".");
+  3 < a[0].length && (a[0] = a[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, e));
+  (a[1] || "").length < c &&
+    ((a[1] = a[1] || ""), (a[1] += Array(c - a[1].length + 1).join("0")));
+  return a.join(d);
+}
+
+/* Quatro Digital Simple Cart // 4.15 // Carlos Vinicius [ QUATRO DIGITAL ] // Todos os direitos reservados */
+
+(function () {
+  var b = jQuery;
+  if ("function" !== typeof b.fn.simpleCart) {
+    b(function () {
+      var e = vtexjs.checkout.getOrderForm;
+      vtexjs.checkout.getOrderForm = function () {
+        return e.call();
+      };
+    });
+    try {
+      window.QuatroDigital_simpleCart = window.QuatroDigital_simpleCart || {};
+      window.QuatroDigital_simpleCart.ajaxStopOn = !1;
+      b.fn.simpleCart = function (e, n, k) {
+        var l = function (a, c) {
+          if ("object" === typeof console) {
+            var d = "object" === typeof a;
+            "undefined" !== typeof c && "alerta" === c.toLowerCase()
+              ? d
+                ? console.warn(
+                    "[Simple Cart]\n",
+                    a[0],
+                    a[1],
+                    a[2],
+                    a[3],
+                    a[4],
+                    a[5],
+                    a[6],
+                    a[7]
+                  )
+                : console.warn("[Simple Cart]\n" + a)
+              : "undefined" !== typeof c && "info" === c.toLowerCase()
+              ? d
+                ? console.info(
+                    "[Simple Cart]\n",
+                    a[0],
+                    a[1],
+                    a[2],
+                    a[3],
+                    a[4],
+                    a[5],
+                    a[6],
+                    a[7]
+                  )
+                : console.info("[Simple Cart]\n" + a)
+              : d
+              ? console.error(
+                  "[Simple Cart]\n",
+                  a[0],
+                  a[1],
+                  a[2],
+                  a[3],
+                  a[4],
+                  a[5],
+                  a[6],
+                  a[7]
+                )
+              : console.error("[Simple Cart]\n" + a);
+          }
+        };
+        var g = b(this);
+        "object" === typeof e
+          ? (n = e)
+          : ((e = e || !1), (g = g.add(b.QD_simpleCart.elements)));
+        if (!g.length) return g;
+        b.QD_simpleCart.elements = b.QD_simpleCart.elements.add(g);
+        k = "undefined" === typeof k ? !1 : k;
+        var p = {
+          cartQtt: ".qd_cart_qtt",
+          cartTotal: ".qd_cart_total",
+          itemsText: ".qd_items_text",
+          currencySymbol:
+            (b("meta[name=currency]").attr("content") || "R$") + " ",
+          showQuantityByItems: !0,
+          smartCheckout: !0,
+          callback: function () {},
+        };
+        var f = b.extend({}, p, n);
+        var m = b("");
+        g.each(function () {
+          var a = b(this);
+          a.data("qd_simpleCartOpts") || a.data("qd_simpleCartOpts", f);
+        });
+        var q = function (a) {
+          window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
+          for (var c = 0, d = 0, h = 0; h < a.totalizers.length; h++)
+            "Shipping" == a.totalizers[h].id
+              ? (d += a.totalizers[h].value)
+              : (c += a.totalizers[h].value);
+          window._QuatroDigital_CartData.total =
+            f.currencySymbol + qd_number_format(c / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.shipping =
+            f.currencySymbol + qd_number_format(d / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.allTotal =
+            f.currencySymbol + qd_number_format((c + d) / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.qtt = 0;
+          if (f.showQuantityByItems)
+            for (h = 0; h < a.items.length; h++)
+              window._QuatroDigital_CartData.qtt += a.items[h].quantity;
+          else window._QuatroDigital_CartData.qtt = a.items.length || 0;
+          try {
+            window._QuatroDigital_CartData.callback &&
+              window._QuatroDigital_CartData.callback.fire &&
+              window._QuatroDigital_CartData.callback.fire();
+          } catch (x) {
+            l("Problemas com o callback do Smart Cart");
+          }
+          t(m);
+        };
+        var u = function (a, c) {
+          1 === a
+            ? c.text("Item").filter(".singular").show()
+            : c.text("itens").filter(".plural").show();
+        };
+        var v = function (a) {
+          1 > a ? g.addClass("qd-emptyCart") : g.removeClass("qd-emptyCart");
+        };
+        var w = function (a, c) {
+          var d = parseInt(window._QuatroDigital_CartData.qtt, 10);
+          c.$this.show();
+          isNaN(d) &&
+            (l(
+              "O valor obtido para calcular o plural/singular n\u00e3o \u00e9 um n\u00famero! O valor ser\u00e1 definido para 0.",
+              "alerta"
+            ),
+            (d = 0));
+          c.cartTotalE.html(window._QuatroDigital_CartData.total);
+          c.cartQttE.html(d);
+          u(d, c.itemsTextE);
+          v(d);
+        };
+        var t = function (a) {
+          g.each(function () {
+            var c = {};
+            var d = b(this);
+            e &&
+              d.data("qd_simpleCartOpts") &&
+              b.extend(f, d.data("qd_simpleCartOpts"));
+            c.$this = d;
+            c.cartQttE = d.find(f.cartQtt) || m;
+            c.cartTotalE = d.find(f.cartTotal) || m;
+            c.itemsTextE = d.find(f.itemsText) || m;
+            c.emptyElem = d.find(f.emptyCart) || m;
+            w(a, c);
+            d.addClass("qd-sc-populated");
+          });
+        };
+        (function () {
+          if (f.smartCheckout) {
+            window._QuatroDigital_DropDown =
+              window._QuatroDigital_DropDown || {};
+            if (
+              "undefined" !==
+                typeof window._QuatroDigital_DropDown.getOrderForm &&
+              (k || !e)
+            )
+              return q(window._QuatroDigital_DropDown.getOrderForm);
+            if (
+              "object" !== typeof window.vtexjs ||
+              "undefined" === typeof window.vtexjs.checkout
+            )
+              if (
+                "object" === typeof vtex &&
+                "object" === typeof vtex.checkout &&
+                "undefined" !== typeof vtex.checkout.SDK
+              )
+                new vtex.checkout.SDK();
+              else return l("N\u00e3o foi encontrada a biblioteca VTEX.js");
+            b.QD_checkoutQueue(["items", "totalizers", "shippingData"], {
+              done: function (a) {
+                q(a);
+                window._QuatroDigital_DropDown.getOrderForm = a;
+              },
+              fail: function (a) {
+                l([
+                  "N\u00e3o foi poss\u00edvel obter os dados para o carrinho.",
+                  a,
+                ]);
+              },
+            });
+          } else alert("Esta \u00e9 uma fun\u00e7\u00e3o descontinuada =/");
+        })();
+        f.callback();
+        b(window).trigger("simpleCartCallback.quatro_digital");
+        return g;
+      };
+      b.QD_simpleCart = { elements: b("") };
+      b(function () {
+        if ("function" === typeof window.ajaxRequestbuyButtonAsynchronous) {
+          var e = window.ajaxRequestbuyButtonAsynchronous;
+          window.ajaxRequestbuyButtonAsynchronous = function (n, k, l, g, p) {
+            e.call(this, n, k, l, g, function () {
+              "function" === typeof p && p();
+              b.QD_simpleCart.elements.each(function () {
+                var f = b(this);
+                f.simpleCart(f.data("qd_simpleCartOpts"));
+              });
+            });
+          };
+        }
+      });
+      var r = window.ReloadItemsCart || void 0;
+      window.ReloadItemsCart = function (e) {
+        b.fn.simpleCart(!0);
+        "function" === typeof r ? r.call(this, e) : alert(e);
+      };
+      b(function () {
+        var e = b(".qd_cart_auto");
+        e.length && e.simpleCart();
+      });
+      b(function () {
+        b(window).bind(
+          "productAddedToCart minicartUpdated.vtex cartProductAdded.vtex",
+          function () {
+            b.fn.simpleCart(!0);
+          }
+        );
+      });
+    } catch (e) {
+      "undefined" !== typeof console &&
+        "function" === typeof console.error &&
+        console.error("Oooops! ", e);
+    }
+  }
+})();
+/*FUNÇÕES AUXILIARES*/
+"function" !== typeof String.prototype.trim &&
+  (String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, "");
+  });
+"function" != typeof String.prototype.capitalize &&
+  (String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+  });
+"function" !== typeof String.prototype.replaceSpecialChars &&
+  (String.prototype.replaceSpecialChars = function () {
+    var b = {
+      "\u00e7": "c",
+      "\u00e6": "ae",
+      "\u0153": "oe",
+      "\u00e1": "a",
+      "\u00e9": "e",
+      "\u00ed": "i",
+      "\u00f3": "o",
+      "\u00fa": "u",
+      "\u00e0": "a",
+      "\u00e8": "e",
+      "\u00ec": "i",
+      "\u00f2": "o",
+      "\u00f9": "u",
+      "\u00e4": "a",
+      "\u00eb": "e",
+      "\u00ef": "i",
+      "\u00f6": "o",
+      "\u00fc": "u",
+      "\u00ff": "y",
+      "\u00e2": "a",
+      "\u00ea": "e",
+      "\u00ee": "i",
+      "\u00f4": "o",
+      "\u00fb": "u",
+      "\u00e5": "a",
+      "\u00e3": "a",
+      "\u00f8": "o",
+      "\u00f5": "o",
+      u: "u",
+      "\u00c1": "A",
+      "\u00c9": "E",
+      "\u00cd": "I",
+      "\u00d3": "O",
+      "\u00da": "U",
+      "\u00ca": "E",
+      "\u00d4": "O",
+      "\u00dc": "U",
+      "\u00c3": "A",
+      "\u00d5": "O",
+      "\u00c0": "A",
+      "\u00c7": "C",
+    };
+    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
+      return "undefined" != typeof b[a] ? b[a] : a;
+    });
+  });
+/* Quatro Digital - jQuery Ajax Queue // 4.0 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT <http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT> */
+(function (d) {
+  if ("function" !== typeof d.qdAjax) {
+    var a = {};
+    d.qdAjaxQueue = a;
+    150 >
+      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
+      console &&
+      "function" == typeof console.error &&
+      console.error();
+    d.qdAjax = function (f) {
+      try {
+        var b = d.extend(
+            {},
+            {
+              url: "",
+              type: "GET",
+              data: "",
+              success: function () {},
+              error: function () {},
+              complete: function () {},
+              clearQueueDelay: 5,
+            },
+            f
+          ),
+          e;
+        e =
+          "object" === typeof b.data
+            ? JSON.stringify(b.data)
+            : b.data.toString();
+        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
+        a[c] = a[c] || {};
+        "undefined" == typeof a[c].jqXHR
+          ? (a[c].jqXHR = d.ajax(b))
+          : (a[c].jqXHR.done(b.success),
+            a[c].jqXHR.fail(b.error),
+            a[c].jqXHR.always(b.complete));
+        a[c].jqXHR.always(function () {
+          isNaN(parseInt(b.clearQueueDelay)) ||
+            setTimeout(function () {
+              a[c].jqXHR = void 0;
+            }, b.clearQueueDelay);
+        });
+        return a[c].jqXHR;
+      } catch (g) {
+        "undefined" !== typeof console &&
+          "function" === typeof console.error &&
+          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
+      }
+    };
+    d.qdAjax.version = "4.0";
+  }
+})(jQuery);
+/* FUNÇÕES AUXILIARES */
+
+"function" !== typeof String.prototype.trim &&
+  (String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, "");
+  });
+"function" != typeof String.prototype.capitalize &&
+  (String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+  });
+"function" !== typeof String.prototype.replaceSpecialChars &&
+  (String.prototype.replaceSpecialChars = function () {
+    var b = {
+      "\u00e7": "c",
+      "\u00e6": "ae",
+      "\u0153": "oe",
+      "\u00e1": "a",
+      "\u00e9": "e",
+      "\u00ed": "i",
+      "\u00f3": "o",
+      "\u00fa": "u",
+      "\u00e0": "a",
+      "\u00e8": "e",
+      "\u00ec": "i",
+      "\u00f2": "o",
+      "\u00f9": "u",
+      "\u00e4": "a",
+      "\u00eb": "e",
+      "\u00ef": "i",
+      "\u00f6": "o",
+      "\u00fc": "u",
+      "\u00ff": "y",
+      "\u00e2": "a",
+      "\u00ea": "e",
+      "\u00ee": "i",
+      "\u00f4": "o",
+      "\u00fb": "u",
+      "\u00e5": "a",
+      "\u00e3": "a",
+      "\u00f8": "o",
+      "\u00f5": "o",
+      u: "u",
+      "\u00c1": "A",
+      "\u00c9": "E",
+      "\u00cd": "I",
+      "\u00d3": "O",
+      "\u00da": "U",
+      "\u00ca": "E",
+      "\u00d4": "O",
+      "\u00dc": "U",
+      "\u00c3": "A",
+      "\u00d5": "O",
+      "\u00c0": "A",
+      "\u00c7": "C",
+    };
+    return this.replace(/[\u00e0-\u00fa]/gi, function (a) {
+      return "undefined" != typeof b[a] ? b[a] : a;
+    });
+  });
+/* Quatro Digital - jQuery Ajax Queue // 4.0 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT <http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT> */
+(function (d) {
+  if ("function" !== typeof d.qdAjax) {
+    var a = {};
+    d.qdAjaxQueue = a;
+    150 >
+      parseInt((d.fn.jquery.replace(/[^0-9]+/g, "") + "000").slice(0, 3), 10) &&
+      console &&
+      "function" == typeof console.error &&
+      console.error();
+    d.qdAjax = function (f) {
+      try {
+        var b = d.extend(
+            {},
+            {
+              url: "",
+              type: "GET",
+              data: "",
+              success: function () {},
+              error: function () {},
+              complete: function () {},
+              clearQueueDelay: 5,
+            },
+            f
+          ),
+          e;
+        e =
+          "object" === typeof b.data
+            ? JSON.stringify(b.data)
+            : b.data.toString();
+        var c = encodeURIComponent(b.url + "|" + b.type + "|" + e);
+        a[c] = a[c] || {};
+        "undefined" == typeof a[c].jqXHR
+          ? (a[c].jqXHR = d.ajax(b))
+          : (a[c].jqXHR.done(b.success),
+            a[c].jqXHR.fail(b.error),
+            a[c].jqXHR.always(b.complete));
+        a[c].jqXHR.always(function () {
+          isNaN(parseInt(b.clearQueueDelay)) ||
+            setTimeout(function () {
+              a[c].jqXHR = void 0;
+            }, b.clearQueueDelay);
+        });
+        return a[c].jqXHR;
+      } catch (g) {
+        "undefined" !== typeof console &&
+          "function" === typeof console.error &&
+          console.error("Problemas no $.qdAjax :( . Detalhes: " + g.message);
+      }
+    };
+    d.qdAjax.version = "4.0";
+  }
+})(jQuery);
+/* Quatro Digital - VTEX Checkout Queue // 1.1 //  Carlos Vinicius [ QUATRO DIGITAL ] // Todos os direitos reservados */
+(function () {
+  var l = function (a, c) {
+      if ("object" === typeof console) {
+        var d = "object" === typeof a;
+        "undefined" !== typeof c && "alerta" === c.toLowerCase()
+          ? d
+            ? console.warn(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.warn("[QD VTEX Checkout Queue]\n" + a)
+          : "undefined" !== typeof c && "info" === c.toLowerCase()
+          ? d
+            ? console.info(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.info("[QD VTEX Checkout Queue]\n" + a)
+          : d
+          ? console.error(
+              "[QD VTEX Checkout Queue]\n",
+              a[0],
+              a[1],
+              a[2],
+              a[3],
+              a[4],
+              a[5],
+              a[6],
+              a[7]
+            )
+          : console.error("[QD VTEX Checkout Queue]\n" + a);
+      }
+    },
+    f = null,
+    g = {},
+    h = {},
+    e = {};
+  $.QD_checkoutQueue = function (a, c) {
+    if (null === f)
+      if (
+        "object" === typeof window.vtexjs &&
+        "undefined" !== typeof window.vtexjs.checkout
+      )
+        f = window.vtexjs.checkout;
+      else
+        return l(
+          "N\u00e3o foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a for\u00e7a n\u00e3o esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
+        );
+    var d = $.extend({ done: function () {}, fail: function () {} }, c),
+      b = a.join(";"),
+      k = function () {
+        g[b].add(d.done);
+        h[b].add(d.fail);
+      };
+    e[b]
+      ? k()
+      : ((g[b] = $.Callbacks()),
+        (h[b] = $.Callbacks()),
+        k(),
+        (e[b] = !0),
+        f
+          .getOrderForm(a)
+          .done(function (a) {
+            e[b] = !1;
+            g[b].fire(a);
+          })
+          .fail(function (a) {
+            e[b] = !1;
+            h[b].fire(a);
+          }));
+  };
+})();
+/*PHP JS - Number Format - http://phpjs.org/functions/number_format/*/
+function qd_number_format(b, c, d, e) {
+  b = (b + "").replace(/[^0-9+\-Ee.]/g, "");
+  b = isFinite(+b) ? +b : 0;
+  c = isFinite(+c) ? Math.abs(c) : 0;
+  e = "undefined" === typeof e ? "," : e;
+  d = "undefined" === typeof d ? "." : d;
+  var a = "",
+    a = function (a, b) {
+      var c = Math.pow(10, b);
+      return "" + (Math.round(a * c) / c).toFixed(b);
+    },
+    a = (c ? a(b, c) : "" + Math.round(b)).split(".");
+  3 < a[0].length && (a[0] = a[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, e));
+  (a[1] || "").length < c &&
+    ((a[1] = a[1] || ""), (a[1] += Array(c - a[1].length + 1).join("0")));
+  return a.join(d);
+}
+
+/* Quatro Digital Simple Cart // 4.15 // Carlos Vinicius [ QUATRO DIGITAL ] // Todos os direitos reservados */
+
+(function () {
+  var b = jQuery;
+  if ("function" !== typeof b.fn.simpleCart) {
+    b(function () {
+      var e = vtexjs.checkout.getOrderForm;
+      vtexjs.checkout.getOrderForm = function () {
+        return e.call();
+      };
+    });
+    try {
+      window.QuatroDigital_simpleCart = window.QuatroDigital_simpleCart || {};
+      window.QuatroDigital_simpleCart.ajaxStopOn = !1;
+      b.fn.simpleCart = function (e, n, k) {
+        var l = function (a, c) {
+          if ("object" === typeof console) {
+            var d = "object" === typeof a;
+            "undefined" !== typeof c && "alerta" === c.toLowerCase()
+              ? d
+                ? console.warn(
+                    "[Simple Cart]\n",
+                    a[0],
+                    a[1],
+                    a[2],
+                    a[3],
+                    a[4],
+                    a[5],
+                    a[6],
+                    a[7]
+                  )
+                : console.warn("[Simple Cart]\n" + a)
+              : "undefined" !== typeof c && "info" === c.toLowerCase()
+              ? d
+                ? console.info(
+                    "[Simple Cart]\n",
+                    a[0],
+                    a[1],
+                    a[2],
+                    a[3],
+                    a[4],
+                    a[5],
+                    a[6],
+                    a[7]
+                  )
+                : console.info("[Simple Cart]\n" + a)
+              : d
+              ? console.error(
+                  "[Simple Cart]\n",
+                  a[0],
+                  a[1],
+                  a[2],
+                  a[3],
+                  a[4],
+                  a[5],
+                  a[6],
+                  a[7]
+                )
+              : console.error("[Simple Cart]\n" + a);
+          }
+        };
+        var g = b(this);
+        "object" === typeof e
+          ? (n = e)
+          : ((e = e || !1), (g = g.add(b.QD_simpleCart.elements)));
+        if (!g.length) return g;
+        b.QD_simpleCart.elements = b.QD_simpleCart.elements.add(g);
+        k = "undefined" === typeof k ? !1 : k;
+        var p = {
+          cartQtt: ".qd_cart_qtt",
+          cartTotal: ".qd_cart_total",
+          itemsText: ".qd_items_text",
+          currencySymbol:
+            (b("meta[name=currency]").attr("content") || "R$") + " ",
+          showQuantityByItems: !0,
+          smartCheckout: !0,
+          callback: function () {},
+        };
+        var f = b.extend({}, p, n);
+        var m = b("");
+        g.each(function () {
+          var a = b(this);
+          a.data("qd_simpleCartOpts") || a.data("qd_simpleCartOpts", f);
+        });
+        var q = function (a) {
+          window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
+          for (var c = 0, d = 0, h = 0; h < a.totalizers.length; h++)
+            "Shipping" == a.totalizers[h].id
+              ? (d += a.totalizers[h].value)
+              : (c += a.totalizers[h].value);
+          window._QuatroDigital_CartData.total =
+            f.currencySymbol + qd_number_format(c / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.shipping =
+            f.currencySymbol + qd_number_format(d / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.allTotal =
+            f.currencySymbol + qd_number_format((c + d) / 100, 2, ",", ".");
+          window._QuatroDigital_CartData.qtt = 0;
+          if (f.showQuantityByItems)
+            for (h = 0; h < a.items.length; h++)
+              window._QuatroDigital_CartData.qtt += a.items[h].quantity;
+          else window._QuatroDigital_CartData.qtt = a.items.length || 0;
+          try {
+            window._QuatroDigital_CartData.callback &&
+              window._QuatroDigital_CartData.callback.fire &&
+              window._QuatroDigital_CartData.callback.fire();
+          } catch (x) {
+            l("Problemas com o callback do Smart Cart");
+          }
+          t(m);
+        };
+        var u = function (a, c) {
+          1 === a
+            ? c.text("Item").filter(".singular").show()
+            : c.text("itens").filter(".plural").show();
+        };
+        var v = function (a) {
+          1 > a ? g.addClass("qd-emptyCart") : g.removeClass("qd-emptyCart");
+        };
+        var w = function (a, c) {
+          var d = parseInt(window._QuatroDigital_CartData.qtt, 10);
+          c.$this.show();
+          isNaN(d) &&
+            (l(
+              "O valor obtido para calcular o plural/singular n\u00e3o \u00e9 um n\u00famero! O valor ser\u00e1 definido para 0.",
+              "alerta"
+            ),
+            (d = 0));
+          c.cartTotalE.html(window._QuatroDigital_CartData.total);
+          c.cartQttE.html(d);
+          u(d, c.itemsTextE);
+          v(d);
+        };
+        var t = function (a) {
+          g.each(function () {
+            var c = {};
+            var d = b(this);
+            e &&
+              d.data("qd_simpleCartOpts") &&
+              b.extend(f, d.data("qd_simpleCartOpts"));
+            c.$this = d;
+            c.cartQttE = d.find(f.cartQtt) || m;
+            c.cartTotalE = d.find(f.cartTotal) || m;
+            c.itemsTextE = d.find(f.itemsText) || m;
+            c.emptyElem = d.find(f.emptyCart) || m;
+            w(a, c);
+            d.addClass("qd-sc-populated");
+          });
+        };
+        (function () {
+          if (f.smartCheckout) {
+            window._QuatroDigital_DropDown =
+              window._QuatroDigital_DropDown || {};
+            if (
+              "undefined" !==
+                typeof window._QuatroDigital_DropDown.getOrderForm &&
+              (k || !e)
+            )
+              return q(window._QuatroDigital_DropDown.getOrderForm);
+            if (
+              "object" !== typeof window.vtexjs ||
+              "undefined" === typeof window.vtexjs.checkout
+            )
+              if (
+                "object" === typeof vtex &&
+                "object" === typeof vtex.checkout &&
+                "undefined" !== typeof vtex.checkout.SDK
+              )
+                new vtex.checkout.SDK();
+              else return l("N\u00e3o foi encontrada a biblioteca VTEX.js");
+            b.QD_checkoutQueue(["items", "totalizers", "shippingData"], {
+              done: function (a) {
+                q(a);
+                window._QuatroDigital_DropDown.getOrderForm = a;
+              },
+              fail: function (a) {
+                l([
+                  "N\u00e3o foi poss\u00edvel obter os dados para o carrinho.",
+                  a,
+                ]);
+              },
+            });
+          } else alert("Esta \u00e9 uma fun\u00e7\u00e3o descontinuada =/");
+        })();
+        f.callback();
+        b(window).trigger("simpleCartCallback.quatro_digital");
+        return g;
+      };
+      b.QD_simpleCart = { elements: b("") };
+      b(function () {
+        if ("function" === typeof window.ajaxRequestbuyButtonAsynchronous) {
+          var e = window.ajaxRequestbuyButtonAsynchronous;
+          window.ajaxRequestbuyButtonAsynchronous = function (n, k, l, g, p) {
+            e.call(this, n, k, l, g, function () {
+              "function" === typeof p && p();
+              b.QD_simpleCart.elements.each(function () {
+                var f = b(this);
+                f.simpleCart(f.data("qd_simpleCartOpts"));
+              });
+            });
+          };
+        }
+      });
+      var r = window.ReloadItemsCart || void 0;
+      window.ReloadItemsCart = function (e) {
+        b.fn.simpleCart(!0);
+        "function" === typeof r ? r.call(this, e) : alert(e);
+      };
+      b(function () {
+        var e = b(".qd_cart_auto");
+        e.length && e.simpleCart();
+      });
+      b(function () {
+        b(window).bind(
+          "productAddedToCart minicartUpdated.vtex cartProductAdded.vtex",
+          function () {
+            b.fn.simpleCart(!0);
+          }
+        );
+      });
+    } catch (e) {
+      "undefined" !== typeof console &&
+        "function" === typeof console.error &&
+        console.error("Oooops! ", e);
+    }
+  }
+})();
+/* Quatro Digital - VTEX Checkout Queue // 1.1 //  Carlos Vinicius [ QUATRO DIGITAL ] // Todos os direitos reservados */
+(function () {
+  var l = function (a, c) {
+      if ("object" === typeof console) {
+        var d = "object" === typeof a;
+        "undefined" !== typeof c && "alerta" === c.toLowerCase()
+          ? d
+            ? console.warn(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.warn("[QD VTEX Checkout Queue]\n" + a)
+          : "undefined" !== typeof c && "info" === c.toLowerCase()
+          ? d
+            ? console.info(
+                "[QD VTEX Checkout Queue]\n",
+                a[0],
+                a[1],
+                a[2],
+                a[3],
+                a[4],
+                a[5],
+                a[6],
+                a[7]
+              )
+            : console.info("[QD VTEX Checkout Queue]\n" + a)
+          : d
+          ? console.error(
+              "[QD VTEX Checkout Queue]\n",
+              a[0],
+              a[1],
+              a[2],
+              a[3],
+              a[4],
+              a[5],
+              a[6],
+              a[7]
+            )
+          : console.error("[QD VTEX Checkout Queue]\n" + a);
+      }
+    },
+    f = null,
+    g = {},
+    h = {},
+    e = {};
+  $.QD_checkoutQueue = function (a, c) {
+    if (null === f)
+      if (
+        "object" === typeof window.vtexjs &&
+        "undefined" !== typeof window.vtexjs.checkout
+      )
+        f = window.vtexjs.checkout;
+      else
+        return l(
+          "N\u00e3o foi encontrada a biblioteca VTEX.js. Este componente para por aqui, a for\u00e7a n\u00e3o esta mais contigo neste jornada! Para resolver isto inclua a biblioteca VTEX.js"
+        );
+    var d = $.extend({ done: function () {}, fail: function () {} }, c),
+      b = a.join(";"),
+      k = function () {
+        g[b].add(d.done);
+        h[b].add(d.fail);
+      };
+    e[b]
+      ? k()
+      : ((g[b] = $.Callbacks()),
+        (h[b] = $.Callbacks()),
+        k(),
+        (e[b] = !0),
+        f
+          .getOrderForm(a)
+          .done(function (a) {
+            e[b] = !1;
+            g[b].fire(a);
+          })
+          .fail(function (a) {
+            e[b] = !1;
+            h[b].fire(a);
+          }));
+  };
+})();
+/* Quatro Digital - Smart Buy Button // 2.1 // Carlos Vinicius // Todos os direitos reservados */
+(function (u) {
+  try {
+    var a = jQuery,
+      r = a({}),
+      n = function (a, d) {
+        console.log("Smart Buy Button", a, d);
+        if (
+          "object" === typeof console &&
+          "undefined" !== typeof console.error &&
+          "undefined" !== typeof console.info &&
+          "undefined" !== typeof console.warn
+        ) {
+          var b;
+          "object" === typeof a
+            ? (a.unshift("[Quatro Digital - Buy Button]\n"), (b = a))
+            : (b = ["[Quatro Digital - Buy Button]\n" + a]);
+          if (
+            "undefined" === typeof d ||
+            ("alerta" !== d.toLowerCase() && "aviso" !== d.toLowerCase())
+          )
+            if ("undefined" !== typeof d && "info" === d.toLowerCase())
+              try {
+                console.info.apply(console, b);
+              } catch (h) {
+                try {
+                  console.info(b.join("\n"));
+                } catch (k) {}
+              }
+            else
+              try {
+                console.error.apply(console, b);
+              } catch (h) {
+                try {
+                  console.error(b.join("\n"));
+                } catch (k) {}
+              }
+          else
+            try {
+              console.warn.apply(console, b);
+            } catch (h) {
+              try {
+                console.warn(b.join("\n"));
+              } catch (k) {}
+            }
+        }
+      },
+      t = {
+        timeRemoveNewItemClass: 5e3,
+        isSmartCheckout: !0,
+        buyQtt: "input.buy-in-page-quantity",
+        selectSkuMsg: "javascript:",
+        autoWatchBuyButton: !0,
+        buyIfQuantityZeroed: !1,
+        fakeRequest: !1,
+        productPageCallback: function (g, d, b) {
+          a("body").is(".productQuickView") &&
+            ("success" === d
+              ? alert("Produto adicionado ao carrinho!")
+              : (alert(
+                  "Ooops! Algo saiu errado ao tentar adicionar seu produto ao carrinho. \n Vou te redirecionar para o carrinho."
+                ),
+                (("object" === typeof parent
+                  ? parent
+                  : document
+                ).location.href = b)));
+        },
+        isProductPage: function () {
+          return a("body").is("#produto, .produto");
+        },
+        execDefaultAction: function (a) {
+          return !1;
+        },
+        allowBuyClick: function () {
+          return !0;
+        },
+        callback: function () {},
+        asyncCallback: function () {},
+      };
+    a.QD_buyButton = function (g, d, b) {
+      function h(a) {
+        f.isSmartCheckout
+          ? a.data("qd-bb-click-active") ||
+            (a.data("qd-bb-click-active", 1),
+            a.on("click.qd_bb_buy_sc", function (a) {
+              if (!f.allowBuyClick()) return !0;
+              if (!0 !== m.clickBuySmartCheckout.call(this))
+                return a.preventDefault(), !1;
+            }))
+          : alert("M\u00e9todo descontinuado!");
+      }
+      function k(e) {
+        e = e || a(f.buyButton);
+        e.each(function () {
+          var c = a(this);
+          c.is(".qd-sbb-on") ||
+            (c.addClass("qd-sbb-on"),
+            (c.is(".btn-add-buy-button-asynchronous") &&
+              !c.is(".remove-href")) ||
+              c.data("qd-bb-active") ||
+              (c.data("qd-bb-active", 1),
+              c.children(".qd-bb-productAdded").length ||
+                c.append(
+                  '<span class="qd-bb-productAdded"><i class="icon-thumbs-up"></i> <span>Produto adicionado</span></span>'
+                ),
+              c.is(".buy-in-page-button") && f.isProductPage() && l.call(c),
+              h(c)));
+        });
+        f.isProductPage() &&
+          !e.length &&
+          n(
+            "Oooops!\nAparentemente esta \u00e9 uma p\u00e1gina de produto por\u00e9m n\u00e3o encontrei nenhum bot\u00e3o comprar!\nVerifique se \u00e9 este mesmo o seletor: '" +
+              e.selector +
+              "'.",
+            "info"
+          );
+      }
+      var f = b || f,
+        p = a(g),
+        m = this;
+      window._Quatro_Digital_dropDown = window._Quatro_Digital_dropDown || {};
+      window._QuatroDigital_CartData = window._QuatroDigital_CartData || {};
+      m.prodAdd = function (e, c) {
+        p.addClass("qd-bb-itemAddCartWrapper qd-bb-lightBoxProdAdd");
+        a("body").addClass("qd-bb-lightBoxBodyProdAdd");
+        var b = a(f.buyButton)
+          .filter("[href='" + (e.attr("href") || "---") + "']")
+          .add(e);
+        b.addClass("qd-bb-itemAddBuyButtonWrapper");
+        setTimeout(function () {
+          p.removeClass("qd-bb-itemAddCartWrapper");
+          b.removeClass("qd-bb-itemAddBuyButtonWrapper");
+        }, f.timeRemoveNewItemClass);
+        window._Quatro_Digital_dropDown.getOrderForm = void 0;
+        if (
+          "undefined" !== typeof d &&
+          "function" === typeof d.getCartInfoByUrl
+        )
+          return (
+            f.isSmartCheckout ||
+              (n("fun\u00e7\u00e3o descontinuada"), d.getCartInfoByUrl()),
+            (window._QuatroDigital_DropDown.getOrderForm = void 0),
+            d.getCartInfoByUrl(
+              function (c) {
+                window._Quatro_Digital_dropDown.getOrderForm = c;
+                a.fn.simpleCart(!0, void 0, !0);
+              },
+              { lastSku: c }
+            )
+          );
+        window._Quatro_Digital_dropDown.allowUpdate = !0;
+        a.fn.simpleCart(!0);
+        a(window).trigger("QuatroDigital.qd_sc_prodAdd", [e, c, b]);
+      };
+      (function () {
+        if (f.isSmartCheckout && f.autoWatchBuyButton) {
+          var e = a(".btn-add-buy-button-asynchronous");
+          e.length && k(e);
+        }
+      })();
+      var l = function () {
+        var e = a(this);
+        "undefined" !== typeof e.data("buyButton")
+          ? (e.unbind("click"), h(e))
+          : (e.bind("mouseenter.qd_bb_buy_sc", function (c) {
+              e.unbind("click");
+              h(e);
+              a(this).unbind(c);
+            }),
+            a(window).load(function () {
+              e.unbind("click");
+              h(e);
+              e.unbind("mouseenter.qd_bb_buy_sc");
+            }));
+      };
+      m.clickBuySmartCheckout = function () {
+        var e = a(this),
+          c = e.attr("href") || "";
+        if (-1 < c.indexOf(f.selectSkuMsg)) return !0;
+        c = c
+          .replace(/redirect=(false|true)/gi, "")
+          .replace("?", "?redirect=false&")
+          .replace(/&&/gi, "&");
+        if (f.execDefaultAction(e))
+          return (
+            e.attr("href", c.replace("redirect=false", "redirect=true")), !0
+          );
+        c = c.replace(/http.?:/i, "");
+        r.queue(function (b) {
+          if (!f.buyIfQuantityZeroed && !/(&|\?)qty=[1-9][0-9]*/gi.test(c))
+            return b();
+          var d = function (b, d) {
+            var g = c.match(/sku=([0-9]+)/gi),
+              h = [];
+            if ("object" === typeof g && null !== g)
+              for (var k = g.length - 1; 0 <= k; k--) {
+                var l = parseInt(g[k].replace(/sku=/gi, ""));
+                isNaN(l) || h.push(l);
+              }
+            f.productPageCallback.call(this, b, d, c);
+            m.buyButtonClickCallback.call(this, b, d, c, h);
+            m.prodAdd(e, c.split("ku=").pop().split("&").shift());
+            "function" === typeof f.asyncCallback && f.asyncCallback.call(this);
+            a(window).trigger("productAddedToCart");
+            a(window).trigger("cartProductAdded.vtex");
+          };
+          f.fakeRequest
+            ? (d(null, "success"), b())
+            : a
+                .ajax({
+                  url: c,
+                  complete: d,
+                  mimeType: "text/html",
+                })
+                .always(function () {
+                  b();
+                });
+        });
+      };
+      m.buyButtonClickCallback = function (a, c, b, d) {
+        try {
+          "success" === c &&
+            "object" === typeof window.parent &&
+            "function" ===
+              typeof window.parent._QuatroDigital_prodBuyCallback &&
+            window.parent._QuatroDigital_prodBuyCallback(a, c, b, d);
+        } catch (v) {
+          n(
+            "Problemas ao tentar comunicar a p\u00e1gina que o produto foi aicionado ao carrinho."
+          );
+        }
+      };
+      k();
+      "function" === typeof f.callback
+        ? f.callback.call(this)
+        : n("Callback n\u00e3o \u00e9 uma fun\u00e7\u00e3o");
+    };
+    var l = a.Callbacks();
+    a.fn.QD_buyButton = function (g, d) {
+      var b = a(this);
+      "undefined" !== typeof d ||
+        "object" !== typeof g ||
+        g instanceof a ||
+        ((d = g), (g = void 0));
+      var h;
+      l.add(function () {
+        b.children(".qd-bb-itemAddWrapper").length ||
+          b.prepend(
+            '<span class="qd-bb-itemAddWrapper"><span class="qd-bb-itemAddIco"></span></span>'
+          );
+        h = new a.QD_buyButton(b, g, a.extend({}, t, d));
+      });
+      l.fire();
+      a(window).on("QuatroDigital.qd_bb_prod_add", function (a, b, d) {
+        h.prodAdd(b, d);
+      });
+      return a.extend(b, h);
+    };
+    var q = 0;
+    a(document).ajaxSend(function (a, d, b) {
+      -1 < b.url.toLowerCase().indexOf("/checkout/cart/add") &&
+        (q = (b.url.match(/sku=([0-9]+)/i) || [""]).pop());
+    });
+    a(window).bind("productAddedToCart.qdSbbVtex", function () {
+      a(window).trigger("QuatroDigital.qd_bb_prod_add", [new a(), q]);
+    });
+    a(document).ajaxStop(function () {
+      l.fire();
+    });
+  } catch (g) {
+    "undefined" !== typeof console &&
+      "function" === typeof console.error &&
+      console.error("Oooops! ", g);
+  }
+})(this);
+/* $("a").getParent("ul"); // 3 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT */
+(function (a) {
+  a.fn.getParent = a.fn.closest;
+})(jQuery);
+
+/* Quatro Digital Plus Smart Cart // 7.7 // Carlos Vinicius // Todos os direitos reservados */
+var _0x99c4 = [
+  "productAddedToCart.qdDdcVtex\x20minicartUpdated.vtex.qdDdcVtex",
+  "qd-bb-lightBoxProdAdd\x20sc-qd-cart-opened\x20qd-ddc-product-add-time-v2",
+  "body",
+  "data-sku",
+  "buyButton",
+  "mouseenter.qd_ddc_hover",
+  "clearNotification",
+  ".qd-ddc-infoTotalItems",
+  "<span\x20class=\x22qd-ddc-infoTotalShipping\x22></span>",
+  "vtexjs",
+  "<div\x20class=\x22qd-ddc-prodRow\x20qd_ddc_prodRow\x22><div\x20class=\x22qd-ddc-prodCell\x20qd-ddc-column1\x20qd-ddc-prodImg\x22><div\x20class=\x22qd-ddc-prodImgWrapper\x22><img\x20src=\x22\x22\x20class=\x22qd-ddc-image\x22\x20/><span\x20class=\x22qd-ddc-imgLoading\x22></span></div></div><div\x20class=\x22qd-ddc-prodCell\x20qd-ddc-column2\x20qd-ddc-prodName\x22></div><div\x20class=\x22qd-ddc-prodCell\x20qd-ddc-column3\x20qd-ddc-prodPrice\x22></div><div\x20class=\x22qd-ddc-prodCell\x20qd-ddc-column4\x20qd-ddc-prodQtt\x22><div\x20class=\x22qd-ddc-prodQttWrapper\x20clearfix\x22><a\x20href=\x22#\x22\x20class=\x22qd-ddc-quantityMinus\x22></a><input\x20type=\x22text\x22\x20class=\x22qd-ddc-quantity\x22\x20/><a\x20href=\x22#\x22\x20class=\x22qd-ddc-quantityMore\x22></a><span\x20class=\x22qd-ddc-qttLoading\x22></span></div></div><div\x20class=\x22qd-ddc-prodCell\x20qd-ddc-column5\x20qd-ddc-prodRemove\x22><div\x20class=\x22qd-ddc-removeWrapper\x20clearfix\x22><a\x20href=\x22#\x22\x20class=\x22qd-ddc-remove\x22></a><span\x20class=\x22qd-ddc-prodRowLoading\x22></span></div></div></div>",
+  "callbackProductsList\x20não\x20é\x20uma\x20função",
+  "boolean",
+  "<div\x20class=\x22qd-ddc-notification\x22>",
+  ".qd-ddc-notification-close",
+  ".qd-ddc-prodWrapper2",
+  ".qd-ddc-emptyCart\x20p",
+  "text",
+  "Problemas\x20ao\x20atualizar\x20os\x20dados\x20do\x20carrinho\x20a\x20partir\x20do\x20eveento\x20da\x20VTEX.\x20Detalhes:\x20",
+  ".qd-ddc-image",
+  "j%25C2%25A8pragrecnegf%25C2%25A8pbz%25C2%25A8oe",
+  "quantity",
+  "http",
+  ".qd-ddc-scrollUp",
+  ".qd-ddc-infoTotal",
+  "$1-",
+  "insertProdImg",
+  "actionButtons",
+  "allowUpdate",
+  "Não\x20foi\x20possível\x20atualizar\x20a\x20quantidade\x20de\x20itens\x20no\x20carrinho",
+  "done",
+  ".qd-ddc-prodRow",
+  "warn",
+  "qd-ddc-prodLoaded",
+  "erc",
+  "keyup.qd_ddc_closeFn",
+  "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+  "availability",
+  "texts",
+  ".qd_ddc_continueShopping",
+  "cartContainer",
+  "address",
+  "object",
+  "append",
+  "<table\x20class=\x22table\x20qd-dd-cep-slas\x22><thead><tr><th>Valor</th><th>Disponibilidade</th></tr></thead><tbody></tbody></table>",
+  "allowRecalculate",
+  ".qd-ddc-shipping",
+  "Atenção,\x20este\x20método\x20esta\x20descontinuado.",
+  "price",
+  "shippingEstimate",
+  "continueShopping",
+  "---",
+  "function",
+  "scrollCart",
+  "ite",
+  "preventDefault",
+  ".qd-ddc-notification",
+  "SKU\x20não\x20encontrado!\x20Certifique-se\x20de\x20que\x20este\x20produto\x20está\x20ativo.",
+  "quickViewUpdate",
+  "filter",
+  "cartIsEmpty",
+  "outerHeight",
+  "atenção\x20esta\x20método\x20esta\x20descontinuado",
+  "Problemas\x20ao\x20tentar\x20definir\x20o\x20CEP\x20com\x20base\x20nos\x20dados\x20do\x20checkout.\x20Detalhes:\x20",
+  "qd-loaded",
+  "unshift",
+  "qtt",
+  "removeProduct",
+  "SDK",
+  ".qd_ddc_lightBoxOverlay",
+  "keyup.qd_ddc_cep",
+  "timeRemoveNewItemClass",
+  "closest",
+  "message",
+  "empty",
+  ".qd-bap-qtt",
+  "cartTotal",
+  "removeClass",
+  ".qd-ddc-quantityMore",
+  "toUpperCase",
+  "exec",
+  "target",
+  "<tr></tr>",
+  "apply",
+  "Não\x20foi\x20encontrada\x20a\x20biblioteca\x20VTEX.js",
+  "slideUp",
+  "keyup.qd_ddc_change",
+  "<span\x20class=\x22qd-ddc-infoAllTotal\x22></span>",
+  "input.qd-productId[value=",
+  "setOrderForm",
+  "callback",
+  "aviso",
+  "prepend",
+  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
+  "_QuatroDigital_AmountProduct",
+  ".qd-ddc-quantityMore,.qd-ddc-quantityMinus",
+  ".qd-ddc-wrapper",
+  "Finalizar\x20Compra",
+  "Não\x20foi\x20possível\x20remover\x20o\x20item\x20do\x20carrinho",
+  "html",
+  "Seu\x20carrinho\x20ainda\x20não\x20tem\x20nenhum\x20produto.",
+  "val",
+  "meta[name=currency]",
+  "length",
+  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+  "buyButtonClicked",
+  "qd-ddc-noItems",
+  "qd-ddc-cart-rendered\x20qd-ddc-product-add-time",
+  "appendTo",
+  ".qd-ddc-quantityMinus",
+  "info",
+  ".qd-ddc-cep-ok",
+  "hide",
+  "_QuatroDigital_CartData",
+  "name",
+  "dataOptionsCache",
+  ".qd_ddc_continueShopping,\x20.qd_ddc_lightBoxClose",
+  "Este\x20método\x20esta\x20descontinuado!",
+  "emptyCart",
+  "<span\x20class=\x22qd-ddc-infoTotalItems\x22></span>",
+  "click.qd_ddc_scrollUp",
+  "shipping",
+  "#shipping",
+  "ProdAddTimeV2",
+  "qd-bb-lightBoxBodyProdAdd\x20sc-qd-cart-opened\x20qd-ddc-product-add-time-v2",
+  "add",
+  "each",
+  "#items",
+  ".qd-ddc-cep-close",
+  "items",
+  "smartCheckout",
+  "_QuatroDigital_DropDown",
+  "keyCode",
+  "stop",
+  "prod_",
+  "parent",
+  "off",
+  "//io.vtex.com.br/vtex.js/1.0.0/vtex.min.js",
+  "click.qd_ddc_closeFn",
+  "Oooops!\x20",
+  "<span\x20class=\x22qd-ddc-notification-close\x22>X</span><p>#messageText</p>",
+  "Não\x20foi\x20informada\x20uma\x20URL\x20para\x20a\x20imagem\x20e\x20nem\x20um\x20SKU",
+  "linkCart",
+  "qd-ddc-cart-empty",
+  "totalizers",
+  "insertBefore",
+  "load",
+  "prodId",
+  "<span\x20class=\x22qd-bap-wrapper\x22\x20title=\x22Itens\x20no\x20carrinho\x20para\x20este\x20produto.\x22><span\x20class=\x22qd-bap-wrapper2\x22><span\x20class=\x22qd-bap-qtt\x22></span></span></span>",
+  "getParent",
+  ".qd-ddc-quantity",
+  "simpleCart",
+  ".qd-ddc-remove",
+  "click._QD_DDC_closeShipping",
+  "getCartInfoByUrl",
+  "qd-ddc-lastAddedFixed",
+  "attr",
+  "<div\x20class=\x22qd-ddc-wrapper\x20qd-ddc-noItems\x22><div\x20class=\x22qd-ddc-wrapper2\x22><div\x20class=\x22qd_ddc_lightBoxClose\x22></div><div\x20class=\x22qd-ddc-wrapper3\x22><div\x20class=\x22qd-ddc-emptyCart\x22><p></p></div><div\x20class=\x22qd-ddc-row\x20qd-ddc-products\x22><a\x20href=\x22#\x22\x20class=\x22qd-ddc-scrollUp\x22></a><div\x20class=\x22qd-ddc-prodWrapper\x22>\x20<div\x20class=\x22qd-ddc-prodWrapper2\x22></div>\x20</div><span\x20class=\x22qd-ddc-prodLoading\x22></span><a\x20href=\x22#\x22\x20class=\x22qd-ddc-scrollDown\x22></a></div><div\x20class=\x22qd-ddc-row\x20qd-ddc-info\x22><div\x20class=\x22qd-ddc-shipping\x22></div><div\x20class=\x22qd-ddc-infoTotal\x22></div><div\x20class=\x22qd-ddc-infoBts\x22><a\x20href=\x22/checkout/#/cart\x22\x20class=\x22qd-ddc-viewCart\x22></a><a\x20href=\x22#\x22\x20class=\x22qd_ddc_continueShopping\x22></a><a\x20href=\x22/checkout/#/orderform\x22\x20class=\x22qd-ddc-checkout\x22></a></div></div></div></div></div>",
+  "logisticsInfo",
+  ".qd-ddc-cep",
+  ".qd-ddc-viewCart",
+  "sellingPrice",
+  "changeQantity",
+  "<td>\x20R$\x20",
+  "smartCart",
+  "#total",
+  "checkout",
+  "Não\x20foi\x20possível\x20obter\x20os\x20dados\x20do\x20carrinho",
+  ".qd-bap-wrapper",
+  "call",
+  "forceImageHTTPS",
+  ".qd-ddc-infoTotalValue",
+  "focusout.qd_ddc_change",
+  "$1-$2$3",
+  "linkCheckout",
+  "Não\x20foi\x20possível\x20obter\x20\x27//io.vtex.com.br/vtex.js/1.0.0/vtex.min.js\x27\x20o\x20DropDown\x20não\x20será\x20executado.",
+  "find",
+  "selector",
+  "QD_checkoutQueue",
+  "remove",
+  "</td>",
+  "O\x20Smart\x20Cart\x20não\x20é\x20mais\x20iniciado\x20desta\x20forma.\x20A\x20versão\x20que\x20você\x20esta\x20executando\x20tem\x20licença\x20restrita\x20e\x20todos\x20os\x20direitos\x20reservados\x20à\x20Quatro\x20Digital.",
+  "Continuar\x20Comprando",
+  "addClass",
+  "error",
+  ".qd-ddc-cep-tooltip-text",
+  "undefined",
+  "#value",
+  "A\x20execução\x20do\x20DropDown\x20pará\x20por\x20aqui!",
+  "shippingForm",
+  "productCategoryIds",
+  "Callbacks",
+  "qd-bap-item-added",
+  "click.qd_ddc_scrollDown",
+  "fromCharCode",
+  ".qd-ddc-prodWrapper,\x20.qd-ddc-prodWrapper2",
+  ".qd-ddc-prodWrapper",
+  "<div\x20class=\x22qd-ddc-cep-tooltip\x22><a\x20href=\x22#\x22\x20class=\x22qd-ddc-cep-btn\x22>Consulte\x20o\x20prazo\x20e\x20o\x20valor\x20do\x20frete</a><div\x20class=\x22qd-ddc-cep-tooltip-text\x22><h4\x20class=\x22qd-ddc-cep-title\x22>Consulte\x20o\x20prazo\x20e\x20o\x20valor\x20do\x20frete</h4><div\x20class=\x22qd-ddc-cep-wrapper\x22><input\x20type=\x22tel\x22\x20class=\x22qd-ddc-cep\x22\x20placeholder=\x22Digite\x20o\x20CEP\x20de\x20entrega\x22><a\x20class=\x22qd-ddc-cep-ok\x22\x20href=\x22#\x22>OK</a></div><a\x20class=\x22qd-ddc-cep-close\x22\x20href=\x22#\x22><i\x20class=\x22fa\x20fa-times\x22\x20aria-hidden=\x22true\x22></i>\x20Fechar</a></div></div>",
+  "productId",
+  "#messageText",
+  "QD_dropDownCart",
+  "join",
+  "replace",
+  "qd-loading",
+  "https",
+  "renderProductsList",
+  "A\x20biblioteca\x20VTEX.js\x20não\x20foi\x20encontrada.\x20o\x20Script\x20tentará\x20buscar\x20no\x20CDN",
+  "shippingCalculate",
+  ",\x20entrega\x20em\x20",
+  "qd-ddc-cart-rendered",
+  "ทÃѲ\x20√Αℓ¡∂Α∂Ѳ\x20ΡΑ૨Α\x20૯ઽƬΑ\x20LѲJΑ!",
+  ".qd-ddc-checkout",
+  "\x20para\x20o\x20CEP\x20",
+  "thumbSize",
+  "qd-ddc-product-add-time-v2",
+  "shippingData",
+  "fail",
+  ".qd-dd-cep-slas",
+  "imageUrl",
+  "data-sku-index",
+  "updateOnlyHover",
+  "dropDown",
+  "charCodeAt",
+  "slas",
+  "<div><span>Itens:\x20#items</span><span>Subtotal:\x20#value</span></div><div><span>Frete:\x20#shipping</span><span>Total:\x20#total</span></div>",
+  "Callback\x20não\x20é\x20uma\x20função",
+  "lastSku",
+  "BRA",
+  "qd-ddc-lastAdded",
+  "formatCepField",
+  ".qd-ddc-cep-btn",
+  "src",
+  "avisso",
+  "Ir\x20ao\x20Carrinho",
+  "extend",
+  "QD_smartCart",
+  "height",
+  "qd-ddc-product-add-time",
+  "click",
+  "enableNotification",
+  "callbackProductsList",
+  "alerta",
+  "getOrderForm",
+];
+(function (_0x552382, _0x99c451) {
+  var _0x4b44a8 = function (_0x177550) {
+    while (--_0x177550) {
+      _0x552382["push"](_0x552382["shift"]());
+    }
+  };
+  _0x4b44a8(++_0x99c451);
+})(_0x99c4, 0x1c9);
+var _0x4b44 = function (_0x552382, _0x99c451) {
+  _0x552382 = _0x552382 - 0x0;
+  var _0x4b44a8 = _0x99c4[_0x552382];
+  return _0x4b44a8;
+};
+(function () {
+  try {
+    (window[_0x4b44("0x8e")] = window[_0x4b44("0x8e")] || {}),
+      (window[_0x4b44("0x8e")][_0x4b44("0x77")] =
+        window[_0x4b44("0x8e")][_0x4b44("0x77")] || $[_0x4b44("0xdc")]());
+  } catch (_0xe19df8) {
+    _0x4b44("0xd7") !== typeof console &&
+      "function" === typeof console["error"] &&
+      console[_0x4b44("0xd5")](_0x4b44("0xa8"), _0xe19df8[_0x4b44("0x66")]);
+  }
+})();
+(function (_0x3997b7) {
+  try {
+    var _0x1ac1d3 = jQuery,
+      _0x2fef20 = function (_0x2d496f, _0x17101b) {
+        if (
+          "object" === typeof console &&
+          "undefined" !== typeof console[_0x4b44("0xd5")] &&
+          _0x4b44("0xd7") !== typeof console[_0x4b44("0x8b")] &&
+          _0x4b44("0xd7") !== typeof console[_0x4b44("0x3d")]
+        ) {
+          var _0x40b875;
+          _0x4b44("0x47") === typeof _0x2d496f
+            ? (_0x2d496f[_0x4b44("0x5e")](
+                "[Quatro\x20Digital\x20-\x20DropDown\x20Cart]\x0a"
+              ),
+              (_0x40b875 = _0x2d496f))
+            : (_0x40b875 = [
+                "[Quatro\x20Digital\x20-\x20DropDown\x20Cart]\x0a" + _0x2d496f,
+              ]);
+          if (
+            "undefined" === typeof _0x17101b ||
+            (_0x4b44("0x1b") !== _0x17101b["toLowerCase"]() &&
+              _0x4b44("0x78") !== _0x17101b["toLowerCase"]())
+          )
+            if (
+              _0x4b44("0xd7") !== typeof _0x17101b &&
+              _0x4b44("0x8b") === _0x17101b["toLowerCase"]()
+            )
+              try {
+                console[_0x4b44("0x8b")][_0x4b44("0x70")](console, _0x40b875);
+              } catch (_0x4b6015) {
+                try {
+                  console[_0x4b44("0x8b")](_0x40b875[_0x4b44("0xe6")]("\x0a"));
+                } catch (_0x326807) {}
+              }
+            else
+              try {
+                console[_0x4b44("0xd5")][_0x4b44("0x70")](console, _0x40b875);
+              } catch (_0x13f24d) {
+                try {
+                  console[_0x4b44("0xd5")](_0x40b875[_0x4b44("0xe6")]("\x0a"));
+                } catch (_0x50f0e3) {}
+              }
+          else
+            try {
+              console[_0x4b44("0x3d")][_0x4b44("0x70")](console, _0x40b875);
+            } catch (_0x460d30) {
+              try {
+                console["warn"](_0x40b875[_0x4b44("0xe6")]("\x0a"));
+              } catch (_0x46e5e6) {}
+            }
+        }
+      };
+    window[_0x4b44("0xa0")] = window[_0x4b44("0xa0")] || {};
+    window[_0x4b44("0xa0")]["allowUpdate"] = !0x0;
+    _0x1ac1d3["QD_dropDownCart"] = function () {};
+    _0x1ac1d3["fn"][_0x4b44("0xe5")] = function () {
+      return { fn: new _0x1ac1d3() };
+    };
+    var _0x43cc86 = (function (_0x50b19b) {
+      var _0xeb4ab4 = {
+        p: "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
+        jj: _0x4b44("0x31"),
+        pra: _0x4b44("0x41"),
+        dqfg: _0x4b44("0x85"),
+      };
+      return (function (_0x142238) {
+        var _0x44df1b = function (_0x15551e) {
+          return _0x15551e;
+        };
+        var _0x104533 = [
+          "a",
+          "e",
+          0x12,
+          "m",
+          "s",
+          "k",
+          "d",
+          "u",
+          "g",
+          "h",
+          "a",
+          "g",
+          "s",
+          "t",
+          "z",
+          "y",
+          "o",
+          "u",
+          "o",
+          "b",
+        ];
+        _0x142238 =
+          _0x142238[
+            "d" +
+              _0x104533[0x10] +
+              "c" +
+              _0x104533[0x11] +
+              "m" +
+              _0x44df1b(_0x104533[0x1]) +
+              "n" +
+              _0x104533[0xd]
+          ][
+            "l" +
+              _0x104533[0x12] +
+              "c" +
+              _0x104533[0x0] +
+              "ti" +
+              _0x44df1b("o") +
+              "n"
+          ];
+        var _0x502130 = function (_0x433a57) {
+          return escape(
+            encodeURIComponent(
+              _0x433a57[_0x4b44("0xe7")](/\./g, "¨")[_0x4b44("0xe7")](
+                /[a-zA-Z]/g,
+                function (_0x287d7b) {
+                  return String[_0x4b44("0xdf")](
+                    ("Z" >= _0x287d7b ? 0x5a : 0x7a) >=
+                      (_0x287d7b = _0x287d7b[_0x4b44("0x8")](0x0) + 0xd)
+                      ? _0x287d7b
+                      : _0x287d7b - 0x1a
+                  );
+                }
+              )
+            )
+          );
+        };
+        var _0x28044d = _0x502130(
+          _0x142238[
+            [
+              _0x104533[0x9],
+              _0x44df1b("o"),
+              _0x104533[0xc],
+              _0x104533[_0x44df1b(0xd)],
+            ]["join"]("")
+          ]
+        );
+        _0x502130 = _0x502130(
+          (window[
+            [
+              "js",
+              _0x44df1b("no"),
+              "m",
+              _0x104533[0x1],
+              _0x104533[0x4][_0x4b44("0x6c")](),
+              _0x4b44("0x53"),
+            ][_0x4b44("0xe6")]("")
+          ] || _0x4b44("0x50")) +
+            [
+              ".v",
+              _0x104533[0xd],
+              "e",
+              _0x44df1b("x"),
+              "co",
+              _0x44df1b("mm"),
+              _0x4b44("0x3f"),
+              _0x104533[0x1],
+              ".c",
+              _0x44df1b("o"),
+              "m.",
+              _0x104533[0x13],
+              "r",
+            ][_0x4b44("0xe6")]("")
+        );
+        for (var _0x22ca49 in _0xeb4ab4) {
+          if (
+            _0x502130 === _0x22ca49 + _0xeb4ab4[_0x22ca49] ||
+            _0x28044d === _0x22ca49 + _0xeb4ab4[_0x22ca49]
+          ) {
+            var _0x3cb77a = "tr" + _0x104533[0x11] + "e";
+            break;
+          }
+          _0x3cb77a = "f" + _0x104533[0x0] + "ls" + _0x44df1b(_0x104533[0x1]);
+        }
+        _0x44df1b = !0x1;
+        -0x1 <
+          _0x142238[
+            [_0x104533[0xc], "e", _0x104533[0x0], "rc", _0x104533[0x9]][
+              _0x4b44("0xe6")
+            ]("")
+          ]["indexOf"](_0x4b44("0x7a")) && (_0x44df1b = !0x0);
+        return [_0x3cb77a, _0x44df1b];
+      })(_0x50b19b);
+    })(window);
+    if (!eval(_0x43cc86[0x0]))
+      return _0x43cc86[0x1] ? _0x2fef20(_0x4b44("0xef")) : !0x1;
+    _0x1ac1d3[_0x4b44("0xe5")] = function (_0x567e72, _0x1ff052) {
+      var _0x349a04 = _0x1ac1d3(_0x567e72);
+      if (!_0x349a04[_0x4b44("0x84")]) return _0x349a04;
+      var _0x31d2f4 = _0x1ac1d3[_0x4b44("0x14")](
+        !0x0,
         {},
         {
-          updateOnlyHover: !0,
+          updateOnlyHover: !0x0,
           texts: {
-            linkCart: "Ir ao Carrinho",
-            linkCheckout: _0x28e2("0x29"),
-            cartTotal: _0x28e2("0xc5"),
-            emptyCart: _0x28e2("0xa8"),
-            continueShopping: "Continuar Comprando",
-            shippingForm: _0x28e2("0xb"),
-            notification: _0x28e2("0x14"),
+            linkCart: _0x4b44("0x13"),
+            linkCheckout: _0x4b44("0x7e"),
+            cartTotal: _0x4b44("0xa"),
+            emptyCart: _0x4b44("0x81"),
+            continueShopping: _0x4b44("0xd3"),
+            shippingForm: _0x4b44("0xe2"),
+            notification: _0x4b44("0xa9"),
           },
-          timeRemoveNewItemClass: 5e3,
-          forceImageHTTPS: !1,
-          thumbSize: {
-            w: 100,
-            h: 100,
-          },
-          skuName: function (_0x21730d) {
-            return _0x21730d["skuName"] || _0x21730d[_0x28e2("0x9e")];
+          timeRemoveNewItemClass: 0x1388,
+          forceImageHTTPS: !0x1,
+          thumbSize: { w: 0x64, h: 0x64 },
+          skuName: function (_0x5055bf) {
+            return _0x5055bf["skuName"] || _0x5055bf[_0x4b44("0x8f")];
           },
           callback: function () {},
           callbackProductsList: function () {},
-          enableNotification: !1,
-          clearNotification: !1,
-          smartCheckout: !0,
+          enableNotification: !0x1,
+          clearNotification: !0x1,
+          smartCheckout: !0x0,
         },
-        _0x385b93
+        _0x1ff052
       );
-      _0x293211("");
-      var _0x5533b6 = this;
-      if (_0x4974e1[_0x28e2("0xf2")]) {
-        var _0x5d0c66 = !1;
-        _0x28e2("0xfa") === typeof window["vtexjs"] &&
-          (_0x328fc7(_0x28e2("0x3")),
-          _0x293211[_0x28e2("0x26")]({
-            url: "//io.vtex.com.br/vtex.js/1.0.0/vtex.min.js",
-            async: !1,
-            dataType: _0x28e2("0x42"),
+      _0x1ac1d3("");
+      var _0x346975 = this;
+      if (_0x31d2f4[_0x4b44("0x9f")]) {
+        var _0x1cc917 = !0x1;
+        _0x4b44("0xd7") === typeof window[_0x4b44("0x26")] &&
+          (_0x2fef20(_0x4b44("0xeb")),
+          _0x1ac1d3["ajax"]({
+            url: _0x4b44("0xa6"),
+            async: !0x1,
+            dataType: "script",
             error: function () {
-              _0x328fc7(_0x28e2("0x3f"));
-              _0x5d0c66 = !0;
+              _0x2fef20(_0x4b44("0xcc"));
+              _0x1cc917 = !0x0;
             },
           }));
-        if (_0x5d0c66)
-          return _0x328fc7("A execução do DropDown pará por aqui!");
+        if (_0x1cc917) return _0x2fef20(_0x4b44("0xd9"));
       }
       if (
-        _0x28e2("0x92") === typeof window[_0x28e2("0xd3")] &&
-        _0x28e2("0xfa") !== typeof window[_0x28e2("0xd3")][_0x28e2("0x4c")]
+        _0x4b44("0x47") === typeof window[_0x4b44("0x26")] &&
+        "undefined" !== typeof window["vtexjs"][_0x4b44("0xc3")]
       )
-        var _0x25727d = window[_0x28e2("0xd3")][_0x28e2("0x4c")];
+        var _0x192618 = window["vtexjs"][_0x4b44("0xc3")];
       else if (
-        _0x28e2("0x92") === typeof vtex &&
-        _0x28e2("0x92") === typeof vtex[_0x28e2("0x4c")] &&
-        _0x28e2("0xfa") !== typeof vtex[_0x28e2("0x4c")][_0x28e2("0xb3")]
+        _0x4b44("0x47") === typeof vtex &&
+        _0x4b44("0x47") === typeof vtex["checkout"] &&
+        _0x4b44("0xd7") !== typeof vtex["checkout"][_0x4b44("0x61")]
       )
-        _0x25727d = new vtex[_0x28e2("0x4c")][_0x28e2("0xb3")]();
-      else return _0x328fc7(_0x28e2("0x98"));
-      var _0x3eb898 = /^\/|\/$/g,
-        _0x20fb17 = /[^0-9]/g,
-        _0x3295b0 = /([0-9]{5})([0-9])([0-9]{2})?/g,
-        _0x214a6d = /(.{9}).*/g,
-        _0x411266 = /(ids\/[0-9]+)[^\/]+/i;
-      _0x5533b6[_0x28e2("0x8")] = _0x28e2("0x80");
-      var _0x43022a = function (_0x174f51) {
-        _0x293211(this)[_0x28e2("0x6e")](_0x174f51);
-        _0x174f51[_0x28e2("0x3a")](_0x28e2("0xb6"))
-          [_0x28e2("0x32")](_0x293211(_0x28e2("0x24")))
-          ["on"](_0x28e2("0x10"), function () {
-            _0x4f29a3["removeClass"](_0x28e2("0x65"));
-            _0x293211(document["body"])[_0x28e2("0xa7")](_0x28e2("0xba"));
+        _0x192618 = new vtex[_0x4b44("0xc3")][_0x4b44("0x61")]();
+      else return _0x2fef20(_0x4b44("0x71"));
+      var _0x4c084d = /^\/|\/$/g,
+        _0x57cbf4 = /[^0-9]/g,
+        _0x5ccade = /([0-9]{5})([0-9])([0-9]{2})?/g,
+        _0x175025 = /(.{9}).*/g,
+        _0x59e714 = /(ids\/[0-9]+)[^\/]+/i;
+      _0x346975[_0x4b44("0x45")] = _0x4b44("0xba");
+      var _0x4ed506 = function (_0x3ced09) {
+        _0x1ac1d3(this)[_0x4b44("0x48")](_0x3ced09);
+        _0x3ced09[_0x4b44("0xcd")](_0x4b44("0x91"))
+          ["add"](_0x1ac1d3(_0x4b44("0x62")))
+          ["on"](_0x4b44("0xa7"), function () {
+            _0x349a04[_0x4b44("0x6a")](_0x4b44("0x1e"));
+            _0x1ac1d3(document["body"])[_0x4b44("0x6a")](_0x4b44("0x99"));
           });
-        _0x293211(document)
-          ["off"](_0x28e2("0x38"))
-          ["on"]("keyup.qd_ddc_closeFn", function (_0x3b1ffc) {
-            27 == _0x3b1ffc[_0x28e2("0xd5")] &&
-              (_0x4f29a3[_0x28e2("0xa7")](_0x28e2("0x65")),
-              _0x293211(document["body"])["removeClass"](_0x28e2("0xba")));
+        _0x1ac1d3(document)
+          [_0x4b44("0xa5")](_0x4b44("0x40"))
+          ["on"](_0x4b44("0x40"), function (_0x4ce29f) {
+            0x1b == _0x4ce29f[_0x4b44("0xa1")] &&
+              (_0x349a04[_0x4b44("0x6a")](_0x4b44("0x1e")),
+              _0x1ac1d3(document[_0x4b44("0x1f")])[_0x4b44("0x6a")](
+                _0x4b44("0x99")
+              ));
           });
-        var _0x53a70e = _0x174f51[_0x28e2("0x3a")](_0x28e2("0xd4"));
-        _0x174f51[_0x28e2("0x3a")](_0x28e2("0x21"))["on"](
-          _0x28e2("0x9a"),
+        var _0xced76f = _0x3ced09[_0x4b44("0xcd")](_0x4b44("0xe1"));
+        _0x3ced09[_0x4b44("0xcd")](_0x4b44("0x34"))["on"](
+          _0x4b44("0x95"),
           function () {
-            _0x5533b6[_0x28e2("0xe8")]("-", void 0, void 0, _0x53a70e);
-            return !1;
+            _0x346975[_0x4b44("0x52")]("-", void 0x0, void 0x0, _0xced76f);
+            return !0x1;
           }
         );
-        _0x174f51["find"](".qd-ddc-scrollDown")["on"](
-          _0x28e2("0xbd"),
+        _0x3ced09["find"](".qd-ddc-scrollDown")["on"](
+          _0x4b44("0xde"),
           function () {
-            _0x5533b6[_0x28e2("0xe8")](void 0, void 0, void 0, _0x53a70e);
-            return !1;
+            _0x346975[_0x4b44("0x52")](void 0x0, void 0x0, void 0x0, _0xced76f);
+            return !0x1;
           }
         );
-        var _0x336aeb = _0x174f51[_0x28e2("0x3a")](_0x28e2("0x9")),
-          _0x58ec13 = _0x174f51[_0x28e2("0x3a")](_0x28e2("0x5e")),
-          _0x267d85 = _0x174f51[_0x28e2("0x3a")](_0x28e2("0x18"));
-        _0x58ec13[_0x28e2("0x67")]("")["on"](
-          _0x28e2("0xcb"),
-          function (_0x3efd53) {
-            _0x5533b6[_0x28e2("0xf6")](_0x293211(this));
-            13 == _0x3efd53[_0x28e2("0xd5")] && _0x267d85["click"]();
+        var _0x205cf = _0x3ced09[_0x4b44("0xcd")](_0x4b44("0xd6")),
+          _0x29954e = _0x3ced09[_0x4b44("0xcd")](".qd-ddc-cep"),
+          _0x388ac7 = _0x3ced09[_0x4b44("0xcd")](_0x4b44("0x8c"));
+        _0x29954e[_0x4b44("0x82")]("")["on"](
+          _0x4b44("0x63"),
+          function (_0x36572a) {
+            _0x346975[_0x4b44("0xf")](_0x1ac1d3(this));
+            0xd == _0x36572a["keyCode"] && _0x388ac7["click"]();
           }
         );
-        _0x174f51[_0x28e2("0x3a")](".qd-ddc-cep-btn")[_0x28e2("0x37")](
-          function (_0x1ceb86) {
-            _0x1ceb86[_0x28e2("0x4d")]();
-            _0x174f51[_0x28e2("0x3a")](_0x28e2("0xc8"))[_0x28e2("0x20")] &&
-              _0x5533b6[_0x28e2("0xab")](_0x58ec13);
-            _0x336aeb[_0x28e2("0x81")]();
-          }
-        );
-        _0x174f51[_0x28e2("0x3a")](_0x28e2("0x52"))["click"](function (
-          _0x36bd4d
+        _0x3ced09["find"](_0x4b44("0x10"))[_0x4b44("0x18")](function (
+          _0x55f81d
         ) {
-          _0x36bd4d[_0x28e2("0x4d")]();
-          _0x336aeb[_0x28e2("0x61")]();
+          _0x55f81d["preventDefault"]();
+          _0x3ced09[_0x4b44("0xcd")](".qd-dd-cep-slas")[_0x4b44("0x84")] &&
+            _0x346975[_0x4b44("0xec")](_0x29954e);
+          _0x205cf["toggle"]();
         });
-        _0x293211(document)
-          ["off"](_0x28e2("0x7a"))
-          ["on"](_0x28e2("0x7a"), function (_0x8e2745) {
-            _0x293211(_0x8e2745[_0x28e2("0x8f")])[_0x28e2("0xaf")](
-              _0x174f51[_0x28e2("0x3a")](".qd-ddc-cep-tooltip")
-            )[_0x28e2("0x20")] || _0x336aeb["hide"]();
+        _0x3ced09["find"](_0x4b44("0x9d"))["click"](function (_0x222ad4) {
+          _0x222ad4["preventDefault"]();
+          _0x205cf[_0x4b44("0x8d")]();
+        });
+        _0x1ac1d3(document)
+          [_0x4b44("0xa5")](_0x4b44("0xb6"))
+          ["on"](_0x4b44("0xb6"), function (_0x47ff03) {
+            _0x1ac1d3(_0x47ff03[_0x4b44("0x6e")])[_0x4b44("0x65")](
+              _0x3ced09[_0x4b44("0xcd")](".qd-ddc-cep-tooltip")
+            )[_0x4b44("0x84")] || _0x205cf["hide"]();
           });
-        _0x267d85["click"](function (_0x4551b3) {
-          _0x4551b3[_0x28e2("0x4d")]();
-          _0x5533b6[_0x28e2("0xab")](_0x58ec13);
+        _0x388ac7[_0x4b44("0x18")](function (_0x1393d1) {
+          _0x1393d1["preventDefault"]();
+          _0x346975["shippingCalculate"](_0x29954e);
         });
-        if (_0x4974e1[_0x28e2("0x66")]) {
-          var _0x485759 = 0;
-          _0x293211(this)["on"]("mouseenter.qd_ddc_hover", function () {
-            var _0x495940 = function () {
-              window[_0x28e2("0x33")][_0x28e2("0x56")] &&
-                (_0x5533b6[_0x28e2("0x3c")](),
-                (window[_0x28e2("0x33")][_0x28e2("0x56")] = !1),
-                _0x293211["fn"][_0x28e2("0x90")](!0),
-                _0x5533b6[_0x28e2("0x60")]());
+        if (_0x31d2f4[_0x4b44("0x6")]) {
+          var _0x347739 = 0x0;
+          _0x1ac1d3(this)["on"](_0x4b44("0x22"), function () {
+            var _0x457e22 = function () {
+              window["_QuatroDigital_DropDown"]["allowUpdate"] &&
+                (_0x346975["getCartInfoByUrl"](),
+                (window[_0x4b44("0xa0")][_0x4b44("0x39")] = !0x1),
+                _0x1ac1d3["fn"][_0x4b44("0xb4")](!0x0),
+                _0x346975["cartIsEmpty"]());
             };
-            _0x485759 = setInterval(function () {
-              _0x495940();
-            }, 600);
-            _0x495940();
+            _0x347739 = setInterval(function () {
+              _0x457e22();
+            }, 0x258);
+            _0x457e22();
           });
-          _0x293211(this)["on"](_0x28e2("0xe"), function () {
-            clearInterval(_0x485759);
+          _0x1ac1d3(this)["on"]("mouseleave.qd_ddc_hover", function () {
+            clearInterval(_0x347739);
           });
         }
       };
-      var _0x85161b = (function (_0x203943) {
-        _0x203943 = _0x293211(_0x203943);
-        _0x4974e1[_0x28e2("0x4b")][_0x28e2("0xbb")] = _0x4974e1[
-          _0x28e2("0x4b")
-        ]["cartTotal"]["replace"](_0x28e2("0xb0"), _0x28e2("0x6c"));
-        _0x4974e1["texts"][_0x28e2("0xbb")] = _0x4974e1["texts"][
-          _0x28e2("0xbb")
-        ][_0x28e2("0x9f")](_0x28e2("0xdd"), _0x28e2("0x54"));
-        _0x4974e1["texts"]["cartTotal"] = _0x4974e1[_0x28e2("0x4b")][
-          "cartTotal"
-        ][_0x28e2("0x9f")](_0x28e2("0x19"), _0x28e2("0xde"));
-        _0x4974e1[_0x28e2("0x4b")]["cartTotal"] = _0x4974e1[_0x28e2("0x4b")][
-          _0x28e2("0xbb")
-        ][_0x28e2("0x9f")]("#total", _0x28e2("0x59"));
-        _0x203943["find"](_0x28e2("0x7"))[_0x28e2("0xc7")](
-          _0x4974e1["texts"][_0x28e2("0x3b")]
+      var _0x51cd62 = (function (_0x57fc47) {
+        _0x57fc47 = _0x1ac1d3(_0x57fc47);
+        _0x31d2f4[_0x4b44("0x43")][_0x4b44("0x69")] = _0x31d2f4[
+          _0x4b44("0x43")
+        ][_0x4b44("0x69")][_0x4b44("0xe7")](
+          _0x4b44("0xd8"),
+          "<span\x20class=\x22qd-ddc-infoTotalValue\x22></span>"
         );
-        _0x203943[_0x28e2("0x3a")](_0x28e2("0x53"))[_0x28e2("0xc7")](
-          _0x4974e1[_0x28e2("0x4b")][_0x28e2("0x39")]
+        _0x31d2f4[_0x4b44("0x43")]["cartTotal"] = _0x31d2f4[_0x4b44("0x43")][
+          _0x4b44("0x69")
+        ]["replace"](_0x4b44("0x9c"), _0x4b44("0x94"));
+        _0x31d2f4[_0x4b44("0x43")][_0x4b44("0x69")] = _0x31d2f4[
+          _0x4b44("0x43")
+        ][_0x4b44("0x69")][_0x4b44("0xe7")](_0x4b44("0x97"), _0x4b44("0x25"));
+        _0x31d2f4[_0x4b44("0x43")][_0x4b44("0x69")] = _0x31d2f4[
+          _0x4b44("0x43")
+        ][_0x4b44("0x69")]["replace"](_0x4b44("0xc2"), _0x4b44("0x74"));
+        _0x57fc47["find"](_0x4b44("0xbd"))[_0x4b44("0x80")](
+          _0x31d2f4[_0x4b44("0x43")][_0x4b44("0xab")]
         );
-        _0x203943[_0x28e2("0x3a")](".qd-ddc-checkout")[_0x28e2("0xc7")](
-          _0x4974e1[_0x28e2("0x4b")]["linkCheckout"]
+        _0x57fc47["find"](_0x4b44("0x44"))[_0x4b44("0x80")](
+          _0x31d2f4[_0x4b44("0x43")][_0x4b44("0x4f")]
         );
-        _0x203943[_0x28e2("0x3a")](_0x28e2("0xac"))[_0x28e2("0xc7")](
-          _0x4974e1[_0x28e2("0x4b")][_0x28e2("0xbb")]
+        _0x57fc47[_0x4b44("0xcd")](_0x4b44("0xf0"))[_0x4b44("0x80")](
+          _0x31d2f4[_0x4b44("0x43")][_0x4b44("0xcb")]
         );
-        _0x203943["find"](_0x28e2("0x2"))[_0x28e2("0xc7")](
-          _0x4974e1[_0x28e2("0x4b")][_0x28e2("0x43")]
+        _0x57fc47["find"](_0x4b44("0x35"))["html"](
+          _0x31d2f4[_0x4b44("0x43")]["cartTotal"]
         );
-        _0x203943[_0x28e2("0x3a")](_0x28e2("0xa4"))["html"](
-          _0x4974e1[_0x28e2("0x4b")][_0x28e2("0x8e")]
+        _0x57fc47["find"](_0x4b44("0x4b"))[_0x4b44("0x80")](
+          _0x31d2f4["texts"][_0x4b44("0xda")]
         );
-        return _0x203943;
-      })(this[_0x28e2("0x8")]);
-      var _0x2e726b = 0;
-      _0x4f29a3["each"](function () {
-        0 < _0x2e726b
-          ? _0x43022a[_0x28e2("0x9c")](this, _0x85161b[_0x28e2("0xf5")]())
-          : _0x43022a["call"](this, _0x85161b);
-        _0x2e726b++;
+        _0x57fc47["find"](_0x4b44("0x2d"))[_0x4b44("0x80")](
+          _0x31d2f4[_0x4b44("0x43")][_0x4b44("0x93")]
+        );
+        return _0x57fc47;
+      })(this[_0x4b44("0x45")]);
+      var _0x3d13f3 = 0x0;
+      _0x349a04[_0x4b44("0x9b")](function () {
+        0x0 < _0x3d13f3
+          ? _0x4ed506[_0x4b44("0xc6")](this, _0x51cd62["clone"]())
+          : _0x4ed506[_0x4b44("0xc6")](this, _0x51cd62);
+        _0x3d13f3++;
       });
-      window["_QuatroDigital_CartData"]["callback"]["add"](function () {
-        _0x293211(".qd-ddc-infoTotalValue")["html"](
-          window["_QuatroDigital_CartData"][_0x28e2("0x62")] || "--"
+      window[_0x4b44("0x8e")][_0x4b44("0x77")][_0x4b44("0x9a")](function () {
+        _0x1ac1d3(_0x4b44("0xc8"))[_0x4b44("0x80")](
+          window[_0x4b44("0x8e")]["total"] || "--"
         );
-        _0x293211(_0x28e2("0x5a"))[_0x28e2("0xc7")](
-          window["_QuatroDigital_CartData"][_0x28e2("0xcf")] || "0"
+        _0x1ac1d3(_0x4b44("0x24"))["html"](
+          window[_0x4b44("0x8e")][_0x4b44("0x5f")] || "0"
         );
-        _0x293211(_0x28e2("0x2d"))["html"](
-          window[_0x28e2("0xad")]["shipping"] || "--"
+        _0x1ac1d3(".qd-ddc-infoTotalShipping")[_0x4b44("0x80")](
+          window[_0x4b44("0x8e")][_0x4b44("0x96")] || "--"
         );
-        _0x293211(_0x28e2("0xcc"))[_0x28e2("0xc7")](
-          window["_QuatroDigital_CartData"][_0x28e2("0x69")] || "--"
+        _0x1ac1d3(".qd-ddc-infoAllTotal")[_0x4b44("0x80")](
+          window[_0x4b44("0x8e")]["allTotal"] || "--"
         );
       });
-      var _0x5f23b5 = function (_0x4f13b5, _0x47e668) {
-        if (_0x28e2("0xfa") === typeof _0x4f13b5[_0x28e2("0x23")])
-          return _0x328fc7(_0x28e2("0x75"));
-        _0x5533b6["renderProductsList"]["call"](this, _0x47e668);
+      var _0x48dd9d = function (_0x28330c, _0x58f433) {
+        if ("undefined" === typeof _0x28330c["items"])
+          return _0x2fef20(
+            "Não\x20foi\x20possível\x20obter\x20os\x20items\x20da\x20requisição"
+          );
+        _0x346975["renderProductsList"][_0x4b44("0xc6")](this, _0x58f433);
       };
-      _0x5533b6[_0x28e2("0x3c")] = function (_0x53a163, _0x4512a2) {
-        "undefined" != typeof _0x4512a2
-          ? (window[_0x28e2("0x33")][_0x28e2("0x48")] = _0x4512a2)
-          : window[_0x28e2("0x33")][_0x28e2("0x48")] &&
-            (_0x4512a2 = window[_0x28e2("0x33")][_0x28e2("0x48")]);
+      _0x346975[_0x4b44("0xb7")] = function (_0x1751d6, _0x240597) {
+        _0x4b44("0xd7") != typeof _0x240597
+          ? (window[_0x4b44("0xa0")][_0x4b44("0x90")] = _0x240597)
+          : window[_0x4b44("0xa0")][_0x4b44("0x90")] &&
+            (_0x240597 = window["_QuatroDigital_DropDown"][_0x4b44("0x90")]);
         setTimeout(function () {
-          window[_0x28e2("0x33")]["dataOptionsCache"] = void 0;
-        }, _0x4974e1["timeRemoveNewItemClass"]);
-        _0x293211(_0x28e2("0x47"))[_0x28e2("0xa7")]("qd-ddc-prodLoaded");
-        if (_0x4974e1["smartCheckout"]) {
-          var _0x5271ae = function (_0x45f479) {
-            _0x5533b6["setOrderForm"](_0x45f479);
-            _0x5f23b5(_0x45f479, _0x4512a2);
-            "undefined" !== typeof window[_0x28e2("0xbe")] &&
-              _0x28e2("0x41") === typeof window[_0x28e2("0xbe")]["exec"] &&
-              window[_0x28e2("0xbe")][_0x28e2("0x2f")]["call"](this);
-            _0x293211(_0x28e2("0x47"))["addClass"]("qd-ddc-prodLoaded");
+          window[_0x4b44("0xa0")][_0x4b44("0x90")] = void 0x0;
+        }, _0x31d2f4[_0x4b44("0x64")]);
+        _0x1ac1d3(_0x4b44("0x7d"))["removeClass"]("qd-ddc-prodLoaded");
+        if (_0x31d2f4[_0x4b44("0x9f")]) {
+          var _0x27d1c0 = function (_0x3695d7) {
+            _0x346975[_0x4b44("0x76")](_0x3695d7);
+            _0x48dd9d(_0x3695d7, _0x240597);
+            "undefined" !== typeof window[_0x4b44("0x7b")] &&
+              _0x4b44("0x51") ===
+                typeof window["_QuatroDigital_AmountProduct"][
+                  _0x4b44("0x6d")
+                ] &&
+              window["_QuatroDigital_AmountProduct"][_0x4b44("0x6d")][
+                _0x4b44("0xc6")
+              ](this);
+            _0x1ac1d3(_0x4b44("0x7d"))[_0x4b44("0xd4")](_0x4b44("0x3e"));
           };
-          _0x28e2("0xfa") !== typeof window[_0x28e2("0x33")][_0x28e2("0x6d")]
-            ? (_0x5271ae(window[_0x28e2("0x33")]["getOrderForm"]),
-              _0x28e2("0x41") === typeof _0x53a163 &&
-                _0x53a163(window["_QuatroDigital_DropDown"]["getOrderForm"]))
-            : _0x293211[_0x28e2("0xc3")](
-                ["items", _0x28e2("0x34"), "shippingData"],
+          _0x4b44("0xd7") !==
+          typeof window["_QuatroDigital_DropDown"]["getOrderForm"]
+            ? (_0x27d1c0(window["_QuatroDigital_DropDown"]["getOrderForm"]),
+              _0x4b44("0x51") === typeof _0x1751d6 &&
+                _0x1751d6(window["_QuatroDigital_DropDown"][_0x4b44("0x1c")]))
+            : _0x1ac1d3[_0x4b44("0xcf")](
+                [_0x4b44("0x9e"), "totalizers", _0x4b44("0x1")],
                 {
-                  done: function (_0x4c023c) {
-                    _0x5271ae[_0x28e2("0x9c")](this, _0x4c023c);
-                    _0x28e2("0x41") === typeof _0x53a163 &&
-                      _0x53a163(_0x4c023c);
+                  done: function (_0x2d57f1) {
+                    _0x27d1c0[_0x4b44("0xc6")](this, _0x2d57f1);
+                    _0x4b44("0x51") === typeof _0x1751d6 &&
+                      _0x1751d6(_0x2d57f1);
                   },
-                  fail: function (_0x3ca4b9) {
-                    _0x328fc7([_0x28e2("0xf7"), _0x3ca4b9]);
+                  fail: function (_0x38e87a) {
+                    _0x2fef20([_0x4b44("0xc4"), _0x38e87a]);
                   },
                 }
               );
-        } else alert(_0x28e2("0x6a"));
+        } else _0x2fef20(_0x4b44("0x92"), "aviso");
       };
-      _0x5533b6["cartIsEmpty"] = function () {
-        var _0x1320a8 = _0x293211(".qd-ddc-wrapper");
-        _0x1320a8[_0x28e2("0x3a")](".qd-ddc-prodRow")[_0x28e2("0x20")]
-          ? _0x1320a8[_0x28e2("0xa7")](_0x28e2("0x2e"))
-          : _0x1320a8[_0x28e2("0x5d")](_0x28e2("0x2e"));
+      _0x346975[_0x4b44("0x59")] = function () {
+        var _0x4624f2 = _0x1ac1d3(_0x4b44("0x7d"));
+        _0x4624f2[_0x4b44("0xcd")](".qd-ddc-prodRow")[_0x4b44("0x84")]
+          ? _0x4624f2[_0x4b44("0x6a")](_0x4b44("0x87"))
+          : _0x4624f2[_0x4b44("0xd4")]("qd-ddc-noItems");
       };
-      _0x5533b6[_0x28e2("0xf4")] = function (_0x4d1244) {
-        var _0x155283 = _0x293211(_0x28e2("0xb8"));
-        _0x155283[_0x28e2("0x1a")]();
-        _0x155283["each"](function () {
-          var _0x261176 = _0x293211(this),
-            _0x75b5d,
-            _0x5df935,
-            _0x82a97 = _0x293211(""),
-            _0x2f81ca;
-          for (_0x2f81ca in window[_0x28e2("0x33")][_0x28e2("0x6d")][
-            _0x28e2("0x23")
+      _0x346975[_0x4b44("0xea")] = function (_0x353eb1) {
+        var _0x1528a4 = _0x1ac1d3(_0x4b44("0x2c"));
+        _0x1528a4[_0x4b44("0x67")]();
+        _0x1528a4[_0x4b44("0x9b")](function () {
+          var _0x3ec207 = _0x1ac1d3(this),
+            _0x1e1d50,
+            _0x5d7663,
+            _0x1567f9 = _0x1ac1d3(""),
+            _0xf7c75b;
+          for (_0xf7c75b in window[_0x4b44("0xa0")][_0x4b44("0x1c")][
+            _0x4b44("0x9e")
           ])
             if (
               "object" ===
-              typeof window[_0x28e2("0x33")][_0x28e2("0x6d")][_0x28e2("0x23")][
-                _0x2f81ca
+              typeof window[_0x4b44("0xa0")]["getOrderForm"][_0x4b44("0x9e")][
+                _0xf7c75b
               ]
             ) {
-              var _0x58c39d =
-                window[_0x28e2("0x33")][_0x28e2("0x6d")][_0x28e2("0x23")][
-                  _0x2f81ca
+              var _0x2e584a =
+                window[_0x4b44("0xa0")][_0x4b44("0x1c")][_0x4b44("0x9e")][
+                  _0xf7c75b
                 ];
-              var _0x20b552 = _0x58c39d[_0x28e2("0x4a")]
-                [_0x28e2("0x9f")](_0x3eb898, "")
-                [_0x28e2("0x6b")]("/");
-              var _0x5db9f5 = _0x293211(_0x28e2("0x46"));
-              _0x5db9f5[_0x28e2("0x91")]({
-                "data-sku": _0x58c39d["id"],
-                "data-sku-index": _0x2f81ca,
-                "data-qd-departament": _0x20b552[0],
-                "data-qd-category": _0x20b552[_0x20b552[_0x28e2("0x20")] - 1],
+              var _0x12bc27 = _0x2e584a[_0x4b44("0xdb")]
+                ["replace"](_0x4c084d, "")
+                ["split"]("/");
+              var _0x22721c = _0x1ac1d3(_0x4b44("0x27"));
+              _0x22721c[_0x4b44("0xb9")]({
+                "data-sku": _0x2e584a["id"],
+                "data-sku-index": _0xf7c75b,
+                "data-qd-departament": _0x12bc27[0x0],
+                "data-qd-category": _0x12bc27[_0x12bc27[_0x4b44("0x84")] - 0x1],
               });
-              _0x5db9f5[_0x28e2("0x5d")](
-                _0x28e2("0xf0") + _0x58c39d[_0x28e2("0xcd")]
+              _0x22721c["addClass"]("qd-ddc-" + _0x2e584a[_0x4b44("0x42")]);
+              _0x22721c[_0x4b44("0xcd")](".qd-ddc-prodName")[_0x4b44("0x48")](
+                _0x31d2f4["skuName"](_0x2e584a)
               );
-              _0x5db9f5[_0x28e2("0x3a")](".qd-ddc-prodName")[_0x28e2("0x6e")](
-                _0x4974e1[_0x28e2("0x51")](_0x58c39d)
-              );
-              _0x5db9f5["find"](_0x28e2("0x89"))[_0x28e2("0x6e")](
-                isNaN(_0x58c39d[_0x28e2("0x6")])
-                  ? _0x58c39d[_0x28e2("0x6")]
-                  : 0 == _0x58c39d["sellingPrice"]
-                  ? _0x28e2("0x0")
-                  : (_0x293211(_0x28e2("0x2b"))["attr"](_0x28e2("0x1")) ||
-                      "R$") +
-                    " " +
+              _0x22721c[_0x4b44("0xcd")](".qd-ddc-prodPrice")[_0x4b44("0x48")](
+                isNaN(_0x2e584a[_0x4b44("0xbe")])
+                  ? _0x2e584a[_0x4b44("0xbe")]
+                  : 0x0 == _0x2e584a["sellingPrice"]
+                  ? "Grátis"
+                  : (_0x1ac1d3(_0x4b44("0x83"))["attr"]("content") || "R$") +
+                    "\x20" +
                     qd_number_format(
-                      _0x58c39d["sellingPrice"] / 100,
-                      2,
+                      _0x2e584a[_0x4b44("0xbe")] / 0x64,
+                      0x2,
                       ",",
                       "."
                     )
               );
-              _0x5db9f5[_0x28e2("0x3a")](_0x28e2("0x22"))
-                [_0x28e2("0x91")]({
-                  "data-sku": _0x58c39d["id"],
-                  "data-sku-index": _0x2f81ca,
+              _0x22721c["find"](_0x4b44("0xb3"))
+                [_0x4b44("0xb9")]({
+                  "data-sku": _0x2e584a["id"],
+                  "data-sku-index": _0xf7c75b,
                 })
-                [_0x28e2("0x67")](_0x58c39d[_0x28e2("0x45")]);
-              _0x5db9f5[_0x28e2("0x3a")](_0x28e2("0xc9"))["attr"]({
-                "data-sku": _0x58c39d["id"],
-                "data-sku-index": _0x2f81ca,
+                [_0x4b44("0x82")](_0x2e584a[_0x4b44("0x32")]);
+              _0x22721c[_0x4b44("0xcd")](_0x4b44("0xb5"))[_0x4b44("0xb9")]({
+                "data-sku": _0x2e584a["id"],
+                "data-sku-index": _0xf7c75b,
               });
-              _0x5533b6[_0x28e2("0x1e")](
-                _0x58c39d["id"],
-                _0x5db9f5[_0x28e2("0x3a")](_0x28e2("0x71")),
-                _0x58c39d[_0x28e2("0x83")]
+              _0x346975[_0x4b44("0x37")](
+                _0x2e584a["id"],
+                _0x22721c[_0x4b44("0xcd")](_0x4b44("0x30")),
+                _0x2e584a[_0x4b44("0x4")]
               );
-              _0x5db9f5[_0x28e2("0x3a")](_0x28e2("0xa2"))[_0x28e2("0x91")]({
-                "data-sku": _0x58c39d["id"],
-                "data-sku-index": _0x2f81ca,
+              _0x22721c["find"](_0x4b44("0x7c"))[_0x4b44("0xb9")]({
+                "data-sku": _0x2e584a["id"],
+                "data-sku-index": _0xf7c75b,
               });
-              _0x5db9f5[_0x28e2("0xdc")](_0x261176);
-              _0x82a97 = _0x82a97[_0x28e2("0x32")](_0x5db9f5);
+              _0x22721c[_0x4b44("0x89")](_0x3ec207);
+              _0x1567f9 = _0x1567f9[_0x4b44("0x9a")](_0x22721c);
             }
           try {
-            var _0x3b70d2 = _0x261176["getParent"](".qd-ddc-wrapper")[
-              _0x28e2("0x3a")
-            ](".qd-ddc-shipping input");
-            _0x3b70d2[_0x28e2("0x20")] &&
-              "" == _0x3b70d2[_0x28e2("0x67")]() &&
-              window[_0x28e2("0x33")][_0x28e2("0x6d")][_0x28e2("0x7d")][
-                _0x28e2("0x55")
+            var _0x12280e = _0x3ec207[_0x4b44("0xb2")](_0x4b44("0x7d"))[
+              _0x4b44("0xcd")
+            ](".qd-ddc-shipping\x20input");
+            _0x12280e[_0x4b44("0x84")] &&
+              "" == _0x12280e[_0x4b44("0x82")]() &&
+              window[_0x4b44("0xa0")]["getOrderForm"][_0x4b44("0x1")][
+                "address"
               ] &&
-              _0x3b70d2["val"](
-                window[_0x28e2("0x33")]["getOrderForm"][_0x28e2("0x7d")][
-                  _0x28e2("0x55")
-                ][_0x28e2("0xc2")]
+              _0x12280e[_0x4b44("0x82")](
+                window["_QuatroDigital_DropDown"][_0x4b44("0x1c")][
+                  _0x4b44("0x1")
+                ][_0x4b44("0x46")]["postalCode"]
               );
-          } catch (_0x50043b) {
-            _0x328fc7(
-              "Problemas ao tentar definir o CEP com base nos dados do checkout. Detalhes: " +
-                _0x50043b[_0x28e2("0x68")],
-              _0x28e2("0xa1")
+          } catch (_0x57d35b) {
+            _0x2fef20(
+              _0x4b44("0x5c") + _0x57d35b[_0x4b44("0x66")],
+              _0x4b44("0x78")
             );
           }
-          _0x5533b6[_0x28e2("0x76")](_0x261176);
-          _0x5533b6[_0x28e2("0x60")]();
-          _0x4d1244 &&
-            _0x4d1244["lastSku"] &&
+          _0x346975[_0x4b44("0x38")](_0x3ec207);
+          _0x346975[_0x4b44("0x59")]();
+          _0x353eb1 &&
+            _0x353eb1[_0x4b44("0xc")] &&
             (function () {
-              _0x5df935 = _0x82a97[_0x28e2("0x7c")](
-                _0x28e2("0x7e") + _0x4d1244[_0x28e2("0x64")] + "']"
+              _0x5d7663 = _0x1567f9[_0x4b44("0x58")](
+                "[data-sku=\x27" + _0x353eb1[_0x4b44("0xc")] + "\x27]"
               );
-              _0x5df935[_0x28e2("0x20")] &&
-                ((_0x75b5d = 0),
-                _0x82a97["each"](function () {
-                  var _0x74b038 = _0x293211(this);
-                  if (_0x74b038["is"](_0x5df935)) return !1;
-                  _0x75b5d += _0x74b038[_0x28e2("0x8d")]();
+              _0x5d7663["length"] &&
+                ((_0x1e1d50 = 0x0),
+                _0x1567f9[_0x4b44("0x9b")](function () {
+                  var _0x2484b9 = _0x1ac1d3(this);
+                  if (_0x2484b9["is"](_0x5d7663)) return !0x1;
+                  _0x1e1d50 += _0x2484b9[_0x4b44("0x5a")]();
                 }),
-                _0x5533b6[_0x28e2("0xe8")](
-                  void 0,
-                  void 0,
-                  _0x75b5d,
-                  _0x261176[_0x28e2("0x32")](_0x261176[_0x28e2("0xed")]())
+                _0x346975[_0x4b44("0x52")](
+                  void 0x0,
+                  void 0x0,
+                  _0x1e1d50,
+                  _0x3ec207[_0x4b44("0x9a")](_0x3ec207[_0x4b44("0xa4")]())
                 ),
-                _0x82a97[_0x28e2("0xa7")](_0x28e2("0xd6")),
-                (function (_0xb3f4fd) {
-                  _0xb3f4fd[_0x28e2("0x5d")](_0x28e2("0xb7"));
-                  _0xb3f4fd["addClass"](_0x28e2("0xd6"));
+                _0x1567f9[_0x4b44("0x6a")]("qd-ddc-lastAddedFixed"),
+                (function (_0x103a09) {
+                  _0x103a09[_0x4b44("0xd4")]("qd-ddc-lastAdded");
+                  _0x103a09[_0x4b44("0xd4")](_0x4b44("0xb8"));
                   setTimeout(function () {
-                    _0xb3f4fd[_0x28e2("0xa7")]("qd-ddc-lastAdded");
-                  }, _0x4974e1[_0x28e2("0xb9")]);
-                })(_0x5df935),
-                _0x28e2("0xfa") !==
-                  typeof window[_0x28e2("0x33")][_0x28e2("0x3e")] &&
-                  clearTimeout(window[_0x28e2("0x33")][_0x28e2("0x3e")]),
-                _0x293211(document["body"])[_0x28e2("0x5d")](_0x28e2("0xda")),
-                (window["_QuatroDigital_DropDown"]["ProdAddTimeV2"] =
-                  setTimeout(function () {
-                    _0x293211(document[_0x28e2("0x78")])[_0x28e2("0xa7")](
-                      _0x28e2("0xda")
+                    _0x103a09[_0x4b44("0x6a")](_0x4b44("0xe"));
+                  }, _0x31d2f4[_0x4b44("0x64")]);
+                })(_0x5d7663),
+                "undefined" !==
+                  typeof window[_0x4b44("0xa0")][_0x4b44("0x98")] &&
+                  clearTimeout(window[_0x4b44("0xa0")][_0x4b44("0x98")]),
+                _0x1ac1d3(document[_0x4b44("0x1f")])[_0x4b44("0xd4")](
+                  "qd-ddc-product-add-time-v2"
+                ),
+                (window[_0x4b44("0xa0")][_0x4b44("0x98")] = setTimeout(
+                  function () {
+                    _0x1ac1d3(document[_0x4b44("0x1f")])[_0x4b44("0x6a")](
+                      _0x4b44("0x0")
                     );
-                  }, _0x4974e1[_0x28e2("0xb9")])));
+                  },
+                  _0x31d2f4["timeRemoveNewItemClass"]
+                )));
             })();
         });
         (function () {
-          _QuatroDigital_DropDown[_0x28e2("0x6d")][_0x28e2("0x23")][
-            _0x28e2("0x20")
-          ]
-            ? (_0x293211(_0x28e2("0x78"))
-                [_0x28e2("0xa7")]("qd-ddc-cart-empty")
-                [_0x28e2("0x5d")](
-                  "qd-ddc-cart-rendered qd-ddc-product-add-time"
-                ),
+          _QuatroDigital_DropDown["getOrderForm"]["items"][_0x4b44("0x84")]
+            ? (_0x1ac1d3("body")
+                [_0x4b44("0x6a")](_0x4b44("0xac"))
+                [_0x4b44("0xd4")](_0x4b44("0x88")),
               setTimeout(function () {
-                _0x293211(_0x28e2("0x78"))[_0x28e2("0xa7")](_0x28e2("0xd1"));
-              }, _0x4974e1[_0x28e2("0xb9")]))
-            : _0x293211(_0x28e2("0x78"))
-                [_0x28e2("0xa7")](_0x28e2("0xd9"))
-                [_0x28e2("0x5d")]("qd-ddc-cart-empty");
+                _0x1ac1d3(_0x4b44("0x1f"))[_0x4b44("0x6a")](_0x4b44("0x17"));
+              }, _0x31d2f4[_0x4b44("0x64")]))
+            : _0x1ac1d3("body")
+                [_0x4b44("0x6a")](_0x4b44("0xee"))
+                [_0x4b44("0xd4")](_0x4b44("0xac"));
         })();
-        _0x28e2("0x41") === typeof _0x4974e1[_0x28e2("0x44")]
-          ? _0x4974e1[_0x28e2("0x44")]["call"](this)
-          : _0x328fc7(_0x28e2("0x15"));
+        "function" === typeof _0x31d2f4[_0x4b44("0x1a")]
+          ? _0x31d2f4["callbackProductsList"][_0x4b44("0xc6")](this)
+          : _0x2fef20(_0x4b44("0x28"));
       };
-      _0x5533b6[_0x28e2("0x1e")] = function (_0x529c66, _0x17f981, _0x1cf343) {
-        function _0x403ce0() {
-          _0x1cf343 = _0x1cf343[_0x28e2("0x9f")](
-            _0x411266,
-            _0x28e2("0xf1") +
-              _0x4974e1["thumbSize"]["w"] +
+      _0x346975["insertProdImg"] = function (_0x1c8cd2, _0x286f06, _0x3d4091) {
+        function _0x5caa94() {
+          _0x3d4091 = _0x3d4091["replace"](
+            _0x59e714,
+            _0x4b44("0x36") +
+              _0x31d2f4[_0x4b44("0xf2")]["w"] +
               "-" +
-              _0x4974e1[_0x28e2("0xc4")]["h"]
+              _0x31d2f4["thumbSize"]["h"]
           );
-          _0x4974e1[_0x28e2("0x12")] &&
-            _0x28e2("0x94") == typeof _0x1cf343 &&
-            (_0x1cf343 = _0x1cf343[_0x28e2("0x9f")]("http", _0x28e2("0x8c")));
-          _0x17f981[_0x28e2("0xa7")](_0x28e2("0x31"))
-            [_0x28e2("0xa0")](function () {
-              _0x293211(this)[_0x28e2("0x5d")]("qd-loaded");
+          _0x31d2f4[_0x4b44("0xc7")] &&
+            "string" == typeof _0x3d4091 &&
+            (_0x3d4091 = _0x3d4091[_0x4b44("0xe7")](
+              _0x4b44("0x33"),
+              _0x4b44("0xe9")
+            ));
+          _0x286f06[_0x4b44("0x6a")](_0x4b44("0x5d"))
+            [_0x4b44("0xaf")](function () {
+              _0x1ac1d3(this)["addClass"](_0x4b44("0x5d"));
             })
-            [_0x28e2("0x91")](_0x28e2("0xe0"), _0x1cf343);
+            [_0x4b44("0xb9")](_0x4b44("0x11"), _0x3d4091);
         }
-        _0x1cf343
-          ? _0x403ce0()
-          : isNaN(_0x529c66)
-          ? _0x328fc7(_0x28e2("0x97"), "alerta")
-          : alert(_0x28e2("0x36"));
+        _0x3d4091
+          ? _0x5caa94()
+          : isNaN(_0x1c8cd2)
+          ? _0x2fef20(_0x4b44("0xaa"), _0x4b44("0x1b"))
+          : _0x2fef20(_0x4b44("0x56"), _0x4b44("0x78"));
       };
-      _0x5533b6[_0x28e2("0x76")] = function (_0x182623) {
-        var _0x47de05 = function (_0x5d6e92, _0x5a9810) {
-          var _0x575ccd = _0x293211(_0x5d6e92);
-          var _0x37a741 = _0x575ccd[_0x28e2("0x91")](_0x28e2("0x17"));
-          var _0x2a3400 = _0x575ccd["attr"](_0x28e2("0x86"));
-          if (_0x37a741) {
-            var _0x2bd24d = parseInt(_0x575ccd[_0x28e2("0x67")]()) || 1;
-            _0x5533b6[_0x28e2("0xf9")](
-              [_0x37a741, _0x2a3400],
-              _0x2bd24d,
-              _0x2bd24d + 1,
-              function (_0x22fd66) {
-                _0x575ccd[_0x28e2("0x67")](_0x22fd66);
-                _0x28e2("0x41") === typeof _0x5a9810 && _0x5a9810();
+      _0x346975[_0x4b44("0x38")] = function (_0x11b9df) {
+        var _0x489a87 = function (_0x4b4714, _0x2a55b8) {
+          var _0x37be24 = _0x1ac1d3(_0x4b4714);
+          var _0x527e20 = _0x37be24["attr"](_0x4b44("0x20"));
+          var _0x286f42 = _0x37be24[_0x4b44("0xb9")](_0x4b44("0x5"));
+          if (_0x527e20) {
+            var _0x23cb59 = parseInt(_0x37be24["val"]()) || 0x1;
+            _0x346975[_0x4b44("0xbf")](
+              [_0x527e20, _0x286f42],
+              _0x23cb59,
+              _0x23cb59 + 0x1,
+              function (_0x2aef32) {
+                _0x37be24["val"](_0x2aef32);
+                _0x4b44("0x51") === typeof _0x2a55b8 && _0x2a55b8();
               }
             );
           }
         };
-        var _0x20c5d8 = function (_0xdb026a, _0x28d1ab) {
-          var _0x188b2b = _0x293211(_0xdb026a);
-          var _0x40b8a2 = _0x188b2b[_0x28e2("0x91")]("data-sku");
-          var _0x56c8fc = _0x188b2b["attr"](_0x28e2("0x86"));
-          if (_0x40b8a2) {
-            var _0x202171 = parseInt(_0x188b2b[_0x28e2("0x67")]()) || 2;
-            _0x5533b6["changeQantity"](
-              [_0x40b8a2, _0x56c8fc],
-              _0x202171,
-              _0x202171 - 1,
-              function (_0xdba1ed) {
-                _0x188b2b[_0x28e2("0x67")](_0xdba1ed);
-                _0x28e2("0x41") === typeof _0x28d1ab && _0x28d1ab();
+        var _0x360cc8 = function (_0x543f9b, _0x73149) {
+          var _0x48ae38 = _0x1ac1d3(_0x543f9b);
+          var _0x23c7d8 = _0x48ae38[_0x4b44("0xb9")](_0x4b44("0x20"));
+          var _0x5ea29b = _0x48ae38[_0x4b44("0xb9")](_0x4b44("0x5"));
+          if (_0x23c7d8) {
+            var _0x50c8fc = parseInt(_0x48ae38["val"]()) || 0x2;
+            _0x346975[_0x4b44("0xbf")](
+              [_0x23c7d8, _0x5ea29b],
+              _0x50c8fc,
+              _0x50c8fc - 0x1,
+              function (_0x9b23b) {
+                _0x48ae38["val"](_0x9b23b);
+                _0x4b44("0x51") === typeof _0x73149 && _0x73149();
               }
             );
           }
         };
-        var _0xd34347 = function (_0x45e74e, _0x5171ce) {
-          var _0x3fd57d = _0x293211(_0x45e74e);
-          var _0x5511d7 = _0x3fd57d[_0x28e2("0x91")](_0x28e2("0x17"));
-          var _0x4bf39c = _0x3fd57d[_0x28e2("0x91")](_0x28e2("0x86"));
-          if (_0x5511d7) {
-            var _0x551875 = parseInt(_0x3fd57d[_0x28e2("0x67")]()) || 1;
-            _0x5533b6[_0x28e2("0xf9")](
-              [_0x5511d7, _0x4bf39c],
-              1,
-              _0x551875,
-              function (_0x4dc730) {
-                _0x3fd57d[_0x28e2("0x67")](_0x4dc730);
-                "function" === typeof _0x5171ce && _0x5171ce();
+        var _0x9ca0cb = function (_0x4a9c88, _0x5b4620) {
+          var _0x15f89c = _0x1ac1d3(_0x4a9c88);
+          var _0x418b49 = _0x15f89c["attr"](_0x4b44("0x20"));
+          var _0x46adbc = _0x15f89c[_0x4b44("0xb9")]("data-sku-index");
+          if (_0x418b49) {
+            var _0x5658a6 = parseInt(_0x15f89c[_0x4b44("0x82")]()) || 0x1;
+            _0x346975[_0x4b44("0xbf")](
+              [_0x418b49, _0x46adbc],
+              0x1,
+              _0x5658a6,
+              function (_0x5f5bf2) {
+                _0x15f89c[_0x4b44("0x82")](_0x5f5bf2);
+                _0x4b44("0x51") === typeof _0x5b4620 && _0x5b4620();
               }
             );
           }
         };
-        var _0x13ddbe = _0x182623[_0x28e2("0x3a")](
+        var _0x31ccc4 = _0x11b9df[_0x4b44("0xcd")](
           ".qd-ddc-prodQttWrapper:not(.qd_on)"
         );
-        _0x13ddbe[_0x28e2("0x5d")](_0x28e2("0x25"))[_0x28e2("0x84")](
-          function () {
-            var _0xe4a823 = _0x293211(this);
-            _0xe4a823[_0x28e2("0x3a")](_0x28e2("0xe7"))["on"](
-              "click.qd_ddc_more",
-              function (_0x115cfa) {
-                _0x115cfa["preventDefault"]();
-                _0x13ddbe["addClass"]("qd-loading");
-                _0x47de05(_0xe4a823["find"](".qd-ddc-quantity"), function () {
-                  _0x13ddbe["removeClass"]("qd-loading");
-                });
-              }
-            );
-            _0xe4a823[_0x28e2("0x3a")](_0x28e2("0xe9"))["on"](
-              _0x28e2("0x2c"),
-              function (_0x5745af) {
-                _0x5745af[_0x28e2("0x4d")]();
-                _0x13ddbe["addClass"](_0x28e2("0xa"));
-                _0x20c5d8(
-                  _0xe4a823[_0x28e2("0x3a")](".qd-ddc-quantity"),
-                  function () {
-                    _0x13ddbe[_0x28e2("0xa7")](_0x28e2("0xa"));
-                  }
-                );
-              }
-            );
-            _0xe4a823[_0x28e2("0x3a")](_0x28e2("0x22"))["on"](
-              _0x28e2("0xc6"),
-              function () {
-                _0x13ddbe[_0x28e2("0x5d")](_0x28e2("0xa"));
-                _0xd34347(this, function () {
-                  _0x13ddbe[_0x28e2("0xa7")]("qd-loading");
-                });
-              }
-            );
-            _0xe4a823[_0x28e2("0x3a")](".qd-ddc-quantity")["on"](
-              "keyup.qd_ddc_change",
-              function (_0x154a93) {
-                13 == _0x154a93[_0x28e2("0xd5")] &&
-                  (_0x13ddbe[_0x28e2("0x5d")]("qd-loading"),
-                  _0xd34347(this, function () {
-                    _0x13ddbe[_0x28e2("0xa7")](_0x28e2("0xa"));
-                  }));
-              }
-            );
-          }
-        );
-        _0x182623[_0x28e2("0x3a")](_0x28e2("0x50"))[_0x28e2("0x84")](
-          function () {
-            var _0x52a53a = _0x293211(this);
-            _0x52a53a["find"](_0x28e2("0xc9"))["on"](
-              _0x28e2("0x58"),
-              function () {
-                _0x52a53a[_0x28e2("0x5d")](_0x28e2("0xa"));
-                _0x5533b6[_0x28e2("0x1c")](
-                  _0x293211(this),
-                  function (_0x3e1058) {
-                    _0x3e1058
-                      ? _0x52a53a[_0x28e2("0xe5")](!0)[_0x28e2("0xb4")](
-                          function () {
-                            _0x52a53a[_0x28e2("0xd0")]();
-                            _0x5533b6[_0x28e2("0x60")]();
-                            window["_QuatroDigital_DropDown"][_0x28e2("0x6d")][
-                              _0x28e2("0x23")
-                            ]["length"] &&
-                              _0x5533b6[_0x28e2("0xab")](
-                                _0x182623[_0x28e2("0x30")](_0x28e2("0x47"))[
-                                  "find"
-                                ](_0x28e2("0x5e"))
-                              );
-                          }
-                        )
-                      : _0x52a53a[_0x28e2("0xa7")](_0x28e2("0xa"));
-                  }
-                );
-                return !1;
-              }
-            );
-          }
-        );
+        _0x31ccc4[_0x4b44("0xd4")]("qd_on")[_0x4b44("0x9b")](function () {
+          var _0x3ade60 = _0x1ac1d3(this);
+          _0x3ade60[_0x4b44("0xcd")](_0x4b44("0x6b"))["on"](
+            "click.qd_ddc_more",
+            function (_0x24f3cb) {
+              _0x24f3cb[_0x4b44("0x54")]();
+              _0x31ccc4[_0x4b44("0xd4")](_0x4b44("0xe8"));
+              _0x489a87(_0x3ade60["find"](_0x4b44("0xb3")), function () {
+                _0x31ccc4["removeClass"]("qd-loading");
+              });
+            }
+          );
+          _0x3ade60[_0x4b44("0xcd")](_0x4b44("0x8a"))["on"](
+            "click.qd_ddc_minus",
+            function (_0xacfb07) {
+              _0xacfb07[_0x4b44("0x54")]();
+              _0x31ccc4["addClass"](_0x4b44("0xe8"));
+              _0x360cc8(
+                _0x3ade60[_0x4b44("0xcd")](_0x4b44("0xb3")),
+                function () {
+                  _0x31ccc4[_0x4b44("0x6a")]("qd-loading");
+                }
+              );
+            }
+          );
+          _0x3ade60[_0x4b44("0xcd")](_0x4b44("0xb3"))["on"](
+            _0x4b44("0xc9"),
+            function () {
+              _0x31ccc4[_0x4b44("0xd4")](_0x4b44("0xe8"));
+              _0x9ca0cb(this, function () {
+                _0x31ccc4[_0x4b44("0x6a")](_0x4b44("0xe8"));
+              });
+            }
+          );
+          _0x3ade60[_0x4b44("0xcd")](_0x4b44("0xb3"))["on"](
+            _0x4b44("0x73"),
+            function (_0x4524c6) {
+              0xd == _0x4524c6[_0x4b44("0xa1")] &&
+                (_0x31ccc4[_0x4b44("0xd4")]("qd-loading"),
+                _0x9ca0cb(this, function () {
+                  _0x31ccc4[_0x4b44("0x6a")](_0x4b44("0xe8"));
+                }));
+            }
+          );
+        });
+        _0x11b9df[_0x4b44("0xcd")](_0x4b44("0x3c"))["each"](function () {
+          var _0x1e502d = _0x1ac1d3(this);
+          _0x1e502d[_0x4b44("0xcd")](_0x4b44("0xb5"))["on"](
+            "click.qd_ddc_remove",
+            function () {
+              _0x1e502d["addClass"](_0x4b44("0xe8"));
+              _0x346975[_0x4b44("0x60")](_0x1ac1d3(this), function (_0x53edd2) {
+                _0x53edd2
+                  ? _0x1e502d[_0x4b44("0xa2")](!0x0)[_0x4b44("0x72")](
+                      function () {
+                        _0x1e502d["remove"]();
+                        _0x346975["cartIsEmpty"]();
+                        window[_0x4b44("0xa0")]["getOrderForm"]["items"][
+                          _0x4b44("0x84")
+                        ] &&
+                          _0x346975["shippingCalculate"](
+                            _0x11b9df[_0x4b44("0xb2")](".qd-ddc-wrapper")[
+                              _0x4b44("0xcd")
+                            ](_0x4b44("0xbc"))
+                          );
+                      }
+                    )
+                  : _0x1e502d[_0x4b44("0x6a")](_0x4b44("0xe8"));
+              });
+              return !0x1;
+            }
+          );
+        });
       };
-      _0x5533b6[_0x28e2("0xf6")] = function (_0x13aea0) {
-        var _0x2924b6 = _0x13aea0[_0x28e2("0x67")]();
-        _0x2924b6 = _0x2924b6[_0x28e2("0x9f")](_0x20fb17, "");
-        _0x2924b6 = _0x2924b6[_0x28e2("0x9f")](_0x3295b0, "$1-$2$3");
-        _0x2924b6 = _0x2924b6["replace"](_0x214a6d, "$1");
-        _0x13aea0[_0x28e2("0x67")](_0x2924b6);
+      _0x346975["formatCepField"] = function (_0x359b4d) {
+        var _0x3af304 = _0x359b4d[_0x4b44("0x82")]();
+        _0x3af304 = _0x3af304[_0x4b44("0xe7")](_0x57cbf4, "");
+        _0x3af304 = _0x3af304[_0x4b44("0xe7")](_0x5ccade, _0x4b44("0xca"));
+        _0x3af304 = _0x3af304[_0x4b44("0xe7")](_0x175025, "$1");
+        _0x359b4d[_0x4b44("0x82")](_0x3af304);
       };
-      _0x5533b6["shippingCalculate"] = function (_0x343f8f) {
-        var _0x4eec7d = (_0x343f8f[_0x28e2("0x67")]() || "")[_0x28e2("0x9f")](
+      _0x346975["shippingCalculate"] = function (_0x353e8d) {
+        var _0x332409 = (_0x353e8d[_0x4b44("0x82")]() || "")[_0x4b44("0xe7")](
           /[^0-9]/g,
           ""
         );
-        8 <= _0x4eec7d[_0x28e2("0x20")] &&
-          _0x25727d[_0x28e2("0x79")]({
-            postalCode: _0x4eec7d,
-            country: _0x28e2("0xe2"),
+        0x8 <= _0x332409[_0x4b44("0x84")] &&
+          _0x192618["calculateShipping"]({
+            postalCode: _0x332409,
+            country: _0x4b44("0xd"),
           })
-            [_0x28e2("0x3d")](function (_0x197c23) {
-              _0x343f8f["closest"](_0x28e2("0x9"))
-                [_0x28e2("0x3a")](_0x28e2("0xc8"))
-                [_0x28e2("0xd0")]();
-              _0x5533b6[_0x28e2("0x13")](_0x197c23);
-              _0x5533b6[_0x28e2("0x3c")]();
-              var _0x37bcaf = [],
-                _0x38bcab = _0x197c23[_0x28e2("0x7d")][_0x28e2("0x2a")];
-              _0x197c23 = _0x293211(
-                '<table class="table qd-dd-cep-slas"><thead><tr><th>Valor</th><th>Disponibilidade</th></tr></thead><tbody></tbody></table>'
-              );
+            ["done"](function (_0x525ff5) {
+              _0x353e8d[_0x4b44("0x65")](_0x4b44("0xd6"))
+                [_0x4b44("0xcd")](_0x4b44("0x3"))
+                [_0x4b44("0xd0")]();
+              _0x346975[_0x4b44("0x76")](_0x525ff5);
+              _0x346975[_0x4b44("0xb7")]();
+              var _0x46d392 = [],
+                _0x4f10a4 = _0x525ff5["shippingData"][_0x4b44("0xbb")];
+              _0x525ff5 = _0x1ac1d3(_0x4b44("0x49"));
               for (
-                var _0x426c00 = 0;
-                _0x426c00 < _0x38bcab[_0x28e2("0x20")];
-                _0x426c00++
+                var _0x16621f = 0x0;
+                _0x16621f < _0x4f10a4[_0x4b44("0x84")];
+                _0x16621f++
               )
                 for (
-                  var _0x3d5da9 = _0x38bcab[_0x426c00][_0x28e2("0x5b")],
-                    _0x2381e5 = 0;
-                  _0x2381e5 < _0x3d5da9[_0x28e2("0x20")];
-                  _0x2381e5++
+                  var _0x5a3161 = _0x4f10a4[_0x16621f][_0x4b44("0x9")],
+                    _0x1f7d07 = 0x0;
+                  _0x1f7d07 < _0x5a3161[_0x4b44("0x84")];
+                  _0x1f7d07++
                 )
-                  (_0x37bcaf[_0x2381e5] = _0x37bcaf[_0x2381e5] || {}),
-                    (_0x37bcaf[_0x2381e5][_0x28e2("0xf8")] =
-                      (_0x37bcaf[_0x2381e5][_0x28e2("0xf8")] || 0) +
-                      _0x3d5da9[_0x2381e5][_0x28e2("0xf8")]),
-                    (_0x37bcaf[_0x2381e5][_0x28e2("0xb5")] =
-                      _0x3d5da9[_0x2381e5]["shippingEstimate"]),
-                    (_0x37bcaf[_0x2381e5][_0x28e2("0x9e")] =
-                      _0x3d5da9[_0x2381e5][_0x28e2("0x9e")]);
+                  (_0x46d392[_0x1f7d07] = _0x46d392[_0x1f7d07] || {}),
+                    (_0x46d392[_0x1f7d07]["price"] =
+                      (_0x46d392[_0x1f7d07][_0x4b44("0x4d")] || 0x0) +
+                      _0x5a3161[_0x1f7d07][_0x4b44("0x4d")]),
+                    (_0x46d392[_0x1f7d07][_0x4b44("0x4e")] =
+                      _0x5a3161[_0x1f7d07][_0x4b44("0x4e")]),
+                    (_0x46d392[_0x1f7d07]["name"] =
+                      _0x5a3161[_0x1f7d07]["name"]);
               for (
-                _0x38bcab = 0;
-                _0x38bcab < _0x37bcaf[_0x28e2("0x20")];
-                _0x38bcab++
+                _0x4f10a4 = 0x0;
+                _0x4f10a4 < _0x46d392[_0x4b44("0x84")];
+                _0x4f10a4++
               )
-                (_0x426c00 = _0x293211("<tr></tr>")),
-                  (_0x3d5da9 =
-                    1 < _0x37bcaf[_0x38bcab][_0x28e2("0xb5")]
-                      ? _0x37bcaf[_0x38bcab][_0x28e2("0xb5")][_0x28e2("0x9f")](
+                (_0x16621f = _0x1ac1d3(_0x4b44("0x6f"))),
+                  (_0x5a3161 =
+                    0x1 < _0x46d392[_0x4f10a4][_0x4b44("0x4e")]
+                      ? _0x46d392[_0x4f10a4][_0x4b44("0x4e")][_0x4b44("0xe7")](
                           "bd",
-                          _0x28e2("0x57")
+                          "\x20dia\x20útil"
                         )
-                      : _0x37bcaf[_0x38bcab][_0x28e2("0xb5")][_0x28e2("0x9f")](
+                      : _0x46d392[_0x4f10a4][_0x4b44("0x4e")][_0x4b44("0xe7")](
                           "bd",
-                          _0x28e2("0x5f")
+                          "\x20dias\x20útéis"
                         )),
-                  _0x426c00[_0x28e2("0x6e")](
-                    "<td> R$ " +
+                  _0x16621f[_0x4b44("0x48")](
+                    _0x4b44("0xc0") +
                       qd_number_format(
-                        _0x37bcaf[_0x38bcab]["price"] / 100,
-                        2,
+                        _0x46d392[_0x4f10a4]["price"] / 0x64,
+                        0x2,
                         ",",
                         "."
                       ) +
                       "</td><td>" +
-                      _0x37bcaf[_0x38bcab]["name"] +
-                      _0x28e2("0x82") +
-                      _0x3d5da9 +
-                      _0x28e2("0xe4") +
-                      _0x4eec7d +
-                      _0x28e2("0x95")
+                      _0x46d392[_0x4f10a4][_0x4b44("0x8f")] +
+                      _0x4b44("0xed") +
+                      _0x5a3161 +
+                      _0x4b44("0xf1") +
+                      _0x332409 +
+                      _0x4b44("0xd1")
                   ),
-                  _0x426c00["appendTo"](_0x197c23[_0x28e2("0x3a")]("tbody"));
-              _0x197c23[_0x28e2("0xd7")](
-                _0x343f8f[_0x28e2("0xaf")](".qd-ddc-cep-tooltip-text")[
-                  _0x28e2("0x3a")
-                ](_0x28e2("0x52"))
+                  _0x16621f["appendTo"](_0x525ff5[_0x4b44("0xcd")]("tbody"));
+              _0x525ff5[_0x4b44("0xae")](
+                _0x353e8d[_0x4b44("0x65")](_0x4b44("0xd6"))["find"](
+                  _0x4b44("0x9d")
+                )
               );
             })
-            [_0x28e2("0xaa")](function (_0x3e7028) {
-              _0x328fc7([_0x28e2("0x1b"), _0x3e7028]);
+            [_0x4b44("0x2")](function (_0x22e069) {
+              _0x2fef20([
+                "Não\x20foi\x20possível\x20calcular\x20o\x20frete",
+                _0x22e069,
+              ]);
             });
       };
-      _0x5533b6[_0x28e2("0xf9")] = function (
-        _0x5c61bb,
-        _0x1ae644,
-        _0x2c1b78,
-        _0x4f2eb1
+      _0x346975["changeQantity"] = function (
+        _0x40b8cb,
+        _0x556180,
+        _0x4846dc,
+        _0x43e97b
       ) {
-        function _0x14ee1a(_0x1bb969) {
-          _0x1bb969 = "boolean" !== typeof _0x1bb969 ? !1 : _0x1bb969;
-          _0x5533b6[_0x28e2("0x3c")]();
-          window["_QuatroDigital_DropDown"][_0x28e2("0x56")] = !1;
-          _0x5533b6[_0x28e2("0x60")]();
-          "undefined" !== typeof window[_0x28e2("0xbe")] &&
-            _0x28e2("0x41") ===
-              typeof window["_QuatroDigital_AmountProduct"]["exec"] &&
-            window[_0x28e2("0xbe")]["exec"]["call"](this);
-          _0x28e2("0x41") === typeof adminCart && adminCart();
-          _0x293211["fn"][_0x28e2("0x90")](!0, void 0, _0x1bb969);
-          "function" === typeof _0x4f2eb1 && _0x4f2eb1(_0x1ae644);
+        function _0x2c1927(_0x2332e5) {
+          _0x2332e5 = _0x4b44("0x29") !== typeof _0x2332e5 ? !0x1 : _0x2332e5;
+          _0x346975["getCartInfoByUrl"]();
+          window[_0x4b44("0xa0")][_0x4b44("0x39")] = !0x1;
+          _0x346975[_0x4b44("0x59")]();
+          _0x4b44("0xd7") !== typeof window["_QuatroDigital_AmountProduct"] &&
+            _0x4b44("0x51") === typeof window[_0x4b44("0x7b")]["exec"] &&
+            window[_0x4b44("0x7b")][_0x4b44("0x6d")][_0x4b44("0xc6")](this);
+          _0x4b44("0x51") === typeof adminCart && adminCart();
+          _0x1ac1d3["fn"][_0x4b44("0xb4")](!0x0, void 0x0, _0x2332e5);
+          _0x4b44("0x51") === typeof _0x43e97b && _0x43e97b(_0x556180);
         }
-        _0x2c1b78 = _0x2c1b78 || 1;
-        if (1 > _0x2c1b78) return _0x1ae644;
-        if (_0x4974e1[_0x28e2("0xf2")]) {
-          var _0x1f180a =
-            window["_QuatroDigital_DropDown"][_0x28e2("0x6d")][_0x28e2("0x23")];
-          if (_0x28e2("0xfa") === typeof _0x1f180a[_0x5c61bb[1]])
-            return _0x328fc7(_0x28e2("0x4f") + _0x5c61bb[1] + "]"), _0x1ae644;
-          _0x25727d[_0x28e2("0xb1")](
+        _0x4846dc = _0x4846dc || 0x1;
+        if (0x1 > _0x4846dc) return _0x556180;
+        if (_0x31d2f4[_0x4b44("0x9f")]) {
+          var _0x3acf9f = window[_0x4b44("0xa0")][_0x4b44("0x1c")]["items"];
+          if (_0x4b44("0xd7") === typeof _0x3acf9f[_0x40b8cb[0x1]])
+            return (
+              _0x2fef20(
+                "Não\x20foi\x20possível\x20localizar\x20os\x20dados\x20do\x20item.\x20A\x20chave\x20buscada\x20é\x20composta\x20pelo\x20SKU:\x20cItems[" +
+                  _0x40b8cb[0x1] +
+                  "]"
+              ),
+              _0x556180
+            );
+          _0x192618["updateItems"](
             [
               {
-                id: _0x1f180a[_0x5c61bb[1]]["id"],
-                index: _0x5c61bb[1],
-                quantity: _0x2c1b78,
-                seller: _0x1f180a[_0x5c61bb[1]]["seller"],
+                id: _0x3acf9f[_0x40b8cb[0x1]]["id"],
+                index: _0x40b8cb[0x1],
+                quantity: _0x4846dc,
+                seller: _0x3acf9f[_0x40b8cb[0x1]]["seller"],
               },
             ],
-            [_0x28e2("0x23"), _0x28e2("0x34"), _0x28e2("0x7d")],
-            !0
+            [_0x4b44("0x9e"), _0x4b44("0xad"), _0x4b44("0x1")],
+            !0x0
           )
-            [_0x28e2("0x3d")](function (_0x6317ea) {
-              _0x5533b6[_0x28e2("0x13")](_0x6317ea);
-              _0x14ee1a(!0);
+            [_0x4b44("0x3b")](function (_0x3a7e1c) {
+              _0x346975[_0x4b44("0x76")](_0x3a7e1c);
+              _0x2c1927(!0x0);
             })
-            ["fail"](function (_0x2523f1) {
-              _0x328fc7([
-                "Não foi possível atualizar a quantidade de itens no carrinho",
-                _0x2523f1,
-              ]);
-              _0x14ee1a();
+            [_0x4b44("0x2")](function (_0x2a51b6) {
+              _0x2fef20([_0x4b44("0x3a"), _0x2a51b6]);
+              _0x2c1927();
             });
-        } else _0x328fc7(_0x28e2("0x73"));
+        } else _0x2fef20(_0x4b44("0x5b"));
       };
-      _0x5533b6[_0x28e2("0x1c")] = function (_0x4f7222, _0x583ef1) {
-        function _0x2da468(_0x5a18da) {
-          _0x5a18da = _0x28e2("0x5") !== typeof _0x5a18da ? !1 : _0x5a18da;
-          _0x28e2("0xfa") !== typeof window[_0x28e2("0xbe")] &&
-            _0x28e2("0x41") === typeof window[_0x28e2("0xbe")]["exec"] &&
-            window[_0x28e2("0xbe")][_0x28e2("0x2f")][_0x28e2("0x9c")](this);
+      _0x346975["removeProduct"] = function (_0x1cdca3, _0x5cc730) {
+        function _0x31b6bf(_0x355b32) {
+          _0x355b32 = _0x4b44("0x29") !== typeof _0x355b32 ? !0x1 : _0x355b32;
+          _0x4b44("0xd7") !== typeof window[_0x4b44("0x7b")] &&
+            _0x4b44("0x51") ===
+              typeof window[_0x4b44("0x7b")][_0x4b44("0x6d")] &&
+            window["_QuatroDigital_AmountProduct"][_0x4b44("0x6d")][
+              _0x4b44("0xc6")
+            ](this);
           "function" === typeof adminCart && adminCart();
-          _0x293211["fn"][_0x28e2("0x90")](!0, void 0, _0x5a18da);
-          "function" === typeof _0x583ef1 && _0x583ef1(_0x401b3c);
+          _0x1ac1d3["fn"][_0x4b44("0xb4")](!0x0, void 0x0, _0x355b32);
+          _0x4b44("0x51") === typeof _0x5cc730 && _0x5cc730(_0xcbc32e);
         }
-        var _0x401b3c = !1,
-          _0x388929 = _0x293211(_0x4f7222)[_0x28e2("0x91")]("data-sku-index"),
-          _0x2f82dd = window[_0x28e2("0x33")][_0x28e2("0x6d")]["items"];
-        _0x4974e1[_0x28e2("0xf2")] || alert(_0x28e2("0x27"));
-        if ("undefined" === typeof _0x2f82dd[_0x388929])
-          return _0x328fc7(_0x28e2("0x4f") + _0x388929 + "]"), _0x401b3c;
-        _0x25727d["removeItems"]([
-          {
-            index: _0x388929,
-            quantity: 0,
-          },
-        ])
-          ["done"](function (_0x3a8baa) {
-            _0x401b3c = !0;
-            _0x5533b6[_0x28e2("0x13")](_0x3a8baa);
-            _0x5f23b5(_0x3a8baa);
-            _0x2da468(!0);
+        var _0xcbc32e = !0x1,
+          _0x3f03e3 = _0x1ac1d3(_0x1cdca3)[_0x4b44("0xb9")](_0x4b44("0x5")),
+          _0x32e2e2 = window[_0x4b44("0xa0")]["getOrderForm"][_0x4b44("0x9e")];
+        _0x31d2f4[_0x4b44("0x9f")] ||
+          _0x2fef20(_0x4b44("0x4c"), _0x4b44("0x78"));
+        if (_0x4b44("0xd7") === typeof _0x32e2e2[_0x3f03e3])
+          return (
+            _0x2fef20(
+              "Não\x20foi\x20possível\x20localizar\x20os\x20dados\x20do\x20item.\x20A\x20chave\x20buscada\x20é\x20composta\x20pelo\x20SKU:\x20cItems[" +
+                _0x3f03e3 +
+                "]"
+            ),
+            _0xcbc32e
+          );
+        _0x192618["removeItems"]([{ index: _0x3f03e3, quantity: 0x0 }])
+          [_0x4b44("0x3b")](function (_0x4d1469) {
+            _0xcbc32e = !0x0;
+            _0x346975[_0x4b44("0x76")](_0x4d1469);
+            _0x48dd9d(_0x4d1469);
+            _0x31b6bf(!0x0);
           })
-          [_0x28e2("0xaa")](function (_0x7f73c0) {
-            _0x328fc7([_0x28e2("0xca"), _0x7f73c0]);
-            _0x2da468();
+          [_0x4b44("0x2")](function (_0x1ba99a) {
+            _0x2fef20([_0x4b44("0x7f"), _0x1ba99a]);
+            _0x31b6bf();
           });
       };
-      _0x5533b6[_0x28e2("0xe8")] = function (
-        _0x42d616,
-        _0x2f4d47,
-        _0x5cfff0,
-        _0x4b1090
+      _0x346975["scrollCart"] = function (
+        _0x26d089,
+        _0x2fb1ac,
+        _0x31fd78,
+        _0x12d997
       ) {
-        _0x4b1090 = _0x4b1090 || _0x293211(_0x28e2("0xb2"));
-        _0x42d616 = _0x42d616 || "+";
-        _0x2f4d47 = _0x2f4d47 || 0.9 * _0x4b1090[_0x28e2("0x7b")]();
-        _0x4b1090["stop"](!0, !0)[_0x28e2("0xd8")]({
-          scrollTop: isNaN(_0x5cfff0)
-            ? _0x42d616 + "=" + _0x2f4d47 + "px"
-            : _0x5cfff0,
+        _0x12d997 = _0x12d997 || _0x1ac1d3(_0x4b44("0xe0"));
+        _0x26d089 = _0x26d089 || "+";
+        _0x2fb1ac = _0x2fb1ac || 0.9 * _0x12d997[_0x4b44("0x16")]();
+        _0x12d997["stop"](!0x0, !0x0)["animate"]({
+          scrollTop: isNaN(_0x31fd78)
+            ? _0x26d089 + "=" + _0x2fb1ac + "px"
+            : _0x31fd78,
         });
       };
-      _0x5533b6[_0x28e2("0x13")] = function (_0x4769fe) {
-        window[_0x28e2("0x33")][_0x28e2("0x6d")] = _0x4769fe;
-        _0x28e2("0xfa") != typeof _0x4769fe &&
-          _0x4974e1[_0x28e2("0x16")] &&
-          _0x5533b6[_0x28e2("0xc0")](_0x4769fe[_0x28e2("0xa5")] || []);
+      _0x346975[_0x4b44("0x76")] = function (_0x475e62) {
+        window["_QuatroDigital_DropDown"][_0x4b44("0x1c")] = _0x475e62;
+        _0x4b44("0xd7") != typeof _0x475e62 &&
+          _0x31d2f4[_0x4b44("0x19")] &&
+          _0x346975["buildNotification"](_0x475e62["messages"] || []);
       };
-      _0x5533b6["buildNotification"] = function (_0xd62ce1) {
-        _0xd62ce1[_0x28e2("0x20")] &&
-          ((_0xd62ce1 = _0x4974e1["texts"][_0x28e2("0x35")][_0x28e2("0x9f")](
-            "#messageText",
-            _0xd62ce1[0][_0x28e2("0x4")]
+      _0x346975["buildNotification"] = function (_0x4e6993) {
+        _0x4e6993[_0x4b44("0x84")] &&
+          ((_0x4e6993 = _0x31d2f4["texts"]["notification"]["replace"](
+            _0x4b44("0xe4"),
+            _0x4e6993[0x0][_0x4b44("0x2e")]
           )),
-          _0x4f29a3[_0x28e2("0x3a")](_0x28e2("0x74"))[_0x28e2("0x20")]
-            ? _0x4f29a3["find"](".qd-ddc-notification")[_0x28e2("0xc7")](
-                _0xd62ce1
+          _0x349a04[_0x4b44("0xcd")](_0x4b44("0x55"))["length"]
+            ? _0x349a04[_0x4b44("0xcd")](_0x4b44("0x55"))[_0x4b44("0x80")](
+                _0x4e6993
               )
-            : _0x4f29a3[_0x28e2("0xee")](
-                _0x293211(_0x28e2("0xbc") + _0xd62ce1 + "</div>")
+            : _0x349a04[_0x4b44("0x79")](
+                _0x1ac1d3(_0x4b44("0x2a") + _0x4e6993 + "</div>")
               ),
-          _0x4f29a3[_0x28e2("0x3a")](".qd-ddc-notification-close")["on"](
-            _0x28e2("0x37"),
+          _0x349a04["find"](_0x4b44("0x2b"))["on"](
+            _0x4b44("0x18"),
             function () {
-              _0x4f29a3["find"](".qd-ddc-notification")[_0x28e2("0xd0")]();
-              _0x4974e1[_0x28e2("0xe6")] &&
-                _0x28e2("0x41") ==
-                  typeof vtexjs[_0x28e2("0x4c")]["clearMessages"] &&
-                vtexjs[_0x28e2("0x4c")]["clearMessages"]();
+              _0x349a04[_0x4b44("0xcd")](".qd-ddc-notification")[
+                _0x4b44("0xd0")
+              ]();
+              _0x31d2f4[_0x4b44("0x23")] &&
+                _0x4b44("0x51") == typeof vtexjs["checkout"]["clearMessages"] &&
+                vtexjs[_0x4b44("0xc3")]["clearMessages"]();
             }
           ));
       };
-      _0x4974e1[_0x28e2("0x66")] ||
-        (_0x5533b6[_0x28e2("0x3c")](), _0x293211["fn"][_0x28e2("0x90")](!0));
-      _0x293211(window)["on"](_0x28e2("0x96"), function () {
+      _0x31d2f4["updateOnlyHover"] ||
+        (_0x346975[_0x4b44("0xb7")](), _0x1ac1d3["fn"][_0x4b44("0xb4")](!0x0));
+      _0x1ac1d3(window)["on"](_0x4b44("0x1d"), function () {
         try {
-          _0x5533b6[_0x28e2("0x13")](void 0), _0x5533b6["getCartInfoByUrl"]();
-        } catch (_0x67c645) {
-          _0x328fc7(_0x28e2("0xfb") + _0x67c645["message"], _0x28e2("0x28"));
+          _0x346975["setOrderForm"](void 0x0), _0x346975[_0x4b44("0xb7")]();
+        } catch (_0x3afa09) {
+          _0x2fef20(
+            _0x4b44("0x2f") + _0x3afa09[_0x4b44("0x66")],
+            _0x4b44("0x12")
+          );
         }
       });
-      _0x28e2("0x41") === typeof _0x4974e1["callback"]
-        ? _0x4974e1["callback"][_0x28e2("0x9c")](this)
-        : _0x328fc7(_0x28e2("0x49"));
+      "function" === typeof _0x31d2f4["callback"]
+        ? _0x31d2f4[_0x4b44("0x77")]["call"](this)
+        : _0x2fef20(_0x4b44("0xb"));
     };
-    _0x293211["fn"][_0x28e2("0x85")] = function (_0x3e5f5d) {
-      var _0x1696d0 = _0x293211(this);
-      _0x1696d0["fn"] = new _0x293211[_0x28e2("0x85")](this, _0x3e5f5d);
-      return _0x1696d0;
+    _0x1ac1d3["fn"][_0x4b44("0xe5")] = function (_0x35e644) {
+      var _0x80bd2f = _0x1ac1d3(this);
+      _0x80bd2f["fn"] = new _0x1ac1d3[_0x4b44("0xe5")](this, _0x35e644);
+      return _0x80bd2f;
     };
-  } catch (_0x5b9545) {
-    _0x28e2("0xfa") !== typeof console &&
-      _0x28e2("0x41") === typeof console[_0x28e2("0x9b")] &&
-      console[_0x28e2("0x9b")]("Oooops! ", _0x5b9545);
+  } catch (_0x48d326) {
+    _0x4b44("0xd7") !== typeof console &&
+      _0x4b44("0x51") === typeof console[_0x4b44("0xd5")] &&
+      console[_0x4b44("0xd5")](_0x4b44("0xa8"), _0x48d326);
   }
 })(this);
-(function (_0x29c075) {
+(function (_0x40f204) {
   try {
-    var _0x508898 = jQuery;
-    window[_0x28e2("0xbe")] = window[_0x28e2("0xbe")] || {};
-    window[_0x28e2("0xbe")][_0x28e2("0x23")] = {};
-    window[_0x28e2("0xbe")][_0x28e2("0xe1")] = !1;
-    window[_0x28e2("0xbe")][_0x28e2("0xa3")] = !1;
-    window["_QuatroDigital_AmountProduct"]["quickViewUpdate"] = !1;
-    var _0x4a2adb = function () {
-      if (window[_0x28e2("0xbe")][_0x28e2("0xe1")]) {
-        var _0x278b4b = !1;
-        var _0x556543 = {};
-        window[_0x28e2("0xbe")]["items"] = {};
-        for (_0x5ba09d in window[_0x28e2("0x33")]["getOrderForm"][
-          _0x28e2("0x23")
-        ])
+    var _0x2d55a4 = jQuery;
+    window[_0x4b44("0x7b")] = window["_QuatroDigital_AmountProduct"] || {};
+    window[_0x4b44("0x7b")][_0x4b44("0x9e")] = {};
+    window["_QuatroDigital_AmountProduct"][_0x4b44("0x4a")] = !0x1;
+    window["_QuatroDigital_AmountProduct"][_0x4b44("0x86")] = !0x1;
+    window[_0x4b44("0x7b")][_0x4b44("0x57")] = !0x1;
+    var _0x15e465 = function () {
+      if (window[_0x4b44("0x7b")][_0x4b44("0x4a")]) {
+        var _0x40ca73 = !0x1;
+        var _0x8c551 = {};
+        window["_QuatroDigital_AmountProduct"][_0x4b44("0x9e")] = {};
+        for (_0x2c0c6f in window[_0x4b44("0xa0")]["getOrderForm"]["items"])
           if (
-            _0x28e2("0x92") ===
-            typeof window["_QuatroDigital_DropDown"][_0x28e2("0x6d")][
-              _0x28e2("0x23")
-            ][_0x5ba09d]
+            _0x4b44("0x47") ===
+            typeof window[_0x4b44("0xa0")][_0x4b44("0x1c")][_0x4b44("0x9e")][
+              _0x2c0c6f
+            ]
           ) {
-            var _0x1b971b =
-              window[_0x28e2("0x33")][_0x28e2("0x6d")][_0x28e2("0x23")][
-                _0x5ba09d
+            var _0x8f9f89 =
+              window["_QuatroDigital_DropDown"][_0x4b44("0x1c")]["items"][
+                _0x2c0c6f
               ];
-            _0x28e2("0xfa") !== typeof _0x1b971b[_0x28e2("0x99")] &&
-              null !== _0x1b971b[_0x28e2("0x99")] &&
-              "" !== _0x1b971b[_0x28e2("0x99")] &&
-              ((window[_0x28e2("0xbe")][_0x28e2("0x23")][
-                _0x28e2("0x11") + _0x1b971b["productId"]
+            _0x4b44("0xd7") !== typeof _0x8f9f89[_0x4b44("0xe3")] &&
+              null !== _0x8f9f89[_0x4b44("0xe3")] &&
+              "" !== _0x8f9f89[_0x4b44("0xe3")] &&
+              ((window["_QuatroDigital_AmountProduct"][_0x4b44("0x9e")][
+                "prod_" + _0x8f9f89[_0x4b44("0xe3")]
               ] =
-                window[_0x28e2("0xbe")][_0x28e2("0x23")][
-                  _0x28e2("0x11") + _0x1b971b["productId"]
+                window[_0x4b44("0x7b")][_0x4b44("0x9e")][
+                  _0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]
                 ] || {}),
-              (window["_QuatroDigital_AmountProduct"][_0x28e2("0x23")][
-                _0x28e2("0x11") + _0x1b971b["productId"]
-              ]["prodId"] = _0x1b971b[_0x28e2("0x99")]),
-              _0x556543["prod_" + _0x1b971b[_0x28e2("0x99")]] ||
-                (window[_0x28e2("0xbe")][_0x28e2("0x23")][
-                  _0x28e2("0x11") + _0x1b971b["productId"]
-                ][_0x28e2("0xcf")] = 0),
-              (window["_QuatroDigital_AmountProduct"][_0x28e2("0x23")][
-                "prod_" + _0x1b971b[_0x28e2("0x99")]
-              ]["qtt"] += _0x1b971b[_0x28e2("0x45")]),
-              (_0x278b4b = !0),
-              (_0x556543[_0x28e2("0x11") + _0x1b971b[_0x28e2("0x99")]] = !0));
+              (window[_0x4b44("0x7b")][_0x4b44("0x9e")][
+                _0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]
+              ][_0x4b44("0xb0")] = _0x8f9f89["productId"]),
+              _0x8c551[_0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]] ||
+                (window[_0x4b44("0x7b")][_0x4b44("0x9e")][
+                  _0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]
+                ][_0x4b44("0x5f")] = 0x0),
+              (window[_0x4b44("0x7b")][_0x4b44("0x9e")][
+                _0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]
+              ][_0x4b44("0x5f")] += _0x8f9f89[_0x4b44("0x32")]),
+              (_0x40ca73 = !0x0),
+              (_0x8c551[_0x4b44("0xa3") + _0x8f9f89[_0x4b44("0xe3")]] = !0x0));
           }
-        var _0x5ba09d = _0x278b4b;
-      } else _0x5ba09d = void 0;
-      window[_0x28e2("0xbe")][_0x28e2("0xe1")] &&
-        (_0x508898(_0x28e2("0x8a"))[_0x28e2("0xd0")](),
-        _0x508898(".qd-bap-item-added")[_0x28e2("0xa7")](_0x28e2("0x77")));
-      for (var _0x4f0f00 in window[_0x28e2("0xbe")][_0x28e2("0x23")]) {
-        _0x1b971b = window[_0x28e2("0xbe")][_0x28e2("0x23")][_0x4f0f00];
-        if ("object" !== typeof _0x1b971b) return;
-        _0x556543 = _0x508898(_0x28e2("0xd") + _0x1b971b["prodId"] + "]")[
-          _0x28e2("0x30")
-        ]("li");
+        var _0x2c0c6f = _0x40ca73;
+      } else _0x2c0c6f = void 0x0;
+      window[_0x4b44("0x7b")]["allowRecalculate"] &&
+        (_0x2d55a4(".qd-bap-wrapper")[_0x4b44("0xd0")](),
+        _0x2d55a4(".qd-bap-item-added")[_0x4b44("0x6a")]("qd-bap-item-added"));
+      for (var _0x4b6682 in window[_0x4b44("0x7b")][_0x4b44("0x9e")]) {
+        _0x8f9f89 =
+          window["_QuatroDigital_AmountProduct"][_0x4b44("0x9e")][_0x4b6682];
+        if (_0x4b44("0x47") !== typeof _0x8f9f89) return;
+        _0x8c551 = _0x2d55a4(
+          _0x4b44("0x75") + _0x8f9f89[_0x4b44("0xb0")] + "]"
+        )["getParent"]("li");
         if (
-          window["_QuatroDigital_AmountProduct"]["allowRecalculate"] ||
-          !_0x556543[_0x28e2("0x3a")](_0x28e2("0x8a"))[_0x28e2("0x20")]
+          window[_0x4b44("0x7b")]["allowRecalculate"] ||
+          !_0x8c551[_0x4b44("0xcd")](_0x4b44("0xc5"))[_0x4b44("0x84")]
         )
-          (_0x278b4b = _0x508898(_0x28e2("0xec"))),
-            _0x278b4b["find"](".qd-bap-qtt")[_0x28e2("0xc7")](
-              _0x1b971b[_0x28e2("0xcf")]
+          (_0x40ca73 = _0x2d55a4(_0x4b44("0xb1"))),
+            _0x40ca73[_0x4b44("0xcd")](_0x4b44("0x68"))[_0x4b44("0x80")](
+              _0x8f9f89[_0x4b44("0x5f")]
             ),
-            (_0x1b971b = _0x556543[_0x28e2("0x3a")](_0x28e2("0x4e"))),
-            _0x1b971b["length"]
-              ? _0x1b971b["prepend"](_0x278b4b)["addClass"](_0x28e2("0x77"))
-              : _0x556543[_0x28e2("0xee")](_0x278b4b);
+            (_0x8f9f89 = _0x8c551[_0x4b44("0xcd")](".qd_bap_wrapper_content")),
+            _0x8f9f89["length"]
+              ? _0x8f9f89["prepend"](_0x40ca73)["addClass"](_0x4b44("0xdd"))
+              : _0x8c551[_0x4b44("0x79")](_0x40ca73);
       }
-      _0x5ba09d &&
-        (window["_QuatroDigital_AmountProduct"][_0x28e2("0xe1")] = !1);
+      _0x2c0c6f && (window[_0x4b44("0x7b")][_0x4b44("0x4a")] = !0x1);
     };
-    window[_0x28e2("0xbe")][_0x28e2("0x2f")] = function () {
-      window["_QuatroDigital_AmountProduct"][_0x28e2("0xe1")] = !0;
-      _0x4a2adb[_0x28e2("0x9c")](this);
+    window[_0x4b44("0x7b")][_0x4b44("0x6d")] = function () {
+      window["_QuatroDigital_AmountProduct"][_0x4b44("0x4a")] = !0x0;
+      _0x15e465[_0x4b44("0xc6")](this);
     };
-    _0x508898(document)["ajaxStop"](function () {
-      _0x4a2adb[_0x28e2("0x9c")](this);
+    _0x2d55a4(document)["ajaxStop"](function () {
+      _0x15e465[_0x4b44("0xc6")](this);
     });
-  } catch (_0x54a91b) {
-    _0x28e2("0xfa") !== typeof console &&
-      _0x28e2("0x41") === typeof console["error"] &&
-      console[_0x28e2("0x9b")](_0x28e2("0x40"), _0x54a91b);
+  } catch (_0x763621) {
+    "undefined" !== typeof console &&
+      _0x4b44("0x51") === typeof console[_0x4b44("0xd5")] &&
+      console[_0x4b44("0xd5")](_0x4b44("0xa8"), _0x763621);
   }
 })(this);
 (function () {
   try {
-    var _0x528abc = jQuery,
-      _0x2a511f,
-      _0x3b47e0 = {
-        selector: _0x28e2("0xa9"),
+    var _0x22072a = jQuery,
+      _0x331c63,
+      _0x4b5f81 = {
+        selector: ".qdDdcContainer",
         dropDown: {},
         buyButton: {},
       };
-    _0x528abc[_0x28e2("0xf")] = function (_0x5ee86a) {
-      var _0x198371 = {};
-      _0x2a511f = _0x528abc[_0x28e2("0xeb")](!0, {}, _0x3b47e0, _0x5ee86a);
-      _0x5ee86a = _0x528abc(_0x2a511f[_0x28e2("0xa6")])[_0x28e2("0x85")](
-        _0x2a511f[_0x28e2("0x1d")]
+    _0x22072a[_0x4b44("0x15")] = function (_0x44909a) {
+      var _0x2cd382 = {};
+      _0x331c63 = _0x22072a[_0x4b44("0x14")](!0x0, {}, _0x4b5f81, _0x44909a);
+      _0x44909a = _0x22072a(_0x331c63["selector"])["QD_dropDownCart"](
+        _0x331c63[_0x4b44("0x7")]
       );
-      _0x198371[_0x28e2("0x87")] =
-        "undefined" !== typeof _0x2a511f["dropDown"]["updateOnlyHover"] &&
-        !1 === _0x2a511f["dropDown"][_0x28e2("0x66")]
-          ? _0x528abc(_0x2a511f["selector"])[_0x28e2("0x5c")](
-              _0x5ee86a["fn"],
-              _0x2a511f[_0x28e2("0x87")]
+      _0x2cd382[_0x4b44("0x21")] =
+        _0x4b44("0xd7") !==
+          typeof _0x331c63[_0x4b44("0x7")]["updateOnlyHover"] &&
+        !0x1 === _0x331c63[_0x4b44("0x7")]["updateOnlyHover"]
+          ? _0x22072a(_0x331c63["selector"])["QD_buyButton"](
+              _0x44909a["fn"],
+              _0x331c63[_0x4b44("0x21")]
             )
-          : _0x528abc(_0x2a511f[_0x28e2("0xa6")])["QD_buyButton"](
-              _0x2a511f[_0x28e2("0x87")]
+          : _0x22072a(_0x331c63[_0x4b44("0xce")])["QD_buyButton"](
+              _0x331c63["buyButton"]
             );
-      _0x198371[_0x28e2("0x1d")] = _0x5ee86a;
-      return _0x198371;
+      _0x2cd382[_0x4b44("0x7")] = _0x44909a;
+      return _0x2cd382;
     };
-    _0x528abc["fn"]["smartCart"] = function () {
-      "object" === typeof console &&
-        _0x28e2("0x41") === typeof console["info"] &&
-        console[_0x28e2("0xc1")](_0x28e2("0x63"));
+    _0x22072a["fn"]["smartCart"] = function () {
+      _0x4b44("0x47") === typeof console &&
+        _0x4b44("0x51") === typeof console[_0x4b44("0x8b")] &&
+        console[_0x4b44("0x8b")](_0x4b44("0xd2"));
     };
-    _0x528abc[_0x28e2("0xd2")] = _0x528abc["fn"][_0x28e2("0xd2")];
-  } catch (_0xc3532) {
-    _0x28e2("0xfa") !== typeof console &&
-      _0x28e2("0x41") === typeof console[_0x28e2("0x9b")] &&
-      console[_0x28e2("0x9b")](_0x28e2("0x40"), _0xc3532);
+    _0x22072a["smartCart"] = _0x22072a["fn"][_0x4b44("0xc1")];
+  } catch (_0x15b3fd) {
+    _0x4b44("0xd7") !== typeof console &&
+      _0x4b44("0x51") === typeof console["error"] &&
+      console[_0x4b44("0xd5")](_0x4b44("0xa8"), _0x15b3fd);
   }
 })();
+/* Quatro Digital - Product Thumbs // 1.2 // Carlos Vinicius // Todos os direitos reservados. */
 (function () {
   function b(a) {
     var b = $("ul.thumbs").not(a);
@@ -11490,6 +12173,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
       $(".QD-thumbs").QD_productThumbs();
     }));
 })();
+/* Quatro Digital - Scroll Toggle // 1.5 // Carlos Vinicius // Todos os direitos reservados */
 (function () {
   var c = jQuery,
     d = function (a, c) {
@@ -11540,7 +12224,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
         if ("auto" === a) f.push(c(window).height());
         else
           return d(
-            "Não foi informado o limite de scroll necessário para adicionar o atributo."
+            "N\u00e3o foi informado o limite de scroll necess\u00e1rio para adicionar o atributo."
           );
       else {
         var b = a.split(","),
@@ -11551,29 +12235,35 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
       }
       if (!f.length)
         return d(
-          "Aaeeeeeeee irmão! Não consegui encontrar nenhum valor para calcular o scroll"
+          "Aaeeeeeeee irm\u00e3o! N\u00e3o consegui encontrar nenhum valor para calcular o scroll"
         );
       if (
         !document ||
         !document.body ||
         "undefined" === typeof document.body.setAttribute
       )
-        return d('"document.body.setAttribute" Não é uma função :(');
+        return d(
+          '"document.body.setAttribute" N\u00e3o \u00e9 uma fun\u00e7\u00e3o :('
+        );
       if (
         !document ||
         !document.body ||
         "undefined" === typeof document.body.removeAttribute
       )
-        return d('"document.body.removeAttribute" Não é uma função :(');
+        return d(
+          '"document.body.removeAttribute" N\u00e3o \u00e9 uma fun\u00e7\u00e3o :('
+        );
       if (
         !document ||
         !document.body ||
         "undefined" === typeof document.body.getAttribute
       )
-        return d('"document.body.getAttribute" Não é uma função :(');
+        return d(
+          '"document.body.getAttribute" N\u00e3o \u00e9 uma fun\u00e7\u00e3o :('
+        );
       if (!c(window).scrollTop || isNaN(parseInt(c(window).scrollTop())))
         return d(
-          '"$(window).scrollTop" não esta retornando um número inteiro :('
+          '"$(window).scrollTop" n\u00e3o esta retornando um n\u00famero inteiro :('
         );
       try {
         document.body.setAttribute("data-qd-scroll", 1),
@@ -11582,7 +12272,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
           document.body.getAttribute("data-qd-scroll");
       } catch (h) {
         d(
-          "Não foi possível fazer o passo a passo de consultar, adicionar e remover um atributo",
+          "N\u00e3o foi poss\u00edvel fazer o passo a passo de consultar, adicionar e remover um atributo",
           h.message
         );
       }
@@ -11607,6 +12297,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
       a.length && c.QD_scrollToggle(a.attr("data-qd-scroll-limit"));
     }));
 })();
+/* Quatro Digital - Mosaic Banners // 1.2 // Carlos Vinicius // Todos os direitos reservados */
 (function (q) {
   var e = jQuery;
   if ("function" !== typeof e.fn.QD_mosaicBanners) {
@@ -11687,7 +12378,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
         a.each(function () {
           var a = e(this);
           if (a.is(".qd-mb-banner"))
-            k(["Este banner já esta processado!", a], "info");
+            k(["Este banner j\u00e1 esta processado!", a], "info");
           else {
             a.addClass("qd-mb-banner");
             var d = a.find("img").first();
@@ -11714,7 +12405,7 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
             } else
               k(
                 [
-                  "Esse elemento não possui nenhuma imagem dentro. Certifique-se que esteja chamando um “.box-banner”. Mas você é burro hein!",
+                  "Esse elemento n\u00e3o possui nenhuma imagem dentro. Certifique-se que esteja chamando um \u201c.box-banner\u201d. Mas voc\u00ea \u00e9 burro hein!",
                   a,
                 ],
                 "info"
@@ -11737,93 +12428,96 @@ var _0x28e2 = function (_0x3f07e6, _0x5759e3) {
     });
   }
 })(this);
-var _0x1510 = [
-  "toUpperCase",
-  "sizes",
-  "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
-  "trigger",
-  "qd-sil-image",
-  "scrollTop",
-  "function",
-  "indexOf",
-  "src",
-  "clone",
-  "ทÃѲ √Αℓ¡∂Α∂Ѳ ΡΑ૨Α ૯ઽƬΑ LѲJΑ!",
-  "unshift",
-  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "undefined",
+var _0x255b = [
   "j%25C2%25A8pragrecnegf%25C2%25A8pbz%25C2%25A8oe",
-  "error",
-  "QD_SIL_scroll QuatroDigital.is_Callback",
-  "find",
-  "insertAfter",
-  "QD_SIL_scrollRange",
-  "load",
-  "bottom",
-  "warn",
-  "QD_smartImageLoad",
-  "object",
-  "charCodeAt",
-  "replace",
-  "height",
-  "closest",
-  "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
-  "info",
-  "addClass",
-  "length",
-  "imageWrapper",
-  "width",
-  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
-  "[Quatro Digital - Smart Image Load]\n",
-  "not",
-  "body",
-  "apply",
-  "qd-sil-image-loaded",
-  "attr",
+  "src",
   "toLowerCase",
-  "push",
-  "fromCharCode",
+  "unshift",
+  "[Quatro\x20Digital\x20-\x20Smart\x20Image\x20Load]\x0a",
+  "apply",
   "qd-sil-on",
-  "alerta",
-  "QD_SIL_individualChildRender",
-  "QD_SIL_scroll",
-  "join",
-  "ite",
+  "scrollTop",
+  "bargerr%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+  "qd-sil-image",
   "aviso",
+  "documentElement",
+  "info",
+  "QD_SIL_scroll\x20QuatroDigital.is_Callback",
+  "erc",
+  "bottom",
+  "function",
+  "QD_smartImageLoad",
+  "toUpperCase",
+  "imageWrapper",
+  "grecnegf%25C2%25A8igrkpbzzreprfgnoyr%25C2%25A8pbz%25C2%25A8oe",
+  "closest",
+  "img:visible",
+  "undefined",
+  "replace",
+  "warn",
+  "addClass",
+  "push",
+  "clone",
+  "qu%E0%B8%84%D1%82%D1%8F%CF%83d%C2%A1g%C2%A1%D1%82%E0%B8%84%C5%82",
+  ".qd_sil_img_wrapper",
+  "QD_SIL_scrollRange",
+  "QD_SIL_individualChildRender",
+  "top",
+  "attr",
+  "length",
+  "sizes",
+  "ทÃѲ\x20√Αℓ¡∂Α∂Ѳ\x20ΡΑ૨Α\x20૯ઽƬΑ\x20LѲJΑ!",
+  "first",
+  "Problemas\x20:(\x20.\x20Detalhes:\x20",
+  "not",
+  "object",
+  "load",
   "---",
+  "extend",
+  ".qd-sil-on",
+  "QD_SIL_scroll",
+  "offset",
+  "alerta",
+  "body",
+  "find",
+  "error",
+  "width",
+  "join",
+  "height",
+  "insertAfter",
 ];
-(function (_0xead9cc, _0x15106e) {
-  var _0xb2f29b = function (_0x3f6a54) {
-    while (--_0x3f6a54) {
-      _0xead9cc["push"](_0xead9cc["shift"]());
+(function (_0x2226d4, _0x255b29) {
+  var _0x669a31 = function (_0x46bddb) {
+    while (--_0x46bddb) {
+      _0x2226d4["push"](_0x2226d4["shift"]());
     }
   };
-  _0xb2f29b(++_0x15106e);
-})(_0x1510, 161);
-var _0xb2f2 = function (_0xead9cc, _0x15106e) {
-  _0xead9cc = _0xead9cc - 0;
-  var _0xb2f29b = _0x1510[_0xead9cc];
-  return _0xb2f29b;
+  _0x669a31(++_0x255b29);
+})(_0x255b, 0xf3);
+var _0x669a = function (_0x2226d4, _0x255b29) {
+  _0x2226d4 = _0x2226d4 - 0x0;
+  var _0x669a31 = _0x255b[_0x2226d4];
+  return _0x669a31;
 };
-(function (_0x458f63) {
-  var _0x8783e3 = jQuery;
-  if (_0xb2f2("0x4") !== typeof _0x8783e3["fn"][_0xb2f2("0x15")]) {
-    _0x8783e3["fn"][_0xb2f2("0x15")] = function () {};
-    _0x458f63 = (function (_0x7518c2) {
-      var _0x1b6428 = {
-        p: _0xb2f2("0x0"),
-        jj: _0xb2f2("0xc"),
-        pra: _0xb2f2("0x1b"),
-        dqfg: _0xb2f2("0xa"),
+(function (_0x116edb) {
+  var _0x1c7fab = jQuery;
+  if (_0x669a("0x35") !== typeof _0x1c7fab["fn"][_0x669a("0x36")]) {
+    _0x1c7fab["fn"]["QD_smartImageLoad"] = function () {};
+    _0x116edb = (function (_0x1c4b7f) {
+      var _0x36d78b = {
+        p: "ragrecnegf%25C2%25A8igrkpbzzrepr%25C2%25A8pbz%25C2%25A8oe",
+        jj: _0x669a("0x25"),
+        pra: _0x669a("0x1"),
+        dqfg: _0x669a("0x2d"),
       };
-      return (function (_0x2041b1) {
-        var _0x30864a = function (_0x344558) {
-          return _0x344558;
+      return (function (_0x1c6f8f) {
+        var _0x37bda6 = function (_0x2770f1) {
+          return _0x2770f1;
         };
-        var _0x7f94b9 = [
+        var _0x301755 = [
           "a",
           "e",
-          18,
+          0x12,
           "m",
           "s",
           "k",
@@ -11842,263 +12536,260 @@ var _0xb2f2 = function (_0xead9cc, _0x15106e) {
           "o",
           "b",
         ];
-        _0x2041b1 =
-          _0x2041b1[
+        _0x1c6f8f =
+          _0x1c6f8f[
             "d" +
-              _0x7f94b9[16] +
+              _0x301755[0x10] +
               "c" +
-              _0x7f94b9[17] +
+              _0x301755[0x11] +
               "m" +
-              _0x30864a(_0x7f94b9[1]) +
+              _0x37bda6(_0x301755[0x1]) +
               "n" +
-              _0x7f94b9[13]
+              _0x301755[0xd]
           ][
             "l" +
-              _0x7f94b9[18] +
+              _0x301755[0x12] +
               "c" +
-              _0x7f94b9[0] +
+              _0x301755[0x0] +
               "ti" +
-              _0x30864a("o") +
+              _0x37bda6("o") +
               "n"
           ];
-        var _0x289490 = function (_0x389925) {
+        var _0x156d77 = function (_0x535ebf) {
           return escape(
             encodeURIComponent(
-              _0x389925[_0xb2f2("0x18")](/\./g, "¨")[_0xb2f2("0x18")](
+              _0x535ebf[_0x669a("0x5")](/\./g, "¨")[_0x669a("0x5")](
                 /[a-zA-Z]/g,
-                function (_0x597553) {
-                  return String[_0xb2f2("0x2a")](
-                    ("Z" >= _0x597553 ? 90 : 122) >=
-                      (_0x597553 = _0x597553[_0xb2f2("0x17")](0) + 13)
-                      ? _0x597553
-                      : _0x597553 - 26
+                function (_0xe415ad) {
+                  return String["fromCharCode"](
+                    ("Z" >= _0xe415ad ? 0x5a : 0x7a) >=
+                      (_0xe415ad = _0xe415ad["charCodeAt"](0x0) + 0xd)
+                      ? _0xe415ad
+                      : _0xe415ad - 0x1a
                   );
                 }
               )
             )
           );
         };
-        var _0x4d9f33 = _0x289490(
-          _0x2041b1[
+        var _0x2cf379 = _0x156d77(
+          _0x1c6f8f[
             [
-              _0x7f94b9[9],
-              _0x30864a("o"),
-              _0x7f94b9[12],
-              _0x7f94b9[_0x30864a(13)],
-            ][_0xb2f2("0x2f")]("")
+              _0x301755[0x9],
+              _0x37bda6("o"),
+              _0x301755[0xc],
+              _0x301755[_0x37bda6(0xd)],
+            ][_0x669a("0x22")]("")
           ]
         );
-        _0x289490 = _0x289490(
+        _0x156d77 = _0x156d77(
           (window[
             [
               "js",
-              _0x30864a("no"),
+              _0x37bda6("no"),
               "m",
-              _0x7f94b9[1],
-              _0x7f94b9[4][_0xb2f2("0x33")](),
-              _0xb2f2("0x30"),
-            ][_0xb2f2("0x2f")]("")
-          ] || _0xb2f2("0x32")) +
+              _0x301755[0x1],
+              _0x301755[0x4][_0x669a("0x37")](),
+              "ite",
+            ][_0x669a("0x22")]("")
+          ] || _0x669a("0x18")) +
             [
               ".v",
-              _0x7f94b9[13],
+              _0x301755[0xd],
               "e",
-              _0x30864a("x"),
+              _0x37bda6("x"),
               "co",
-              _0x30864a("mm"),
-              "erc",
-              _0x7f94b9[1],
+              _0x37bda6("mm"),
+              _0x669a("0x33"),
+              _0x301755[0x1],
               ".c",
-              _0x30864a("o"),
+              _0x37bda6("o"),
               "m.",
-              _0x7f94b9[19],
+              _0x301755[0x13],
               "r",
-            ][_0xb2f2("0x2f")]("")
+            ][_0x669a("0x22")]("")
         );
-        for (var _0x597565 in _0x1b6428) {
+        for (var _0x4c2a83 in _0x36d78b) {
           if (
-            _0x289490 === _0x597565 + _0x1b6428[_0x597565] ||
-            _0x4d9f33 === _0x597565 + _0x1b6428[_0x597565]
+            _0x156d77 === _0x4c2a83 + _0x36d78b[_0x4c2a83] ||
+            _0x2cf379 === _0x4c2a83 + _0x36d78b[_0x4c2a83]
           ) {
-            var _0x2621ba = "tr" + _0x7f94b9[17] + "e";
+            var _0x170dfe = "tr" + _0x301755[0x11] + "e";
             break;
           }
-          _0x2621ba = "f" + _0x7f94b9[0] + "ls" + _0x30864a(_0x7f94b9[1]);
+          _0x170dfe = "f" + _0x301755[0x0] + "ls" + _0x37bda6(_0x301755[0x1]);
         }
-        _0x30864a = !1;
-        -1 <
-          _0x2041b1[
-            [_0x7f94b9[12], "e", _0x7f94b9[0], "rc", _0x7f94b9[9]][
-              _0xb2f2("0x2f")
+        _0x37bda6 = !0x1;
+        -0x1 <
+          _0x1c6f8f[
+            [_0x301755[0xc], "e", _0x301755[0x0], "rc", _0x301755[0x9]][
+              _0x669a("0x22")
             ]("")
-          ][_0xb2f2("0x5")](_0xb2f2("0x21")) && (_0x30864a = !0);
-        return [_0x2621ba, _0x30864a];
-      })(_0x7518c2);
+          ]["indexOf"](_0x669a("0xa")) && (_0x37bda6 = !0x0);
+        return [_0x170dfe, _0x37bda6];
+      })(_0x1c4b7f);
     })(window);
-    if (!eval(_0x458f63[0]))
-      return _0x458f63[1] ? _0xd30885(_0xb2f2("0x8")) : !1;
-    var _0xd30885 = function (_0x5a7d43, _0x3359d5) {
+    if (!eval(_0x116edb[0x0]))
+      return _0x116edb[0x1] ? _0x124143(_0x669a("0x12")) : !0x1;
+    var _0x124143 = function (_0x1815be, _0x7fa9f) {
         if (
-          _0xb2f2("0x16") === typeof console &&
-          _0xb2f2("0xb") !== typeof console["error"] &&
-          _0xb2f2("0xb") !== typeof console[_0xb2f2("0x1c")] &&
-          _0xb2f2("0xb") !== typeof console[_0xb2f2("0x14")]
+          _0x669a("0x16") === typeof console &&
+          _0x669a("0x4") !== typeof console[_0x669a("0x20")] &&
+          _0x669a("0x4") !== typeof console["info"] &&
+          _0x669a("0x4") !== typeof console[_0x669a("0x6")]
         ) {
           if (
-            "object" == typeof _0x5a7d43 &&
-            _0xb2f2("0x4") == typeof _0x5a7d43[_0xb2f2("0x9")]
+            _0x669a("0x16") == typeof _0x1815be &&
+            "function" == typeof _0x1815be[_0x669a("0x28")]
           ) {
-            _0x5a7d43[_0xb2f2("0x9")](_0xb2f2("0x22"));
-            var _0x4b867a = _0x5a7d43;
-          } else
-            _0x4b867a = ["[Quatro Digital - Smart Image Load]\n", _0x5a7d43];
+            _0x1815be[_0x669a("0x28")](_0x669a("0x29"));
+            var _0x1e15fe = _0x1815be;
+          } else _0x1e15fe = [_0x669a("0x29"), _0x1815be];
           if (
-            _0xb2f2("0xb") == typeof _0x3359d5 ||
-            (_0xb2f2("0x2c") !== _0x3359d5[_0xb2f2("0x28")]() &&
-              _0xb2f2("0x31") !== _0x3359d5[_0xb2f2("0x28")]())
+            "undefined" == typeof _0x7fa9f ||
+            (_0x669a("0x1d") !== _0x7fa9f["toLowerCase"]() &&
+              _0x669a("0x2f") !== _0x7fa9f["toLowerCase"]())
           )
             if (
-              _0xb2f2("0xb") != typeof _0x3359d5 &&
-              _0xb2f2("0x1c") == _0x3359d5[_0xb2f2("0x28")]()
+              _0x669a("0x4") != typeof _0x7fa9f &&
+              "info" == _0x7fa9f[_0x669a("0x27")]()
             )
               try {
-                console[_0xb2f2("0x1c")]["apply"](console, _0x4b867a);
-              } catch (_0x2168aa) {
+                console["info"][_0x669a("0x2a")](console, _0x1e15fe);
+              } catch (_0x262383) {
                 try {
-                  console[_0xb2f2("0x1c")](_0x4b867a[_0xb2f2("0x2f")]("\n"));
-                } catch (_0x2dc379) {}
+                  console[_0x669a("0x31")](_0x1e15fe[_0x669a("0x22")]("\x0a"));
+                } catch (_0x1e860a) {}
               }
             else
               try {
-                console["error"][_0xb2f2("0x25")](console, _0x4b867a);
-              } catch (_0x1a004e) {
+                console["error"][_0x669a("0x2a")](console, _0x1e15fe);
+              } catch (_0x2295a3) {
                 try {
-                  console[_0xb2f2("0xd")](_0x4b867a["join"]("\n"));
-                } catch (_0x2d67c7) {}
+                  console["error"](_0x1e15fe[_0x669a("0x22")]("\x0a"));
+                } catch (_0xb1d0d1) {}
               }
           else
             try {
-              console["warn"][_0xb2f2("0x25")](console, _0x4b867a);
-            } catch (_0x2ace71) {
+              console[_0x669a("0x6")][_0x669a("0x2a")](console, _0x1e15fe);
+            } catch (_0x2ded2d) {
               try {
-                console[_0xb2f2("0x14")](_0x4b867a[_0xb2f2("0x2f")]("\n"));
-              } catch (_0x22d93b) {}
+                console[_0x669a("0x6")](_0x1e15fe["join"]("\x0a"));
+              } catch (_0x2e8332) {}
             }
         }
       },
-      _0x3d02c8 = /(ids\/[0-9]+-)[0-9-]+/i,
-      _0xd7bd57 = {
-        imageWrapper: ".qd_sil_img_wrapper",
-        sizes: {
-          width: "300",
-          height: "300",
-        },
+      _0x2fff4a = /(ids\/[0-9]+-)[0-9-]+/i,
+      _0x1cc8eb = {
+        imageWrapper: _0x669a("0xb"),
+        sizes: { width: "300", height: "300" },
       },
-      _0x116863 = function (_0x2b7f2c, _0x28fa2d) {
-        function _0x26924f(_0x37d222) {
+      _0x18db84 = function (_0x860251, _0x4e840d) {
+        function _0x3e7dd8(_0x148a19) {
           try {
-            var _0x5a01b2 = _0x37d222[_0xb2f2("0xf")](
-              _0x28fa2d[_0xb2f2("0x1f")]
-            )
-              [_0xb2f2("0x23")](".qd-sil-on")
-              ["find"]("img:visible");
-            if (_0x5a01b2["length"]) {
-              var _0x5d116b = _0x8783e3(window),
-                _0x15ae81 = _0x5d116b[_0xb2f2("0x3")]();
-              var _0x278d4a = _0x15ae81 + _0x5d116b["height"]();
-              var _0x1cbe99 = _0x5a01b2["first"]()[_0xb2f2("0x19")]();
-              _0x37d222 = [];
+            var _0x49ee08 = _0x148a19["find"](_0x4e840d[_0x669a("0x0")])
+              [_0x669a("0x15")](_0x669a("0x1a"))
+              [_0x669a("0x1f")](_0x669a("0x3"));
+            if (_0x49ee08[_0x669a("0x10")]) {
+              var _0x4b4d7a = _0x1c7fab(window),
+                _0x1aac81 = _0x4b4d7a[_0x669a("0x2c")]();
+              var _0x5c0095 = _0x1aac81 + _0x4b4d7a[_0x669a("0x23")]();
+              var _0x3f0a89 = _0x49ee08[_0x669a("0x13")]()[_0x669a("0x23")]();
+              _0x148a19 = [];
               for (
-                _0x5d116b = 0;
-                _0x5d116b < _0x5a01b2["length"];
-                _0x5d116b++
+                _0x4b4d7a = 0x0;
+                _0x4b4d7a < _0x49ee08[_0x669a("0x10")];
+                _0x4b4d7a++
               ) {
-                var _0x2794e8 = _0x8783e3(_0x5a01b2[_0x5d116b])["offset"]();
-                _0x2794e8[_0xb2f2("0x13")] = _0x2794e8["top"] + _0x1cbe99;
-                _0x278d4a < _0x2794e8["top"] ||
-                  _0x15ae81 > _0x2794e8[_0xb2f2("0x13")] ||
-                  _0x37d222[_0xb2f2("0x29")](_0x5a01b2[_0x5d116b]);
+                var _0x3b3e9e = _0x1c7fab(_0x49ee08[_0x4b4d7a])[
+                  _0x669a("0x1c")
+                ]();
+                _0x3b3e9e[_0x669a("0x34")] =
+                  _0x3b3e9e[_0x669a("0xe")] + _0x3f0a89;
+                _0x5c0095 < _0x3b3e9e["top"] ||
+                  _0x1aac81 > _0x3b3e9e[_0x669a("0x34")] ||
+                  _0x148a19[_0x669a("0x8")](_0x49ee08[_0x4b4d7a]);
               }
               for (
-                _0x5a01b2 = 0;
-                _0x5a01b2 < _0x37d222[_0xb2f2("0x1e")];
-                _0x5a01b2++
+                _0x49ee08 = 0x0;
+                _0x49ee08 < _0x148a19[_0x669a("0x10")];
+                _0x49ee08++
               )
-                _0x508e93(_0x8783e3(_0x37d222[_0x5a01b2]));
+                _0xe7651b(_0x1c7fab(_0x148a19[_0x49ee08]));
             }
-          } catch (_0x1d090a) {
-            _0xb2f2("0xb") !== typeof console &&
-              "function" === typeof console[_0xb2f2("0xd")] &&
-              console[_0xb2f2("0xd")]("Problemas :( . Detalhes: ", _0x1d090a);
+          } catch (_0x19dcca) {
+            _0x669a("0x4") !== typeof console &&
+              _0x669a("0x35") === typeof console[_0x669a("0x20")] &&
+              console[_0x669a("0x20")](_0x669a("0x14"), _0x19dcca);
           }
         }
-        function _0x508e93(_0x4e8f25) {
-          var _0x3c37e2 = _0x4e8f25[_0xb2f2("0x7")]();
-          _0x3c37e2["on"](_0xb2f2("0x12"), function () {
-            _0x8783e3(this)[_0xb2f2("0x1d")](_0xb2f2("0x26"));
+        function _0xe7651b(_0x482ebc) {
+          var _0x54580d = _0x482ebc[_0x669a("0x9")]();
+          _0x54580d["on"](_0x669a("0x17"), function () {
+            _0x1c7fab(this)[_0x669a("0x7")]("qd-sil-image-loaded");
           });
-          _0x3c37e2[_0xb2f2("0x27")]({
-            src: _0x3c37e2[0][_0xb2f2("0x6")][_0xb2f2("0x18")](
-              _0x3d02c8,
+          _0x54580d[_0x669a("0xf")]({
+            src: _0x54580d[0x0][_0x669a("0x26")][_0x669a("0x5")](
+              _0x2fff4a,
               "$1" +
-                _0x28fa2d[_0xb2f2("0x34")][_0xb2f2("0x20")] +
+                _0x4e840d[_0x669a("0x11")][_0x669a("0x21")] +
                 "-" +
-                _0x28fa2d[_0xb2f2("0x34")][_0xb2f2("0x19")]
+                _0x4e840d[_0x669a("0x11")][_0x669a("0x23")]
             ),
-            width: _0x28fa2d[_0xb2f2("0x34")][_0xb2f2("0x20")],
-            height: _0x28fa2d[_0xb2f2("0x34")][_0xb2f2("0x19")],
+            width: _0x4e840d["sizes"][_0x669a("0x21")],
+            height: _0x4e840d[_0x669a("0x11")][_0x669a("0x23")],
           });
-          _0x3c37e2[_0xb2f2("0x1d")](_0xb2f2("0x2"))[_0xb2f2("0x10")](
-            _0x4e8f25
-          );
-          _0x3c37e2[_0xb2f2("0x1a")](_0x28fa2d["imageWrapper"])["addClass"](
-            _0xb2f2("0x2b")
+          _0x54580d["addClass"](_0x669a("0x2e"))[_0x669a("0x24")](_0x482ebc);
+          _0x54580d[_0x669a("0x2")](_0x4e840d[_0x669a("0x0")])[_0x669a("0x7")](
+            _0x669a("0x2b")
           );
         }
-        _0x26924f(_0x2b7f2c);
-        _0x8783e3(window)["on"](_0xb2f2("0xe"), function () {
-          _0x26924f(_0x2b7f2c);
+        _0x3e7dd8(_0x860251);
+        _0x1c7fab(window)["on"](_0x669a("0x32"), function () {
+          _0x3e7dd8(_0x860251);
         });
-        _0x8783e3(window)["on"](
-          _0xb2f2("0x2d"),
-          function (_0x339040, _0x4ce8b9) {
-            var _0x5e742e = _0x2b7f2c["find"](_0x4ce8b9);
-            _0x5e742e[_0xb2f2("0x1e")] && _0x26924f(_0x5e742e);
+        _0x1c7fab(window)["on"](
+          _0x669a("0xd"),
+          function (_0x164edd, _0xce8cae) {
+            var _0x542dc1 = _0x860251[_0x669a("0x1f")](_0xce8cae);
+            _0x542dc1[_0x669a("0x10")] && _0x3e7dd8(_0x542dc1);
           }
         );
       };
-    _0x8783e3["fn"][_0xb2f2("0x15")] = function (_0x469558) {
-      var _0x23ce6d = _0x8783e3(this);
-      if (!_0x23ce6d[_0xb2f2("0x1e")]) return _0x23ce6d;
-      _0x23ce6d["each"](function () {
-        var _0x491f13 = _0x8783e3(this);
-        _0x491f13[_0xb2f2("0x15")] = new _0x116863(
-          _0x491f13,
-          _0x8783e3["extend"]({}, _0xd7bd57, _0x469558)
+    _0x1c7fab["fn"][_0x669a("0x36")] = function (_0x1e00df) {
+      var _0x1d8239 = _0x1c7fab(this);
+      if (!_0x1d8239[_0x669a("0x10")]) return _0x1d8239;
+      _0x1d8239["each"](function () {
+        var _0x298ef0 = _0x1c7fab(this);
+        _0x298ef0[_0x669a("0x36")] = new _0x18db84(
+          _0x298ef0,
+          _0x1c7fab[_0x669a("0x19")]({}, _0x1cc8eb, _0x1e00df)
         );
       });
-      return _0x23ce6d;
+      return _0x1d8239;
     };
-    window[_0xb2f2("0x11")] = 40;
-    var _0x494102 = QD_SIL_scrollRange,
-      _0x441360 = 0;
-    _0x8783e3(window)["on"]("scroll", function () {
-      var _0x40e419 =
-        document["documentElement"][_0xb2f2("0x3")] ||
-        document[_0xb2f2("0x24")][_0xb2f2("0x3")];
+    window[_0x669a("0xc")] = 0x28;
+    var _0x2a9632 = QD_SIL_scrollRange,
+      _0x150531 = 0x0;
+    _0x1c7fab(window)["on"]("scroll", function () {
+      var _0x59366a =
+        document[_0x669a("0x30")][_0x669a("0x2c")] ||
+        document[_0x669a("0x1e")][_0x669a("0x2c")];
       if (
-        _0x40e419 > _0x441360 + _0x494102 ||
-        _0x40e419 < _0x441360 - _0x494102
+        _0x59366a > _0x150531 + _0x2a9632 ||
+        _0x59366a < _0x150531 - _0x2a9632
       )
-        _0x8783e3(window)[_0xb2f2("0x1")](_0xb2f2("0x2e")),
-          (_0x441360 = _0x40e419);
+        _0x1c7fab(window)["trigger"](_0x669a("0x1b")), (_0x150531 = _0x59366a);
     });
   }
 })(this);
+/* Quatro Digital Newsletter // 6.1 // Carlos Vinicius [ QUATRO DIGITAL ] // Todos os Direitos Reservados */
+// FUNÇÕES AUXILIARES
 if ("function" !== typeof String.prototype.trim)
   String.prototype.trim = function () {
     return this.replace(/^\s+|\s+$/g, "");
   };
+// CORE
 (function () {
   var d = jQuery;
   if ("function" !== typeof d.fn.QD_news) {
@@ -12181,21 +12872,17 @@ if ("function" !== typeof String.prototype.trim)
         "function" !== typeof d.fn.vtexPopUp2
       )
         return (
-          g("O popUp2 não foi encontrado. Adicione o Plugin de PopUp2."), k
+          g("O popUp2 n\u00e3o foi encontrado. Adicione o Plugin de PopUp2."), k
         );
       var v = function (d) {
         var g = 0;
         var e = function () {
           d.animate(
-            {
-              left: "-=" + a.animateDistance,
-            },
+            { left: "-=" + a.animateDistance },
             a.animateSpeed,
             function () {
               d.animate(
-                {
-                  left: "+=" + a.animateDistance,
-                },
+                { left: "+=" + a.animateDistance },
                 a.animateSpeed,
                 function () {
                   g < a.animateRepeat && e();
@@ -12298,7 +12985,7 @@ if ("function" !== typeof String.prototype.trim)
         function e(b, e) {
           e.fail(function () {
             alert(
-              "Desculpe. Não foi possível cadastrar seu e-mail, por favor tente novamente."
+              "Desculpe. N\u00e3o foi poss\u00edvel cadastrar seu e-mail, por favor tente novamente."
             );
           });
           e.done(function (e) {
@@ -12354,15 +13041,20 @@ if ("function" !== typeof String.prototype.trim)
         1 > m.length &&
           a.checkNameExist &&
           g(
-            "Campo de nome, não encontrado (" +
+            "Campo de nome, n\u00e3o encontrado (" +
               m.selector +
-              "). Será atribuido um valor padrão.",
+              "). Ser\u00e1 atribuido um valor padr\u00e3o.",
             "info"
           );
         if (1 > h.length)
-          return g("Campo de e-mail, não encontrado (" + h.selector + ")"), c;
+          return (
+            g("Campo de e-mail, n\u00e3o encontrado (" + h.selector + ")"), c
+          );
         if (1 > l.length)
-          return g("Botão de envio, não encontrado (" + l.selector + ")"), c;
+          return (
+            g("Bot\u00e3o de envio, n\u00e3o encontrado (" + l.selector + ")"),
+            c
+          );
         if (
           "animateField" != a.validationMethod &&
           (1 > r.length || 1 > n.length)
@@ -12467,7 +13159,7 @@ if ("function" !== typeof String.prototype.trim)
             : a.allowSubmit()
             ? k(b, e)
             : g(
-                "Os dados não foram enviados pois o parametro 'allowSubmit' não retornou 'true'",
+                "Os dados n\u00e3o foram enviados pois o parametro 'allowSubmit' n\u00e3o retornou 'true'",
                 "info"
               );
         };
@@ -12493,6 +13185,14 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })();
+
+/**
+ *  Ajax Autocomplete for jQuery, version 1.4.9
+ *  (c) 2017 Tomas Kirda
+ *
+ *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
+ *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
+ */
 !(function (a) {
   "use strict";
   "function" == typeof define && define.amd
@@ -12717,10 +13417,7 @@ if ("function" !== typeof String.prototype.trim)
             f = c.outerHeight(),
             g = b.el.outerHeight(),
             h = b.el.offset(),
-            i = {
-              top: h.top,
-              left: h.left,
-            };
+            i = { top: h.top, left: h.left };
           if ("auto" === e) {
             var j = a(window).height(),
               k = a(window).scrollTop(),
@@ -13023,10 +13720,7 @@ if ("function" !== typeof String.prototype.trim)
       verifySuggestionsFormat: function (b) {
         return b.length && "string" == typeof b[0]
           ? a.map(b, function (a) {
-              return {
-                value: a,
-                data: null,
-              };
+              return { value: a, data: null };
             })
           : b;
       },
@@ -13163,6 +13857,8 @@ if ("function" !== typeof String.prototype.trim)
     }),
     a.fn.autocomplete || (a.fn.autocomplete = a.fn.devbridgeAutocomplete);
 });
+
+/* Quatro Digital - Smart Auto Complete // 1.0 // Carlos Vinicius // Todos os direitos reservados */
 (function (m) {
   var c = jQuery;
   if ("function" !== typeof c.fn.QD_smartAutoComplete) {
@@ -13236,9 +13932,7 @@ if ("function" !== typeof String.prototype.trim)
                   };
                 })),
                 (d = b.modifyResults(d)),
-                h({
-                  suggestions: d,
-                }));
+                h({ suggestions: d }));
             },
             error: function (d, e, g) {
               if (
@@ -13289,6 +13983,10 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })(jQuery);
+
+// !!! QD SMART SHOOTING STARS - FAVORITOS
+/*FUNÇÕES AUXILIARES*/
+/* jQuery Cookie Plugin v1.4.1 // https://github.com/carhartl/jquery-cookie // Copyright 2013 Klaus Hartl // Released under the MIT license */
 (function () {
   "function" !== typeof $.cookie &&
     (function (c) {
@@ -13362,17 +14060,13 @@ if ("function" !== typeof String.prototype.trim)
       e.defaults = {};
       c.removeCookie = function (a, e) {
         if (void 0 === c.cookie(a)) return !1;
-        c.cookie(
-          a,
-          "",
-          c.extend({}, e, {
-            expires: -1,
-          })
-        );
+        c.cookie(a, "", c.extend({}, e, { expires: -1 }));
         return !c.cookie(a);
       };
     });
 })();
+
+/* Quatro Digital - Smart Shooting Star // BETA 0.1 // Todos os direitos reservados */
 (function (t) {
   var a = jQuery;
   if ("function" !== typeof a.fn.QD_smartShootingStar) {
@@ -13506,10 +14200,7 @@ if ("function" !== typeof String.prototype.trim)
               Accept: "application/vnd.vtex.ds.v10+json",
               "Content-Type": "application/json; charset=utf-8",
             },
-            data: JSON.stringify({
-              id: c,
-              items: f,
-            }),
+            data: JSON.stringify({ id: c, items: f }),
           })
             .done(function (c) {
               a(window).trigger(k, [f, c]);
@@ -13566,9 +14257,7 @@ if ("function" !== typeof String.prototype.trim)
               new Date().getTime() +
               "-" +
               Math.round(98999 * Math.random() + 1e3)),
-            a.cookie(b.cookieName, c, {
-              path: "/",
-            }));
+            a.cookie(b.cookieName, c, { path: "/" }));
           return c;
         }
         "undefined" === typeof vtexjs.checkout.orderForm
@@ -13588,6 +14277,10 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })(this);
+/* Quatro Digital - Smart Photo Carousel // 1.2 // Carlos Vinicius // Todos os direitos reservados */
+
+/*FUNÇÕES AUXILIARES*/
+/* Quatro Digital - jQuery Ajax Queue // 4.0 // Carlos Vinicius [ QUATRO DIGITAL ] // MIT <http://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT> */
 (function (d) {
   if ("function" !== typeof d.qdAjax) {
     var a = {};
@@ -13640,6 +14333,7 @@ if ("function" !== typeof String.prototype.trim)
     d.qdAjax.version = "4.0";
   }
 })(jQuery);
+
 !(function (o) {
   "use strict";
   var e = jQuery;
@@ -13654,11 +14348,7 @@ if ("function" !== typeof String.prototype.trim)
           imagezoom: "1000-1000",
         },
         slickOptions: {
-          images: {
-            lazyLoad: "ondemand",
-            infinite: !1,
-            arrows: !1,
-          },
+          images: { lazyLoad: "ondemand", infinite: !1, arrows: !1 },
           thumbs: {
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -13738,9 +14428,7 @@ if ("function" !== typeof String.prototype.trim)
                 class: "jqzoom",
               })
             ),
-          e("<img>", {
-            src: u.replace(s, "$1" + i.sizes.thumb),
-          })
+          e("<img>", { src: u.replace(s, "$1" + i.sizes.thumb) })
             .appendTo(l)
             .wrap("<div></div>"),
           d[m].IsMain && (i.slickOptions.images.initialSlide = m);
@@ -13788,6 +14476,9 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })();
+
+/// FIXAR IMAGEM PAGINA DE PRODUTO
+/* Quatro Digital - Affix // 1.0 // Carlos Vinicius // Todos os direitos reservados */
 (function (F, d) {
   if ("function" !== typeof d.fn.QD_affix) {
     var y = function (a, b) {
@@ -13835,9 +14526,7 @@ if ("function" !== typeof String.prototype.trim)
         topSpacing: 20,
         bottomSpacing: 20,
         bottomLimitSeletor: !1,
-        css: {
-          position: "relative",
-        },
+        css: { position: "relative" },
       },
       e = d(window);
     e.width();
@@ -13866,7 +14555,7 @@ if ("function" !== typeof String.prototype.trim)
       if (a.is(".qd-affix-on"))
         return (
           y(
-            "Execução ignorada pois a classe 'qd-affix-on' foi encontrado o que significa que este elemento já teve o plugin aplicado",
+            "Execu\u00e7\u00e3o ignorada pois a classe 'qd-affix-on' foi encontrado o que significa que este elemento j\u00e1 teve o plugin aplicado",
             "aviso"
           ),
           a
@@ -13973,6 +14662,8 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })(window, jQuery);
+
+/* Quatro Digital - Smart Quantity // 1.10 // Carlos Vinicius // Todos os direitos reservados */
 (function (r) {
   var d = jQuery;
   if ("function" !== typeof d.fn.QD_smartQuantity) {
@@ -14064,7 +14755,7 @@ if ("function" !== typeof String.prototype.trim)
             try {
               if (!(e[0].hostname || "").length)
                 return g(
-                  "A quantidade não foi inserida no bt comprar pois o mesmo não possui uma URL",
+                  "A quantidade n\u00e3o foi inserida no bt comprar pois o mesmo n\u00e3o possui uma URL",
                   "info"
                 );
               var b = e[0].search || "";
@@ -14114,13 +14805,13 @@ if ("function" !== typeof String.prototype.trim)
               k = c.find(a.btnMinus);
             if ((!e.length && null !== a.buyButton) || !b.length)
               return g(
-                "O plugin parou por aqui! Não foram encontrados o botão comprar e o campo de quantidade",
+                "O plugin parou por aqui! N\u00e3o foram encontrados o bot\u00e3o comprar e o campo de quantidade",
                 "alerta"
               );
             if (b.is(".qd-sq-on"))
               return g(
                 [
-                  "Execução ignorada pois este input já possui o plugin aplicado. Input: ",
+                  "Execu\u00e7\u00e3o ignorada pois este input j\u00e1 possui o plugin aplicado. Input: ",
                   b,
                 ],
                 "info"
@@ -14148,6 +14839,8 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })(this);
+
+/* Quatro Digital - Smart SKU Totalizer // 1.0 // Carlos Vinicius // Todos os direitos reservados */
 (function (m) {
   var a = jQuery;
   if ("function" !== typeof a.fn.QD_smartSkuTotalizer) {
@@ -14204,7 +14897,7 @@ if ("function" !== typeof String.prototype.trim)
           k = a("meta[name='currency']").attr("content") || "R$";
         if (!c.length && !h.length)
           return f(
-            "Não encontrei os elementos para informar os totais, por isso não irei exibi-los.",
+            "N\u00e3o encontrei os elementos para informar os totais, por isso n\u00e3o irei exibi-los.",
             "info"
           );
         var g = d.find(b.inputQtt).not("disabled").filter("[data-sku-id]");
@@ -14243,7 +14936,9 @@ if ("function" !== typeof String.prototype.trim)
     });
   }
 })(this);
+
 function qd_number_format(number, decimals, dec_point, thousands_sep) {
+  // Strip all characters but numerical ones.
   number = (number + "").replace(/[^0-9+\-Ee.]/g, "");
   var n = !isFinite(+number) ? 0 : +number,
     prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -14254,6 +14949,7 @@ function qd_number_format(number, decimals, dec_point, thousands_sep) {
       var k = Math.pow(10, prec);
       return "" + Math.round(n * k) / k;
     };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
   s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split(".");
   if (s[0].length > 3) {
     s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
@@ -14264,3 +14960,177 @@ function qd_number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+
+function isProductInCart(sku) {
+  return vtexjs.checkout.orderForm.items.find((item) => item.id === sku);
+}
+
+function handleAddToCart(buyLink) {
+  const [, skuAfter] = buyLink.split("sku=");
+  const [sku] = skuAfter.split("&");
+  console.log("handleAddToCart sku", sku);
+  let quantity = document.querySelector(`[data-sku-id="${sku}"]`).value;
+
+  const [, sellerAfter] = buyLink.split("seller=");
+  const [sellerId] = sellerAfter.split("&");
+  console.log("handleAddToCart sellerId", sellerId);
+
+  console.log("handleAddToCart qty", quantity);
+  if (!quantity) {
+    alert("Selecione a quantidade");
+  }
+  const productInCart = isProductInCart(sku);
+  if (productInCart) {
+    quantity = Number(quantity) + Number(productInCart.quantity);
+  }
+
+  const product = [
+    {
+      id: sku,
+      quantity,
+      seller: sellerId,
+    },
+  ];
+  vtexjs.checkout.getOrderForm().then((orderForm) => {
+    vtexjs.checkout
+      .addToCart(product, null, this.salesChannel)
+      .done((orderForm) => {
+        window.location.reload();
+      });
+  });
+}
+
+function addQueryParamWithoutReloading(key, value) {
+  if (history.pushState) {
+    let newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
+    const query = new URLSearchParams(window.location.search);
+
+    query.set(key, value);
+
+    if ([...query].length) {
+      newurl += "?" + query.toString();
+    }
+    //window.history.pushState({path:newurl}, '', newurl);
+    window.location.href = newurl;
+  }
+}
+
+function addToCartButtonOnPdp(sku, qtd, seller, sc){
+  var item = {
+    id: sku,
+    quantity: qtd,
+    seller: seller,
+  };
+  vtexjs.checkout.addToCart([item], null, sc).done(function(orderForm) {
+    console.log(orderForm);
+    location.reload();
+  });
+}
+
+function validateValue(input) {
+  const min = parseInt(input.min, 10);
+  const max = parseInt(input.max, 10);
+  let value = parseInt(input.value, 10);
+
+  if (isNaN(value)) {
+      value = min;
+  }
+
+  if (value < min) {
+      value = min;
+  } else if (value > max) {
+      value = max;
+  }
+
+  input.value = value;
+}
+
+$(document).ready(function () {
+  try {
+    if (skuJson){
+
+      $(".mz-product__sku-total.text-right.mz-buy-button").prepend(`
+        <style>
+        #buyQuantity {
+          padding-bottom: 5px;
+        }
+
+        #buyQuantity>input[type=number] {
+          text-align: center;
+        }
+        #buyQuantity>input[type=number]::-webkit-inner-spin-button, 
+        #buyQuantity>input[type=number]::-webkit-outer-spin-button {  
+          opacity: 1;
+        }
+        </style>
+        <div id="buyQuantity"><input type="number" min="1" max="${skuJson.skus[0].availablequantity}" value="1" oninput="validateValue(this)"></div>
+      `);
+      console.log(skuJson)
+      $(".qd-selected-sku-total").text(() => {
+        switch (skuJson.skus) {
+          case skuJson.skus.find((e) => e.listPriceFormated || e.bestPriceFormated || e.fullSellingPrice).fullSellingPrice :
+            return skuJson.skus.find((e) => e.listPriceFormated || e.bestPriceFormated || e.fullSellingPrice).fullSellingPrice;
+          case skuJson.skus.find((e) => e.listPriceFormated || e.bestPriceFormated || e.fullSellingPrice).listPriceFormated != "R$ 0,00" :
+            return skuJson.skus.find((e) => e.listPriceFormated || e.bestPriceFormated || e.fullSellingPrice).listPriceFormated;
+          default:
+            return skuJson.skus.find((e) => e.listPriceFormated || e.bestPriceFormated || e.fullSellingPrice).bestPriceFormated;
+        }
+      }
+      );
+      $(".product__buy-button").off();
+      $(".product__buy-button").on("click", () => {
+        // let skuSelectedOnPdp = $(".sku-selector-container input[checked]")[0].id.split("_").at(-1);
+        let skuSelectedOnPdp = 0;
+        let quantityInputPdp = parseInt($("#buyQuantity>input[type=number]").val());
+        
+        var skuOnCartQuantity = 0;
+        var skuSelected = vtexjs.checkout.orderForm.items.find(el => el.id == skuJson.skus[skuSelectedOnPdp].sku);
+        if(skuSelected)
+          skuOnCartQuantity = skuSelected.quantity;
+        addToCartButtonOnPdp(skuJson.skus[skuSelectedOnPdp].sku, skuOnCartQuantity+quantityInputPdp, skuJson.skus[skuSelectedOnPdp].sellerId, skuJson.salesChannel)
+      })
+    }
+  } catch (e) {
+    console.log("não achou skuJson");
+  }
+  $(".asynchronousBuyButton").click(function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const buyLink = event.target.href;
+    handleAddToCart(buyLink);
+  });
+
+  $(".dropdown-item").on("click", (e) => {
+    addQueryParamWithoutReloading("O", e.currentTarget.dataset.orderParameter);
+  });
+
+  $("a.actionActivated").click(function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const buyLink = event.target.href;
+    handleAddToCart(buyLink);
+  });
+});
+
+function setUrlParam(paramName, paramValue) {
+  const url = new URL(window.location.href);
+  url.searchParams.set(paramName, paramValue);
+  window.history.pushState({}, '', url.toString());
+  window.location.href = window.location.href;
+}
+
+vtexjs.checkout.getOrderForm().done(function(orderForm) {
+  if(window.location.href.match("centerparts.com.br") && !window.location.pathname.match(/\/Sistema\/401|\/login|\/cadastro/)){
+    console.log("OrderForm", orderForm, $.cookie("VTEXSC"))
+    if(!orderForm.loggedIn){
+      window.location.href = `https://www.centerparts.com.br/login?ReturnUrl=${window.location.href}`;
+      // if($.cookie("VTEXSC").split("=")[1] != orderForm.salesChannel)
+      //   setUrlParam($.cookie("VTEXSC").split("=")[0], $.cookie("VTEXSC").split("=")[1]);
+      
+    }
+  }
+})
