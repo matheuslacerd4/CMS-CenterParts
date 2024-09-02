@@ -242,14 +242,16 @@
       <div class="input-group w-100 regular-search">
         <vtex.cmc:fullTextSearchBox />
       </div>
-
+      <!-- item excluido do CMS porque estava dando erro de xml -->
+      <!-- 
       <div class="mz-search__customsearch--text">
         <h4 class="open">
           Digite abaixo o código Centerparts ou da marca do produto que você
           procura. <span>Clique Aqui</span>
         </h4>
-        <!-- <a id="mz-show-search-code">Clique Aqui</a> -->
       </div>
+      -->
+
       <div class="mz-search__customsearch--input" style="display: none">
         <input class="form-control" type="text" placeholder="Ex: 12345.00" />
         <button id="mz-custom-search--button">Buscar</button>

@@ -246,3 +246,23 @@ Retirada na loja
 .vtex-omnishipping-1-x-teste .ship-number {
   width: 49%;
 }
+
+/* Despesas checkout */
+
+table tbody .Tax .info::before {
+  content: "Despesas";
+  
+}
+
+
+table tbody .Tax .info {
+  visibility: hidden;
+  position: relative;
+}
+
+
+table tbody .Tax .info::before {
+  visibility: visible;
+  position: absolute;
+  left: 0;
+}

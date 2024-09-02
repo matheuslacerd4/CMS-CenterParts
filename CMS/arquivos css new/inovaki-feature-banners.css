@@ -16,6 +16,10 @@
   }
 }
 
+.mz-slider-marcas img {
+  width: 6rem !important;
+}
+
 /*      BANNER LATERAL        */
 
 .carrocelLateral {
