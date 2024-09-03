@@ -15127,7 +15127,7 @@ vtexjs.checkout.getOrderForm().done(function(orderForm) {
   if(window.location.href.match("centerparts.com.br") && !window.location.pathname.match(/\/Sistema\/401|\/login|\/cadastro/)){
     console.log("OrderForm", orderForm, $.cookie("VTEXSC"))
     if(!orderForm.loggedIn){
-      window.location.href = `https://www.centerparts.com.br/login?ReturnUrl=${window.location.href}`;
+      window.location.href = `https://www.centerparts.com.br/Sistema/401`;
       // if($.cookie("VTEXSC").split("=")[1] != orderForm.salesChannel)
       //   setUrlParam($.cookie("VTEXSC").split("=")[0], $.cookie("VTEXSC").split("=")[1]);
       
