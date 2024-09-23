@@ -232,7 +232,7 @@
     <div class="mz-search__customsearch">
       <h4>
         Digite abaixo o nome ou marca do produto que você procura.
-        <span style="display: none">Clique Aqui</span>
+        <span style="display: none">Clique Aqui</span> 
       </h4>
 
       <div class="input-group w-100 regular-search">

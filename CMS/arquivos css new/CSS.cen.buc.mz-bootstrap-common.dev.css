@@ -8202,21 +8202,25 @@ body.categoria .mz-search {
   font-weight: bold;
   width: 100%;
   cursor: pointer;
+  pointer-events: none !important;
 }
 
 .mz-search h4 span {
   font-weight: normal;
   text-decoration: underline;
+  display: none !important;
 }
 
 .mz-search h4.open::after {
   content: "";
   font-size: 10px;
+  display: none !important;
 }
 
 .mz-search h4::after {
   content: "";
   font-size: 10px;
+  display: none !important;
 }
 
 .mz-search legend,
