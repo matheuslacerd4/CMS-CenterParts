@@ -1,6 +1,7 @@
 $(document).ready(() => {
   renderCatalogo();
   renderPagFornecedor();
+
   renderBanner();
   renderLogosHome();
   rBannerLateral();
@@ -85,7 +86,6 @@ async function renderLogosHome() {
         );
 
         $(".inovaki-new-home .mz-slider-marcas").slick({
-          dots: false,
           slidesToShow: 7,
           slidesToScroll: 1,
           autoplay: true,
@@ -95,12 +95,16 @@ async function renderLogosHome() {
               breakpoint: 900,
               settings: {
                 slidesToShow: 5,
+                autoplay: true,
+                autoplaySpeed: 6000,
               },
             },
             {
               breakpoint: 480,
               settings: {
                 slidesToShow: 2,
+                autoplay: true,
+                autoplaySpeed: 6000,
               },
             },
           ],
@@ -165,15 +169,17 @@ async function rBannerLateral() {
 function setupCloseLateralBanner() {
   const sidebar = document.querySelector(".mz-sidebar");
 
-  sidebar.addEventListener("click", (event) => {
-    if (event.target.closest("#openClose")) {
-      const arrowDisplay = window.getComputedStyle(
-        document.querySelector(".icon-chevron-left")
-      ).display;
-      document.getElementById("main-banner-lateral").style.display =
-        arrowDisplay === "none" ? "none" : "inline-block";
-    }
-  });
+  try {
+    sidebar.addEventListener("click", (event) => {
+      if (event.target.closest("#openClose")) {
+        const arrowDisplay = window.getComputedStyle(
+          document.querySelector(".icon-chevron-left")
+        ).display;
+        document.getElementById("main-banner-lateral").style.display =
+          arrowDisplay === "none" ? "none" : "inline-block";
+      }
+    });
+  } catch (e) {}
 }
 
 async function renderPagFornecedor() {
@@ -289,7 +295,9 @@ async function renderCatalogo() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const data = await response.json();
+      data.sort((a, b) => a.position - b.position);
 
       if (data && data.length > 0) {
         importCatalogo.insertAdjacentHTML(
@@ -328,3 +336,101 @@ function appendUrlParam(logos) {
   const updatedUrl = `${logos.redirect_url}${separator}bannerId=${logos.banner_id}`;
   return updatedUrl;
 }
+// ---------------- exluindo header antiga mobile ----------------
+
+let oldHeaderDiv;
+
+function manageHeader() {
+  const headerElement = document.querySelector("header");
+  const existingDiv = headerElement.querySelector(".logo-container");
+
+  if (window.innerWidth < 480) {
+    if (!oldHeaderDiv) {
+      oldHeaderDiv = document.querySelector(".mz-header.mz-system__header");
+    }
+
+    if (oldHeaderDiv) {
+      oldHeaderDiv.remove();
+    }
+
+    if (!existingDiv) {
+      const logoHTML = `
+            <div class="logo-container">
+              <img src="https://centerparts.vteximg.com.br/arquivos/logo-top.jpg" alt="Logo" class="logomarcaMobile">
+            </div>
+          `;
+      headerElement.insertAdjacentHTML("afterbegin", logoHTML);
+    }
+  } else {
+    if (existingDiv) {
+      existingDiv.remove();
+    }
+
+    if (oldHeaderDiv) {
+      headerElement.insertAdjacentElement("afterbegin", oldHeaderDiv);
+      oldHeaderDiv = null;
+    }
+  }
+
+  // Chama a criação do menu hamburguer após a manipulação da logo
+  checkScreenSize();
+}
+
+document.addEventListener("DOMContentLoaded", manageHeader);
+
+window.addEventListener("resize", manageHeader);
+
+// ---------------- Menu Hamburger mobile ----------------
+function createHamburgerMenu() {
+  if (!document.querySelector(".menuHamburguer")) {
+    const headerElement = document.querySelector(
+      ".mz-header.mz-system__header"
+    );
+    headerElement.insertAdjacentHTML(
+      "afterend",
+      `
+          <div class="menuHamburguer">
+            <input type="checkbox" id="menuToggle" />
+            <label for="menuToggle" class="menuIcon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+            <nav class="menuInfo">
+              <ul>
+                <li><a id="btnVendedorHome" href="https://devcenterparts.myvtex.com">Área do Vendedor</a></li>
+                <li><a id="login" href="/login?ReturnUrl=/"> Área do Cliente </a></li>
+                <li><a id="signIn" href="#"> Primeiro Acesso </a></li>
+              </ul>
+            </nav>
+          </div>
+        `
+    );
+
+    document
+      .getElementById("menuToggle")
+      .addEventListener("change", function () {
+        const menu = document.querySelector(".menuInfo");
+
+        if (this.checked) {
+          menu.classList.add("active");
+        } else {
+          menu.classList.remove("active");
+        }
+      });
+  }
+}
+
+function checkScreenSize() {
+  if (window.innerWidth <= 480) {
+    createHamburgerMenu();
+  } else {
+    const menu = document.querySelector(".menuHamburguer");
+    if (menu) {
+      menu.remove();
+    }
+  }
+}
+
+checkScreenSize();
+window.addEventListener("resize", checkScreenSize);
