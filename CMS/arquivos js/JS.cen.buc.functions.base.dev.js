@@ -2685,6 +2685,7 @@ try {
       CustomSearch.getMultipleProducts(queryString.join("&")).then(function (
         resp
       ) {
+        console.log(resp);
         resp.map(function (item) {
           var productId = item.productId;
           var inventory =
@@ -14264,5 +14265,3 @@ function qd_number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
-
-

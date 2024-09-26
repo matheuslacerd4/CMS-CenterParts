@@ -318,6 +318,9 @@
 }
 
 /* ---------- menu hamburger ----------*/
+header {
+  top: 0;
+}
 @media (max-width: 480px) {
   header {
     display: flex;
@@ -438,4 +441,9 @@ input#menuToggle {
 
 .carrouselHome {
   margin-top: 67px;
+}
+
+body.system header,
+body.s401 header {
+  top: 0;
 }

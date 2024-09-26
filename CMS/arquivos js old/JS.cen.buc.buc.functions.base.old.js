@@ -2905,11 +2905,16 @@ try {
           item.append($('<div class="mz-product-data-code"></div>'));
 
           CustomSearch.getProduct(itemID, "productId", function (res_product) {
+            debugger;
+            console.log("teste", res_product);
+
+            // Verifica se a resposta contém produtos e se a marca tem uma imagem
             var brandName = res_product[0].brand;
             var brandImageUrl =
               res_product[0].brandImageUrl ||
               "https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png";
 
+            // Cria o HTML da tag de imagem com a URL correta
             var tagImg =
               '<div class="mz-product-data-code-img ' +
               brandName +
@@ -2920,6 +2925,7 @@ try {
               '"/></div>';
 
             console.log("TESTEBRAND", brandName);
+
             //aqui parece ok
             var inventory = "";
             var maxValue =
@@ -3214,26 +3220,15 @@ try {
       var itemID = location.search.replace("?", "").split("=")[1];
       CustomSearch.getProduct(itemID, "productId", function (res_product) {
         var brandName = res_product[0].brand.toLowerCase().replace(/ /g, "-");
-
-        // Substitui a lógica de criação da URL manual pela URL direta da imagem da marca
-        var brandImageUrl =
-          res_product[0].brandImageUrl ||
-          "https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png";
-
-        // Cria o HTML da tag de imagem com a URL correta
+        var brandImg =
+          "https://centerparts.vteximg.com.br/arquivos/" + brandName + ".jpg";
         var tagImg =
-          '<img class="variacao-img-name" src="' +
-          brandImageUrl +
-          '" alt="' +
-          res_product[0].brand +
-          '" onerror="this.onerror=null;this.src=\'https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png\'"/>';
-
-        // Adiciona a classe com o nome da marca
+          '<img class="variacao-img-name " src=' +
+          brandImg +
+          " onerror=\"this.onerror=null;this.src='https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png'\"/>";
         $(".mz-product-data-code .mz-product-data-code-img").addClass(
           brandName
         );
-
-        // Insere a tag da imagem no elemento HTML
         $(".mz-product-data-code .mz-product-data-code-img").html(tagImg);
 
         var nameSku = res_product[0].items[0].name;
@@ -3318,21 +3313,17 @@ try {
           var inventory =
             item.items[0].sellers[0].commertialOffer.AvailableQuantity || 0;
           var sku = item.items[0];
-
           if (inventory) {
             var brandName = item.brand.toLowerCase().replace(/ /g, "-");
-
-            var brandImageUrl =
-              item.brandImageUrl ||
-              "https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png";
-
+            var brandImg =
+              "https://centerparts.vteximg.com.br/arquivos/" +
+              brandName +
+              ".jpg";
             var tagImg =
               '<div class="variacao-img ' +
               brandName +
               '"><img class="variacao-img-name"  src="' +
-              brandImageUrl +
-              '" alt="' +
-              item.brand +
+              brandImg +
               '" onerror="this.onerror=null;this.src=\'https://centerparts.vteximg.com.br/arquivos/brand_placeholder.png\'"/></div>';
 
             var price = sku.sellers[0].commertialOffer.ListPrice || "0";
