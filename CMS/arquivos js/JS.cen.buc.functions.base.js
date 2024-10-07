@@ -15180,3 +15180,15 @@ vtexjs.checkout.getOrderForm().done(function (orderForm) {
     }
   }
 });
+
+// ------------- cart-loading --------------------
+
+document.addEventListener("DOMContentLoaded", function () {
+  const loadingText = document.querySelector(".loading__wrapper-text");
+
+  if (loadingText) {
+    loadingText.textContent = "Usuário não possui endereço cadastrado";
+  }
+});
+
+// ------------- cart-loading final --------------

@@ -7553,9 +7553,10 @@ body[data-qd-scroll-down="1"].mz-sidebar-off:not(.system):not(.s401)
 .mz-header__cart span,
 .mz-header__cart i {
   float: left;
-  line-height: 15px;
+  line-height: 16px;
   color: #fff;
   margin: 0;
+  font-size: 19px;
 }
 
 .mz-header__cart i {

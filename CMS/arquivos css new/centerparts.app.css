@@ -488,6 +488,7 @@
   animation: rotate 1s infinite ease;
   border-color: #000 transparent transparent;
   transform-origin: 50%;
+  display: none;
 }
 
 .loading .loading__wrapper:before {
@@ -502,6 +503,7 @@
   position: absolute;
   top: 0;
   border-color: #ccc;
+  display: none;
 }
 
 @-webkit-keyframes rotate {
