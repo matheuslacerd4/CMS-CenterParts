@@ -211,26 +211,32 @@ async function renderPagFornecedor() {
 
             if (data && data.length > 0) {
               return `
-                <div id="cardProduto">
+                <a href="${data[0].link}" id="cardProduto">
                   <div id="imgProduto">
                     <img src="${data[0].items[0].images[0].imageUrl}" alt="" />
                   </div>
-                  <div class="titleProdut">
-                    <p id="txttitulo">
+                  <p id="txttitulo">
                       ${data[0].productName}
                     </p>
+                  <div class="titleProdut">
                     <div id="CodValor">
                       <p id="txtCodigo">${data[0].productReferenceCode}</p>
-                      <p id="txtValor"><span id="spanReais">R$</span>${data[0].items[0].sellers[0].commertialOffer.Price}</p>
+                      <p id="txtValor"><span id="spanReais">R$</span>${formatarPreco(
+                        data[0].items[0].sellers[0].commertialOffer.Price
+                      )}</p>
                     </div>
                   </div>
-                </div>`;
+                </a>`;
             }
           } catch (error) {
             console.error("Fetch error:", error);
             return "";
           }
         });
+
+        function formatarPreco(txtValor) {
+          return txtValor.toFixed(2);
+        }
 
         const cards = await Promise.all(promises);
 
@@ -243,7 +249,7 @@ async function renderPagFornecedor() {
             <div class="destaqueDoDia">
               <div id="containerDestaque">
                 <div id="txtDestaque">
-                  <h1 id="txtDestaqueDia">Destaques do dia</h1>
+                  <h1 id="txtDestaqueDia">DESTAQUES</h1>
                 </div>
               </div>
               <div class="containerCard">
