@@ -235,7 +235,8 @@ async function renderPagFornecedor() {
         });
 
         function formatarPreco(txtValor) {
-          return txtValor.toFixed(2);
+          let valorFormatado = txtValor.toFixed(2).replace(".", ",");
+          return valorFormatado;
         }
 
         const cards = await Promise.all(promises);
