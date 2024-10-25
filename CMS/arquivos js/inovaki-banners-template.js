@@ -1,7 +1,6 @@
 $(document).ready(() => {
   renderCatalogo();
   renderPagFornecedor();
-
   renderBanner();
   renderLogosHome();
   rBannerLateral();
@@ -441,3 +440,76 @@ function checkScreenSize() {
 
 checkScreenSize();
 window.addEventListener("resize", checkScreenSize);
+
+// ------------------- btn toolbar ---------------------
+
+function newBtnToolbar() {
+  // botão "Trocar de cliente"
+  const filho = document.getElementById("impersonateButton");
+  const pai = filho.parentElement;
+  let formAberto = false;
+
+  pai.insertAdjacentHTML(
+    "beforeend",
+    `
+    <span id="btnTrocaClient" style="cursor: pointer; height: 2.5rem; display: flex; align-items: center; justify-content: center;"
+    class="cc-fr-ns cc-mt1 cc-mt0-ns cc-link cc-br2 cc-ba cc-pa0 cc-w-20-ns cc-ph3-ns cc-ba-ns cc-pv2-ns cc-db cc-dib-ns cc-tc cc-ttu cc-fw7 cc-f7 cc-dim cc-btn-change cc-silver">
+      <span>Trocar de cliente</span>
+    </span>
+  `
+  );
+
+  filho.style.display = "none";
+
+  document
+    .getElementById("btnTrocaClient")
+    .addEventListener("click", function () {
+      if (!formAberto) {
+        this.insertAdjacentHTML(
+          "afterend",
+          `
+      <div id="impersonateForm" style="position: absolute; top: 19%; left: 49%;">
+        <input type="email" id="emailInput" placeholder="Digite o email do cliente" style="padding: 5px; width: 250px; height: 2.5rem;"/>
+        <button id="submitImpersonate" style="padding: 5px 10px; margin-left: 5px; background-color: #8dff6e; height: 2.5rem; border-color: #c1c4ca;">Trocar</button>
+      </div>
+      `
+        );
+
+        // adiciona evento para o botão de submit
+        document
+          .getElementById("submitImpersonate")
+          .addEventListener("click", function () {
+            const email = document.getElementById("emailInput").value;
+            if (email) {
+              window.cc.impersonate(email);
+            }
+          });
+        formAberto = true;
+      } else {
+        document.getElementById("impersonateForm").remove();
+        formAberto = false;
+      }
+    });
+}
+
+// Cria um observador de mutações
+const observer = new MutationObserver((mutationsList) => {
+  mutationsList.forEach((mutation) => {
+    // Verifica se o tipo de mutação foi a adição de um nó
+    if (mutation.type === "childList") {
+      mutation.addedNodes.forEach((node) => {
+        // Verifica se o nó adicionado tem o ID que você está procurando
+        if (node.id === "vtex-callcenter__toolbar") {
+          newBtnToolbar();
+          console.log(
+            "Elemento com ID específico foi criado via JavaScript:",
+            node
+          );
+        }
+      });
+    }
+  });
+});
+
+// Inicia a observação do corpo da página para alterações no DOM
+observer.observe(document.body, { childList: true, subtree: true });
