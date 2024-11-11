@@ -453,3 +453,7 @@ body.system header,
 body.s401 header {
   top: 0;
 }
+
+#impersonateButton {
+  display: none !important;
+}
