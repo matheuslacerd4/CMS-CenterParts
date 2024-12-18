@@ -1704,7 +1704,7 @@ try {
 
             $.qdAjax({
               url:
-                "https://centerb2b.websiteseguro.com/vtex-user-info/vtex-crm.php?u=" +
+                "https://signup-centerparts.inovaki.com.br/vtex-user-info/vtex-crm.php?u=" +
                 userProfileId,
               dataType: "json",
               clearQueueDelay: null,
@@ -15179,6 +15179,7 @@ vtexjs.checkout.getOrderForm().done(function (orderForm) {
       //   setUrlParam($.cookie("VTEXSC").split("=")[0], $.cookie("VTEXSC").split("=")[1]);
     }
   }
+  preserveCart();
 });
 
 // ------------- cart-loading --------------------
@@ -15192,3 +15193,114 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ------------- cart-loading final --------------
+// ------------- Carrinho preservado -------------
+
+function preserveCart() {
+  const ultimaExecucao = localStorage.getItem("ultimaExecucao");
+
+  if (ultimaExecucao) {
+    const agora = new Date().getTime();
+    const tempoPassado = agora - parseInt(ultimaExecucao);
+    // 3600000
+    const umaHora = 3600000;
+
+    if (tempoPassado < umaHora) {
+      return;
+    }
+  }
+  try {
+    let apiUrl =
+      "https://signup-centerparts.inovaki.com.br/vtex-user-info/vtex-crm.php?u=" +
+      vtexjs.checkout.orderForm.userProfileId;
+    console.log("teste", apiUrl);
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        let str = data.user.rclastcart;
+
+        let params = str.replace("add?", "").split("&");
+        let result = [];
+        let currentItem = {};
+        params.forEach((param) => {
+          let [key, value] = param.split("=");
+          if (key === "sku") {
+            if (Object.keys(currentItem).length > 0) {
+              result.push(currentItem);
+            }
+            currentItem = { id: value, quantity: 1, seller: 1 };
+          } else if (key === "qty") {
+            currentItem.quantity = parseInt(value);
+          } else if (key === "seller") {
+            currentItem.seller = parseInt(value);
+          }
+        });
+
+        if (Object.keys(currentItem).length > 0) {
+          result.push(currentItem);
+        }
+
+        console.log("Itens do último carrinho:", result);
+
+        vtexjs.checkout.getOrderForm().done(function (orderForm) {
+          const itensCarrinhoAtual = orderForm.items.map((item) => ({
+            id: item.id.toString(),
+            quantity: item.quantity,
+            seller: item.seller,
+          }));
+
+          const itensParaAdicionar = [];
+
+          result.forEach((item) => {
+            const itemNoCarrinho = itensCarrinhoAtual.find(
+              (carrinhoItem) =>
+                carrinhoItem.id === item.id &&
+                carrinhoItem.seller === item.seller
+            );
+
+            if (itemNoCarrinho) {
+              if (itemNoCarrinho.quantity < item.quantity) {
+                const quantidadeFaltante =
+                  item.quantity - itemNoCarrinho.quantity;
+                itensParaAdicionar.push({
+                  id: item.id,
+                  quantity: quantidadeFaltante,
+                  seller: item.seller,
+                });
+              }
+            } else {
+              itensParaAdicionar.push(item);
+            }
+          });
+
+          if (itensParaAdicionar.length > 0) {
+            vtexjs.checkout
+              .addToCart(itensParaAdicionar, null, 3)
+              .done(function (orderForm) {
+                console.log(
+                  "Carrinho atualizado com os itens faltantes:",
+                  orderForm
+                );
+              });
+          } else {
+            console.log(
+              "Carrinho já contém todos os itens com as quantidades corretas"
+            );
+          }
+
+          localStorage.setItem("ultimaExecucao", new Date().getTime());
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar dados da API:", error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// setTimeout(() => {
+//   preserveCart();
+// }, 5000);
+
+// ------------- Carrinho preservado final -------------
