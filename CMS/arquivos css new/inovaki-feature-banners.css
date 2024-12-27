@@ -457,3 +457,76 @@ body.s401 header {
 #impersonateButton {
   display: none !important;
 }
+
+/* -------------- AVISE-ME ----------------- */
+
+/* -------------- AVISE-ME ----------------- */
+
+.portal-notify-me-ref {
+  margin-top: 30px;
+  background-color: #ebebf0;
+  padding: 10px;
+  border-radius: 2px;
+}
+.blueBorder {
+  border-radius: 3px !important;
+  border: 3px solid #015ac2 !important;
+}
+
+.buy-button,
+.buy-button-ref {
+  display: none !important;
+}
+
+.notifymetitle {
+  color: #585757;
+}
+
+.sku-notifyme-form p {
+  color: #585757;
+  margin-bottom: 10px;
+}
+
+.sku-notifyme-client-name,
+.sku-notifyme-client-email {
+  border-radius: 3px;
+  border: solid 1px #585757;
+
+  background-color: #fff;
+  margin-right: 5px;
+}
+
+.sku-notifyme-client-email {
+  width: 50%;
+}
+
+.sku-notifyme-button-ok {
+  background-color: #d2a23a !important;
+  border-radius: 3px;
+  border: solid 1px transparent;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .sku-notifyme-form {
+    display: flex;
+    flex-direction: column;
+  }
+  /* .notifymetitle {
+    text-align: center;
+  } */
+  .sku-notifyme-client-email,
+  .sku-notifyme-client-name {
+    width: 100%;
+    margin: 0 0 5px 0 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .sku-notifyme-client-email,
+  .sku-notifyme-client-name {
+    margin: 0 5px 5px 0 !important;
+  }
+}
+
+/* -------------- AVISE-ME final ----------------- */

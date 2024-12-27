@@ -5,8 +5,92 @@ $(document).ready(() => {
   renderLogosHome();
   rBannerLateral();
   setupCloseLateralBanner();
+  observadorToolbar();
 });
 
+// ---------------- avise-me -----------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkStockAndHide = () => {
+    if (typeof skuJson !== "undefined") {
+      const availableQuantity = skuJson.skus[0]?.availablequantity || 0;
+
+      if (availableQuantity === 0) {
+        document
+          .querySelectorAll(
+            ".product-sku-info-wrapper, #buyQuantity, .qd-selected-sku-total, .buy-test-vue, .mz-product__sku--ship"
+          )
+          .forEach((el) => {
+            el.style.display = "none";
+          });
+      }
+    }
+  };
+
+  checkStockAndHide();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  function verificarTextoAntes(precoElement) {
+    const beforeContent = window.getComputedStyle(
+      precoElement,
+      "::before"
+    ).content;
+    return beforeContent.includes("Avise-me quando estiver disponível");
+  }
+
+  function substituirPorBotao(precoElement) {
+    const parent = precoElement.parentElement;
+    const parent2 = parent.parentElement.querySelector(
+      ".mz-product-summary__name"
+    );
+
+    const link = parent2.getElementsByTagName("a")[0].href;
+    console.log("linkkk", link);
+    const avisoButton = document.createElement("a");
+    avisoButton.innerHTML =
+      "<button id='btnAviseme' style='font-size: 16px;'>Avise-me quando estiver disponível</button>";
+    avisoButton.href = `${link}?blue_check=1`;
+    parent.replaceChild(avisoButton, precoElement);
+  }
+
+  const observer = new MutationObserver(() => {
+    const precos = document.querySelectorAll(".mz-product-summary__best-price");
+
+    precos.forEach((precoElement) => {
+      if (verificarTextoAntes(precoElement)) {
+        substituirPorBotao(precoElement);
+      }
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  const precos = document.querySelectorAll(".mz-product-summary__best-price");
+  precos.forEach((precoElement) => {
+    if (verificarTextoAntes(precoElement)) {
+      substituirPorBotao(precoElement);
+    }
+  });
+});
+
+window.addEventListener("load", () => {
+  const currentURL = window.location.href;
+
+  // Cria um objeto URL
+  const url = new URL(currentURL);
+
+  // Obtém os parâmetros da query string
+  const params = url.searchParams;
+
+  // Checar se um parâmetro específico existe
+  if (params.has("blue_check")) {
+    const element = document.querySelector(".portal-notify-me-ref");
+    element.classList.add("blueBorder");
+  }
+});
+
+// ------------- avise-me fim -----------------
 async function renderBanner() {
   const menuBanners = document.querySelector(".inovaki-new-home .mz-system");
 
@@ -392,9 +476,12 @@ function createHamburgerMenu() {
     const headerElement = document.querySelector(
       ".mz-header.mz-system__header"
     );
-    headerElement.insertAdjacentHTML(
-      "afterend",
-      `
+
+    if (headerElement) {
+      // Valida se o headerElement existe
+      headerElement.insertAdjacentHTML(
+        "afterend",
+        `
           <div class="menuHamburguer">
             <input type="checkbox" id="menuToggle" />
             <label for="menuToggle" class="menuIcon">
@@ -411,19 +498,22 @@ function createHamburgerMenu() {
             </nav>
           </div>
         `
-    );
+      );
 
-    document
-      .getElementById("menuToggle")
-      .addEventListener("change", function () {
-        const menu = document.querySelector(".menuInfo");
+      document
+        .getElementById("menuToggle")
+        .addEventListener("change", function () {
+          const menu = document.querySelector(".menuInfo");
 
-        if (this.checked) {
-          menu.classList.add("active");
-        } else {
-          menu.classList.remove("active");
-        }
-      });
+          if (this.checked) {
+            menu.classList.add("active");
+          } else {
+            menu.classList.remove("active");
+          }
+        });
+    } else {
+      console.warn("Elemento '.mz-header.mz-system__header' não encontrado.");
+    }
   }
 }
 
@@ -448,39 +538,57 @@ function newBtnToolbar() {
     const isLoggedIn = orderForm.userProfileId ? true : false;
 
     const buttonText = isLoggedIn ? "Trocar de cliente" : "Entrar";
-    // botão "Trocar de cliente"
 
     const filho = document.getElementById("impersonateButton");
     const pai = filho.parentElement;
     let formAberto = false;
 
-    pai.insertAdjacentHTML(
-      "beforeend",
-      `
-    <span id="btnTrocaClient" style="cursor: pointer; height: 2.5rem; display: flex; align-items: center; justify-content: center;"
-    class="cc-fr-ns cc-mt1 cc-mt0-ns cc-link cc-br2 cc-ba cc-pa0 cc-w-20-ns cc-ph3-ns cc-ba-ns cc-pv2-ns cc-db cc-dib-ns cc-tc cc-ttu cc-fw7 cc-f7 cc-dim cc-btn-change cc-silver">
-      <span>${buttonText}</span>
-    </span>
-  `
-    );
+    const renderButton = (el) => {
+      // Verifica se o botão já foi inserido
+      if (!document.getElementById("btnTrocaClient")) {
+        el.insertAdjacentHTML(
+          "beforeend",
+          `
+          <span id="btnTrocaClient" style="cursor: pointer; height: 2.5rem; display: flex; align-items: center; justify-content: center;"
+          class="cc-fr-ns cc-mt1 cc-mt0-ns cc-link cc-br2 cc-ba cc-pa0 cc-w-20-ns cc-ph3-ns cc-ba-ns cc-pv2-ns cc-db cc-dib-ns cc-tc cc-ttu cc-fw7 cc-f7 cc-dim cc-btn-change cc-silver">
+            <span>${buttonText}</span>
+          </span>
+          `
+        );
+      }
+    };
+
+    renderButton(pai);
+
+    // btn para mobile
+    const trocaMobile = document.getElementById("vtex-callcenter__toolbar");
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
+
+    if (mediaQuery.matches) {
+      renderButton(trocaMobile);
+    }
 
     filho.style.display = "none";
 
-    document
-      .getElementById("btnTrocaClient")
-      .addEventListener("click", function () {
+    const btnTroca = document.getElementById("btnTrocaClient");
+    if (btnTroca) {
+      // Remove todos os eventos antigos para evitar duplicidade
+      const novoBtnTroca = btnTroca.cloneNode(true);
+      btnTroca.replaceWith(novoBtnTroca);
+
+      novoBtnTroca.addEventListener("click", function () {
         if (!formAberto) {
           this.insertAdjacentHTML(
             "afterend",
             `
-      <div id="impersonateForm" style="position: absolute; top: 19%; left: 49%;">
-        <input type="email" id="emailInput" placeholder="Digite o email do cliente" style="padding: 5px; width: 250px; height: 2.5rem;"/>
-        <button id="submitImpersonate" style="padding: 5px 10px; margin-left: 5px; background-color: #015ac2; height: 2.5rem; border-color: #c1c4ca; color: #fff;">Enviar</button>
-      </div>
-      `
+            <div id="impersonateForm" style="position: absolute; top: 19%; left: 49%;">
+              <input type="email" id="emailInput" placeholder="Digite o email do cliente" style="padding: 5px; width: 250px; height: 2.5rem;"/>
+              <button id="submitImpersonate" style="padding: 5px 10px; margin-left: 5px; background-color: #015ac2; height: 2.5rem; border-color: #c1c4ca; color: #fff;">Enviar</button>
+            </div>
+            `
           );
 
-          // adiciona evento para o botão de submit
+          // Adiciona evento ao botão de submit
           document
             .getElementById("submitImpersonate")
             .addEventListener("click", function () {
@@ -489,33 +597,36 @@ function newBtnToolbar() {
                 window.cc.impersonate(email);
               }
             });
+
           formAberto = true;
         } else {
           document.getElementById("impersonateForm").remove();
           formAberto = false;
         }
       });
+    }
   });
 }
 
-// Cria um observador de mutações
-const observer = new MutationObserver((mutationsList) => {
-  mutationsList.forEach((mutation) => {
-    // Verifica se o tipo de mutação foi a adição de um nó
-    if (mutation.type === "childList") {
-      mutation.addedNodes.forEach((node) => {
-        // Verifica se o nó adicionado tem o ID que você está procurando
-        if (node.id === "vtex-callcenter__toolbar") {
-          newBtnToolbar();
-          console.log(
-            "Elemento com ID específico foi criado via JavaScript:",
-            node
-          );
-        }
-      });
-    }
+let observerInitialized = false;
+function observadorToolbar() {
+  const observer = new MutationObserver((mutationsList) => {
+    mutationsList.forEach((mutation) => {
+      if (mutation.type === "childList") {
+        mutation.addedNodes.forEach((node) => {
+          if (node.id === "vtex-callcenter__toolbar") {
+            newBtnToolbar();
+            console.log(
+              "Elemento com ID específico foi criado via JavaScript:",
+              node
+            );
+          }
+        });
+      }
+    });
   });
-});
 
-// Inicia a observação do corpo da página para alterações no DOM
-observer.observe(document.body, { childList: true, subtree: true });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// ----------------- btn toolbar fim -------------------
