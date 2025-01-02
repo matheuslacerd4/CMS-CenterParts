@@ -15210,14 +15210,22 @@ function preserveCart() {
   }
   try {
     let apiUrl =
-      "https://centerb2b.websiteseguro.com/vtex-user-info/vtex-crm.php?u=" +
+      "https://signup-centerparts.inovaki.com.br/vtex-user-info/vtex-crm.php?u=" +
       vtexjs.checkout.orderForm.userProfileId;
-    console.log("teste", apiUrl);
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
         let str = data.user.rclastcart;
+
+        let formaPagamentoDate = new Date(
+          data.user.checkouttag?.Scores?.FormaPagamento?.[0].Date
+        );
+        let lastAbandonedCart = new Date(data.user.rclastsessiondate);
+
+        if (formaPagamentoDate < lastAbandonedCart) {
+          return;
+        }
 
         let params = str.replace("add?", "").split("&");
         let result = [];
@@ -15299,68 +15307,4 @@ function preserveCart() {
   }
 }
 
-// setTimeout(() => {
-//   preserveCart();
-// }, 5000);
-
 // ------------- Carrinho preservado final -------------
-
-// ------------------ Compre junto -------------------
-
-function renderCompreJunto() {
-  const productId = 2065481;
-
-  const url = `/api/catalog_system/pub/products/crossselling/whosawalsosaw/${productId}`;
-
-  const options = {
-    method: "get",
-  };
-
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erro ao buscar os produtos: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Produtos relacionados:", data);
-      displayProducts(data);
-    })
-    .catch((error) => {
-      console.error("Erro na requisição:", error);
-    });
-
-  function displayProducts(data) {
-    const container = document.querySelector(".mz-product");
-    if (!container) {
-      console.error("Elemento #caracteristicas não encontrado.");
-      return;
-    }
-
-    const heading = `
-      <div class="compreJunto">
-        <h2>Compre junto</h2>
-        <div class="cardCj">
-          <div id="divImgCj"> 
-           <img src="${
-             data[0].items[0].images[0].imageUrl
-           }" alt="" id="imgCj" />
-          </div>
-          <div id="divTitleCj">
-            <p id="titleCj">${data[0].productName}</p> 
-          </div>
-          <p id="priceCj">R$ ${data[0].items[0].sellers[0].commertialOffer.Price.toFixed(
-            2
-          )}</p>
-          <div class="btnDetalhes">
-	        	<a href="${data[0].link}" tabindex="0">Ver Detalhes</a>
-	        </div>
-        </div>
-      </div> 
-    `;
-    container.insertAdjacentHTML("beforeend", heading);
-  }
-}
-
-// ------------------- COMPRE JUNTO FIM ------------------------
